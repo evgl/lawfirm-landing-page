@@ -1,0 +1,62 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: law-firm-wordpress
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress_db
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_DEBUG_LOG: 1
+      WORDPRESS_DEBUG_DISPLAY: 0
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./themes:/var/www/html/wp-content/themes
+      - ./plugins:/var/www/html/wp-content/plugins
+      - ./uploads:/var/www/html/wp-content/uploads
+    depends_on:
+      - db
+    networks:
+      - wordpress_network
+
+  db:
+    image: mysql:8.0
+    container_name: law-firm-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wordpress_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: law-firm-phpmyadmin
+    restart: always
+    ports:
+      - "8083:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: wordpress
+      PMA_PASSWORD: wordpress_password
+    depends_on:
+      - db
+    networks:
+      - wordpress_network
+
+volumes:
+  wordpress_data:
+  db_data:
+
+networks:
+  wordpress_network:
+    driver: bridge

@@ -5,7 +5,9 @@
 *.log
 *.tmp
 *.swp
-
+docker-wordpress/plugins/
+docker-wordpress/themes/
+docker-wordpress/uploads/
 # Env / secrets
 .env
 wp-config.php
