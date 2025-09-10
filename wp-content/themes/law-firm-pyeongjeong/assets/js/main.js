@@ -60,8 +60,8 @@
         $('.modal-close, .modal-overlay').on('click', closeModal);
         $(document).on('keydown', handleKeydown);
         
-        // Search form
-        $('.hero-search form').on('submit', handleHeroSearch);
+        // Search form (hero)
+        $('.hero-search-form').on('submit', handleHeroSearch);
         
         // Quick menu interactions
         $('.quick-menu-item').on('click', handleQuickMenuClick);

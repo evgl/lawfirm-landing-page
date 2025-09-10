@@ -72,6 +72,9 @@ body {
     height: 70px;
 }
 
+/* Ensure navigation is visible on desktop */
+.main-navigation { display: block; }
+
 .site-logo {
     display: flex;
     align-items: center;
@@ -184,6 +187,16 @@ body {
     font-size: 48px;
     color: var(--white);
     margin-bottom: 10px;
+}
+
+/* Large hero logo image when a custom logo is set */
+.hero-logo-image img,
+.main-logo .custom-logo {
+    max-width: 420px;
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
 }
 
 .site-title {

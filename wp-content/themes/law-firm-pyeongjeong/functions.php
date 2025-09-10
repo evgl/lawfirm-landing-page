@@ -600,6 +600,21 @@ function law_firm_customize_register($wp_customize) {
 add_action('customize_register', 'law_firm_customize_register');
 
 /**
+ * Fallback Primary Menu
+ */
+if (!function_exists('law_firm_fallback_menu')) {
+    function law_firm_fallback_menu() {
+        echo '<ul class="primary-menu">';
+        echo '<li><a href="' . esc_url(home_url('/')) . '">' . __('소개', 'law-firm-pyeongjeong') . '</a></li>';
+        echo '<li><a href="' . esc_url(get_post_type_archive_link('practice_area')) . '">' . __('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
+        echo '<li><a href="' . esc_url(get_post_type_archive_link('attorney')) . '">' . __('구성원', 'law-firm-pyeongjeong') . '</a></li>';
+        echo '<li><a href="' . esc_url(get_post_type_archive_link('legal_case')) . '">' . __('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
+        echo '<li><a href="#consultation-form" data-scroll-to="consultation-form">' . __('상담문의', 'law-firm-pyeongjeong') . '</a></li>';
+        echo '</ul>';
+    }
+}
+
+/**
  * Helper Functions
  */
 

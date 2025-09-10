@@ -9,16 +9,20 @@
 get_header(); ?>
 
 <!-- Main Hero Section -->
-<main class="homepage-hero">
+<section id="home-hero" class="homepage-hero">
     <div class="hero-background"></div>
     
     <div class="hero-content">
         <!-- Main Logo Section -->
         <div class="hero-logo-section">
             <div class="main-logo">
-                <i class="fas fa-balance-scale" aria-hidden="true"></i>
-                <h1 class="site-title">법률사무소 평정</h1>
-                <p class="site-tagline">LAW & PARTNERS</p>
+                <?php if (has_custom_logo()) : ?>
+                    <div class="hero-logo-image"><?php the_custom_logo(); ?></div>
+                <?php else : ?>
+                    <i class="fas fa-balance-scale" aria-hidden="true"></i>
+                    <h1 class="site-title">법률사무소 평정</h1>
+                    <p class="site-tagline">LAW & PARTNERS</p>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -29,7 +33,7 @@ get_header(); ?>
                     <input type="search" 
                            name="s" 
                            class="search-input"
-                           placeholder=""
+                           placeholder="<?php esc_attr_e('검색어를 입력해주세요.', 'law-firm-pyeongjeong'); ?>"
                            value="<?php echo get_search_query(); ?>"
                            aria-label="<?php esc_attr_e('검색', 'law-firm-pyeongjeong'); ?>">
                     <button type="submit" class="search-button" aria-label="<?php esc_attr_e('검색 실행', 'law-firm-pyeongjeong'); ?>">
@@ -46,29 +50,7 @@ get_header(); ?>
         </div>
     </div>
 
-    <!-- Quick Menu Sidebar -->
-    <div class="quick-menu">
-        <div class="quick-menu-header">
-            <span>Quick<br>Menu</span>
-        </div>
-        
-        <div class="quick-menu-items">
-            <a href="<?php echo esc_url(get_page_link(get_page_by_path('consultation'))); ?>" class="quick-menu-item">
-                <i class="fas fa-comment" aria-hidden="true"></i>
-                <span>온라인상담</span>
-            </a>
-            
-            <a href="#case-status" class="quick-menu-item">
-                <i class="fas fa-folder-open" aria-hidden="true"></i>
-                <span>사건현황</span>
-            </a>
-            
-            <a href="tel:02-554-6674" class="quick-menu-item">
-                <i class="fas fa-phone" aria-hidden="true"></i>
-                <span>전화상담</span>
-            </a>
-        </div>
-    </div>
+    <!-- Quick Menu is rendered globally from header -->
 
     <!-- Bottom Contact Section -->
     <div class="hero-bottom-contact">
@@ -91,6 +73,6 @@ get_header(); ?>
             </div>
         </div>
     </div>
-</main>
+</section>
 
 <?php get_footer(); ?>

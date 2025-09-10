@@ -20,8 +20,7 @@
 
 <!-- Site Header -->
 <header class="site-header" role="banner">
-    <div class="container">
-        <div class="header-content">
+    <div class="header-container">
             <!-- Site Logo/Branding -->
             <div class="site-branding">
                 <?php if (has_custom_logo()) : ?>
@@ -86,65 +85,45 @@
                 <i class="fas fa-bars" aria-hidden="true"></i>
                 <span class="screen-reader-text"><?php _e('Menu', 'law-firm-pyeongjeong'); ?></span>
             </button>
-        </div>
+    </div>
     </div>
 </header>
 
 <!-- Quick Menu Sidebar -->
 <aside class="quick-menu" role="complementary" aria-label="<?php esc_attr_e('Quick Actions', 'law-firm-pyeongjeong'); ?>">
-    <nav class="quick-menu-nav">
+    <div class="quick-menu-header">
+        <span>Quick<br>Menu</span>
+    </div>
+    <div class="quick-menu-items">
         <?php
-        // Check if custom quick menu exists
+        $consultation_page = get_page_by_path('consultation');
+        $consultation_link = $consultation_page ? get_permalink($consultation_page) : '#consultation-form';
+        
         if (has_nav_menu('quick-menu')) {
             wp_nav_menu(array(
                 'theme_location' => 'quick-menu',
                 'container' => false,
                 'menu_class' => 'quick-menu-list',
-                'link_before' => '<span class="quick-menu-icon">',
-                'link_after' => '</span>',
             ));
         } else {
-            // Default quick menu items
             ?>
-            <a href="#consultation-form" class="quick-menu-item" data-scroll-to="consultation-form" title="<?php esc_attr_e('온라인상담', 'law-firm-pyeongjeong'); ?>">
-                <i class="fas fa-comment-dots" aria-hidden="true"></i>
-                <span><?php _e('온라인상담', 'law-firm-pyeongjeong'); ?></span>
+            <a href="<?php echo esc_url($consultation_link); ?>" class="quick-menu-item" title="<?php esc_attr_e('온라인예약', 'law-firm-pyeongjeong'); ?>">
+                <i class="fas fa-file-signature" aria-hidden="true"></i>
+                <span><?php _e('온라인예약', 'law-firm-pyeongjeong'); ?></span>
             </a>
-            
-            <a href="<?php echo esc_url(get_post_type_archive_link('legal_case')); ?>" class="quick-menu-item" title="<?php esc_attr_e('카톡예약', 'law-firm-pyeongjeong'); ?>">
-                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <a href="#" class="quick-menu-item" title="<?php esc_attr_e('카톡예약', 'law-firm-pyeongjeong'); ?>">
+                <i class="fas fa-comment" aria-hidden="true"></i>
                 <span><?php _e('카톡예약', 'law-firm-pyeongjeong'); ?></span>
             </a>
-            
             <a href="tel:<?php echo esc_attr(str_replace('-', '', get_theme_mod('law_firm_phone', '02-554-6674'))); ?>" class="quick-menu-item" title="<?php esc_attr_e('전화예약', 'law-firm-pyeongjeong'); ?>">
                 <i class="fas fa-phone" aria-hidden="true"></i>
                 <span><?php _e('전화예약', 'law-firm-pyeongjeong'); ?></span>
             </a>
-            
-            <button class="quick-menu-item scroll-to-top" title="<?php esc_attr_e('위로', 'law-firm-pyeongjeong'); ?>" aria-label="<?php esc_attr_e('페이지 상단으로 이동', 'law-firm-pyeongjeong'); ?>">
-                <i class="fas fa-arrow-up" aria-hidden="true"></i>
-                <span><?php _e('위로', 'law-firm-pyeongjeong'); ?></span>
-            </button>
             <?php
         }
         ?>
-    </nav>
+    </div>
 </aside>
 
 <!-- Main Content Area -->
 <main id="main" class="site-main" role="main">
-
-<?php
-/**
- * Fallback function for primary menu when no menu is assigned
- */
-function law_firm_fallback_menu() {
-    echo '<ul class="primary-menu">';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">' . __('소개', 'law-firm-pyeongjeong') . '</a></li>';
-    echo '<li><a href="' . esc_url(get_post_type_archive_link('practice_area')) . '">' . __('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
-    echo '<li><a href="' . esc_url(get_post_type_archive_link('attorney')) . '">' . __('구성원', 'law-firm-pyeongjeong') . '</a></li>';
-    echo '<li><a href="' . esc_url(get_post_type_archive_link('legal_case')) . '">' . __('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
-    echo '<li><a href="#consultation-form" data-scroll-to="consultation-form">' . __('상담문의', 'law-firm-pyeongjeong') . '</a></li>';
-    echo '</ul>';
-}
-?>
