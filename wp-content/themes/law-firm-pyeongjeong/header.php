@@ -47,38 +47,21 @@
                 <?php endif; ?>
             </div>
 
-            <!-- Primary Navigation -->
-            <nav class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Menu', 'law-firm-pyeongjeong'); ?>">
-                <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'primary',
-                    'menu_class' => 'primary-menu',
-                    'container' => false,
-                    'fallback_cb' => 'law_firm_fallback_menu',
-                ));
-                ?>
-            </nav>
+            <!-- Header Right Section -->
+            <div class="header-right">
+                <!-- Primary Navigation -->
+                <nav class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Menu', 'law-firm-pyeongjeong'); ?>">
+                    <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'primary',
+                        'menu_class' => 'primary-menu',
+                        'container' => false,
+                        'fallback_cb' => 'law_firm_fallback_menu',
+                    ));
+                    ?>
+                </nav>
 
-            <!-- Header Contact Info -->
-            <?php if (is_active_sidebar('header-contact')) : ?>
-                <div class="header-contact">
-                    <?php dynamic_sidebar('header-contact'); ?>
-                </div>
-            <?php else : ?>
-                <div class="header-contact">
-                    <div class="contact-item">
-                        <i class="fas fa-phone" aria-hidden="true"></i>
-                        <a href="tel:<?php echo esc_attr(str_replace('-', '', get_theme_mod('law_firm_phone', '02-554-6674'))); ?>">
-                            <?php echo esc_html(get_theme_mod('law_firm_phone', '02-554-6674')); ?>
-                        </a>
-                    </div>
-                    <div class="consultation-btn">
-                        <a href="#consultation-form" class="btn btn-primary btn-small" data-scroll-to="consultation-form">
-                            <?php _e('무료상담', 'law-firm-pyeongjeong'); ?>
-                        </a>
-                    </div>
-                </div>
-            <?php endif; ?>
+            </div>
 
             <!-- Mobile Menu Toggle -->
             <button class="mobile-menu-toggle" aria-controls="primary-navigation" aria-expanded="false">

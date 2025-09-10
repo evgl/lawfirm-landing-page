@@ -72,6 +72,12 @@ body {
     height: 70px;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
 /* Ensure navigation is visible on desktop */
 .main-navigation { display: block; }
 
