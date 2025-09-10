@@ -55,8 +55,8 @@ add_action('after_setup_theme', 'law_firm_setup');
  * Enqueue Scripts and Styles
  */
 function law_firm_scripts() {
-    // Enqueue main stylesheet
-    wp_enqueue_style('law-firm-style', get_stylesheet_uri(), array(), '1.0.0');
+    // Enqueue main stylesheet with timestamp to force cache refresh
+    wp_enqueue_style('law-firm-style', get_stylesheet_uri(), array(), '2.0.' . time());
     
     // Enqueue Google Fonts
     wp_enqueue_style('law-firm-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap', array(), null);
