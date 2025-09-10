@@ -10,7 +10,11 @@ get_header(); ?>
 
 <!-- Main Hero Section -->
 <section id="home-hero" class="homepage-hero">
-    <div class="hero-background"></div>
+    <!-- Professional Background with Overlay -->
+    <div class="hero-background">
+        <div class="hero-bg-image"></div>
+        <div class="hero-overlay"></div>
+    </div>
     
     <div class="hero-content">
         <!-- Main Logo Section -->
@@ -19,43 +23,35 @@ get_header(); ?>
                 <?php if (has_custom_logo()) : ?>
                     <div class="hero-logo-image"><?php the_custom_logo(); ?></div>
                 <?php else : ?>
-                    <i class="fas fa-balance-scale" aria-hidden="true"></i>
-                    <h1 class="site-title">법률사무소 평정</h1>
-                    <p class="site-tagline">LAW & PARTNERS</p>
+                    <div class="law-firm-logo">
+                        <div class="logo-shield">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1 class="site-title">법률사무소 평정</h1>
+                            <p class="site-tagline">LEE & PARTNERS</p>
+                        </div>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
 
-        <!-- Search Section -->
+        <!-- Professional Search Section -->
         <div class="hero-search-section">
             <div class="search-container">
                 <form class="hero-search-form" method="get" action="<?php echo esc_url(home_url('/')); ?>" role="search">
-                    <input type="search" 
-                           name="s" 
-                           class="search-input"
-                           placeholder="<?php esc_attr_e('법률 상담이나 서비스를 검색하세요', 'law-firm-pyeongjeong'); ?>"
-                           value="<?php echo get_search_query(); ?>"
-                           aria-label="<?php esc_attr_e('검색', 'law-firm-pyeongjeong'); ?>">
-                    <button type="submit" class="search-button" aria-label="<?php esc_attr_e('검색', 'law-firm-pyeongjeong'); ?>">
-                        <?php esc_html_e('검색', 'law-firm-pyeongjeong'); ?>
-                    </button>
+                    <div class="search-input-wrapper">
+                        <input type="search" 
+                               name="s" 
+                               class="search-input"
+                               placeholder="<?php esc_attr_e('법률 상담이나 서비스를 검색하세요', 'law-firm-pyeongjeong'); ?>"
+                               value="<?php echo get_search_query(); ?>"
+                               aria-label="<?php esc_attr_e('검색', 'law-firm-pyeongjeong'); ?>">
+                        <button type="submit" class="search-button" aria-label="<?php esc_attr_e('검색', 'law-firm-pyeongjeong'); ?>">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </form>
-            </div>
-        </div>
-
-        <!-- Contact Information -->
-        <div class="hero-contact-info">
-            <div class="contact-item">
-                <h4><?php esc_html_e('전화상담', 'law-firm-pyeongjeong'); ?></h4>
-                <p><a href="tel:02-554-5674">02-554-5674</a></p>
-            </div>
-            <div class="contact-item">
-                <h4><?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?></h4>
-                <p><?php esc_html_e('무료상담', 'law-firm-pyeongjeong'); ?></p>
-            </div>
-            <div class="contact-item">
-                <h4><?php esc_html_e('온라인상담', 'law-firm-pyeongjeong'); ?></h4>
-                <p><?php esc_html_e('24시간', 'law-firm-pyeongjeong'); ?></p>
             </div>
         </div>
 
@@ -63,6 +59,29 @@ get_header(); ?>
         <div class="scroll-indicator">
             <span>Scroll</span>
             <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </div>
+    </div>
+
+    <!-- Bottom Contact Bar -->
+    <div class="hero-bottom-contact">
+        <div class="contact-info-wrapper">
+            <div class="contact-phone">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <div class="phone-info">
+                    <span class="phone-label"><?php esc_html_e('24시간 미팅상담', 'law-firm-pyeongjeong'); ?></span>
+                    <a href="tel:02-554-5674" class="phone-number">02-554-5674</a>
+                </div>
+            </div>
+            <div class="contact-buttons">
+                <a href="#" class="contact-btn kakao-btn">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDJDNS41ODEgMiAyIDUuMTM0IDIgOC44ODlDMiAxMS4xNjcgMy4xOTEgMTMuMTY3IDQuOTk5IDE0LjMzM0w0LjI5NCAxNy4yMjJMMTMuNzA2IDE0LjMzM0MxNi44MDkgMTMuMTY3IDE4IDExLjE2NyAxOCA4Ljg4OUMxOCA1LjEzNCAE0LjQxOSAyIDEwIDJaIiBmaWxsPSIjM0MxRTFFIi8+Cjwvc3ZnPgo=" alt="KakaoTalk" />
+                    <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
+                </a>
+                <a href="#consultation-form" class="contact-btn consultation-btn" data-scroll-to="contact">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                    <?php esc_html_e('상담하기', 'law-firm-pyeongjeong'); ?>
+                </a>
+            </div>
         </div>
     </div>
 </section>
