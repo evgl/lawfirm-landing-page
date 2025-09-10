@@ -6,7 +6,9 @@
 *.tmp
 *.swp
 docker-wordpress/plugins/
-docker-wordpress/themes/
+docker-wordpress/themes/twentytwentyfour/
+docker-wordpress/themes/twentytwentyfive/
+docker-wordpress/themes/twentytwentythree/
 docker-wordpress/uploads/
 # Env / secrets
 .env
