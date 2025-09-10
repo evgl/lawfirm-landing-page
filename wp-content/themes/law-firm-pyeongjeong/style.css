@@ -116,36 +116,6 @@ body {
     color: var(--accent-blue);
 }
 
-/* Header Contact Styles */
-.header-contact {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.header-contact .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--white);
-}
-
-.header-contact .contact-item i {
-    font-size: 14px;
-    color: var(--accent-blue);
-}
-
-.header-contact .contact-item a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.header-contact .contact-item a:hover {
-    color: var(--accent-blue);
-}
 
 /* Button Styles */
 .btn {
