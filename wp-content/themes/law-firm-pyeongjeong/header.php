@@ -61,6 +61,26 @@
                     ?>
                 </nav>
 
+                <!-- Header Contact Info -->
+                <?php if (is_active_sidebar('header-contact')) : ?>
+                    <div class="header-contact">
+                        <?php dynamic_sidebar('header-contact'); ?>
+                    </div>
+                <?php else : ?>
+                    <div class="header-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <a href="tel:<?php echo esc_attr(str_replace('-', '', get_theme_mod('law_firm_phone', '02-554-6674'))); ?>">
+                                <?php echo esc_html(get_theme_mod('law_firm_phone', '02-554-6674')); ?>
+                            </a>
+                        </div>
+                        <div class="consultation-btn">
+                            <a href="#consultation-form" class="btn btn-primary btn-small" data-scroll-to="consultation-form">
+                                <?php _e('무료상담', 'law-firm-pyeongjeong'); ?>
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- Mobile Menu Toggle -->
@@ -68,7 +88,6 @@
                 <i class="fas fa-bars" aria-hidden="true"></i>
                 <span class="screen-reader-text"><?php _e('Menu', 'law-firm-pyeongjeong'); ?></span>
             </button>
-    </div>
     </div>
 </header>
 
