@@ -67,8 +67,40 @@ function law_firm_scripts() {
     // Enqueue jQuery
     wp_enqueue_script('jquery');
     
-    // Enqueue main JavaScript file
-    wp_enqueue_script('law-firm-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
+    // Add inline JavaScript for smooth scrolling and navigation
+    wp_add_inline_script('jquery', '
+        jQuery(document).ready(function($) {
+            // Smooth scrolling for navigation links
+            $("a[href^=\"#\"]").on("click", function(e) {
+                e.preventDefault();
+                var target = $(this.getAttribute("href"));
+                if (target.length) {
+                    $("html, body").stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 800);
+                }
+            });
+            
+            // Navbar background on scroll
+            $(window).scroll(function() {
+                var header = $(".site-header");
+                if ($(window).scrollTop() > 50) {
+                    header.css("background", "rgba(26, 38, 66, 0.98)");
+                } else {
+                    header.css("background", "rgba(26, 38, 66, 0.95)");
+                }
+            });
+            
+            // Search functionality
+            $(".search-button").on("click", function(e) {
+                var searchTerm = $(".search-input").val();
+                if (!searchTerm.trim()) {
+                    e.preventDefault();
+                    alert("검색어를 입력해주세요.");
+                }
+            });
+        });
+    ');
     
     // Localize script for AJAX
     wp_localize_script('law-firm-script', 'law_firm_ajax', array(
@@ -82,6 +114,19 @@ function law_firm_scripts() {
     }
 }
 add_action('wp_enqueue_scripts', 'law_firm_scripts');
+
+/**
+ * Fallback menu when no menu is assigned
+ */
+function law_firm_fallback_menu() {
+    echo '<ul class="primary-menu">';
+    echo '<li><a href="#about">' . esc_html__('소개', 'law-firm-pyeongjeong') . '</a></li>';
+    echo '<li><a href="#services">' . esc_html__('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
+    echo '<li><a href="#team">' . esc_html__('구성원', 'law-firm-pyeongjeong') . '</a></li>';
+    echo '<li><a href="#cases">' . esc_html__('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
+    echo '<li><a href="#contact">' . esc_html__('상담문의', 'law-firm-pyeongjeong') . '</a></li>';
+    echo '</ul>';
+}
 
 /**
  * Register Custom Post Types
