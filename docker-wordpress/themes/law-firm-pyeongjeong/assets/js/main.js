@@ -42,6 +42,10 @@
         initModalSystem();
         initFormValidation();
         initHeaderScroll();
+        initScrollAnimations();
+        initScrollProgress();
+        initParallaxEffects();
+        initAdvancedInteractions();
     }
 
     /**
@@ -926,5 +930,286 @@
 
     // Initialize lazy loading
     initLazyLoading();
+
+    /**
+     * Advanced Scroll Animations with Intersection Observer
+     */
+    function initScrollAnimations() {
+        if (!('IntersectionObserver' in window)) {
+            // Fallback for older browsers
+            $('.scroll-animate').addClass('animate-in');
+            return;
+        }
+
+        const animationObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    
+                    // Add animation class with slight delay for smoother effect
+                    setTimeout(function() {
+                        target.classList.add('animate-in');
+                    }, 100);
+                    
+                    // Stop observing once animated
+                    animationObserver.unobserve(target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe all elements with scroll-animate class
+        document.querySelectorAll('.scroll-animate').forEach(function(element) {
+            animationObserver.observe(element);
+        });
+
+        // Add scroll animations to key elements
+        addScrollAnimationClasses();
+    }
+
+    /**
+     * Add scroll animation classes to elements
+     */
+    function addScrollAnimationClasses() {
+        // About section animations
+        $('.about-content .section-header').addClass('scroll-animate');
+        $('.value-item').each(function(index) {
+            $(this).addClass('scroll-animate delay-' + ((index + 1) * 100));
+        });
+        $('.stat-item').each(function(index) {
+            $(this).addClass('scroll-animate animate-scale delay-' + ((index + 2) * 100));
+        });
+
+        // Services section animations
+        $('.services-content .section-header').addClass('scroll-animate');
+        $('.service-card').each(function(index) {
+            $(this).addClass('scroll-animate delay-' + ((index % 3 + 1) * 100));
+        });
+
+        // Team section animations
+        $('.team-content .section-header').addClass('scroll-animate');
+        $('.team-member').each(function(index) {
+            $(this).addClass('scroll-animate delay-' + ((index + 1) * 150));
+        });
+
+        // Cases section animations
+        $('.cases-content .section-header').addClass('scroll-animate');
+        $('.cases-search-section').addClass('scroll-animate delay-100');
+        $('.case-card').each(function(index) {
+            $(this).addClass('scroll-animate delay-' + ((index % 2 + 1) * 100));
+        });
+
+        // Contact section animations
+        $('.contact-content .section-header').addClass('scroll-animate');
+        $('.consultation-form-section').addClass('scroll-animate animate-from-left delay-100');
+        $('.contact-info-section').addClass('scroll-animate animate-from-right delay-200');
+    }
+
+    /**
+     * Scroll Progress Indicator
+     */
+    function initScrollProgress() {
+        // Create progress bar element
+        if (!document.querySelector('.scroll-progress')) {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'scroll-progress';
+            document.body.appendChild(progressBar);
+        }
+
+        // Update progress on scroll
+        $(window).on('scroll', function() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            $('.scroll-progress').css('width', Math.min(scrollPercent, 100) + '%');
+        });
+    }
+
+    /**
+     * Parallax Effects for Hero Section
+     */
+    function initParallaxEffects() {
+        const heroSection = document.querySelector('.homepage-hero');
+        if (!heroSection) return;
+
+        $(window).on('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.5;
+            
+            // Apply parallax to hero background
+            $('.hero-bg-image').css('transform', 'translate3d(0, ' + parallax + 'px, 0)');
+            
+            // Apply subtle parallax to hero content
+            $('.hero-content').css('transform', 'translate3d(0, ' + (parallax * 0.3) + 'px, 0)');
+        });
+    }
+
+    /**
+     * Advanced Interactions and Micro-animations
+     */
+    function initAdvancedInteractions() {
+        // Enhanced hover effects for service cards
+        $('.service-card').on('mouseenter', function() {
+            $(this).addClass('hover-lift');
+            $(this).find('.service-icon').addClass('pulse-animation');
+        }).on('mouseleave', function() {
+            $(this).removeClass('hover-lift');
+            $(this).find('.service-icon').removeClass('pulse-animation');
+        });
+
+        // Enhanced hover effects for team members
+        $('.team-member').on('mouseenter', function() {
+            $(this).addClass('hover-lift');
+        }).on('mouseleave', function() {
+            $(this).removeClass('hover-lift');
+        });
+
+        // Case filter functionality with animations
+        $('.category-btn').on('click', function() {
+            const category = $(this).data('category');
+            
+            // Update active button
+            $('.category-btn').removeClass('active');
+            $(this).addClass('active');
+            
+            // Filter cases with animation
+            $('.case-card').each(function(index) {
+                const cardCategory = $(this).data('category');
+                const shouldShow = category === 'all' || cardCategory === category;
+                
+                if (shouldShow) {
+                    $(this).removeClass('hidden').addClass('scroll-animate');
+                    setTimeout(() => {
+                        $(this).addClass('animate-in');
+                    }, index * 100);
+                } else {
+                    $(this).removeClass('animate-in').addClass('hidden');
+                }
+            });
+        });
+
+        // Smooth scroll enhancement for navigation links
+        $('a[href^="#"]').on('click', function(e) {
+            const target = $(this.getAttribute('href'));
+            if (target.length) {
+                e.preventDefault();
+                const offset = $('.site-header').height() || 70;
+                
+                $('html, body').animate({
+                    scrollTop: target.offset().top - offset
+                }, 800, 'easeInOutQuart');
+            }
+        });
+
+        // Form field enhancements
+        $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('focus', function() {
+            $(this).parent().addClass('focused');
+        }).on('blur', function() {
+            if (!$(this).val()) {
+                $(this).parent().removeClass('focused');
+            }
+        });
+
+        // Contact button pulse animation
+        $('.submit-btn, .emergency-btn').addClass('pulse-animation');
+
+        // Floating animation for decorative elements
+        $('.value-icon, .service-icon').addClass('float-animation');
+    }
+
+    /**
+     * Advanced Header Behavior
+     */
+    function initHeaderScroll() {
+        let lastScrollTop = 0;
+        const header = $('.site-header');
+        const headerHeight = header.outerHeight();
+        
+        $(window).on('scroll', throttle(function() {
+            const scrollTop = window.pageYOffset;
+            
+            if (scrollTop > headerHeight) {
+                header.addClass('scrolled');
+                
+                // Hide/show header based on scroll direction
+                if (scrollTop > lastScrollTop && scrollTop > headerHeight * 2) {
+                    header.addClass('header-hidden');
+                } else {
+                    header.removeClass('header-hidden');
+                }
+            } else {
+                header.removeClass('scrolled header-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        }, 16));
+    }
+
+    /**
+     * Enhanced Mobile Touch Interactions
+     */
+    function initTouchInteractions() {
+        // Touch-friendly hover states for mobile
+        if ('ontouchstart' in window) {
+            $('.service-card, .team-member, .case-card').on('touchstart', function() {
+                $(this).addClass('touch-active');
+            }).on('touchend', function() {
+                setTimeout(() => {
+                    $(this).removeClass('touch-active');
+                }, 300);
+            });
+        }
+
+        // Swipe gesture for case categories (mobile)
+        let startX = 0;
+        $('.cases-grid').on('touchstart', function(e) {
+            startX = e.originalEvent.touches[0].clientX;
+        }).on('touchend', function(e) {
+            const endX = e.originalEvent.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            
+            if (Math.abs(diffX) > 50) {
+                const activeBtn = $('.category-btn.active');
+                const buttons = $('.category-btn');
+                const currentIndex = buttons.index(activeBtn);
+                
+                if (diffX > 0 && currentIndex < buttons.length - 1) {
+                    // Swipe left - next category
+                    buttons.eq(currentIndex + 1).click();
+                } else if (diffX < 0 && currentIndex > 0) {
+                    // Swipe right - previous category
+                    buttons.eq(currentIndex - 1).click();
+                }
+            }
+        });
+    }
+
+    /**
+     * Loading Animation for Form Submissions
+     */
+    function showLoadingState(form) {
+        const submitBtn = form.find('.submit-btn');
+        const originalText = submitBtn.text();
+        
+        submitBtn.prop('disabled', true)
+                 .html('<i class="fas fa-spinner fa-spin"></i> 전송 중...')
+                 .addClass('loading-state');
+        
+        return originalText;
+    }
+
+    function hideLoadingState(form, originalText) {
+        const submitBtn = form.find('.submit-btn');
+        
+        submitBtn.prop('disabled', false)
+                 .html('<i class="fas fa-paper-plane"></i> ' + originalText)
+                 .removeClass('loading-state');
+    }
+
+    // Initialize touch interactions
+    initTouchInteractions();
 
 })(jQuery);
