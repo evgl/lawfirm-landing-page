@@ -736,4 +736,102 @@ function law_firm_format_case_amount($amount) {
     // Format with Korean number formatting
     return number_format($numeric_amount) . '원';
 }
+
+/**
+ * Performance Optimizations
+ */
+
+// Remove WordPress version from head
+remove_action('wp_head', 'wp_generator');
+
+// Remove unnecessary WordPress features for better performance
+function law_firm_performance_optimizations() {
+    // Remove WordPress emoji support
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('admin_print_styles', 'print_emoji_styles');
+    remove_filter('the_content_feed', 'wp_staticize_emoji');
+    remove_filter('comment_text_rss', 'wp_staticize_emoji');
+    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+    
+    // Remove RSD link
+    remove_action('wp_head', 'rsd_link');
+    
+    // Remove Windows Live Writer
+    remove_action('wp_head', 'wlwmanifest_link');
+    
+    // Remove shortlink
+    remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+}
+add_action('init', 'law_firm_performance_optimizations');
+
+// Add preload hints for performance
+function law_firm_preload_resources() {
+    // Preload critical fonts
+    echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+    echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"></noscript>' . "\n";
+    
+    // Preload Font Awesome
+    echo '<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+    echo '<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>' . "\n";
+}
+add_action('wp_head', 'law_firm_preload_resources', 1);
+
+// Enable gzip compression
+function law_firm_enable_compression() {
+    if (!ob_start("ob_gzhandler")) {
+        ob_start();
+    }
+}
+add_action('init', 'law_firm_enable_compression');
+
+// Add cache headers for static resources
+function law_firm_cache_headers() {
+    if (!is_admin()) {
+        header('Cache-Control: public, max-age=31536000'); // 1 year for static resources
+        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + 31536000));
+    }
+}
+
+// Add security headers
+function law_firm_security_headers() {
+    if (!is_admin()) {
+        header('X-Content-Type-Options: nosniff');
+        header('X-Frame-Options: SAMEORIGIN');
+        header('X-XSS-Protection: 1; mode=block');
+        header('Referrer-Policy: strict-origin-when-cross-origin');
+    }
+}
+add_action('send_headers', 'law_firm_security_headers');
+
+// Optimize database queries
+function law_firm_optimize_queries() {
+    // Remove query strings from static resources
+    function remove_query_strings($src) {
+        $parts = explode('?ver', $src);
+        return $parts[0];
+    }
+    
+    if (!is_admin()) {
+        add_filter('script_loader_src', 'remove_query_strings', 15, 1);
+        add_filter('style_loader_src', 'remove_query_strings', 15, 1);
+    }
+}
+add_action('init', 'law_firm_optimize_queries');
+
+/**
+ * SEO and Meta Tags
+ */
+function law_firm_seo_meta_tags() {
+    if (is_front_page()) {
+        echo '<meta name="description" content="법률사무소 평정 (LEE & PARTNERS) - 민사, 형사, 가족법, 부동산법 전문. 15년 경력의 전문 변호사진이 최상의 법률 서비스를 제공합니다.">' . "\n";
+        echo '<meta name="keywords" content="법률사무소, 변호사, 민사소송, 형사소송, 가족법, 부동산법, 서울 법률사무소, 법률상담">' . "\n";
+        echo '<meta property="og:title" content="법률사무소 평정 | LEE & PARTNERS">' . "\n";
+        echo '<meta property="og:description" content="전문 변호사진이 제공하는 최상의 법률 서비스. 민사, 형사, 가족법, 부동산법 전문.">' . "\n";
+        echo '<meta property="og:type" content="website">' . "\n";
+        echo '<meta property="og:locale" content="ko_KR">' . "\n";
+    }
+}
+add_action('wp_head', 'law_firm_seo_meta_tags');
 ?>
