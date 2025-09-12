@@ -1,0 +1,25 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.tmp
+*.swp
+docker-wordpress/plugins/
+docker-wordpress/themes/twentytwentyfour/
+docker-wordpress/themes/twentytwentyfive/
+docker-wordpress/themes/twentytwentythree/
+docker-wordpress/uploads/
+# Env / secrets
+.env
+
+# Composer / Node
+vendor/
+node_modules/
+
+# Misc
+sitemap.xml
+sitemap.xml.gz
+*.sql
+*.tar
+*.zip
