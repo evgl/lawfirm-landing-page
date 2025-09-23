@@ -213,9 +213,9 @@ body {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(30, 58, 95, 0.85) 0%, 
-        rgba(43, 61, 102, 0.75) 50%, 
-        rgba(30, 58, 95, 0.85) 100%);
+        rgba(30, 58, 95, 0.2) 0%, 
+        rgba(43, 61, 102, 0.15) 50%, 
+        rgba(30, 58, 95, 0.2) 100%);
     background-size: 400% 400%;
     animation: gradientShift 15s ease-in-out infinite;
 }
