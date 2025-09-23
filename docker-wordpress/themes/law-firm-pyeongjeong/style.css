@@ -550,11 +550,15 @@ body {
     background: #FEE500;
     color: #3C1E1E;
     border: 1px solid #F7D500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .kakao-btn img {
     width: 18px;
     height: 18px;
+    fill: #3C1E1E; /* Ensure SVG fills with dark color */
 }
 
 .kakao-btn:hover {

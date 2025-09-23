@@ -74,7 +74,7 @@ get_header(); ?>
             </div>
             <div class="contact-buttons">
                 <a href="#" class="contact-btn kakao-btn">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDJDNS41ODEgMiAyIDUuMTM0IDIgOC44ODlDMiAxMS4xNjcgMy4xOTEgMTMuMTY3IDQuOTk5IDE0LjMzM0w0LjI5NCAxNy4yMjJMMTMuNzA2IDE0LjMzM0MxNi44MDkgMTMuMTY3IDE4IDExLjE2NyAxOCA4Ljg4OUMxOCA1LjEzNCAE0LjQxOSAyIDEwIDJaIiBmaWxsPSIjM0MxRTFFIi8+Cjwvc3ZnPgo=" alt="KakaoTalk" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/kakao-icon.svg" alt="KakaoTalk" />
                     <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
                 </a>
                 <a href="#consultation-form" class="contact-btn consultation-btn" data-scroll-to="contact">
