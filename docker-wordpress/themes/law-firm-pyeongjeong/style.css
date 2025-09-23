@@ -172,12 +172,13 @@ body {
 .homepage-hero {
     position: relative;
     height: 100vh;
-    min-height: 700px;
+    min-height: 750px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    padding-bottom: 120px; /* Space for bottom contact bar */
 }
 
 .hero-background {
@@ -475,6 +476,7 @@ body {
     backdrop-filter: blur(20px);
     border-top: 2px solid rgba(74, 144, 226, 0.3);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    min-height: 80px; /* Ensure minimum height */
 }
 
 .contact-info-wrapper {
@@ -578,7 +580,7 @@ body {
    ========================================================================== */
 .scroll-indicator {
     position: absolute;
-    bottom: 100px;
+    bottom: 120px; /* Adjusted to avoid overlap with bottom contact bar */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -587,6 +589,7 @@ body {
     gap: 8px;
     color: rgba(255, 255, 255, 0.7);
     animation: bounce 2s infinite;
+    z-index: 10; /* Ensure it's above background but below contact bar */
 }
 
 .scroll-indicator span {
@@ -1013,6 +1016,11 @@ body {
         display: block;
     }
     
+    .homepage-hero {
+        min-height: 650px; /* Reduced min-height for mobile */
+        padding-bottom: 100px; /* Adjusted padding for mobile */
+    }
+    
     .site-title {
         font-size: 32px;
     }
@@ -1038,6 +1046,18 @@ body {
         width: 40px;
         height: 40px;
         font-size: 16px;
+    }
+    
+    .scroll-indicator {
+        bottom: 110px; /* Adjusted for mobile */
+    }
+    
+    .hero-bottom-contact {
+        min-height: 70px; /* Smaller height for mobile */
+    }
+    
+    .contact-info-wrapper {
+        padding: 15px 20px; /* Reduced padding for mobile */
     }
     
     .quick-menu {
@@ -1067,7 +1087,7 @@ body {
         font-size: 9px;
     }
     
-    .contact-info {
+    .contact-info-wrapper {
         flex-direction: column;
         gap: 15px;
         text-align: center;
@@ -1104,6 +1124,11 @@ body {
 }
 
 @media (max-width: 480px) {
+    .homepage-hero {
+        min-height: 600px; /* Further reduced for small screens */
+        padding-bottom: 90px; /* Smaller padding for very small screens */
+    }
+    
     .hero-content {
         padding: 0 15px;
     }
@@ -1113,11 +1138,19 @@ body {
     }
     
     .hero-logo-section {
-        margin-bottom: 40px;
+        margin-bottom: 30px; /* Reduced margin */
     }
     
     .hero-search-section {
-        margin-bottom: 60px;
+        margin-bottom: 40px; /* Reduced margin */
+    }
+    
+    .scroll-indicator {
+        bottom: 100px; /* Further adjusted for small screens */
+    }
+    
+    .hero-bottom-contact {
+        min-height: 65px; /* Even smaller for very small screens */
     }
     
     .contact-btn {
@@ -4168,4 +4201,5 @@ body {
         grid-template-columns: repeat(3, 1fr);
         gap: 70px;
     }
+}
 }
