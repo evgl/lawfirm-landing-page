@@ -29,14 +29,7 @@
                     </div>
                 <?php else : ?>
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo" rel="home">
-                        <?php 
-                        $site_name = get_bloginfo('name');
-                        if ($site_name) :
-                            echo esc_html($site_name);
-                        else :
-                            echo __('법률사무소 평정', 'law-firm-pyeongjeong');
-                        endif;
-                        ?>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-white.svg" alt="<?php echo esc_attr__('법률사무소 평정', 'law-firm-pyeongjeong'); ?>" class="logo-image">
                     </a>
                 <?php endif; ?>
                 

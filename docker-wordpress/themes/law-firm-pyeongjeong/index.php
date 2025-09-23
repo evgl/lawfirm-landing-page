@@ -24,13 +24,7 @@ get_header(); ?>
                     <div class="hero-logo-image"><?php the_custom_logo(); ?></div>
                 <?php else : ?>
                     <div class="law-firm-logo">
-                        <div class="logo-shield">
-                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                        </div>
-                        <div class="logo-text">
-                            <h1 class="site-title">법률사무소 평정</h1>
-                            <p class="site-tagline">LEE & PARTNERS</p>
-                        </div>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-white.svg" alt="<?php echo esc_attr__('법률사무소 평정', 'law-firm-pyeongjeong'); ?>" class="hero-logo-image">
                     </div>
                 <?php endif; ?>
             </div>

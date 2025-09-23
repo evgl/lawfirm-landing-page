@@ -90,6 +90,11 @@ body {
     font-weight: 600;
 }
 
+.site-logo .logo-image {
+    height: 40px;
+    width: auto;
+}
+
 .site-logo i {
     margin-right: 8px;
     font-size: 20px;
@@ -280,6 +285,7 @@ body {
 }
 
 /* Large hero logo image when a custom logo is set */
+.hero-logo-image,
 .hero-logo-image img,
 .main-logo .custom-logo {
     max-width: 450px;
