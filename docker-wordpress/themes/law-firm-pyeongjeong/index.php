@@ -74,7 +74,7 @@ get_header(); ?>
             </div>
             <div class="contact-buttons">
                 <a href="#" class="contact-btn kakao-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/kakao-icon.svg" alt="KakaoTalk" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/kakao-icon.svg" alt="KakaoTalk" />
                     <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
                 </a>
                 <a href="#consultation-form" class="contact-btn consultation-btn" data-scroll-to="contact">
