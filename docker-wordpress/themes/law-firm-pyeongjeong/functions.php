@@ -120,7 +120,9 @@ add_action('wp_enqueue_scripts', 'law_firm_scripts');
  */
 function law_firm_fallback_menu() {
     echo '<ul class="primary-menu">';
-    echo '<li><a href="#about">' . esc_html__('소개', 'law-firm-pyeongjeong') . '</a></li>';
+    
+    // Link to about page
+    echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('소개', 'law-firm-pyeongjeong') . '</a></li>';
     echo '<li><a href="#services">' . esc_html__('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
     echo '<li><a href="#team">' . esc_html__('구성원', 'law-firm-pyeongjeong') . '</a></li>';
     echo '<li><a href="#cases">' . esc_html__('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
@@ -218,6 +220,43 @@ function law_firm_custom_post_types() {
     ));
 }
 add_action('init', 'law_firm_custom_post_types');
+
+/**
+ * Add custom rewrite rule for about page
+ */
+function law_firm_add_about_rewrite_rule() {
+    add_rewrite_rule('^about/?$', 'index.php?about_page=1', 'top');
+}
+add_action('init', 'law_firm_add_about_rewrite_rule');
+
+/**
+ * Add custom query var
+ */
+function law_firm_add_query_vars($vars) {
+    $vars[] = 'about_page';
+    return $vars;
+}
+add_filter('query_vars', 'law_firm_add_query_vars');
+
+/**
+ * Template redirect for about page
+ */
+function law_firm_about_template_redirect() {
+    if (get_query_var('about_page')) {
+        include(get_template_directory() . '/about.php');
+        exit;
+    }
+}
+add_action('template_redirect', 'law_firm_about_template_redirect');
+
+/**
+ * Flush rewrite rules on theme activation
+ */
+function law_firm_flush_rewrite_rules() {
+    law_firm_add_about_rewrite_rule();
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'law_firm_flush_rewrite_rules');
 
 /**
  * Register Custom Taxonomies
@@ -650,7 +689,9 @@ add_action('customize_register', 'law_firm_customize_register');
 if (!function_exists('law_firm_fallback_menu')) {
     function law_firm_fallback_menu() {
         echo '<ul class="primary-menu">';
-        echo '<li><a href="' . esc_url(home_url('/')) . '">' . __('소개', 'law-firm-pyeongjeong') . '</a></li>';
+        
+        // Link to about page
+        echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . __('소개', 'law-firm-pyeongjeong') . '</a></li>';
         echo '<li><a href="' . esc_url(get_post_type_archive_link('practice_area')) . '">' . __('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
         echo '<li><a href="' . esc_url(get_post_type_archive_link('attorney')) . '">' . __('구성원', 'law-firm-pyeongjeong') . '</a></li>';
         echo '<li><a href="' . esc_url(get_post_type_archive_link('legal_case')) . '">' . __('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
