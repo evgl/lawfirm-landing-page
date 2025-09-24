@@ -1252,6 +1252,213 @@ body {
 /* ==========================================================================
    Content Sections
    ========================================================================== */
+.about-hero-section {
+    position: relative;
+    min-height: calc(100vh - 150px);
+    margin-top: 70px;
+    padding: 80px 0 120px;
+    background: url('assets/images/about-background.png') center/cover no-repeat;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.about-hero-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+    gap: 40px;
+}
+
+.about-hero-text {
+    grid-column: 6 / span 4;
+    grid-row: 1;
+    align-self: start;
+}
+
+.about-hero-profile {
+    grid-column: 1 / span 4;
+    grid-row: 1 / span 2;
+    align-self: flex-end;
+    justify-self: flex-start;
+    margin-bottom: -120px;
+    position: relative;
+    z-index: 2;
+}
+
+.about-hero-experience {
+    grid-column: 6 / span 6;
+    grid-row: 2;
+    align-self: start;
+}
+
+.about-hero-text img,
+.about-hero-profile img,
+.about-hero-experience img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.about-hero-text img {
+    max-width: 640px;
+    width: 100%;
+}
+
+.about-hero-profile img {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    transform: scale(1.2);
+}
+
+.about-hero-experience img {
+    max-width: 900px;
+    width: 100%;
+}
+
+.about-hero-profile {
+    justify-self: center;
+}
+
+.about-hero-experience {
+    justify-self: end;
+}
+
+.about-hero-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 45%);
+    pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+    .about-hero-section {
+        padding: 70px 0 100px;
+    }
+
+    .about-hero-content {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: auto auto auto;
+        gap: 30px;
+    }
+
+    .about-hero-text {
+        grid-column: 1 / span 8;
+        grid-row: 1;
+        justify-self: center;
+        text-align: center;
+    }
+
+    .about-hero-profile {
+        grid-column: 2 / span 6;
+        grid-row: 2;
+        margin-bottom: -100px;
+        position: relative;
+        z-index: 2;
+        justify-self: center;
+    }
+
+    .about-hero-experience {
+        grid-column: 1 / span 8;
+        grid-row: 3;
+        justify-self: center;
+    }
+
+    .about-hero-text img {
+        max-width: 720px;
+        width: 100%;
+    }
+
+    .about-hero-profile img {
+        max-width: 700px;
+        transform: scale(1.15);
+    }
+
+    .about-hero-experience img {
+        max-width: 850px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero-section {
+        margin-top: 90px;
+        padding: 60px 0 80px;
+    }
+
+    .about-hero-content {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: auto auto auto;
+        padding: 0 24px;
+        gap: 24px;
+    }
+
+    .about-hero-text {
+        grid-column: 1 / span 6;
+        grid-row: 1;
+        justify-self: center;
+        text-align: center;
+    }
+
+    .about-hero-profile {
+        grid-column: 1 / span 6;
+        grid-row: 2;
+        justify-self: center;
+        text-align: center;
+        margin-bottom: -60px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .about-hero-experience {
+        grid-column: 1 / span 6;
+        grid-row: 3;
+        justify-self: center;
+        text-align: center;
+    }
+
+    .about-hero-text img {
+        max-width: 100%;
+    }
+
+    .about-hero-profile img {
+        max-width: 550px;
+        transform: scale(1.1);
+    }
+
+    .about-hero-experience img {
+        max-width: 650px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero-section {
+        padding: 50px 0 70px;
+    }
+
+    .about-hero-content {
+        padding: 0 18px;
+        gap: 20px;
+    }
+
+    .about-hero-profile img {
+        max-width: 450px;
+        transform: scale(1.05);
+    }
+
+    .about-hero-experience img {
+        max-width: 550px;
+        width: 100%;
+    }
+}
+
 .content-section {
     min-height: 100vh;
     padding: 100px 30px;

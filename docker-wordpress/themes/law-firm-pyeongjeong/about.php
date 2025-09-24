@@ -78,9 +78,19 @@
 <main id="main" class="site-main" role="main" style="background-color: white;">
 
 <!-- About Content Area with Background -->
-<div style="min-height: calc(100vh - 150px); margin-top: 50px; padding: 40px 0; background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/about-background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <!-- Content can be added here -->
-</div>
+<section class="about-hero-section">
+    <div class="about-hero-content">
+        <div class="about-hero-text">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/page-text.png" alt="평정 법률사무소 소개 텍스트" loading="lazy">
+        </div>
+        <div class="about-hero-profile">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/profile-image.png" alt="담당 변호사 프로필" loading="lazy">
+        </div>
+        <div class="about-hero-experience">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/experience.png" alt="주요 경력 및 수상 현황" loading="lazy">
+        </div>
+    </div>
+</section>
 
 <!-- Bottom Contact Bar (Same as Main Page) -->
 <div class="hero-bottom-contact">
