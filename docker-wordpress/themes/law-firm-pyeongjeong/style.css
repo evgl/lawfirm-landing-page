@@ -1275,9 +1275,10 @@ body {
 }
 
 .about-hero-text {
-    grid-column: 6 / span 4;
+    grid-column: 7 / span 4;
     grid-row: 1;
     align-self: start;
+    justify-self: start;
 }
 
 .about-hero-profile {
@@ -1291,9 +1292,10 @@ body {
 }
 
 .about-hero-experience {
-    grid-column: 6 / span 6;
+    grid-column: 7 / span 4;
     grid-row: 2;
     align-self: start;
+    margin-top: 20px;
 }
 
 .about-hero-text img,
@@ -1316,7 +1318,7 @@ body {
 }
 
 .about-hero-experience img {
-    width: clamp(450px, 30vw, 1100px);
+    width: clamp(500px, 34vw, 1200px);
     height: auto;
 }
 
@@ -1325,7 +1327,7 @@ body {
 }
 
 .about-hero-experience {
-    justify-self: end;
+    justify-self: start;
 }
 
 .about-hero-section::after {
@@ -1367,6 +1369,7 @@ body {
         grid-column: 1 / span 8;
         grid-row: 3;
         justify-self: center;
+        margin-top: 20px;
     }
 
     .about-hero-text img {
@@ -1381,7 +1384,7 @@ body {
     }
 
     .about-hero-experience img {
-        width: clamp(400px, 25vw, 850px);
+        width: clamp(440px, 28vw, 900px);
         height: auto;
     }
 }
@@ -1421,6 +1424,7 @@ body {
         grid-row: 3;
         justify-self: center;
         text-align: center;
+        margin-top: 20px;
     }
 
     .about-hero-text img {
@@ -1435,7 +1439,7 @@ body {
     }
 
     .about-hero-experience img {
-        width: clamp(350px, 22vw, 650px);
+        width: clamp(380px, 24vw, 700px);
         height: auto;
     }
 }
@@ -1457,7 +1461,7 @@ body {
     }
 
     .about-hero-experience img {
-        width: clamp(300px, 20vw, 550px);
+        width: clamp(330px, 22vw, 600px);
         height: auto;
     }
 }
