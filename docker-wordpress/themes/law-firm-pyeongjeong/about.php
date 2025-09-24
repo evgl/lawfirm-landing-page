@@ -77,8 +77,8 @@
 <!-- Main Content Area -->
 <main id="main" class="site-main" role="main" style="background-color: white;">
 
-<!-- Blank Content Area -->
-<div style="min-height: 60vh; padding: 50px 0; background-color: white;">
+<!-- About Content Area with Background -->
+<div style="min-height: calc(100vh - 150px); margin-top: 50px; padding: 40px 0; background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/about-background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <!-- Content can be added here -->
 </div>
 
