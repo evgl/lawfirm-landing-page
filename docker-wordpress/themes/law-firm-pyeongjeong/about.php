@@ -22,7 +22,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> style="background-color: white;">
 <?php wp_body_open(); ?>
 
 <!-- Skip to main content for accessibility -->
@@ -75,10 +75,10 @@
 </header>
 
 <!-- Main Content Area -->
-<main id="main" class="site-main" role="main">
+<main id="main" class="site-main" role="main" style="background-color: white;">
 
 <!-- Blank Content Area -->
-<div style="min-height: 60vh; padding: 50px 0;">
+<div style="min-height: 60vh; padding: 50px 0; background-color: white;">
     <!-- Content can be added here -->
 </div>
 
