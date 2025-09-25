@@ -22,7 +22,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?> style="background: url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases-background.png' ); ?>') no-repeat center center fixed; background-size: cover;">
+<body <?php body_class(); ?> style="background: url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases/background.png' ); ?>') no-repeat center center fixed; background-size: cover;">
 <?php wp_body_open(); ?>
 
 <!-- Skip to main content for accessibility -->
@@ -77,10 +77,13 @@
 <!-- Main Content Area -->
 <main id="main" class="site-main" role="main">
 
-<!-- Blank Content Area -->
-<div style="min-height: 60vh; padding: 50px 0;">
-    <!-- Content can be added here -->
-</div>
+<!-- Cases Image Stack -->
+<section class="cases-gallery">
+    <div class="cases-gallery__stack">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases/top.png' ); ?>" alt="성공사례 사례 이미지 1" class="cases-gallery__image">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases/bottom.png' ); ?>" alt="성공사례 사례 이미지 2" class="cases-gallery__image cases-gallery__image--bottom">
+    </div>
+</section>
 
 <!-- Bottom Contact Bar (Same as Main Page) -->
 <div class="hero-bottom-contact">

@@ -2041,6 +2041,34 @@ body {
     margin-bottom: 50px;
 }
 
+.cases-gallery {
+    min-height: 60vh;
+    padding: 150px 0 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cases-gallery__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    width: min(90vw, 640px);
+}
+
+.cases-gallery__image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+.cases-gallery__image--bottom {
+    width: 200%;
+    max-width: none;
+}
+
 .case-card {
     background: var(--white);
     border: 1px solid rgba(26, 38, 66, 0.1);
