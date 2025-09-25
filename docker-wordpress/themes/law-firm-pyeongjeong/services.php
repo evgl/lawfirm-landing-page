@@ -79,7 +79,18 @@
 
 <!-- Blank Content Area -->
 <div class="services-content">
-    <!-- Content can be added here -->
+    <div class="services-text-group">
+        <img
+            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services/page-top-text.png'); ?>"
+            class="services-text-image services-text-image--top"
+            alt="<?php echo esc_attr__('평정 법률사무소 업무분야 소개 상단 텍스트', 'law-firm-pyeongjeong'); ?>"
+        >
+        <img
+            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services/page-bottom-text.png'); ?>"
+            class="services-text-image services-text-image--bottom"
+            alt="<?php echo esc_attr__('평정 법률사무소 업무분야 소개 하단 텍스트', 'law-firm-pyeongjeong'); ?>"
+        >
+    </div>
 </div>
 
 <!-- Bottom Contact Bar (Same as Main Page) -->

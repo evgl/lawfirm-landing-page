@@ -62,7 +62,27 @@ body.services-page .site-main {
 
 body.services-page .services-content {
     min-height: 60vh;
-    padding: 50px 0;
+    padding: 190px 20px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.services-page .services-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+body.services-page .services-text-image {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+}
+
+body.services-page .services-text-image--bottom {
+    max-width: 1040px;
 }
 
 /* ==========================================================================
