@@ -78,7 +78,7 @@
 <main id="main" class="site-main" role="main" style="background-color: white;">
 
 <!-- Contact Section -->
-<section id="contact" class="content-section contact-section" style="background-color: white;">
+<section id="contact" class="content-section contact-section" style="background-color: white; background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/contact/background.png' ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="section-container">
         <div class="contact-content">
             <div class="section-header">
