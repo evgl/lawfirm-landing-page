@@ -77,10 +77,132 @@
 <!-- Main Content Area -->
 <main id="main" class="site-main" role="main" style="background-color: white;">
 
-<!-- Blank Content Area -->
-<div style="min-height: 60vh; padding: 50px 0; background-color: white;">
-    <!-- Content can be added here -->
-</div>
+<!-- Contact Section -->
+<section id="contact" class="content-section contact-section" style="background-color: white;">
+    <div class="section-container">
+        <div class="contact-content">
+            <div class="section-header">
+                <h2><?php esc_html_e('상담문의', 'law-firm-pyeongjeong'); ?></h2>
+                <div class="section-subtitle"><?php esc_html_e('CONSULTATION', 'law-firm-pyeongjeong'); ?></div>
+                <p class="section-description"><?php esc_html_e('법적 문제로 고민이 있으시다면 언제든지 상담을 요청하세요. 전문 변호사가 고객의 상황을 정확히 파악하여 최적의 해결 방안을 제시해드립니다.', 'law-firm-pyeongjeong'); ?></p>
+            </div>
+
+            <div class="contact-layout">
+                <div class="consultation-form-section">
+                    <h3><?php esc_html_e('온라인 상담접수', 'law-firm-pyeongjeong'); ?></h3>
+
+                    <form id="consultation-form" class="consultation-form" method="post" action="">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="client-name"><?php esc_html_e('이름', 'law-firm-pyeongjeong'); ?> *</label>
+                                <input type="text" id="client-name" name="client_name" required aria-describedby="name-error">
+                                <span id="name-error" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="client-phone"><?php esc_html_e('연락처', 'law-firm-pyeongjeong'); ?> *</label>
+                                <input type="tel" id="client-phone" name="client_phone" placeholder="010-0000-0000" required aria-describedby="phone-error">
+                                <span id="phone-error" class="error-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="case-type"><?php esc_html_e('사건분야', 'law-firm-pyeongjeong'); ?> *</label>
+                            <select id="case-type" name="case_type" required aria-describedby="case-error">
+                                <option value=""><?php esc_html_e('사건 분야를 선택하세요', 'law-firm-pyeongjeong'); ?></option>
+                                <option value="civil"><?php esc_html_e('민사소송', 'law-firm-pyeongjeong'); ?></option>
+                                <option value="criminal"><?php esc_html_e('형사소송', 'law-firm-pyeongjeong'); ?></option>
+                                <option value="family"><?php esc_html_e('가족법', 'law-firm-pyeongjeong'); ?></option>
+                                <option value="real-estate"><?php esc_html_e('부동산법', 'law-firm-pyeongjeong'); ?></option>
+                                <option value="corporate"><?php esc_html_e('기업법무', 'law-firm-pyeongjeong'); ?></option>
+                                <option value="intellectual"><?php esc_html_e('지적재산권', 'law-firm-pyeongjeong'); ?></option>
+                                <option value="other"><?php esc_html_e('기타', 'law-firm-pyeongjeong'); ?></option>
+                            </select>
+                            <span id="case-error" class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="consultation-content"><?php esc_html_e('상담내용', 'law-firm-pyeongjeong'); ?> *</label>
+                            <textarea id="consultation-content" name="consultation_content" rows="5" placeholder="<?php esc_attr_e('상담받고 싶은 내용을 구체적으로 작성해주세요.', 'law-firm-pyeongjeong'); ?>" required aria-describedby="content-error"></textarea>
+                            <span id="content-error" class="error-message"></span>
+                        </div>
+
+                        <div class="form-group privacy-consent">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="privacy-consent" name="privacy_consent" required>
+                                <span class="checkmark"></span>
+                                <?php esc_html_e('개인정보 수집 및 이용에 동의합니다', 'law-firm-pyeongjeong'); ?> *
+                            </label>
+                            <a href="#" class="privacy-link"><?php esc_html_e('개인정보처리방침 보기', 'law-firm-pyeongjeong'); ?></a>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            <?php esc_html_e('온라인 상담 문의 신청', 'law-firm-pyeongjeong'); ?>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="contact-info-section">
+                    <div class="contact-card">
+                        <h3><?php esc_html_e('연락처 정보', 'law-firm-pyeongjeong'); ?></h3>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4><?php esc_html_e('전화번호', 'law-firm-pyeongjeong'); ?></h4>
+                                <p><a href="tel:02-554-5674">02-554-5674</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4><?php esc_html_e('이메일', 'law-firm-pyeongjeong'); ?></h4>
+                                <p><a href="mailto:info@pyeongjeong-law.com">info@pyeongjeong-law.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4><?php esc_html_e('주소', 'law-firm-pyeongjeong'); ?></h4>
+                                <p><?php esc_html_e('서울시 강남구 테헤란로 123, 평정빌딩 15층', 'law-firm-pyeongjeong'); ?></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4><?php esc_html_e('운영시간', 'law-firm-pyeongjeong'); ?></h4>
+                                <p><?php esc_html_e('평일 09:00 - 18:00', 'law-firm-pyeongjeong'); ?><br>
+                                   <?php esc_html_e('토요일 09:00 - 13:00', 'law-firm-pyeongjeong'); ?><br>
+                                   <?php esc_html_e('일요일 및 공휴일 휴무', 'law-firm-pyeongjeong'); ?></p>
+                            </div>
+                        </div>
+
+                        <div class="emergency-contact">
+                            <h4><?php esc_html_e('긴급상담', 'law-firm-pyeongjeong'); ?></h4>
+                            <p><?php esc_html_e('24시간 긴급상담 가능', 'law-firm-pyeongjeong'); ?></p>
+                            <a href="tel:010-1234-5678" class="emergency-btn">
+                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                <?php esc_html_e('긴급상담 연결', 'law-firm-pyeongjeong'); ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Bottom Contact Bar (Same as Main Page) -->
 <div class="hero-bottom-contact">
@@ -97,7 +219,7 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/kakao-icon.svg" alt="KakaoTalk" />
                 <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
             </a>
-            <a href="<?php echo esc_url(home_url('/#contact')); ?>" class="contact-btn consultation-btn">
+            <a href="#consultation-form" class="contact-btn consultation-btn">
                 <i class="fas fa-calendar-check" aria-hidden="true"></i>
                 <?php esc_html_e('상담하기', 'law-firm-pyeongjeong'); ?>
             </a>

@@ -100,7 +100,7 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/kakao-icon.svg" alt="KakaoTalk" />
                 <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
             </a>
-            <a href="<?php echo esc_url(home_url('/#contact')); ?>" class="contact-btn consultation-btn">
+            <a href="<?php echo esc_url(home_url('/contact/#contact')); ?>" class="contact-btn consultation-btn">
                 <i class="fas fa-calendar-check" aria-hidden="true"></i>
                 <?php esc_html_e('상담하기', 'law-firm-pyeongjeong'); ?>
             </a>
