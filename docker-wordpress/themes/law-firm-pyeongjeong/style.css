@@ -49,6 +49,23 @@ body {
 }
 
 /* ==========================================================================
+   Services Page Background
+   ========================================================================== */
+body.services-page {
+    background: url('assets/images/services/services-background.png') center top / cover no-repeat;
+    color: var(--white);
+}
+
+body.services-page .site-main {
+    background: transparent;
+}
+
+body.services-page .services-content {
+    min-height: 60vh;
+    padding: 50px 0;
+}
+
+/* ==========================================================================
    Header Styles
    ========================================================================== */
 .site-header {
