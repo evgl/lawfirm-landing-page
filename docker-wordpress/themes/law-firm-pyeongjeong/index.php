@@ -91,74 +91,17 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="content-section services-section">
+<!-- Help Section -->
+<section id="help-section" class="content-section help-section">
     <div class="section-container">
-        <div class="services-content">
-            <div class="section-header">
-                <h2><?php esc_html_e('업무분야', 'law-firm-pyeongjeong'); ?></h2>
-                <div class="section-subtitle"><?php esc_html_e('PRACTICE AREAS', 'law-firm-pyeongjeong'); ?></div>
-                <p class="section-description"><?php esc_html_e('다양한 분야의 전문적인 법률 서비스를 제공합니다. 각 분야별 전문 변호사가 고객의 사안을 정확히 파악하여 최적의 법적 대응 방안을 제시합니다.', 'law-firm-pyeongjeong'); ?></p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-gavel" aria-hidden="true"></i>
-                    </div>
-                    <h3><?php esc_html_e('민사소송', 'law-firm-pyeongjeong'); ?></h3>
-                    <p><?php esc_html_e('계약분쟁, 손해배상, 부당이득 등 민사 관련 법적 분쟁을 전문적으로 해결합니다.', 'law-firm-pyeongjeong'); ?></p>
-                    <a href="#" class="service-link"><?php esc_html_e('자세히 보기', 'law-firm-pyeongjeong'); ?> <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                    </div>
-                    <h3><?php esc_html_e('형사소송', 'law-firm-pyeongjeong'); ?></h3>
-                    <p><?php esc_html_e('각종 형사사건 변호 및 수사기관 대응을 통해 고객의 권익을 보호합니다.', 'law-firm-pyeongjeong'); ?></p>
-                    <a href="#" class="service-link"><?php esc_html_e('자세히 보기', 'law-firm-pyeongjeong'); ?> <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-heart" aria-hidden="true"></i>
-                    </div>
-                    <h3><?php esc_html_e('가족법', 'law-firm-pyeongjeong'); ?></h3>
-                    <p><?php esc_html_e('이혼, 양육권, 재산분할, 상속 등 가족 관련 법률 문제를 해결합니다.', 'law-firm-pyeongjeong'); ?></p>
-                    <a href="#" class="service-link"><?php esc_html_e('자세히 보기', 'law-firm-pyeongjeong'); ?> <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-home" aria-hidden="true"></i>
-                    </div>
-                    <h3><?php esc_html_e('부동산법', 'law-firm-pyeongjeong'); ?></h3>
-                    <p><?php esc_html_e('부동산 매매, 임대차, 재개발, 경매 등 부동산 관련 법적 서비스를 제공합니다.', 'law-firm-pyeongjeong'); ?></p>
-                    <a href="#" class="service-link"><?php esc_html_e('자세히 보기', 'law-firm-pyeongjeong'); ?> <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-building" aria-hidden="true"></i>
-                    </div>
-                    <h3><?php esc_html_e('기업법무', 'law-firm-pyeongjeong'); ?></h3>
-                    <p><?php esc_html_e('기업 설립, 계약서 검토, 기업 분쟁, 컴플라이언스 등 기업 법무를 지원합니다.', 'law-firm-pyeongjeong'); ?></p>
-                    <a href="#" class="service-link"><?php esc_html_e('자세히 보기', 'law-firm-pyeongjeong'); ?> <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                    </div>
-                    <h3><?php esc_html_e('지적재산권', 'law-firm-pyeongjeong'); ?></h3>
-                    <p><?php esc_html_e('특허, 상표, 저작권, 영업비밀 등 지적재산권 보호 및 분쟁 해결을 담당합니다.', 'law-firm-pyeongjeong'); ?></p>
-                    <a href="#" class="service-link"><?php esc_html_e('자세히 보기', 'law-firm-pyeongjeong'); ?> <i class="fas fa-arrow-right"></i></a>
-                </div>
+        <div class="for-you-content">
+            <div class="for-you-text-wrapper">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/for-you-text.png" alt="<?php echo esc_attr__('당신을 위해', 'law-firm-pyeongjeong'); ?>" class="for-you-text-image">
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- Team Section -->
 <section id="team" class="content-section team-section">
