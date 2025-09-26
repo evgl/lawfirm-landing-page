@@ -3657,6 +3657,70 @@ body.services-page .services-text-image--bottom {
     .content-section {
         max-width: 1600px;
     }
-    
 }
+
+/* ===================================
+   CASES PAGE STYLES
+   =================================== */
+
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.cases-gallery {
+    min-height: 60vh;
+    padding: 150px 0 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cases-gallery__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    width: min(80vw, 500px); /* Make container smaller */
+}
+
+.cases-gallery__image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+.cases-gallery__image--bottom {
+    width: 35%; /* Make bottom image much smaller than top image */
+    max-width: none;
+}
+
+/* Responsive adjustments for cases gallery */
+@media (max-width: 768px) {
+    .cases-gallery__stack {
+        width: min(90vw, 400px);
+        gap: 20px;
+    }
+    
+    .cases-gallery__image--bottom {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .cases-gallery {
+        padding: 100px 0 30px;
+    }
+    
+    .cases-gallery__stack {
+        width: 95vw;
+        gap: 15px;
+    }
+    
+    .cases-gallery__image--bottom {
+        width: 55%;
+    }
 }

@@ -78,10 +78,10 @@
 <main id="main" class="site-main" role="main">
 
 <!-- Cases Image Stack -->
-<section class="cases-gallery">
-    <div class="cases-gallery__stack">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases/top.png' ); ?>" alt="성공사례 사례 이미지 1" class="cases-gallery__image">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases/bottom.png' ); ?>" alt="성공사례 사례 이미지 2" class="cases-gallery__image cases-gallery__image--bottom">
+<section class="cases-gallery" style="min-height: 60vh; padding: 150px 0 50px; display: flex; justify-content: center; align-items: center;">
+    <div class="cases-gallery__stack" style="display: flex; flex-direction: column; gap: 30px; align-items: center; width: min(90vw, 800px);">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases/top.png' ); ?>" alt="성공사례 사례 이미지 1" class="cases-gallery__image" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cases/bottom.png' ); ?>" alt="성공사례 사례 이미지 2" class="cases-gallery__image cases-gallery__image--bottom" style="width: 200% !important; height: auto; border-radius: 12px; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);">">
     </div>
 </section>
 
