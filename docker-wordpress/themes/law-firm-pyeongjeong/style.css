@@ -1572,8 +1572,8 @@ body.services-page .services-text-image--bottom {
 .content-section.additional-help-section {
     background: var(--light-gray);
     background-image: url('assets/images/location-background.png') !important;
-    background-position: center;
-    background-size: cover;
+    background-position: left center;
+    background-size: auto 100%;
     background-repeat: no-repeat;
     color: var(--primary-navy);
     position: relative;
