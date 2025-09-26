@@ -105,8 +105,15 @@ get_header(); ?>
 <!-- Additional Help Section -->
 <section id="additional-help-section" class="content-section additional-help-section">
     <div class="section-container">
-        <div class="for-you-content">
-            <!-- Background image only, no centered content -->
+        <div class="location-content">
+            <div class="location-left">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/location-map.png" alt="<?php echo esc_attr__('오시는 길 지도', 'law-firm-pyeongjeong'); ?>" class="location-map-image">
+            </div>
+            <div class="location-right">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/location-text-1.png" alt="<?php echo esc_attr__('위치 정보 1', 'law-firm-pyeongjeong'); ?>" class="location-text-image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/location-text-2.png" alt="<?php echo esc_attr__('위치 정보 2', 'law-firm-pyeongjeong'); ?>" class="location-text-image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/location-text-3.png" alt="<?php echo esc_attr__('위치 정보 3', 'law-firm-pyeongjeong'); ?>" class="location-text-image">
+            </div>
         </div>
     </div>
 </section>
