@@ -674,6 +674,11 @@ body.services-page .services-text-image--bottom {
     margin-top: auto;
 }
 
+/* Hide footer on homepage */
+body.home .site-footer {
+    display: none;
+}
+
 /* Consultation CTA Section */
 .consultation-cta {
     background: var(--secondary-navy);
@@ -1305,6 +1310,11 @@ body.services-page .services-text-image--bottom {
 /* Add padding to main content to prevent overlap with fixed contact bar */
 .site-main {
     padding-bottom: 100px; /* Space for fixed bottom contact bar */
+}
+
+/* Remove bottom padding on homepage since footer is hidden */
+body.home .site-main {
+    padding-bottom: 100px; /* Only space for fixed bottom contact bar */
 }
 
 .about-hero-section {
