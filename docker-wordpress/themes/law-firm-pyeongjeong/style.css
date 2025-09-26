@@ -1569,6 +1569,16 @@ body.services-page .services-text-image--bottom {
     position: relative;
 }
 
+.content-section.additional-help-section {
+    background: var(--light-gray);
+    background-image: url('assets/images/location-background.png') !important;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(--primary-navy);
+    position: relative;
+}
+
 /* For You Section Content */
 .for-you-content {
     display: flex;

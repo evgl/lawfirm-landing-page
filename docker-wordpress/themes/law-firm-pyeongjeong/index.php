@@ -102,7 +102,13 @@ get_header(); ?>
     </div>
 </section>
 
-
-
+<!-- Additional Help Section -->
+<section id="additional-help-section" class="content-section additional-help-section">
+    <div class="section-container">
+        <div class="for-you-content">
+            <!-- Background image only, no centered content -->
+        </div>
+    </div>
+</section>
 
 <?php get_footer(); ?>
