@@ -1539,8 +1539,12 @@ body.services-page .services-text-image--bottom {
 }
 
 /* Section-specific backgrounds */
-.about-section {
+.content-section.about-section {
     background: var(--light-gray);
+    background-image: url('assets/images/for-you-background.png') !important;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     color: var(--primary-navy);
 }
 
