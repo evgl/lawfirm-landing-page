@@ -220,7 +220,7 @@ body.services-page .services-text-image--bottom {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    padding-bottom: 120px; /* Space for bottom contact bar */
+    padding-bottom: 60px;
 }
 
 .hero-background {
@@ -513,11 +513,11 @@ body.services-page .services-text-image--bottom {
    Professional Bottom Contact Bar
    ========================================================================== */
 .hero-bottom-contact {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 15;
+    z-index: 1000;
     background: rgba(26, 38, 66, 0.98);
     backdrop-filter: blur(20px);
     border-top: 2px solid rgba(74, 144, 226, 0.3);
@@ -630,7 +630,7 @@ body.services-page .services-text-image--bottom {
    ========================================================================== */
 .scroll-indicator {
     position: absolute;
-    bottom: 5px; /* Positioned almost at the bottom contact bar edge */
+    bottom: 90px; /* Positioned above the fixed contact bar */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -1073,7 +1073,7 @@ body.services-page .services-text-image--bottom {
     
     .homepage-hero {
         min-height: 650px; /* Reduced min-height for mobile */
-        padding-bottom: 100px; /* Adjusted padding for mobile */
+        padding-bottom: 60px;
     }
     
     .site-title {
@@ -1104,7 +1104,7 @@ body.services-page .services-text-image--bottom {
     }
     
     .scroll-indicator {
-        bottom: 2px; /* Positioned almost at the bottom bar edge on mobile */
+        bottom: 80px; /* Positioned above the fixed contact bar on mobile */
     }
     
     .hero-bottom-contact {
@@ -1183,7 +1183,7 @@ body.services-page .services-text-image--bottom {
 @media (max-width: 480px) {
     .homepage-hero {
         min-height: 600px; /* Further reduced for small screens */
-        padding-bottom: 90px; /* Smaller padding for very small screens */
+        padding-bottom: 60px;
     }
     
     /* For You section ultra-small screens */
@@ -1208,7 +1208,7 @@ body.services-page .services-text-image--bottom {
     }
     
     .scroll-indicator {
-        bottom: 2px; /* Positioned almost at the bottom bar edge on small screens */
+        bottom: 75px; /* Positioned above the fixed contact bar on small screens */
     }
     
     .hero-bottom-contact {
@@ -1301,6 +1301,12 @@ body.services-page .services-text-image--bottom {
 /* ==========================================================================
    Content Sections
    ========================================================================== */
+
+/* Add padding to main content to prevent overlap with fixed contact bar */
+.site-main {
+    padding-bottom: 100px; /* Space for fixed bottom contact bar */
+}
+
 .about-hero-section {
     position: relative;
     min-height: calc(100vh - 150px);
