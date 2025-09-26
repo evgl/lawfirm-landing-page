@@ -2,40 +2,6 @@
 
 <!-- Site Footer -->
 <footer class="site-footer" role="contentinfo">
-    <!-- Consultation Call-to-Action Section -->
-    <div class="consultation-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h3><?php _e('24시간 비밀상담', 'law-firm-pyeongjeong'); ?></h3>
-                <p><?php _e('카톡상담', 'law-firm-pyeongjeong'); ?></p>
-                
-                <div class="cta-form-inline">
-                    <form class="consultation-quick-form" method="post" action="#" data-form-type="footer">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" name="name" placeholder="<?php esc_attr_e('이름', 'law-firm-pyeongjeong'); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" name="phone" placeholder="<?php esc_attr_e('연락처', 'law-firm-pyeongjeong'); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="privacy-checkbox">
-                                    <input type="checkbox" name="privacy_consent" value="1" required>
-                                    <span class="checkmark"></span>
-                                    <?php _e('개인정보 수집 및 이용에 동의합니다.', 'law-firm-pyeongjeong'); ?>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">
-                                    <?php _e('상담하기', 'law-firm-pyeongjeong'); ?>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Main Footer Content -->
     <div class="footer-main">

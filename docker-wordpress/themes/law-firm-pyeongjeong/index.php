@@ -56,28 +56,6 @@ get_header(); ?>
         </div>
     </div>
 
-    <!-- Bottom Contact Bar -->
-    <div class="hero-bottom-contact">
-        <div class="contact-info-wrapper">
-            <div class="contact-phone">
-                <i class="fas fa-phone" aria-hidden="true"></i>
-                <div class="phone-info">
-                    <span class="phone-label"><?php esc_html_e('24시간 미팅상담', 'law-firm-pyeongjeong'); ?></span>
-                    <a href="tel:02-554-5674" class="phone-number">02-554-5674</a>
-                </div>
-            </div>
-            <div class="contact-buttons">
-                <a href="#" class="contact-btn kakao-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/kakao-icon.svg" alt="KakaoTalk" />
-                    <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
-                </a>
-                <a href="<?php echo esc_url(home_url('/contact/#consultation-form')); ?>" class="contact-btn consultation-btn">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                    <?php esc_html_e('상담하기', 'law-firm-pyeongjeong'); ?>
-                </a>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- About Section -->

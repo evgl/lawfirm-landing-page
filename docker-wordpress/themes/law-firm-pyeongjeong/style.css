@@ -220,7 +220,7 @@ body.services-page .services-text-image--bottom {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    padding-bottom: 120px; /* Space for bottom contact bar */
+    padding-bottom: 60px;
 }
 
 .hero-background {
@@ -509,128 +509,13 @@ body.services-page .services-text-image--bottom {
     line-height: 1.2;
 }
 
-/* ==========================================================================
-   Professional Bottom Contact Bar
-   ========================================================================== */
-.hero-bottom-contact {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 15;
-    background: rgba(26, 38, 66, 0.98);
-    backdrop-filter: blur(20px);
-    border-top: 2px solid rgba(74, 144, 226, 0.3);
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-    min-height: 80px; /* Ensure minimum height */
-}
-
-.contact-info-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 18px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.contact-phone {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.contact-phone i {
-    font-size: 20px;
-    color: var(--accent-blue);
-    padding: 8px;
-    background: rgba(74, 144, 226, 0.1);
-    border-radius: 8px;
-}
-
-.phone-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.phone-label {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 400;
-}
-
-.phone-number {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--white);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.phone-number:hover {
-    color: var(--accent-blue);
-}
-
-.contact-buttons {
-    display: flex;
-    gap: 12px;
-}
-
-.contact-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.kakao-btn {
-    background: #FEE500;
-    color: #3C1E1E;
-    border: 1px solid #F7D500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.kakao-btn img {
-    width: 18px;
-    height: 18px;
-    fill: #3C1E1E; /* Ensure SVG fills with dark color */
-}
-
-.kakao-btn:hover {
-    background: #FFE815;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(254, 229, 0, 0.4);
-}
-
-.consultation-btn {
-    background: var(--accent-blue);
-    color: var(--white);
-    border: 1px solid var(--accent-blue);
-}
-
-.consultation-btn:hover {
-    background: var(--secondary-navy);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.4);
-}
 
 /* ==========================================================================
    Scroll Indicator
    ========================================================================== */
 .scroll-indicator {
     position: absolute;
-    bottom: 5px; /* Positioned almost at the bottom contact bar edge */
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -1072,8 +957,7 @@ body.services-page .services-text-image--bottom {
     }
     
     .homepage-hero {
-        min-height: 650px; /* Reduced min-height for mobile */
-        padding-bottom: 100px; /* Adjusted padding for mobile */
+        min-height: 650px;
     }
     
     .site-title {
@@ -1104,15 +988,7 @@ body.services-page .services-text-image--bottom {
     }
     
     .scroll-indicator {
-        bottom: 2px; /* Positioned almost at the bottom bar edge on mobile */
-    }
-    
-    .hero-bottom-contact {
-        min-height: 70px; /* Smaller height for mobile */
-    }
-    
-    .contact-info-wrapper {
-        padding: 15px 20px; /* Reduced padding for mobile */
+        bottom: 20px;
     }
     
     .quick-menu {
@@ -1141,18 +1017,10 @@ body.services-page .services-text-image--bottom {
     .quick-menu-item span {
         font-size: 9px;
     }
-    
-    .contact-info-wrapper {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    
-    .contact-buttons {
-        justify-content: center;
-    }
-    
-    /* Footer Responsive */
+}
+
+/* Footer Responsive */
+@media (max-width: 768px) {
     .cta-form-inline .form-row {
         flex-direction: column;
         align-items: stretch;
@@ -1180,8 +1048,7 @@ body.services-page .services-text-image--bottom {
 
 @media (max-width: 480px) {
     .homepage-hero {
-        min-height: 600px; /* Further reduced for small screens */
-        padding-bottom: 90px; /* Smaller padding for very small screens */
+        min-height: 600px;
     }
     
     /* For You section ultra-small screens */
@@ -1206,16 +1073,7 @@ body.services-page .services-text-image--bottom {
     }
     
     .scroll-indicator {
-        bottom: 2px; /* Positioned almost at the bottom bar edge on small screens */
-    }
-    
-    .hero-bottom-contact {
-        min-height: 65px; /* Even smaller for very small screens */
-    }
-    
-    .contact-btn {
-        padding: 10px 16px;
-        font-size: 13px;
+        bottom: 15px;
     }
     
     /* Footer Mobile */
@@ -3723,4 +3581,5 @@ body.services-page .services-text-image--bottom {
     .cases-gallery__image--bottom {
         width: 55%;
     }
+}
 }
