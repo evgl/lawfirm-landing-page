@@ -83,58 +83,7 @@ get_header(); ?>
 <!-- About Section -->
 <section id="about" class="content-section about-section">
     <div class="section-container">
-        <div class="about-content">
-            <div class="about-text">
-                <div class="section-header">
-                    <h2><?php esc_html_e('소개', 'law-firm-pyeongjeong'); ?></h2>
-                    <div class="section-subtitle"><?php esc_html_e('ABOUT US', 'law-firm-pyeongjeong'); ?></div>
-                </div>
-                
-                <div class="about-description">
-                    <p class="lead-text"><?php esc_html_e('법률사무소 평정은 고객의 권익 보호를 최우선으로 하는 전문 법률 서비스를 제공합니다.', 'law-firm-pyeongjeong'); ?></p>
-                    <p><?php esc_html_e('풍부한 경험과 전문성을 바탕으로 다양한 법적 문제에 대한 최적의 솔루션을 제공하여 고객의 만족과 신뢰를 얻어왔습니다. 민사, 형사, 가족법, 부동산 등 다양한 분야에서 축적된 노하우로 고객의 권익을 보호합니다.', 'law-firm-pyeongjeong'); ?></p>
-                </div>
-
-                <div class="about-values">
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <i class="fas fa-balance-scale" aria-hidden="true"></i>
-                        </div>
-                        <h4><?php esc_html_e('정의 구현', 'law-firm-pyeongjeong'); ?></h4>
-                        <p><?php esc_html_e('공정하고 투명한 법률 서비스', 'law-firm-pyeongjeong'); ?></p>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <i class="fas fa-handshake" aria-hidden="true"></i>
-                        </div>
-                        <h4><?php esc_html_e('신뢰 관계', 'law-firm-pyeongjeong'); ?></h4>
-                        <p><?php esc_html_e('고객과의 깊은 신뢰 구축', 'law-firm-pyeongjeong'); ?></p>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <i class="fas fa-award" aria-hidden="true"></i>
-                        </div>
-                        <h4><?php esc_html_e('전문성', 'law-firm-pyeongjeong'); ?></h4>
-                        <p><?php esc_html_e('각 분야별 전문 지식과 경험', 'law-firm-pyeongjeong'); ?></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="about-stats">
-                <div class="stat-item">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label"><?php esc_html_e('년 경력', 'law-firm-pyeongjeong'); ?></div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label"><?php esc_html_e('성공 사례', 'law-firm-pyeongjeong'); ?></div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label"><?php esc_html_e('고객 만족도', 'law-firm-pyeongjeong'); ?></div>
-                </div>
-            </div>
-        </div>
+        <!-- Content cleaned - ready for new content -->
     </div>
 </section>
 
