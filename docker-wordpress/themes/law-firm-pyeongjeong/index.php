@@ -83,7 +83,11 @@ get_header(); ?>
 <!-- About Section -->
 <section id="about" class="content-section about-section">
     <div class="section-container">
-        <!-- Content cleaned - ready for new content -->
+        <div class="for-you-content">
+            <div class="for-you-text-wrapper">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/for-you-text.png" alt="<?php echo esc_attr__('당신을 위해', 'law-firm-pyeongjeong'); ?>" class="for-you-text-image">
+            </div>
+        </div>
     </div>
 </section>
 
