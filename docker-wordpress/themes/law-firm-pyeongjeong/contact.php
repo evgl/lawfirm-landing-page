@@ -87,7 +87,7 @@
                 <p class="section-description"><?php esc_html_e('법적 문제로 고민이 있으시다면 언제든지 상담을 요청하세요. 전문 변호사가 고객의 상황을 정확히 파악하여 최적의 해결 방안을 제시해드립니다.', 'law-firm-pyeongjeong'); ?></p>
             </div>
 
-            <div class="contact-layout">
+            <div class="contact-layout" style="align-items: flex-start;">
                 <div class="consultation-form-section">
                     <h3><?php esc_html_e('온라인 상담접수', 'law-firm-pyeongjeong'); ?></h3>
 
@@ -144,8 +144,9 @@
                 </div>
 
                 <div class="contact-info-section">
+                    <h3><?php esc_html_e('연락처 정보', 'law-firm-pyeongjeong'); ?></h3>
+
                     <div class="contact-card">
-                        <h3><?php esc_html_e('연락처 정보', 'law-firm-pyeongjeong'); ?></h3>
 
                         <div class="info-item">
                             <div class="info-icon">
