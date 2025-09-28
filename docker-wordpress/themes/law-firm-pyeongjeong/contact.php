@@ -189,14 +189,6 @@
                             </div>
                         </div>
 
-                        <div class="emergency-contact">
-                            <h4><?php esc_html_e('긴급상담', 'law-firm-pyeongjeong'); ?></h4>
-                            <p><?php esc_html_e('24시간 긴급상담 가능', 'law-firm-pyeongjeong'); ?></p>
-                            <a href="tel:010-1234-5678" class="emergency-btn">
-                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                                <?php esc_html_e('긴급상담 연결', 'law-firm-pyeongjeong'); ?>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
