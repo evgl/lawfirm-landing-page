@@ -164,7 +164,7 @@
                             </div>
                             <div class="info-content">
                                 <h4><?php esc_html_e('이메일', 'law-firm-pyeongjeong'); ?></h4>
-                                <p><a href="mailto:info@pyeongjeong-law.com">info@pyeongjeong-law.com</a></p>
+                                <p><a href="mailto:info@koreanlawyer.kr">info@koreanlawyer.kr</a></p>
                             </div>
                         </div>
 
@@ -174,7 +174,7 @@
                             </div>
                             <div class="info-content">
                                 <h4><?php esc_html_e('주소', 'law-firm-pyeongjeong'); ?></h4>
-                                <p><?php esc_html_e('서울시 강남구 테헤란로 123, 평정빌딩 15층', 'law-firm-pyeongjeong'); ?></p>
+                                <p><?php esc_html_e('서울 강남구 논현로63길 71, 금성빌딩 6층', 'law-firm-pyeongjeong'); ?></p>
                             </div>
                         </div>
 
