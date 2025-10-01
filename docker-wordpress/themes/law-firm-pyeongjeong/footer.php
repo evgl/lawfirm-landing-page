@@ -66,7 +66,7 @@
                             <li><a href="<?php echo esc_url(get_post_type_archive_link('attorney')); ?>"><?php _e('변호사 소개', 'law-firm-pyeongjeong'); ?></a></li>
                             <li><a href="<?php echo esc_url(get_post_type_archive_link('legal_case')); ?>"><?php _e('성공사례', 'law-firm-pyeongjeong'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/news')); ?>"><?php _e('법률정보', 'law-firm-pyeongjeong'); ?></a></li>
-                            <li><a href="<?php echo esc_url(home_url('/consultation')); ?>"><?php _e('온라인 상담', 'law-firm-pyeongjeong'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/contact')); ?>"><?php _e('온라인 상담', 'law-firm-pyeongjeong'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/contact')); ?>"><?php _e('오시는 길', 'law-firm-pyeongjeong'); ?></a></li>
                         </ul>
                     <?php endif; ?>

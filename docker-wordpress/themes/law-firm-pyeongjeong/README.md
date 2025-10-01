@@ -53,7 +53,7 @@ Primary Menu:
 - Practice Areas (Practice Areas Archive)
 - Attorneys (Attorneys Archive) 
 - Success Cases (Legal Cases Archive)
-- Consultation (Consultation Page)
+- Contact (Contact Page)
 
 Footer Menu:
 - Privacy Policy
@@ -78,27 +78,10 @@ Footer Column 1-4: Footer information sections
 - Attorney introductions
 - Online consultation form
 
-### Consultation Page (page-consultation.php)
-```
-Template selection when creating page: "Consultation Page"
-
-Included features:
-- Consultation process (4 steps)
-- Detailed consultation request form
-- Contact method guidance
-- Frequently Asked Questions (FAQ)
-```
-
-### Contact Page (page-contact.php)
-```
-Template selection when creating page: "Contact Page"
-
-Included features:
-- Office information
-- Map (Naver Maps integration)
-- Detailed directions
-- Business hours and quick inquiry form
-```
+### Contact Page (contact.php)
+- Consultation request form
+- Contact information
+- Quick contact methods
 
 ## 🎛️ Customizer Settings
 
