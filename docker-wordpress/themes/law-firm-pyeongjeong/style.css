@@ -35,8 +35,12 @@ Tags: legal, law-firm, business, professional, korean, responsive
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
     font-family: var(--font-primary);
     font-size: 16px;
     line-height: 1.6;
@@ -1317,6 +1321,21 @@ body.home .site-main {
     padding-bottom: 100px; /* Only space for fixed bottom contact bar */
 }
 
+/* Contact page - allow scrolling but prevent extra space */
+body.contact-page-no-scroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body.contact-page-no-scroll .site-main {
+    padding-bottom: 0;
+    min-height: 100vh;
+}
+
+body.contact-page-no-scroll .contact-section {
+    min-height: 100vh;
+}
+
 .about-hero-section {
     position: relative;
     min-height: calc(100vh - 150px);
@@ -1842,6 +1861,11 @@ body.home .site-main {
 .contact-section {
     background: var(--primary-navy);
     color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 120px;
 }
 
 /* Contact Section Styles */

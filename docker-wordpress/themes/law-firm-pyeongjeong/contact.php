@@ -22,7 +22,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?> style="background-color: white;">
+<body <?php body_class('contact-page-no-scroll'); ?>>
 <?php wp_body_open(); ?>
 
 <!-- Skip to main content for accessibility -->
@@ -75,10 +75,10 @@
 </header>
 
 <!-- Main Content Area -->
-<main id="main" class="site-main" role="main" style="background-color: white;">
+<main id="main" class="site-main" role="main">
 
 <!-- Contact Section -->
-<section id="contact" class="content-section contact-section" style="background-color: white; background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/contact/background.png' ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<section id="contact" class="content-section contact-section" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/contact/background.png' ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="section-container">
         <div class="contact-content">
             <div class="section-header">
@@ -133,7 +133,6 @@
                                 <span class="checkmark"></span>
                                 <?php esc_html_e('개인정보 수집 및 이용에 동의합니다', 'law-firm-pyeongjeong'); ?> *
                             </label>
-                            <a href="#" class="privacy-link"><?php esc_html_e('개인정보처리방침 보기', 'law-firm-pyeongjeong'); ?></a>
                         </div>
 
                         <button type="submit" class="submit-btn">
