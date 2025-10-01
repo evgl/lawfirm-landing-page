@@ -81,13 +81,29 @@ function law_firm_scripts() {
                 }
             });
             
-            // Navbar background on scroll
-            $(window).scroll(function() {
+            // Navbar background on scroll with throttling and requestAnimationFrame
+            var isScrolled = false;
+            var ticking = false;
+            
+            function updateHeader() {
+                var scrollTop = $(window).scrollTop();
                 var header = $(".site-header");
-                if ($(window).scrollTop() > 50) {
+                
+                if (scrollTop > 50 && !isScrolled) {
                     header.css("background", "rgba(26, 38, 66, 0.98)");
-                } else {
+                    isScrolled = true;
+                } else if (scrollTop <= 50 && isScrolled) {
                     header.css("background", "rgba(26, 38, 66, 0.95)");
+                    isScrolled = false;
+                }
+                
+                ticking = false;
+            }
+            
+            $(window).on("scroll", function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateHeader);
+                    ticking = true;
                 }
             });
             

@@ -101,6 +101,8 @@ body.services-page .services-text-image--bottom {
     background: rgba(26, 38, 66, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease;
+    will-change: background;
 }
 
 .header-container {
@@ -257,8 +259,8 @@ body.services-page .services-text-image--bottom {
         rgba(30, 58, 95, 0.2) 0%, 
         rgba(43, 61, 102, 0.15) 50%, 
         rgba(30, 58, 95, 0.2) 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease-in-out infinite;
+    background-size: 200% 200%;
+    animation: gradientShift 30s ease-in-out infinite;
 }
 
 @keyframes gradientShift {
