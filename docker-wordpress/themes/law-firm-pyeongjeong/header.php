@@ -71,8 +71,8 @@
     </div>
     <div class="quick-menu-items">
         <?php
-        $consultation_page = get_page_by_path('consultation');
-        $consultation_link = $consultation_page ? get_permalink($consultation_page) : '#consultation-form';
+        $contact_page = get_page_by_path('contact');
+        $contact_link = $contact_page ? get_permalink($contact_page) : home_url('/contact/');
         
         if (has_nav_menu('quick-menu')) {
             wp_nav_menu(array(
@@ -82,7 +82,7 @@
             ));
         } else {
             ?>
-            <a href="<?php echo esc_url($consultation_link); ?>" class="quick-menu-item" title="<?php esc_attr_e('온라인예약', 'law-firm-pyeongjeong'); ?>">
+            <a href="<?php echo esc_url($contact_link); ?>" class="quick-menu-item" title="<?php esc_attr_e('온라인예약', 'law-firm-pyeongjeong'); ?>">
                 <i class="fas fa-file-signature" aria-hidden="true"></i>
                 <span><?php _e('온라인예약', 'law-firm-pyeongjeong'); ?></span>
             </a>
