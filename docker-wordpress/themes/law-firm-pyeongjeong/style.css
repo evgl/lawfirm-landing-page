@@ -1341,7 +1341,7 @@ body.contact-page-no-scroll .contact-section {
     min-height: calc(100vh - 150px);
     margin-top: 70px;
     padding: 80px 0 120px;
-    background: url('assets/images/cases/about-background.png') center/cover no-repeat;
+    background: url('assets/images/about/about-background.png') center/cover no-repeat;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
