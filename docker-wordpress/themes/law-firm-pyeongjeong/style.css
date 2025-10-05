@@ -2668,14 +2668,39 @@ body.contact-page-no-scroll .contact-section {
     
 /* Mobile Content Sections */
 @media (max-width: 768px) {
+    body, html {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .site-main {
+        width: 100% !important;
+        max-width: 100vw !important;
+        margin: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
     .content-section {
         padding: 60px 0;
         min-height: auto;
-        overflow-x: hidden;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        position: relative;
+        left: 0 !important;
+        right: 0 !important;
     }
 
     .section-container {
         padding: 0 20px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
     }
 
     .content-section h2 {
@@ -2697,16 +2722,37 @@ body.contact-page-no-scroll .contact-section {
         text-align: center;
     }
 
-    /* Fix background positioning for mobile */
-    .content-section.about-section,
+    /* Fix background positioning for mobile - position to right to hide left edge */
+    .content-section.about-section {
+        background-color: #0d1117 !important;
+        background-size: cover !important;
+        background-position: right center !important;
+        background-attachment: scroll;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
     .content-section.help-section {
-        background-size: cover;
-        background-position: center center;
+        background-color: #1a2332 !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-attachment: scroll;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
     .content-section.additional-help-section {
-        background-size: cover;
-        background-position: center center;
+        background-size: cover !important;
+        background-position: left center !important;
+        background-attachment: scroll;
+        margin-left: -1px !important;
+        margin-right: -1px !important;
+        padding-left: 1px !important;
+        padding-right: 1px !important;
     }
     
     /* About Section Mobile */
@@ -2998,11 +3044,15 @@ body.contact-page-no-scroll .contact-section {
 
     .content-section {
         padding: 40px 0;
-        overflow-x: hidden;
     }
 
     .section-container {
         padding: 0 15px;
+    }
+
+    .content-section.about-section,
+    .content-section.help-section {
+        background-size: 100% auto;
     }
     
     .content-section h2 {
