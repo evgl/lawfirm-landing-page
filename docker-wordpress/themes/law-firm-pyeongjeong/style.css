@@ -1072,60 +1072,78 @@ body.home .site-footer {
     .main-navigation {
         display: none;
     }
-    
+
     .mobile-menu-toggle {
         display: block;
     }
-    
+
     /* For You section mobile */
     .for-you-text-image {
         width: clamp(280px, 80vw, 450px);
     }
-    
+
     .homepage-hero {
         min-height: 650px; /* Reduced min-height for mobile */
         padding-bottom: 60px;
     }
-    
+
     .site-title {
         font-size: 32px;
     }
-    
+
     .main-logo i {
         font-size: 36px;
     }
-    
+
+    /* Fix search bar padding on mobile */
+    .hero-search-section {
+        padding: 0 20px;
+    }
+
     .search-container {
-        max-width: 95%;
+        max-width: 100%;
+        padding: 0;
     }
-    
+
     .hero-search-form {
-        padding: 5px 5px 5px 20px;
+        padding: 0;
+        box-shadow: none;
     }
-    
+
+    .search-input-wrapper {
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .search-input-wrapper:hover,
+    .search-input-wrapper:focus-within {
+        transform: none;
+        box-shadow: none;
+    }
+
     .search-input {
         padding: 12px 15px;
         font-size: 14px;
     }
-    
+
     .search-button {
         width: 40px;
         height: 40px;
         font-size: 16px;
     }
-    
+
     .scroll-indicator {
         bottom: 80px; /* Positioned above the fixed contact bar on mobile */
     }
-    
+
     .hero-bottom-contact {
         min-height: 70px; /* Smaller height for mobile */
     }
-    
+
     .contact-info-wrapper {
         padding: 15px 20px; /* Reduced padding for mobile */
     }
-    
+
     .quick-menu {
         position: fixed;
         right: 15px;
@@ -1134,31 +1152,31 @@ body.home .site-footer {
         transform: none;
         padding: 12px 10px;
     }
-    
+
     .quick-menu-items {
         flex-direction: row;
         gap: 10px;
     }
-    
+
     .quick-menu-item {
         padding: 10px 8px;
         min-width: 50px;
     }
-    
+
     .quick-menu-item i {
         font-size: 16px;
     }
-    
+
     .quick-menu-item span {
         font-size: 9px;
     }
-    
+
     .contact-info-wrapper {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
-    
+
     .contact-buttons {
         justify-content: center;
     }
@@ -2651,27 +2669,44 @@ body.contact-page-no-scroll .contact-section {
 /* Mobile Content Sections */
 @media (max-width: 768px) {
     .content-section {
-        padding: 60px 20px;
+        padding: 60px 0;
         min-height: auto;
+        overflow-x: hidden;
     }
-    
+
+    .section-container {
+        padding: 0 20px;
+    }
+
     .content-section h2 {
         font-size: 28px;
         margin-bottom: 25px;
         text-align: center;
     }
-    
+
     .section-subtitle {
         font-size: 16px;
         margin-bottom: 30px;
         text-align: center;
     }
-    
+
     .content-section p {
         font-size: 16px;
         line-height: 1.7;
         margin-bottom: 25px;
         text-align: center;
+    }
+
+    /* Fix background positioning for mobile */
+    .content-section.about-section,
+    .content-section.help-section {
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .content-section.additional-help-section {
+        background-size: cover;
+        background-position: center center;
     }
     
     /* About Section Mobile */
@@ -2950,19 +2985,24 @@ body.contact-page-no-scroll .contact-section {
     .hero-section {
         padding: 40px 15px;
     }
-    
+
     .site-title {
         font-size: 24px !important;
         line-height: 1.2;
     }
-    
+
     .site-tagline {
         font-size: 14px !important;
         letter-spacing: 1px;
     }
-    
+
     .content-section {
-        padding: 40px 15px;
+        padding: 40px 0;
+        overflow-x: hidden;
+    }
+
+    .section-container {
+        padding: 0 15px;
     }
     
     .content-section h2 {
