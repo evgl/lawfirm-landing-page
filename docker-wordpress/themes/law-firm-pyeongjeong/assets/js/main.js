@@ -1001,10 +1001,12 @@
             $(this).addClass('scroll-animate delay-' + ((index % 2 + 1) * 100));
         });
 
-        // Contact section animations
-        $('.contact-content .section-header').addClass('scroll-animate');
-        $('.consultation-form-section').addClass('scroll-animate animate-from-left delay-100');
-        $('.contact-info-section').addClass('scroll-animate animate-from-right delay-200');
+        // Contact section animations (only on non-contact pages)
+        if (!$('body').hasClass('contact-page-no-scroll')) {
+            $('.contact-content .section-header').addClass('scroll-animate');
+            $('.consultation-form-section').addClass('scroll-animate animate-from-left delay-100');
+            $('.contact-info-section').addClass('scroll-animate animate-from-right delay-200');
+        }
     }
 
     /**
@@ -1097,10 +1099,10 @@
             if (target.length) {
                 e.preventDefault();
                 const offset = $('.site-header').height() || 70;
-                
+
                 $('html, body').animate({
                     scrollTop: target.offset().top - offset
-                }, 800, 'easeInOutQuart');
+                }, 800, 'swing');
             }
         });
 

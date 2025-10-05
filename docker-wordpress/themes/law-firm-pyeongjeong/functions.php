@@ -66,60 +66,12 @@ function law_firm_scripts() {
     
     // Enqueue jQuery
     wp_enqueue_script('jquery');
-    
-    // Add inline JavaScript for smooth scrolling and navigation
-    wp_add_inline_script('jquery', '
-        jQuery(document).ready(function($) {
-            // Smooth scrolling for navigation links
-            $("a[href^=\"#\"]").on("click", function(e) {
-                e.preventDefault();
-                var target = $(this.getAttribute("href"));
-                if (target.length) {
-                    $("html, body").stop().animate({
-                        scrollTop: target.offset().top - 70
-                    }, 800);
-                }
-            });
-            
-            // Navbar background on scroll with throttling and requestAnimationFrame
-            var isScrolled = false;
-            var ticking = false;
-            
-            function updateHeader() {
-                var scrollTop = $(window).scrollTop();
-                var header = $(".site-header");
-                
-                if (scrollTop > 50 && !isScrolled) {
-                    header.css("background", "rgba(26, 38, 66, 0.98)");
-                    isScrolled = true;
-                } else if (scrollTop <= 50 && isScrolled) {
-                    header.css("background", "rgba(26, 38, 66, 0.95)");
-                    isScrolled = false;
-                }
-                
-                ticking = false;
-            }
-            
-            $(window).on("scroll", function() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateHeader);
-                    ticking = true;
-                }
-            });
-            
-            // Search functionality
-            $(".search-button").on("click", function(e) {
-                var searchTerm = $(".search-input").val();
-                if (!searchTerm.trim()) {
-                    e.preventDefault();
-                    alert("검색어를 입력해주세요.");
-                }
-            });
-        });
-    ');
+
+    // Enqueue main JavaScript file
+    wp_enqueue_script('law-firm-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.' . time(), true);
     
     // Localize script for AJAX
-    wp_localize_script('law-firm-script', 'law_firm_ajax', array(
+    wp_localize_script('law-firm-main', 'law_firm_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('law_firm_nonce')
     ));

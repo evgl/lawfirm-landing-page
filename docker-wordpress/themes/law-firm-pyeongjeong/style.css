@@ -2802,7 +2802,30 @@ body.contact-page-no-scroll .contact-section {
         order: 1;
         padding: 30px 25px;
     }
-    
+
+    /* Contact layout - for contact.php template */
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .consultation-form-section {
+        order: 1;
+    }
+
+    .consultation-form {
+        padding: 30px 25px;
+    }
+
+    .contact-info-section {
+        order: 2;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
     .form-group {
         margin-bottom: 20px;
     }
