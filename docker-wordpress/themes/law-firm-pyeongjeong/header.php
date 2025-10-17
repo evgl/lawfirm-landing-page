@@ -86,7 +86,7 @@
                 <i class="fas fa-file-signature" aria-hidden="true"></i>
                 <span><?php _e('온라인예약', 'law-firm-pyeongjeong'); ?></span>
             </a>
-            <a href="#" class="quick-menu-item" title="<?php esc_attr_e('카톡예약', 'law-firm-pyeongjeong'); ?>">
+            <a href="https://pf.kakao.com/_XzMxmn" class="quick-menu-item" title="<?php esc_attr_e('카톡예약', 'law-firm-pyeongjeong'); ?>" target="_blank" rel="noopener noreferrer">
                 <i class="fas fa-comment" aria-hidden="true"></i>
                 <span><?php _e('카톡예약', 'law-firm-pyeongjeong'); ?></span>
             </a>
