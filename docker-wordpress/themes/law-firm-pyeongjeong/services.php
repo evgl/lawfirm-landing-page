@@ -104,7 +104,7 @@
             </div>
         </div>
         <div class="contact-buttons">
-            <a href="#" class="contact-btn kakao-btn">
+            <a href="https://pf.kakao.com/_XzMxmn" class="contact-btn kakao-btn" target="_blank" rel="noopener noreferrer">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/kakao-icon.svg" alt="KakaoTalk" />
                 <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
             </a>
