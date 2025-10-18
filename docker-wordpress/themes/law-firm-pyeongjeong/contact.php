@@ -163,7 +163,7 @@
                             </div>
                             <div class="info-content">
                                 <h4><?php esc_html_e('이메일', 'law-firm-pyeongjeong'); ?></h4>
-                                <p><a href="mailto:info@koreanlawyer.kr">info@koreanlawyer.kr</a></p>
+                                <p><a href="mailto:law@koreanlawyer.kr">law@koreanlawyer.kr</a></p>
                             </div>
                         </div>
 
