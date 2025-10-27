@@ -1036,12 +1036,19 @@ body.home .site-footer {
     line-height: 1.6;
 }
 
-.success-modal .modal-body .btn {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+.success-modal .submit-btn {
+    width: auto;
+    min-width: 240px;
+    padding: 18px 40px;
     margin: 0 auto;
-    min-width: 160px;
+    box-shadow: 0 10px 24px rgba(74, 144, 226, 0.28);
+}
+
+.success-modal .submit-btn:hover,
+.success-modal .submit-btn:focus {
+    background: var(--accent-blue);
+    transform: none;
+    box-shadow: 0 10px 24px rgba(74, 144, 226, 0.28);
 }
 
 /* Loading Overlay */

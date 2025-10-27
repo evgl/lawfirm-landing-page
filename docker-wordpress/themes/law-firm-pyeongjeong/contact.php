@@ -218,8 +218,9 @@
                 <i class="fas fa-check-circle" aria-hidden="true"></i>
                 <p><?php esc_html_e('신청이 정상적으로 접수되었습니다. 담당자가 빠른 시일 내에 연락드리겠습니다.', 'law-firm-pyeongjeong'); ?></p>
             </div>
-            <button type="button" class="btn btn-primary modal-close">
-                <?php esc_html_e('확인', 'law-firm-pyeongjeong'); ?>
+            <button type="button" class="submit-btn success-confirm-btn modal-close">
+                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                <span><?php esc_html_e('확인', 'law-firm-pyeongjeong'); ?></span>
             </button>
         </div>
     </div>
