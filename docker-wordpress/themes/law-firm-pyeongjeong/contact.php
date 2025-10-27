@@ -204,6 +204,27 @@
     </div>
 </section>
 
+<!-- Submission Success Modal -->
+<div id="consultation-success-modal" class="modal success-modal" style="display: none;" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><?php esc_html_e('상담 신청이 접수되었습니다', 'law-firm-pyeongjeong'); ?></h2>
+            <button class="modal-close" aria-label="<?php esc_attr_e('성공 알림 창 닫기', 'law-firm-pyeongjeong'); ?>">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="success-modal-message">
+                <i class="fas fa-check-circle" aria-hidden="true"></i>
+                <p><?php esc_html_e('신청이 정상적으로 접수되었습니다. 담당자가 빠른 시일 내에 연락드리겠습니다.', 'law-firm-pyeongjeong'); ?></p>
+            </div>
+            <button type="button" class="btn btn-primary modal-close">
+                <?php esc_html_e('확인', 'law-firm-pyeongjeong'); ?>
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- Bottom Contact Bar (Same as Main Page) -->
 <div class="hero-bottom-contact">
     <div class="contact-info-wrapper">

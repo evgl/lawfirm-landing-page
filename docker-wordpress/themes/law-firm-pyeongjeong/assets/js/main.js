@@ -521,6 +521,8 @@
                             }
                         });
                     }
+
+                    showContactSuccessModal($form);
                     
                     // Close modal if in modal
                     if ($form.closest('.modal').length) {
@@ -538,6 +540,29 @@
                 showNotification('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'error');
             }
         });
+    }
+
+    /**
+     * Show Success Modal on Contact Page
+     */
+    function showContactSuccessModal($form) {
+        if (!$form || !$form.length) {
+            return;
+        }
+
+        if ($form.attr('id') === 'consultation-form' && $('body').hasClass('contact-page-no-scroll')) {
+            const $successModal = $('#consultation-success-modal');
+            if ($successModal.length) {
+                openModal('consultation-success-modal');
+
+                setTimeout(function() {
+                    const $focusTarget = $successModal.find('.modal-close').first();
+                    if ($focusTarget.length) {
+                        $focusTarget.trigger('focus');
+                    }
+                }, 150);
+            }
+        }
     }
 
     /**
