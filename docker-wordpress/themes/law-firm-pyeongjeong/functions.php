@@ -594,29 +594,62 @@ add_action('save_post', 'law_firm_save_meta_box_data');
  * AJAX Handler for Consultation Form
  */
 function law_firm_handle_consultation_form() {
+    // Debug logging
+    error_log('Consultation form submitted');
+    error_log('POST data: ' . print_r($_POST, true));
+
     // Verify nonce
-    if (!wp_verify_nonce($_POST['nonce'], 'law_firm_nonce')) {
-        wp_die('Security check failed');
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'law_firm_nonce')) {
+        error_log('Nonce verification failed');
+        wp_send_json_error(array('message' => __('Security check failed', 'law-firm-pyeongjeong')));
+        return;
     }
-    
+
     // Sanitize form data
-    $name = sanitize_text_field($_POST['name']);
-    $phone = sanitize_text_field($_POST['phone']);
-    $email = sanitize_email($_POST['email']);
-    $case_type = sanitize_text_field($_POST['case_type']);
-    $message = sanitize_textarea_field($_POST['message']);
-    $privacy_consent = isset($_POST['privacy_consent']) ? '1' : '0';
-    
-    // Validate required fields
-    if (empty($name) || empty($phone) || empty($case_type) || $privacy_consent !== '1') {
-        wp_send_json_error(array('message' => __('Please fill in all required fields and agree to privacy policy.', 'law-firm-pyeongjeong')));
+    $name = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+    $phone = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
+    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+    $case_type = isset($_POST['case_type']) ? sanitize_text_field($_POST['case_type']) : '';
+    $message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
+
+    // Handle privacy consent - accept multiple true values
+    $privacy_consent_raw = isset($_POST['privacy_consent']) ? $_POST['privacy_consent'] : '';
+    $privacy_consent = in_array($privacy_consent_raw, array('1', 'on', 'true', 'yes'), true) ? '1' : '0';
+
+    error_log("Name: $name, Phone: $phone, Email: $email, Case Type: $case_type, Privacy Raw: $privacy_consent_raw, Privacy: $privacy_consent");
+
+    // Validate required fields (case_type is now optional)
+    if (empty($name) || empty($phone)) {
+        error_log('Validation failed: Missing required fields');
+        wp_send_json_error(array('message' => __('Please fill in all required fields.', 'law-firm-pyeongjeong')));
+        return;
+    }
+
+    // Validate privacy consent separately for better error message
+    if ($privacy_consent !== '1') {
+        error_log('Validation failed: Privacy consent not accepted');
+        wp_send_json_error(array('message' => __('Please agree to the privacy policy.', 'law-firm-pyeongjeong')));
+        return;
     }
     
     // Save consultation request
+    // Build formatted content with contact details
+    $formatted_content = "=== 연락처 정보 / Contact Information ===\n\n";
+    $formatted_content .= "이름 (Name): " . $name . "\n";
+    $formatted_content .= "전화번호 (Phone): " . $phone . "\n";
+    if (!empty($email)) {
+        $formatted_content .= "이메일 (Email): " . $email . "\n";
+    }
+    if (!empty($case_type)) {
+        $formatted_content .= "사건분야 (Case Type): " . $case_type . "\n";
+    }
+    $formatted_content .= "\n=== 상담내용 / Consultation Message ===\n\n";
+    $formatted_content .= $message;
+
     $post_data = array(
         'post_title' => sprintf(__('Consultation Request from %s', 'law-firm-pyeongjeong'), $name),
-        'post_content' => $message,
-        'post_status' => 'private',
+        'post_content' => $formatted_content,
+        'post_status' => 'publish',
         'post_type' => 'consultation',
         'meta_input' => array(
             '_consultation_name' => $name,
@@ -629,20 +662,28 @@ function law_firm_handle_consultation_form() {
     );
     
     $consultation_id = wp_insert_post($post_data);
-    
-    if ($consultation_id) {
-        // Send email notification
+
+    error_log('Consultation ID: ' . $consultation_id);
+
+    if ($consultation_id && !is_wp_error($consultation_id)) {
+        error_log('Consultation saved successfully with ID: ' . $consultation_id);
+
+        // TODO: Implement email notification for consultation requests
+        // Currently disabled - submissions are saved to WordPress Consultations menu
+        /*
         $to = get_option('admin_email');
         $subject = __('New Consultation Request', 'law-firm-pyeongjeong');
         $body = sprintf(
             __("New consultation request received:\n\nName: %s\nPhone: %s\nEmail: %s\nCase Type: %s\nMessage: %s", 'law-firm-pyeongjeong'),
             $name, $phone, $email, $case_type, $message
         );
-        
+
         wp_mail($to, $subject, $body);
-        
+        */
+
         wp_send_json_success(array('message' => __('Your consultation request has been submitted successfully. We will contact you soon.', 'law-firm-pyeongjeong')));
     } else {
+        error_log('Failed to save consultation. Error: ' . (is_wp_error($consultation_id) ? $consultation_id->get_error_message() : 'Unknown error'));
         wp_send_json_error(array('message' => __('Sorry, there was an error processing your request. Please try again.', 'law-firm-pyeongjeong')));
     }
 }

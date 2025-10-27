@@ -95,17 +95,24 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="client-name"><?php esc_html_e('이름', 'law-firm-pyeongjeong'); ?> *</label>
-                                <input type="text" id="client-name" name="client_name" required aria-describedby="name-error">
+                                <input type="text" id="client-name" name="name" required aria-describedby="name-error">
                                 <span id="name-error" class="error-message"></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="client-phone"><?php esc_html_e('연락처', 'law-firm-pyeongjeong'); ?> *</label>
-                                <input type="tel" id="client-phone" name="client_phone" placeholder="010-0000-0000" required aria-describedby="phone-error">
+                                <input type="tel" id="client-phone" name="phone" placeholder="010-0000-0000" required aria-describedby="phone-error">
                                 <span id="phone-error" class="error-message"></span>
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="client-email"><?php esc_html_e('이메일', 'law-firm-pyeongjeong'); ?></label>
+                            <input type="email" id="client-email" name="email" placeholder="example@email.com" aria-describedby="email-error">
+                            <span id="email-error" class="error-message"></span>
+                        </div>
+
+                        <!-- Case Type Field - Commented out for simplified form
                         <div class="form-group">
                             <label for="case-type"><?php esc_html_e('사건분야', 'law-firm-pyeongjeong'); ?> *</label>
                             <select id="case-type" name="case_type" required aria-describedby="case-error">
@@ -120,16 +127,17 @@
                             </select>
                             <span id="case-error" class="error-message"></span>
                         </div>
+                        -->
 
                         <div class="form-group">
                             <label for="consultation-content"><?php esc_html_e('상담내용', 'law-firm-pyeongjeong'); ?> *</label>
-                            <textarea id="consultation-content" name="consultation_content" rows="5" placeholder="<?php esc_attr_e('상담받고 싶은 내용을 구체적으로 작성해주세요.', 'law-firm-pyeongjeong'); ?>" required aria-describedby="content-error"></textarea>
+                            <textarea id="consultation-content" name="message" rows="5" placeholder="<?php esc_attr_e('상담받고 싶은 내용을 구체적으로 작성해주세요.', 'law-firm-pyeongjeong'); ?>" required aria-describedby="content-error"></textarea>
                             <span id="content-error" class="error-message"></span>
                         </div>
 
                         <div class="form-group privacy-consent">
                             <label class="checkbox-label">
-                                <input type="checkbox" id="privacy-consent" name="privacy_consent" required>
+                                <input type="checkbox" id="privacy-consent" name="privacy_consent" value="1" required>
                                 <span class="checkmark"></span>
                                 <?php esc_html_e('개인정보 수집 및 이용에 동의합니다', 'law-firm-pyeongjeong'); ?> *
                             </label>
