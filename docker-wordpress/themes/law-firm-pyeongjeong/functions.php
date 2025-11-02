@@ -225,7 +225,7 @@ function law_firm_custom_template_redirect() {
     } elseif (preg_match('#/services/?$#', $path)) {
         $template_file = 'services.php';
     } elseif (preg_match('#/cases/?$#', $path)) {
-        $template_file = 'cases.php';
+        $template_file = 'search-cases.php';
     } elseif (preg_match('#/contact/?$#', $path)) {
         $template_file = 'contact.php';
     }
@@ -241,7 +241,7 @@ function law_firm_custom_template_redirect() {
                 $template_file = 'services.php';
                 break;
             case 'cases':
-                $template_file = 'cases.php';
+                $template_file = 'search-cases.php';
                 break;
             case 'contact':
                 $template_file = 'contact.php';
@@ -272,7 +272,7 @@ function law_firm_early_request_handler() {
         } elseif (preg_match('#/services/?$#', $path)) {
             $template_file = 'services.php';
         } elseif (preg_match('#/cases/?$#', $path)) {
-            $template_file = 'cases.php';
+            $template_file = 'search-cases.php';
         } elseif (preg_match('#/contact/?$#', $path)) {
             $template_file = 'contact.php';
         }
