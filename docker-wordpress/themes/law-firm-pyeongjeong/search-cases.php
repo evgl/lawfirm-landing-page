@@ -27,7 +27,7 @@ global $post;
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> style="background: #ffffff;">
 <?php wp_body_open(); ?>
 
 <!-- Skip to main content for accessibility -->
@@ -88,6 +88,30 @@ global $post;
         }
         ?>
     </div>
+
+    <!-- Bottom Contact Bar (Same as Main Page) -->
+    <div class="hero-bottom-contact">
+        <div class="contact-info-wrapper">
+            <div class="contact-phone">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <div class="phone-info">
+                    <span class="phone-label"><?php esc_html_e('24시간 미팅상담', 'law-firm-pyeongjeong'); ?></span>
+                    <a href="tel:02-554-5674" class="phone-number">02-554-5674</a>
+                </div>
+            </div>
+            <div class="contact-buttons">
+                <a href="https://pf.kakao.com/_XzMxmn" class="contact-btn kakao-btn" target="_blank" rel="noopener noreferrer">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/kakao-icon.svg" alt="KakaoTalk" />
+                    <?php esc_html_e('카톡상담', 'law-firm-pyeongjeong'); ?>
+                </a>
+                <a href="<?php echo esc_url(home_url('/contact/#contact')); ?>" class="contact-btn consultation-btn">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                    <?php esc_html_e('상담하기', 'law-firm-pyeongjeong'); ?>
+                </a>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 <?php wp_footer(); ?>
