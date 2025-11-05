@@ -92,6 +92,7 @@ function law_firm_fallback_menu() {
     // Each menu item links to its respective page
     echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('소개', 'law-firm-pyeongjeong') . '</a></li>';
     echo '<li><a href="' . esc_url(home_url('/services/')) . '">' . esc_html__('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/cases/')) . '">' . esc_html__('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
     echo '<li><a href="' . esc_url(home_url('/contact/')) . '">' . esc_html__('상담문의', 'law-firm-pyeongjeong') . '</a></li>';
     echo '</ul>';
 }
@@ -770,6 +771,7 @@ if (!function_exists('law_firm_fallback_menu')) {
         // Each menu item links to its respective page
         echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . __('소개', 'law-firm-pyeongjeong') . '</a></li>';
         echo '<li><a href="' . esc_url(home_url('/services/')) . '">' . __('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
+        echo '<li><a href="' . esc_url(home_url('/cases/')) . '">' . __('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
         echo '<li><a href="' . esc_url(home_url('/contact/')) . '">' . __('상담문의', 'law-firm-pyeongjeong') . '</a></li>';
         echo '</ul>';
     }
