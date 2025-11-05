@@ -1019,13 +1019,6 @@
             $(this).addClass('scroll-animate delay-' + ((index + 1) * 150));
         });
 
-        // Cases section animations
-        $('.cases-content .section-header').addClass('scroll-animate');
-        $('.cases-search-section').addClass('scroll-animate delay-100');
-        $('.case-card').each(function(index) {
-            $(this).addClass('scroll-animate delay-' + ((index % 2 + 1) * 100));
-        });
-
         // Contact section animations (only on non-contact pages)
         if (!$('body').hasClass('contact-page-no-scroll')) {
             $('.contact-content .section-header').addClass('scroll-animate');
@@ -1190,28 +1183,6 @@
             });
         }
 
-        // Swipe gesture for case categories (mobile)
-        let startX = 0;
-        $('.cases-grid').on('touchstart', function(e) {
-            startX = e.originalEvent.touches[0].clientX;
-        }).on('touchend', function(e) {
-            const endX = e.originalEvent.changedTouches[0].clientX;
-            const diffX = startX - endX;
-            
-            if (Math.abs(diffX) > 50) {
-                const activeBtn = $('.category-btn.active');
-                const buttons = $('.category-btn');
-                const currentIndex = buttons.index(activeBtn);
-                
-                if (diffX > 0 && currentIndex < buttons.length - 1) {
-                    // Swipe left - next category
-                    buttons.eq(currentIndex + 1).click();
-                } else if (diffX < 0 && currentIndex > 0) {
-                    // Swipe right - previous category
-                    buttons.eq(currentIndex - 1).click();
-                }
-            }
-        });
     }
 
     /**

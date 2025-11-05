@@ -2919,25 +2919,6 @@ body.contact-page-no-scroll .contact-section {
     .filter-btn:active {
         transform: scale(0.95);
     }
-    
-    /* Swipe indicators for cases */
-    .cases-grid {
-        position: relative;
-        overflow-x: hidden;
-    }
-    
-    .cases-grid::after {
-        content: "← 스와이프하여 더 보기 →";
-        position: absolute;
-        bottom: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 12px;
-        color: var(--text-muted);
-        opacity: 0.7;
-        text-align: center;
-        width: 100%;
-    }
 }
 
 /* Enhanced Mobile Typography & Readability */
@@ -3866,69 +3847,209 @@ body.contact-page-no-scroll .contact-section {
     }
 }
 
-/* ===================================
-   CASES PAGE STYLES
-   =================================== */
 
-.cases-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-bottom: 50px;
+/* ========================================
+   Search Section Styles (search-cases.php)
+   ======================================== */
+
+.search-section {
+    width: 100%;
+    padding: 60px 20px;
+    background: #ffffff;
 }
 
-.cases-gallery {
-    min-height: 60vh;
-    padding: 150px 0 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cases-gallery__stack {
+.search-section-wrapper {
+    max-width: 980px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    width: min(80vw, 500px); /* Make container smaller */
+    gap: 40px;
 }
 
-.cases-gallery__image {
+/* Search Bar Container */
+.search-bar-container {
     width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
 }
 
-.cases-gallery__image--bottom {
-    width: 35%; /* Make bottom image much smaller than top image */
-    max-width: none;
+.search-bar-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
-/* Responsive adjustments for cases gallery */
+.search-input-wrapper {
+    flex: 1;
+    position: relative;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.search-input-wrapper:hover {
+    border-color: rgba(74, 144, 226, 0.5);
+}
+
+.search-input-wrapper:focus-within {
+    border-color: var(--accent-blue);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-button {
+    padding: 12px 24px;
+    background: #1a1a1a;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: 50px;
+}
+
+.search-button:hover {
+    border-color: var(--accent-blue);
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-2px);
+}
+
+.search-button:active {
+    transform: translateY(0);
+}
+
+/* Category Filter Buttons */
+.category-filter-wrapper {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.category-btn {
+    padding: 12px 24px;
+    background: rgba(26, 38, 66, 0.8);
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.category-btn:hover {
+    color: var(--white);
+    border-color: var(--accent-blue);
+    background: rgba(26, 38, 66, 0.95);
+    transform: translateY(-2px);
+}
+
+.category-btn.active {
+    background: var(--accent-blue);
+    color: var(--white);
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.category-btn.active:hover {
+    background: #3a82d8;
+    box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .cases-gallery__stack {
-        width: min(90vw, 400px);
-        gap: 20px;
+    .search-section {
+        padding: 40px 16px;
     }
-    
-    .cases-gallery__image--bottom {
-        width: 45%;
+
+    .search-section-wrapper {
+        gap: 24px;
+    }
+
+    .search-bar-form {
+        flex-direction: column;
+    }
+
+    .search-button {
+        width: 100%;
+    }
+
+    .category-filter-wrapper {
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 10px;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+    }
+
+    .category-filter-wrapper::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .category-filter-wrapper::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+    }
+
+    .category-filter-wrapper::-webkit-scrollbar-thumb {
+        background: rgba(74, 144, 226, 0.3);
+        border-radius: 10px;
+    }
+
+    .category-filter-wrapper::-webkit-scrollbar-thumb:hover {
+        background: rgba(74, 144, 226, 0.5);
+    }
+
+    .category-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        flex-shrink: 0;
     }
 }
 
 @media (max-width: 480px) {
-    .cases-gallery {
-        padding: 100px 0 30px;
+    .search-section {
+        padding: 30px 12px;
     }
-    
-    .cases-gallery__stack {
-        width: 95vw;
-        gap: 15px;
+
+    .search-section-wrapper {
+        gap: 16px;
     }
-    
-    .cases-gallery__image--bottom {
-        width: 55%;
+
+    .search-input {
+        padding: 12px 16px;
+        font-size: 14px;
     }
-}
+
+    .search-button {
+        min-width: 44px;
+        padding: 10px 16px;
+    }
+
+    .category-btn {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
 }

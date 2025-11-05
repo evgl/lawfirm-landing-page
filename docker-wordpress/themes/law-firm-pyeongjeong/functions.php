@@ -88,11 +88,10 @@ add_action('wp_enqueue_scripts', 'law_firm_scripts');
  */
 function law_firm_fallback_menu() {
     echo '<ul class="primary-menu">';
-    
+
     // Each menu item links to its respective page
     echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('소개', 'law-firm-pyeongjeong') . '</a></li>';
     echo '<li><a href="' . esc_url(home_url('/services/')) . '">' . esc_html__('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/cases/')) . '">' . esc_html__('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
     echo '<li><a href="' . esc_url(home_url('/contact/')) . '">' . esc_html__('상담문의', 'law-firm-pyeongjeong') . '</a></li>';
     echo '</ul>';
 }
@@ -122,7 +121,7 @@ function law_firm_custom_post_types() {
         'has_archive' => true,
         'rewrite' => array('slug' => 'attorneys')
     ));
-    
+
     // Legal Case Post Type
     register_post_type('legal_case', array(
         'labels' => array(
@@ -143,7 +142,7 @@ function law_firm_custom_post_types() {
         'has_archive' => true,
         'rewrite' => array('slug' => 'cases')
     ));
-    
+
     // Practice Area Post Type
     register_post_type('practice_area', array(
         'labels' => array(
@@ -767,11 +766,10 @@ add_action('customize_register', 'law_firm_customize_register');
 if (!function_exists('law_firm_fallback_menu')) {
     function law_firm_fallback_menu() {
         echo '<ul class="primary-menu">';
-        
+
         // Each menu item links to its respective page
         echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . __('소개', 'law-firm-pyeongjeong') . '</a></li>';
         echo '<li><a href="' . esc_url(home_url('/services/')) . '">' . __('업무분야', 'law-firm-pyeongjeong') . '</a></li>';
-        echo '<li><a href="' . esc_url(home_url('/cases/')) . '">' . __('성공사례', 'law-firm-pyeongjeong') . '</a></li>';
         echo '<li><a href="' . esc_url(home_url('/contact/')) . '">' . __('상담문의', 'law-firm-pyeongjeong') . '</a></li>';
         echo '</ul>';
     }
