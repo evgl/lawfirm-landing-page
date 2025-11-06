@@ -470,38 +470,49 @@ function law_firm_attorney_meta_box_callback($post) {
  */
 function law_firm_case_meta_box_callback($post) {
     wp_nonce_field('law_firm_case_meta_box', 'law_firm_case_meta_box_nonce');
-    
+
     $case_result = get_post_meta($post->ID, '_case_result', true);
     $case_amount = get_post_meta($post->ID, '_case_amount', true);
     $case_duration = get_post_meta($post->ID, '_case_duration', true);
     $case_attorney = get_post_meta($post->ID, '_case_attorney', true);
     $case_date = get_post_meta($post->ID, '_case_date', true);
-    
+    $profile_name = get_post_meta($post->ID, '_case_profile_name', true);
+    $brief_description = get_post_meta($post->ID, '_case_brief_description', true);
+
     echo '<table class="form-table">';
+
+    echo '<tr><th><label for="profile_name">' . __('Profile Name (for dropdown card)', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="text" id="profile_name" name="profile_name" value="' . esc_attr($profile_name) . '" class="regular-text" />';
+    echo '<p class="description">' . __('Name/title displayed in the circular badge on the card', 'law-firm-pyeongjeong') . '</p></td></tr>';
+
+    echo '<tr><th><label for="brief_description">' . __('Brief Description (for dropdown card)', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><textarea id="brief_description" name="brief_description" rows="3" class="large-text">' . esc_textarea($brief_description) . '</textarea>';
+    echo '<p class="description">' . __('Short description shown on the card (max 100 characters)', 'law-firm-pyeongjeong') . '</p></td></tr>';
+
     echo '<tr><th><label for="case_result">' . __('Case Result', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><select id="case_result" name="case_result" class="regular-text">';
     echo '<option value="won" ' . selected($case_result, 'won', false) . '>' . __('Won', 'law-firm-pyeongjeong') . '</option>';
     echo '<option value="settled" ' . selected($case_result, 'settled', false) . '>' . __('Settled', 'law-firm-pyeongjeong') . '</option>';
     echo '<option value="dismissed" ' . selected($case_result, 'dismissed', false) . '>' . __('Dismissed', 'law-firm-pyeongjeong') . '</option>';
     echo '</select></td></tr>';
-    
+
     echo '<tr><th><label for="case_amount">' . __('Settlement/Award Amount', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><input type="text" id="case_amount" name="case_amount" value="' . esc_attr($case_amount) . '" class="regular-text" /></td></tr>';
-    
+
     echo '<tr><th><label for="case_duration">' . __('Case Duration', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><input type="text" id="case_duration" name="case_duration" value="' . esc_attr($case_duration) . '" class="regular-text" /></td></tr>';
-    
+
     echo '<tr><th><label for="case_attorney">' . __('Lead Attorney', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><select id="case_attorney" name="case_attorney" class="regular-text">';
     echo '<option value="">' . __('Select Attorney', 'law-firm-pyeongjeong') . '</option>';
-    
+
     $attorneys = get_posts(array('post_type' => 'attorney', 'numberposts' => -1));
     foreach ($attorneys as $attorney) {
         echo '<option value="' . $attorney->ID . '" ' . selected($case_attorney, $attorney->ID, false) . '>' . $attorney->post_title . '</option>';
     }
-    
+
     echo '</select></td></tr>';
-    
+
     echo '<tr><th><label for="case_date">' . __('Case Completion Date', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><input type="date" id="case_date" name="case_date" value="' . esc_attr($case_date) . '" class="regular-text" /></td></tr>';
     echo '</table>';
@@ -559,6 +570,12 @@ function law_firm_save_meta_box_data($post_id) {
     
     // Case Meta
     if (isset($_POST['law_firm_case_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_case_meta_box_nonce'], 'law_firm_case_meta_box')) {
+        if (isset($_POST['profile_name'])) {
+            update_post_meta($post_id, '_case_profile_name', sanitize_text_field($_POST['profile_name']));
+        }
+        if (isset($_POST['brief_description'])) {
+            update_post_meta($post_id, '_case_brief_description', sanitize_textarea_field($_POST['brief_description']));
+        }
         if (isset($_POST['case_result'])) {
             update_post_meta($post_id, '_case_result', sanitize_text_field($_POST['case_result']));
         }
@@ -589,6 +606,64 @@ function law_firm_save_meta_box_data($post_id) {
     }
 }
 add_action('save_post', 'law_firm_save_meta_box_data');
+
+/**
+ * AJAX Handler for Loading Cases
+ */
+function law_firm_load_cases() {
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'law_firm_nonce')) {
+        wp_send_json_error(array('message' => __('Security check failed', 'law-firm-pyeongjeong')));
+        return;
+    }
+
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $per_page = 4;
+    $offset = ($page - 1) * $per_page;
+
+    // Query cases
+    $args = array(
+        'post_type' => 'legal_case',
+        'posts_per_page' => $per_page,
+        'offset' => $offset,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    );
+
+    $cases = get_posts($args);
+    $total_cases = wp_count_posts('legal_case')->publish;
+
+    if (empty($cases)) {
+        wp_send_json_error(array('message' => __('No more cases', 'law-firm-pyeongjeong')));
+        return;
+    }
+
+    $cases_data = array();
+    foreach ($cases as $case) {
+        $profile_name = get_post_meta($case->ID, '_case_profile_name', true);
+        $brief_description = get_post_meta($case->ID, '_case_brief_description', true);
+        $case_date = get_post_meta($case->ID, '_case_date', true);
+
+        $cases_data[] = array(
+            'id' => $case->ID,
+            'title' => $case->post_title,
+            'profile_name' => $profile_name,
+            'brief_description' => $brief_description,
+            'date' => $case_date,
+            'permalink' => get_permalink($case->ID)
+        );
+    }
+
+    $has_more = ($offset + $per_page) < $total_cases;
+
+    wp_send_json_success(array(
+        'cases' => $cases_data,
+        'has_more' => $has_more,
+        'total' => $total_cases
+    ));
+}
+add_action('wp_ajax_law_firm_load_cases', 'law_firm_load_cases');
+add_action('wp_ajax_nopriv_law_firm_load_cases', 'law_firm_load_cases');
 
 /**
  * AJAX Handler for Consultation Form

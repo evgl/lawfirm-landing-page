@@ -46,6 +46,7 @@
         initScrollProgress();
         initParallaxEffects();
         initAdvancedInteractions();
+        initCasesDropdown();
     }
 
     /**
@@ -1209,5 +1210,154 @@
 
     // Initialize touch interactions
     initTouchInteractions();
+
+    /**
+     * Initialize Cases Dropdown Menu
+     */
+    function initCasesDropdown() {
+        const $casesDropdown = $('#casesDropdown');
+        const $casesGrid = $('#casesGrid');
+        const $loadMoreBtn = $('#loadMoreBtn');
+        const $casesMenuItem = $('a[href*="/cases/"]');
+        let currentPage = 1;
+        let isLoading = false;
+        let hasMore = true;
+
+        // Load initial cases
+        loadCases(1);
+
+        // Toggle dropdown on cases menu item click
+        $casesMenuItem.on('click', function(e) {
+            if (window.innerWidth > 768) {
+                e.preventDefault();
+                $casesDropdown.toggleClass('active');
+            }
+        });
+
+        // Close dropdown when clicking on a case card
+        $(document).on('click', '.case-card', function() {
+            $casesDropdown.removeClass('active');
+        });
+
+        // Close dropdown when clicking outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('#casesDropdown, .primary-menu').length) {
+                $casesDropdown.removeClass('active');
+            }
+        });
+
+        // Close dropdown when clicking other menu items
+        $('.primary-menu li a').not($casesMenuItem).on('click', function() {
+            $casesDropdown.removeClass('active');
+        });
+
+        // Load more button
+        $loadMoreBtn.on('click', function(e) {
+            e.preventDefault();
+            if (!isLoading && hasMore) {
+                loadCases(currentPage + 1);
+            }
+        });
+
+        /**
+         * Load cases via AJAX
+         */
+        function loadCases(page) {
+            if (isLoading) return;
+
+            isLoading = true;
+            $loadMoreBtn.addClass('loading').prop('disabled', true);
+
+            $.ajax({
+                url: law_firm_ajax.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'law_firm_load_cases',
+                    page: page,
+                    nonce: law_firm_ajax.nonce
+                },
+                success: function(response) {
+                    if (response.success) {
+                        const cases = response.data.cases;
+                        const hasMore = response.data.has_more;
+
+                        // Render cases
+                        if (page === 1) {
+                            // First page - replace content
+                            $casesGrid.html('');
+                        }
+
+                        cases.forEach(function(caseData) {
+                            const profileInitials = caseData.profile_name
+                                ? caseData.profile_name.substring(0, 2).toUpperCase()
+                                : 'CA';
+
+                            const caseCard = $('<a>')
+                                .addClass('case-card')
+                                .href(caseData.permalink)
+                                .attr('href', caseData.permalink)
+                                .html(`
+                                    <div class="case-card-header">
+                                        <div class="case-profile-circle">${profileInitials}</div>
+                                        <div class="case-card-header-text">
+                                            <div class="case-card-title">${escapeHtml(caseData.title)}</div>
+                                            <div class="case-card-date">${caseData.date ? formatDate(caseData.date) : ''}</div>
+                                        </div>
+                                    </div>
+                                    <div class="case-card-description">${escapeHtml(caseData.brief_description)}</div>
+                                `);
+
+                            $casesGrid.append(caseCard);
+                        });
+
+                        currentPage = page;
+
+                        // Update button state
+                        if (hasMore) {
+                            $loadMoreBtn.removeClass('loading').prop('disabled', false);
+                        } else {
+                            $loadMoreBtn.prop('disabled', true).text('더 이상 없습니다');
+                        }
+                    } else {
+                        // No more cases
+                        $loadMoreBtn.prop('disabled', true).text('더 이상 없습니다');
+                    }
+                },
+                error: function() {
+                    console.error('Failed to load cases');
+                    $loadMoreBtn.removeClass('loading').prop('disabled', false);
+                },
+                complete: function() {
+                    isLoading = false;
+                }
+            });
+        }
+
+        /**
+         * Escape HTML to prevent XSS
+         */
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text ? text.replace(/[&<>"']/g, function(m) { return map[m]; }) : '';
+        }
+
+        /**
+         * Format date
+         */
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const date = new Date(dateStr);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}.${month}.${day}`;
+        }
+    }
 
 })(jQuery);

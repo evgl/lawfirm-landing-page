@@ -4053,3 +4053,303 @@ button.category-btn.active:hover {
         font-size: 12px;
     }
 }
+
+/* ==========================================================================
+   Cases Dropdown Menu Styles
+   ========================================================================== */
+
+/* Dropdown Container */
+.cases-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    width: 100%;
+    max-width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 30px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.cases-dropdown.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cases-dropdown-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cases Grid Layout - 2x2 */
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    min-height: 300px;
+}
+
+/* Case Card Styles */
+.case-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.case-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(74, 144, 226, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.case-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(74, 144, 226, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.15);
+}
+
+.case-card:hover::before {
+    opacity: 1;
+}
+
+/* Case Card Header - Profile Circle and Title */
+.case-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.case-profile-circle {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-blue), rgba(74, 144, 226, 0.7));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px;
+    color: var(--white);
+}
+
+.case-card-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.case-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.case-card-date {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Case Description */
+.case-card-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* Load More Button */
+.cases-load-more {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.cases-load-more-btn {
+    padding: 12px 32px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cases-load-more-btn:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    box-shadow: 0 0 12px rgba(74, 144, 226, 0.2);
+}
+
+.cases-load-more-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.cases-load-more-btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Loading indicator */
+.case-card.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Desktop Navigation Positioning */
+.header-right {
+    position: relative;
+}
+
+.main-navigation {
+    position: relative;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .cases-dropdown {
+        padding: 24px;
+    }
+
+    .case-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cases-dropdown {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .cases-dropdown.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .cases-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        min-height: auto;
+    }
+
+    .case-card {
+        padding: 20px;
+    }
+
+    .case-profile-circle {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        font-size: 11px;
+    }
+
+    .case-card-title {
+        font-size: 15px;
+    }
+
+    .case-card-description {
+        font-size: 13px;
+    }
+
+    .cases-load-more-btn {
+        padding: 10px 24px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cases-dropdown {
+        padding: 16px;
+    }
+
+    .cases-grid {
+        gap: 12px;
+    }
+
+    .case-card {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .case-card-header {
+        gap: 12px;
+    }
+
+    .case-profile-circle {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        font-size: 10px;
+    }
+
+    .case-card-title {
+        font-size: 14px;
+    }
+
+    .case-card-date {
+        font-size: 11px;
+    }
+
+    .case-card-description {
+        font-size: 12px;
+    }
+
+    .cases-load-more-btn {
+        padding: 9px 20px;
+        font-size: 12px;
+        width: 100%;
+    }
+}
