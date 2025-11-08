@@ -54,20 +54,6 @@
                     ?>
                 </nav>
 
-                <!-- Cases Dropdown Menu -->
-                <div class="cases-dropdown" id="casesDropdown" role="region" aria-label="<?php esc_attr_e('Success Cases', 'law-firm-pyeongjeong'); ?>">
-                    <div class="cases-dropdown-content">
-                        <div class="cases-grid" id="casesGrid">
-                            <!-- Cases will be loaded here via JavaScript -->
-                        </div>
-                        <div class="cases-load-more">
-                            <button class="cases-load-more-btn" id="loadMoreBtn" type="button">
-                                <?php _e('더보기 +', 'law-firm-pyeongjeong'); ?>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <!-- Mobile Menu Toggle -->

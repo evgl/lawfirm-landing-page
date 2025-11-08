@@ -1229,7 +1229,7 @@
         // Toggle dropdown on cases menu item click
         $casesMenuItem.on('click', function(e) {
             if (window.innerWidth > 768) {
-                e.preventDefault();
+                // Navigation allowed - removed e.preventDefault() to enable link navigation
                 $casesDropdown.toggleClass('active');
             }
         });
