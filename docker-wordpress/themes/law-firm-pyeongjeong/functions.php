@@ -123,26 +123,6 @@ function law_firm_custom_post_types() {
         'rewrite' => array('slug' => 'attorneys')
     ));
 
-    // Legal Case Post Type
-    register_post_type('legal_case', array(
-        'labels' => array(
-            'name' => __('Legal Cases', 'law-firm-pyeongjeong'),
-            'singular_name' => __('Legal Case', 'law-firm-pyeongjeong'),
-            'add_new' => __('Add New Case', 'law-firm-pyeongjeong'),
-            'add_new_item' => __('Add New Case', 'law-firm-pyeongjeong'),
-            'edit_item' => __('Edit Case', 'law-firm-pyeongjeong'),
-            'new_item' => __('New Case', 'law-firm-pyeongjeong'),
-            'view_item' => __('View Case', 'law-firm-pyeongjeong'),
-            'search_items' => __('Search Cases', 'law-firm-pyeongjeong'),
-        ),
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'menu_icon' => 'dashicons-portfolio',
-        'menu_position' => 26,
-        'has_archive' => true,
-        'rewrite' => array('slug' => 'cases')
-    ));
 
     // Practice Area Post Type
     register_post_type('practice_area', array(
@@ -184,6 +164,28 @@ function law_firm_custom_post_types() {
         'menu_position' => 28,
         'has_archive' => false,
         'rewrite' => array('slug' => 'testimonials')
+    ));
+
+    // Successful Cases Post Type
+    register_post_type('successful_case', array(
+        'labels' => array(
+            'name' => __('Successful Cases', 'law-firm-pyeongjeong'),
+            'singular_name' => __('Successful Case', 'law-firm-pyeongjeong'),
+            'add_new' => __('Add New Case', 'law-firm-pyeongjeong'),
+            'add_new_item' => __('Add New Case', 'law-firm-pyeongjeong'),
+            'edit_item' => __('Edit Case', 'law-firm-pyeongjeong'),
+            'new_item' => __('New Case', 'law-firm-pyeongjeong'),
+            'view_item' => __('View Case', 'law-firm-pyeongjeong'),
+            'search_items' => __('Search Cases', 'law-firm-pyeongjeong'),
+            'all_items' => __('Successful Cases', 'law-firm-pyeongjeong'),
+        ),
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
+        'menu_icon' => 'dashicons-yes-alt',
+        'menu_position' => 26,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'successful-cases')
     ));
 }
 add_action('init', 'law_firm_custom_post_types');
@@ -300,24 +302,6 @@ add_action('after_switch_theme', 'law_firm_flush_rewrite_rules');
  */
 function law_firm_custom_taxonomies() {
     
-    // Case Type Taxonomy
-    register_taxonomy('case_type', 'legal_case', array(
-        'labels' => array(
-            'name' => __('Case Types', 'law-firm-pyeongjeong'),
-            'singular_name' => __('Case Type', 'law-firm-pyeongjeong'),
-            'search_items' => __('Search Case Types', 'law-firm-pyeongjeong'),
-            'all_items' => __('All Case Types', 'law-firm-pyeongjeong'),
-            'edit_item' => __('Edit Case Type', 'law-firm-pyeongjeong'),
-            'update_item' => __('Update Case Type', 'law-firm-pyeongjeong'),
-            'add_new_item' => __('Add New Case Type', 'law-firm-pyeongjeong'),
-            'new_item_name' => __('New Case Type Name', 'law-firm-pyeongjeong'),
-        ),
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'rewrite' => array('slug' => 'case-type')
-    ));
-    
     // Practice Area Taxonomy for Attorneys
     register_taxonomy('attorney_specialty', 'attorney', array(
         'labels' => array(
@@ -409,22 +393,22 @@ function law_firm_add_meta_boxes() {
         'high'
     );
     
-    // Legal Case Meta Box
-    add_meta_box(
-        'case_details',
-        __('Case Details', 'law-firm-pyeongjeong'),
-        'law_firm_case_meta_box_callback',
-        'legal_case',
-        'normal',
-        'high'
-    );
-    
     // Practice Area Meta Box
     add_meta_box(
         'practice_area_details',
         __('Practice Area Details', 'law-firm-pyeongjeong'),
         'law_firm_practice_area_meta_box_callback',
         'practice_area',
+        'normal',
+        'high'
+    );
+
+    // Successful Case Meta Box
+    add_meta_box(
+        'successful_case_details',
+        __('Successful Case Details', 'law-firm-pyeongjeong'),
+        'law_firm_successful_case_meta_box_callback',
+        'successful_case',
         'normal',
         'high'
     );
@@ -466,59 +450,6 @@ function law_firm_attorney_meta_box_callback($post) {
 }
 
 /**
- * Legal Case Meta Box Callback
- */
-function law_firm_case_meta_box_callback($post) {
-    wp_nonce_field('law_firm_case_meta_box', 'law_firm_case_meta_box_nonce');
-
-    $case_result = get_post_meta($post->ID, '_case_result', true);
-    $case_amount = get_post_meta($post->ID, '_case_amount', true);
-    $case_duration = get_post_meta($post->ID, '_case_duration', true);
-    $case_attorney = get_post_meta($post->ID, '_case_attorney', true);
-    $case_date = get_post_meta($post->ID, '_case_date', true);
-    $profile_name = get_post_meta($post->ID, '_case_profile_name', true);
-    $brief_description = get_post_meta($post->ID, '_case_brief_description', true);
-
-    echo '<table class="form-table">';
-
-    echo '<tr><th><label for="profile_name">' . __('Profile Name (for dropdown card)', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="profile_name" name="profile_name" value="' . esc_attr($profile_name) . '" class="regular-text" />';
-    echo '<p class="description">' . __('Name/title displayed in the circular badge on the card', 'law-firm-pyeongjeong') . '</p></td></tr>';
-
-    echo '<tr><th><label for="brief_description">' . __('Brief Description (for dropdown card)', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><textarea id="brief_description" name="brief_description" rows="3" class="large-text">' . esc_textarea($brief_description) . '</textarea>';
-    echo '<p class="description">' . __('Short description shown on the card (max 100 characters)', 'law-firm-pyeongjeong') . '</p></td></tr>';
-
-    echo '<tr><th><label for="case_result">' . __('Case Result', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><select id="case_result" name="case_result" class="regular-text">';
-    echo '<option value="won" ' . selected($case_result, 'won', false) . '>' . __('Won', 'law-firm-pyeongjeong') . '</option>';
-    echo '<option value="settled" ' . selected($case_result, 'settled', false) . '>' . __('Settled', 'law-firm-pyeongjeong') . '</option>';
-    echo '<option value="dismissed" ' . selected($case_result, 'dismissed', false) . '>' . __('Dismissed', 'law-firm-pyeongjeong') . '</option>';
-    echo '</select></td></tr>';
-
-    echo '<tr><th><label for="case_amount">' . __('Settlement/Award Amount', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="case_amount" name="case_amount" value="' . esc_attr($case_amount) . '" class="regular-text" /></td></tr>';
-
-    echo '<tr><th><label for="case_duration">' . __('Case Duration', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="case_duration" name="case_duration" value="' . esc_attr($case_duration) . '" class="regular-text" /></td></tr>';
-
-    echo '<tr><th><label for="case_attorney">' . __('Lead Attorney', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><select id="case_attorney" name="case_attorney" class="regular-text">';
-    echo '<option value="">' . __('Select Attorney', 'law-firm-pyeongjeong') . '</option>';
-
-    $attorneys = get_posts(array('post_type' => 'attorney', 'numberposts' => -1));
-    foreach ($attorneys as $attorney) {
-        echo '<option value="' . $attorney->ID . '" ' . selected($case_attorney, $attorney->ID, false) . '>' . $attorney->post_title . '</option>';
-    }
-
-    echo '</select></td></tr>';
-
-    echo '<tr><th><label for="case_date">' . __('Case Completion Date', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="date" id="case_date" name="case_date" value="' . esc_attr($case_date) . '" class="regular-text" /></td></tr>';
-    echo '</table>';
-}
-
-/**
  * Practice Area Meta Box Callback
  */
 function law_firm_practice_area_meta_box_callback($post) {
@@ -540,6 +471,36 @@ function law_firm_practice_area_meta_box_callback($post) {
     echo '<td><input type="checkbox" id="practice_area_featured" name="practice_area_featured" value="1" ' . checked($featured, '1', false) . ' />';
     echo '<label for="practice_area_featured">' . __('Display on homepage', 'law-firm-pyeongjeong') . '</label></td></tr>';
     echo '</table>';
+}
+
+/**
+ * Successful Case Meta Box Callback
+ */
+function law_firm_successful_case_meta_box_callback($post) {
+    wp_nonce_field('law_firm_successful_case_meta_box', 'law_firm_successful_case_meta_box_nonce');
+
+    $legal_case = get_post_meta($post->ID, '_successful_case_legal_case', true);
+    $decision = get_post_meta($post->ID, '_successful_case_decision', true);
+    $date = get_post_meta($post->ID, '_successful_case_date', true);
+    $subtitle = get_post_meta($post->ID, '_successful_case_subtitle', true);
+
+    echo '<table class="form-table">';
+
+    echo '<tr><th><label for="legal_case">' . __('Legal Case', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="text" id="legal_case" name="legal_case" value="' . esc_attr($legal_case) . '" class="regular-text" /></td></tr>';
+
+    echo '<tr><th><label for="decision">' . __('Decision', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><textarea id="decision" name="decision" rows="4" class="large-text">' . esc_textarea($decision) . '</textarea></td></tr>';
+
+    echo '<tr><th><label for="date">' . __('Date', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="date" id="date" name="date" value="' . esc_attr($date) . '" class="regular-text" /></td></tr>';
+
+    echo '<tr><th><label for="subtitle">' . __('Subtitle', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="text" id="subtitle" name="subtitle" value="' . esc_attr($subtitle) . '" class="regular-text" />';
+    echo '<p class="description">' . __('Brief subtitle or tagline for the case', 'law-firm-pyeongjeong') . '</p></td></tr>';
+
+    echo '</table>';
+    echo '<p class="description">' . __('Content Description: Use the main editor below to add the full case description', 'law-firm-pyeongjeong') . '</p>';
 }
 
 /**
@@ -567,32 +528,6 @@ function law_firm_save_meta_box_data($post_id) {
             update_post_meta($post_id, '_attorney_bar_admission', sanitize_text_field($_POST['attorney_bar_admission']));
         }
     }
-    
-    // Case Meta
-    if (isset($_POST['law_firm_case_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_case_meta_box_nonce'], 'law_firm_case_meta_box')) {
-        if (isset($_POST['profile_name'])) {
-            update_post_meta($post_id, '_case_profile_name', sanitize_text_field($_POST['profile_name']));
-        }
-        if (isset($_POST['brief_description'])) {
-            update_post_meta($post_id, '_case_brief_description', sanitize_textarea_field($_POST['brief_description']));
-        }
-        if (isset($_POST['case_result'])) {
-            update_post_meta($post_id, '_case_result', sanitize_text_field($_POST['case_result']));
-        }
-        if (isset($_POST['case_amount'])) {
-            update_post_meta($post_id, '_case_amount', sanitize_text_field($_POST['case_amount']));
-        }
-        if (isset($_POST['case_duration'])) {
-            update_post_meta($post_id, '_case_duration', sanitize_text_field($_POST['case_duration']));
-        }
-        if (isset($_POST['case_attorney'])) {
-            update_post_meta($post_id, '_case_attorney', intval($_POST['case_attorney']));
-        }
-        if (isset($_POST['case_date'])) {
-            update_post_meta($post_id, '_case_date', sanitize_text_field($_POST['case_date']));
-        }
-    }
-    
     // Practice Area Meta
     if (isset($_POST['law_firm_practice_area_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_practice_area_meta_box_nonce'], 'law_firm_practice_area_meta_box')) {
         if (isset($_POST['practice_area_icon'])) {
@@ -604,66 +539,24 @@ function law_firm_save_meta_box_data($post_id) {
         $featured = isset($_POST['practice_area_featured']) ? '1' : '0';
         update_post_meta($post_id, '_practice_area_featured', $featured);
     }
+
+    // Successful Case Meta
+    if (isset($_POST['law_firm_successful_case_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_successful_case_meta_box_nonce'], 'law_firm_successful_case_meta_box')) {
+        if (isset($_POST['legal_case'])) {
+            update_post_meta($post_id, '_successful_case_legal_case', sanitize_text_field($_POST['legal_case']));
+        }
+        if (isset($_POST['decision'])) {
+            update_post_meta($post_id, '_successful_case_decision', sanitize_textarea_field($_POST['decision']));
+        }
+        if (isset($_POST['date'])) {
+            update_post_meta($post_id, '_successful_case_date', sanitize_text_field($_POST['date']));
+        }
+        if (isset($_POST['subtitle'])) {
+            update_post_meta($post_id, '_successful_case_subtitle', sanitize_text_field($_POST['subtitle']));
+        }
+    }
 }
 add_action('save_post', 'law_firm_save_meta_box_data');
-
-/**
- * AJAX Handler for Loading Cases
- */
-function law_firm_load_cases() {
-    // Verify nonce
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'law_firm_nonce')) {
-        wp_send_json_error(array('message' => __('Security check failed', 'law-firm-pyeongjeong')));
-        return;
-    }
-
-    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    $per_page = 4;
-    $offset = ($page - 1) * $per_page;
-
-    // Query cases
-    $args = array(
-        'post_type' => 'legal_case',
-        'posts_per_page' => $per_page,
-        'offset' => $offset,
-        'orderby' => 'date',
-        'order' => 'DESC'
-    );
-
-    $cases = get_posts($args);
-    $total_cases = wp_count_posts('legal_case')->publish;
-
-    if (empty($cases)) {
-        wp_send_json_error(array('message' => __('No more cases', 'law-firm-pyeongjeong')));
-        return;
-    }
-
-    $cases_data = array();
-    foreach ($cases as $case) {
-        $profile_name = get_post_meta($case->ID, '_case_profile_name', true);
-        $brief_description = get_post_meta($case->ID, '_case_brief_description', true);
-        $case_date = get_post_meta($case->ID, '_case_date', true);
-
-        $cases_data[] = array(
-            'id' => $case->ID,
-            'title' => $case->post_title,
-            'profile_name' => $profile_name,
-            'brief_description' => $brief_description,
-            'date' => $case_date,
-            'permalink' => get_permalink($case->ID)
-        );
-    }
-
-    $has_more = ($offset + $per_page) < $total_cases;
-
-    wp_send_json_success(array(
-        'cases' => $cases_data,
-        'has_more' => $has_more,
-        'total' => $total_cases
-    ));
-}
-add_action('wp_ajax_law_firm_load_cases', 'law_firm_load_cases');
-add_action('wp_ajax_nopriv_law_firm_load_cases', 'law_firm_load_cases');
 
 /**
  * AJAX Handler for Consultation Form
@@ -896,38 +789,6 @@ function law_firm_get_featured_practice_areas($limit = 6) {
     );
     
     return get_posts($args);
-}
-
-// Get recent successful cases
-function law_firm_get_recent_cases($limit = 6) {
-    $args = array(
-        'post_type' => 'legal_case',
-        'posts_per_page' => $limit,
-        'meta_query' => array(
-            array(
-                'key' => '_case_result',
-                'value' => array('won', 'settled'),
-                'compare' => 'IN'
-            )
-        ),
-        'orderby' => 'date',
-        'order' => 'DESC'
-    );
-    
-    return get_posts($args);
-}
-
-// Format case amount for display
-function law_firm_format_case_amount($amount) {
-    if (empty($amount)) return '';
-    
-    // Remove any non-numeric characters except decimal points
-    $numeric_amount = preg_replace('/[^0-9.]/', '', $amount);
-    
-    if (!$numeric_amount) return $amount;
-    
-    // Format with Korean number formatting
-    return number_format($numeric_amount) . '원';
 }
 
 /**

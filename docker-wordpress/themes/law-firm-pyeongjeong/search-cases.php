@@ -178,6 +178,83 @@ global $post;
             border-color: #3a82d8;
         }
 
+        /* Cases List Styles */
+        .cases-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .case-item {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .case-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #4A90E2;
+        }
+
+        .case-item h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .case-item h3 a {
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .case-item h3 a:hover {
+            color: #4A90E2;
+        }
+
+        .case-subtitle {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #666666;
+            font-style: italic;
+        }
+
+        .case-type,
+        .case-date {
+            margin: 8px 0;
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .case-date i {
+            margin-right: 6px;
+            color: #4A90E2;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 12px;
+            color: #4A90E2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #3a82d8;
+            margin-left: 4px;
+        }
+
+        .no-cases {
+            text-align: center;
+            color: #999999;
+            padding: 40px 20px;
+            font-size: 16px;
+        }
+
         @media (max-width: 768px) {
             .search-section {
                 padding: 40px 16px;
@@ -328,31 +405,50 @@ global $post;
                 </form>
             </div>
 
-            <!-- Search Result Message -->
-            <div class="search-result-message">
-                <?php esc_html_e('검색어 "search term"에 대한 검색 결과입니다.', 'law-firm-pyeongjeong'); ?>
-            </div>
+            <!-- Successful Cases Display -->
+            <div class="successful-cases-container">
+                <?php
+                // Query successful cases
+                $args = array(
+                    'post_type' => 'successful_case',
+                    'posts_per_page' => -1,
+                    'orderby' => 'date',
+                    'order' => 'DESC'
+                );
+                $cases = new WP_Query($args);
 
-            <!-- Category Filter Buttons -->
-            <div class="category-filter-wrapper">
-                <button class="category-btn active" data-category="all" aria-pressed="true">
-                    <?php esc_html_e('전체', 'law-firm-pyeongjeong'); ?> (figure)
-                </button>
-                <button class="category-btn" data-category="success-cases" aria-pressed="false">
-                    <?php esc_html_e('성공사례', 'law-firm-pyeongjeong'); ?> (figure)
-                </button>
-                <button class="category-btn" data-category="client-reviews" aria-pressed="false">
-                    <?php esc_html_e('고객후기', 'law-firm-pyeongjeong'); ?> (figure)
-                </button>
-                <button class="category-btn" data-category="legal-info" aria-pressed="false">
-                    <?php esc_html_e('법률정보', 'law-firm-pyeongjeong'); ?> (figure)
-                </button>
-                <button class="category-btn" data-category="press-coverage" aria-pressed="false">
-                    <?php esc_html_e('언론보도', 'law-firm-pyeongjeong'); ?> (figure)
-                </button>
-                <button class="category-btn" data-category="practice-areas" aria-pressed="false">
-                    <?php esc_html_e('업무분야', 'law-firm-pyeongjeong'); ?> (figure)
-                </button>
+                if ($cases->have_posts()) :
+                    ?>
+                    <div class="cases-list">
+                        <?php
+                        while ($cases->have_posts()) : $cases->the_post();
+                            $legal_case = get_post_meta(get_the_ID(), '_successful_case_legal_case', true);
+                            $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
+                            $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
+                            ?>
+                            <div class="case-item">
+                                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <?php if ($subtitle) : ?>
+                                    <p class="case-subtitle"><?php echo esc_html($subtitle); ?></p>
+                                <?php endif; ?>
+                                <?php if ($legal_case) : ?>
+                                    <p class="case-type"><strong><?php esc_html_e('Legal Case:', 'law-firm-pyeongjeong'); ?></strong> <?php echo esc_html($legal_case); ?></p>
+                                <?php endif; ?>
+                                <?php if ($date) : ?>
+                                    <p class="case-date"><i class="fas fa-calendar"></i> <?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></p>
+                                <?php endif; ?>
+                                <a href="<?php the_permalink(); ?>" class="read-more"><?php esc_html_e('Read More →', 'law-firm-pyeongjeong'); ?></a>
+                            </div>
+                            <?php
+                        endwhile;
+                        wp_reset_postdata();
+                        ?>
+                    </div>
+                    <?php
+                else :
+                    echo '<p class="no-cases">' . esc_html__('No successful cases found.', 'law-firm-pyeongjeong') . '</p>';
+                endif;
+                ?>
             </div>
         </div>
     </section>
