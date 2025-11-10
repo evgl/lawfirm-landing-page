@@ -10,8 +10,8 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress_password
       WORDPRESS_DB_NAME: wordpress_db
-      WORDPRESS_DEBUG: 1
-      WORDPRESS_DEBUG_LOG: 1
+      WORDPRESS_DEBUG: 0
+      WORDPRESS_DEBUG_LOG: 0
       WORDPRESS_DEBUG_DISPLAY: 0
     volumes:
       - wordpress_data:/var/www/html

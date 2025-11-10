@@ -455,7 +455,7 @@ global $post;
 
     <div class="template-placeholder" aria-live="polite">
         <?php
-        if (is_user_logged_in() && current_user_can('edit_post', $post ? $post->ID : 0)) {
+        if (is_user_logged_in() && current_user_can('manage_options')) {
             echo '<p>' . esc_html__('This search cases template is ready for custom content.', 'law-firm-pyeongjeong') . '</p>';
         }
         ?>
