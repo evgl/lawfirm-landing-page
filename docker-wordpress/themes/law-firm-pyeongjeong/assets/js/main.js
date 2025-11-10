@@ -1091,25 +1091,40 @@
         // Case filter functionality with animations
         $('.category-btn').on('click', function() {
             const category = $(this).data('category');
-            
+
             // Update active button
             $('.category-btn').removeClass('active');
             $(this).addClass('active');
-            
-            // Filter cases with animation
-            $('.case-card').each(function(index) {
-                const cardCategory = $(this).data('category');
-                const shouldShow = category === 'all' || cardCategory === category;
-                
+            $(this).attr('aria-pressed', 'true');
+            $('.category-btn').not(this).attr('aria-pressed', 'false');
+
+            // Filter cases with animation (supports both .case-card and .case-item)
+            let visibleCount = 0;
+            $('.case-card, .case-item').each(function(index) {
+                const itemCategory = $(this).data('category');
+                const shouldShow = category === 'all' || itemCategory === category;
+
                 if (shouldShow) {
                     $(this).removeClass('hidden').addClass('scroll-animate');
                     setTimeout(() => {
                         $(this).addClass('animate-in');
-                    }, index * 100);
+                    }, visibleCount * 100);
+                    visibleCount++;
                 } else {
                     $(this).removeClass('animate-in').addClass('hidden');
                 }
             });
+
+            // Show no results message if needed
+            const container = $('.cases-list');
+            if (container.length && container.find('.case-card, .case-item').not('.hidden').length === 0) {
+                if (!container.find('.no-results-message').length) {
+                    container.append('<p class="no-cases">' + 'No posts found in this category.' + '</p>');
+                }
+                container.find('.no-results-message').removeClass('hidden');
+            } else {
+                container.find('.no-results-message').addClass('hidden');
+            }
         });
 
         // Smooth scroll enhancement for navigation links

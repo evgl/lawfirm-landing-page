@@ -405,6 +405,28 @@ global $post;
                 </form>
             </div>
 
+            <!-- Category Filter Buttons -->
+            <div class="category-filter-wrapper">
+                <button class="category-btn active" data-category="all" aria-pressed="true">
+                    <?php esc_html_e('전체', 'law-firm-pyeongjeong'); ?>
+                </button>
+                <button class="category-btn" data-category="success-cases" aria-pressed="false">
+                    <?php esc_html_e('성공사례', 'law-firm-pyeongjeong'); ?>
+                </button>
+                <button class="category-btn" data-category="client-reviews" aria-pressed="false">
+                    <?php esc_html_e('고객후기', 'law-firm-pyeongjeong'); ?>
+                </button>
+                <button class="category-btn" data-category="legal-info" aria-pressed="false">
+                    <?php esc_html_e('법률정보', 'law-firm-pyeongjeong'); ?>
+                </button>
+                <button class="category-btn" data-category="press-coverage" aria-pressed="false">
+                    <?php esc_html_e('언론보도', 'law-firm-pyeongjeong'); ?>
+                </button>
+                <button class="category-btn" data-category="practice-areas" aria-pressed="false">
+                    <?php esc_html_e('업무분야', 'law-firm-pyeongjeong'); ?>
+                </button>
+            </div>
+
             <!-- Successful Cases Display -->
             <div class="successful-cases-container">
                 <?php
@@ -426,7 +448,7 @@ global $post;
                             $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
                             $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
                             ?>
-                            <div class="case-item">
+                            <div class="case-item" data-category="success-cases">
                                 <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                 <?php if ($subtitle) : ?>
                                     <p class="case-subtitle"><?php echo esc_html($subtitle); ?></p>
