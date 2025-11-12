@@ -490,7 +490,7 @@ function law_firm_successful_case_meta_box_callback($post) {
     echo '<td><input type="text" id="legal_case" name="legal_case" value="' . esc_attr($legal_case) . '" class="regular-text" /></td></tr>';
 
     echo '<tr><th><label for="decision">' . __('Decision', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><textarea id="decision" name="decision" rows="4" class="large-text">' . esc_textarea($decision) . '</textarea></td></tr>';
+    echo '<td><input type="text" id="decision" name="decision" value="' . esc_attr($decision) . '" class="regular-text" /></td></tr>';
 
     echo '<tr><th><label for="date">' . __('Date', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><input type="date" id="date" name="date" value="' . esc_attr($date) . '" class="regular-text" /></td></tr>';
@@ -546,7 +546,7 @@ function law_firm_save_meta_box_data($post_id) {
             update_post_meta($post_id, '_successful_case_legal_case', sanitize_text_field($_POST['legal_case']));
         }
         if (isset($_POST['decision'])) {
-            update_post_meta($post_id, '_successful_case_decision', sanitize_textarea_field($_POST['decision']));
+            update_post_meta($post_id, '_successful_case_decision', sanitize_text_field($_POST['decision']));
         }
         if (isset($_POST['date'])) {
             update_post_meta($post_id, '_successful_case_date', sanitize_text_field($_POST['date']));
