@@ -178,74 +178,160 @@ global $post;
             border-color: #3a82d8;
         }
 
-        /* Cases List Styles */
+        /* Successful Cases Title */
+        .cases-section-title {
+            display: none;
+            margin: 30px 0 20px 0;
+            padding: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            font-family: 'Noto Sans KR', sans-serif;
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 10px;
+        }
+
+        .cases-section-title.active {
+            display: block;
+        }
+
+        /* Cases Grid Styles */
         .cases-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .case-card {
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            padding: 0;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            overflow: hidden;
         }
 
-        .case-item {
-            background: #f9f9f9;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .case-item:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        .case-card:first-child {
             border-color: #4A90E2;
+            border-width: 2px;
         }
 
-        .case-item h3 {
-            margin: 0 0 12px;
-            font-size: 18px;
+        .case-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Case Card Header */
+        .case-card-header {
+            padding: 16px 20px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 50px;
+        }
+
+        .case-card-badge {
+            background: #1e3a8a;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
             font-weight: 600;
+            white-space: nowrap;
             font-family: 'Noto Sans KR', sans-serif;
         }
 
-        .case-item h3 a {
-            color: #1a1a1a;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        /* Case Card Content */
+        .case-card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .case-item h3 a:hover {
+        .case-card-icon-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .case-card-avatar {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: #e0e8f8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
             color: #4A90E2;
         }
 
-        .case-subtitle {
-            margin: 8px 0;
+        .case-card-info {
+            flex: 1;
+        }
+
+        .case-card-label {
+            font-size: 12px;
+            color: #4A90E2;
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .case-card-description {
             font-size: 14px;
-            color: #666666;
-            font-style: italic;
+            color: #333333;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-family: 'Noto Sans KR', sans-serif;
         }
 
-        .case-type,
-        .case-date {
-            margin: 8px 0;
+        .case-card-date {
             font-size: 13px;
+            color: #999999;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .case-card.hidden {
+            display: none;
+        }
+
+        /* Show More Button */
+        .load-more-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .load-more-btn {
+            padding: 12px 32px;
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
             color: #666666;
-        }
-
-        .case-date i {
-            margin-right: 6px;
-            color: #4A90E2;
-        }
-
-        .read-more {
-            display: inline-block;
-            margin-top: 12px;
-            color: #4A90E2;
-            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
             font-weight: 500;
+            cursor: pointer;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
-        .read-more:hover {
-            color: #3a82d8;
-            margin-left: 4px;
+        .load-more-btn:hover {
+            border-color: #4A90E2;
+            color: #4A90E2;
+            background: #f9f9f9;
+        }
+
+        .load-more-btn.hidden {
+            display: none;
         }
 
         .no-cases {
@@ -293,6 +379,30 @@ global $post;
                 font-size: 13px;
                 flex-shrink: 0;
             }
+
+            .cases-list {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .case-card-header {
+                padding: 14px 16px;
+                min-height: 45px;
+            }
+
+            .case-card-content {
+                padding: 16px;
+            }
+
+            .case-card-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .cases-section-title {
+                font-size: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -321,6 +431,32 @@ global $post;
             .category-btn {
                 padding: 9px 14px;
                 font-size: 12px;
+            }
+
+            .cases-list {
+                gap: 12px;
+            }
+
+            .case-card-content {
+                padding: 12px 14px;
+            }
+
+            .case-card-label {
+                font-size: 11px;
+            }
+
+            .case-card-description {
+                font-size: 13px;
+            }
+
+            .cases-section-title {
+                font-size: 18px;
+                margin: 20px 0 16px 0;
+            }
+
+            .load-more-btn {
+                padding: 10px 24px;
+                font-size: 13px;
             }
         }
     </style>
@@ -429,6 +565,8 @@ global $post;
 
             <!-- Successful Cases Display -->
             <div class="successful-cases-container">
+                <h2 class="cases-section-title" id="cases-section-title">성공사례 (figure)</h2>
+
                 <?php
                 // Query successful cases
                 $args = array(
@@ -440,32 +578,48 @@ global $post;
                 $cases = new WP_Query($args);
 
                 if ($cases->have_posts()) :
+                    $post_count = 0;
                     ?>
-                    <div class="cases-list">
+                    <div class="cases-list" id="cases-list">
                         <?php
                         while ($cases->have_posts()) : $cases->the_post();
                             $legal_case = get_post_meta(get_the_ID(), '_successful_case_legal_case', true);
                             $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
                             $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
+                            $post_count++;
+                            $hidden_class = ($post_count > 4) ? 'hidden' : '';
                             ?>
-                            <div class="case-item" data-category="success-cases">
-                                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <?php if ($subtitle) : ?>
-                                    <p class="case-subtitle"><?php echo esc_html($subtitle); ?></p>
-                                <?php endif; ?>
-                                <?php if ($legal_case) : ?>
-                                    <p class="case-type"><strong><?php esc_html_e('Legal Case:', 'law-firm-pyeongjeong'); ?></strong> <?php echo esc_html($legal_case); ?></p>
-                                <?php endif; ?>
-                                <?php if ($date) : ?>
-                                    <p class="case-date"><i class="fas fa-calendar"></i> <?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></p>
-                                <?php endif; ?>
-                                <a href="<?php the_permalink(); ?>" class="read-more"><?php esc_html_e('Read More →', 'law-firm-pyeongjeong'); ?></a>
+                            <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="success-cases" data-post-index="<?php echo esc_attr($post_count); ?>">
+                                <div class="case-card-header">
+                                    <span class="case-card-badge"><?php echo esc_html($legal_case ? $legal_case : 'Legal case'); ?></span>
+                                </div>
+                                <div class="case-card-content">
+                                    <div class="case-card-icon-section">
+                                        <div class="case-card-avatar">
+                                            <i class="fas fa-briefcase"></i>
+                                        </div>
+                                        <div class="case-card-info">
+                                            <div class="case-card-label"><?php esc_html_e('Decision', 'law-firm-pyeongjeong'); ?></div>
+                                            <div class="case-card-description"><?php echo esc_html($subtitle ? $subtitle : the_title()); ?></div>
+                                        </div>
+                                    </div>
+                                    <?php if ($date) : ?>
+                                        <div class="case-card-date"><?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                             <?php
                         endwhile;
                         wp_reset_postdata();
                         ?>
                     </div>
+
+                    <?php if ($post_count > 4) : ?>
+                    <div class="load-more-wrapper">
+                        <button class="load-more-btn" id="load-more-cases-btn">더보기 +</button>
+                    </div>
+                    <?php endif; ?>
+
                     <?php
                 else :
                     echo '<p class="no-cases">' . esc_html__('No successful cases found.', 'law-firm-pyeongjeong') . '</p>';

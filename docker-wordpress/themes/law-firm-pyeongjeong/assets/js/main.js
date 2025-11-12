@@ -1098,6 +1098,18 @@
             $(this).attr('aria-pressed', 'true');
             $('.category-btn').not(this).attr('aria-pressed', 'false');
 
+            // Show/hide section title for success cases
+            const titleElement = $('#cases-section-title');
+            if (titleElement.length) {
+                if (category === 'success-cases') {
+                    titleElement.addClass('active');
+                } else if (category === 'all') {
+                    titleElement.addClass('active');
+                } else {
+                    titleElement.removeClass('active');
+                }
+            }
+
             // Filter cases with animation (supports both .case-card and .case-item)
             let visibleCount = 0;
             $('.case-card, .case-item').each(function(index) {
@@ -1105,6 +1117,13 @@
                 const shouldShow = category === 'all' || itemCategory === category;
 
                 if (shouldShow) {
+                    // Only show first 4 items if it's a case-card
+                    const postIndex = $(this).data('post-index');
+                    if ($(this).hasClass('case-card') && postIndex > 4) {
+                        $(this).addClass('hidden');
+                        return;
+                    }
+
                     $(this).removeClass('hidden').addClass('scroll-animate');
                     setTimeout(() => {
                         $(this).addClass('animate-in');
@@ -1124,6 +1143,27 @@
                 container.find('.no-results-message').removeClass('hidden');
             } else {
                 container.find('.no-results-message').addClass('hidden');
+            }
+        });
+
+        // Load More button functionality
+        $('#load-more-cases-btn').on('click', function() {
+            const hiddenCases = $('.case-card.hidden');
+            let revealCount = 0;
+
+            hiddenCases.each(function() {
+                if (revealCount < 4) {
+                    $(this).removeClass('hidden').addClass('scroll-animate');
+                    setTimeout(() => {
+                        $(this).addClass('animate-in');
+                    }, revealCount * 100);
+                    revealCount++;
+                }
+            });
+
+            // Hide the button if all items are now visible
+            if ($('.case-card.hidden').length === 0) {
+                $('#load-more-cases-btn').addClass('hidden');
             }
         });
 
