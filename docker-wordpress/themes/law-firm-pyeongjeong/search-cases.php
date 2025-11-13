@@ -214,11 +214,6 @@ global $post;
             overflow: hidden;
         }
 
-        .case-card:first-child {
-            border-color: #4A90E2;
-            border-width: 2px;
-        }
-
         .case-card:hover {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
@@ -574,7 +569,7 @@ global $post;
 
             <!-- Successful Cases Display -->
             <div class="successful-cases-container">
-                <h2 class="cases-section-title active" id="cases-section-title">성공사례 (figure)</h2>
+                <h2 class="cases-section-title active" id="cases-section-title">성공사례</h2>
 
                 <?php
                 // Query successful cases
