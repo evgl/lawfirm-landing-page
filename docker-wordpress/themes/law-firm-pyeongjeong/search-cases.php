@@ -574,7 +574,7 @@ global $post;
 
             <!-- Successful Cases Display -->
             <div class="successful-cases-container">
-                <h2 class="cases-section-title" id="cases-section-title">성공사례 (figure)</h2>
+                <h2 class="cases-section-title active" id="cases-section-title">성공사례 (figure)</h2>
 
                 <?php
                 // Query successful cases
