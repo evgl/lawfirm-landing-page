@@ -269,8 +269,16 @@ global $post;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 11px;
             color: #4A90E2;
+            padding: 6px;
+        }
+
+        .decision-text {
+            word-break: break-word;
+            text-align: center;
+            line-height: 1.2;
+            font-weight: 500;
         }
 
         .case-card-info {
@@ -584,6 +592,7 @@ global $post;
                         <?php
                         while ($cases->have_posts()) : $cases->the_post();
                             $legal_case = get_post_meta(get_the_ID(), '_successful_case_legal_case', true);
+                            $decision = get_post_meta(get_the_ID(), '_successful_case_decision', true);
                             $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
                             $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
                             $post_count++;
@@ -596,10 +605,9 @@ global $post;
                                 <div class="case-card-content">
                                     <div class="case-card-icon-section">
                                         <div class="case-card-avatar">
-                                            <i class="fas fa-briefcase"></i>
+                                            <span class="decision-text"><?php echo esc_html($decision ? $decision : 'N/A'); ?></span>
                                         </div>
                                         <div class="case-card-info">
-                                            <div class="case-card-label"><?php esc_html_e('Decision', 'law-firm-pyeongjeong'); ?></div>
                                             <div class="case-card-description"><?php echo esc_html($subtitle ? $subtitle : the_title()); ?></div>
                                         </div>
                                     </div>
