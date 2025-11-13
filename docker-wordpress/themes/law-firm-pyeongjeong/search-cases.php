@@ -255,15 +255,15 @@ global $post;
 
         .case-card-icon-section {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 16px;
             margin-bottom: 16px;
         }
 
         .case-card-avatar {
-            width: 48px;
-            height: 48px;
-            min-width: 48px;
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
             background: #e0e8f8;
             border-radius: 50%;
             display: flex;
@@ -283,6 +283,7 @@ global $post;
 
         .case-card-info {
             flex: 1;
+            text-align: left;
         }
 
         .case-card-label {
