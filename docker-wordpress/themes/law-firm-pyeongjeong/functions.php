@@ -121,6 +121,50 @@ function law_firm_custom_post_types() {
         'has_archive' => true,
         'rewrite' => array('slug' => 'successful-cases')
     ));
+
+    // Legal Information Post Type
+    register_post_type('legal_information', array(
+        'labels' => array(
+            'name' => __('Legal Information', 'law-firm-pyeongjeong'),
+            'singular_name' => __('Legal Information', 'law-firm-pyeongjeong'),
+            'add_new' => __('Add New Information', 'law-firm-pyeongjeong'),
+            'add_new_item' => __('Add New Information', 'law-firm-pyeongjeong'),
+            'edit_item' => __('Edit Information', 'law-firm-pyeongjeong'),
+            'new_item' => __('New Information', 'law-firm-pyeongjeong'),
+            'view_item' => __('View Information', 'law-firm-pyeongjeong'),
+            'search_items' => __('Search Information', 'law-firm-pyeongjeong'),
+            'all_items' => __('Legal Information', 'law-firm-pyeongjeong'),
+        ),
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
+        'menu_icon' => 'dashicons-yes-alt',
+        'menu_position' => 27,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'legal-information')
+    ));
+
+    // News Board Post Type
+    register_post_type('news_board', array(
+        'labels' => array(
+            'name' => __('News Board', 'law-firm-pyeongjeong'),
+            'singular_name' => __('News Board', 'law-firm-pyeongjeong'),
+            'add_new' => __('Add New News', 'law-firm-pyeongjeong'),
+            'add_new_item' => __('Add New News', 'law-firm-pyeongjeong'),
+            'edit_item' => __('Edit News', 'law-firm-pyeongjeong'),
+            'new_item' => __('New News', 'law-firm-pyeongjeong'),
+            'view_item' => __('View News', 'law-firm-pyeongjeong'),
+            'search_items' => __('Search News', 'law-firm-pyeongjeong'),
+            'all_items' => __('News Board', 'law-firm-pyeongjeong'),
+        ),
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
+        'menu_icon' => 'dashicons-yes-alt',
+        'menu_position' => 28,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'news-board')
+    ));
 }
 add_action('init', 'law_firm_custom_post_types');
 
@@ -132,6 +176,8 @@ function law_firm_add_custom_rewrite_rules() {
     add_rewrite_rule('^services/?$', 'index.php?custom_page=services', 'top');
     add_rewrite_rule('^cases/?$', 'index.php?custom_page=cases', 'top');
     add_rewrite_rule('^contact/?$', 'index.php?custom_page=contact', 'top');
+    add_rewrite_rule('^legal-information/?$', 'index.php?custom_page=legal-information', 'top');
+    add_rewrite_rule('^news-board/?$', 'index.php?custom_page=news-board', 'top');
 }
 add_action('init', 'law_firm_add_custom_rewrite_rules');
 
@@ -151,10 +197,10 @@ function law_firm_custom_template_redirect() {
     // More reliable method - check the request URI directly
     $request_uri = $_SERVER['REQUEST_URI'];
     $template_file = '';
-    
+
     // Remove trailing slash and query parameters
     $path = rtrim(parse_url($request_uri, PHP_URL_PATH), '/');
-    
+
     // Check if it matches our custom pages
     if (preg_match('#/about/?$#', $path)) {
         $template_file = 'about.php';
@@ -164,8 +210,12 @@ function law_firm_custom_template_redirect() {
         $template_file = 'search-cases.php';
     } elseif (preg_match('#/contact/?$#', $path)) {
         $template_file = 'contact.php';
+    } elseif (preg_match('#/legal-information/?$#', $path)) {
+        $template_file = 'search-legal-information.php';
+    } elseif (preg_match('#/news-board/?$#', $path)) {
+        $template_file = 'search-news-board.php';
     }
-    
+
     // Also check the original query var method as fallback
     $custom_page = get_query_var('custom_page');
     if (!$template_file && $custom_page) {
@@ -182,9 +232,15 @@ function law_firm_custom_template_redirect() {
             case 'contact':
                 $template_file = 'contact.php';
                 break;
+            case 'legal-information':
+                $template_file = 'search-legal-information.php';
+                break;
+            case 'news-board':
+                $template_file = 'search-news-board.php';
+                break;
         }
     }
-    
+
     if ($template_file && file_exists(get_template_directory() . '/' . $template_file)) {
         // Prevent WordPress from processing further
         status_header(200);
@@ -201,7 +257,7 @@ function law_firm_early_request_handler() {
     if (!is_admin()) {
         $request_uri = $_SERVER['REQUEST_URI'];
         $path = rtrim(parse_url($request_uri, PHP_URL_PATH), '/');
-        
+
         $template_file = '';
         if (preg_match('#/about/?$#', $path)) {
             $template_file = 'about.php';
@@ -211,8 +267,12 @@ function law_firm_early_request_handler() {
             $template_file = 'search-cases.php';
         } elseif (preg_match('#/contact/?$#', $path)) {
             $template_file = 'contact.php';
+        } elseif (preg_match('#/legal-information/?$#', $path)) {
+            $template_file = 'search-legal-information.php';
+        } elseif (preg_match('#/news-board/?$#', $path)) {
+            $template_file = 'search-news-board.php';
         }
-        
+
         if ($template_file && file_exists(get_template_directory() . '/' . $template_file)) {
             status_header(200);
             include(get_template_directory() . '/' . $template_file);
@@ -309,6 +369,26 @@ function law_firm_add_meta_boxes() {
         'normal',
         'high'
     );
+
+    // Legal Information Meta Box
+    add_meta_box(
+        'legal_information_details',
+        __('Legal Information Details', 'law-firm-pyeongjeong'),
+        'law_firm_legal_information_meta_box_callback',
+        'legal_information',
+        'normal',
+        'high'
+    );
+
+    // News Board Meta Box
+    add_meta_box(
+        'news_board_details',
+        __('News Board Details', 'law-firm-pyeongjeong'),
+        'law_firm_news_board_meta_box_callback',
+        'news_board',
+        'normal',
+        'high'
+    );
 }
 add_action('add_meta_boxes', 'law_firm_add_meta_boxes');
 
@@ -343,6 +423,51 @@ function law_firm_successful_case_meta_box_callback($post) {
 }
 
 /**
+ * Legal Information Meta Box Callback
+ */
+function law_firm_legal_information_meta_box_callback($post) {
+    wp_nonce_field('law_firm_legal_information_meta_box', 'law_firm_legal_information_meta_box_nonce');
+
+    $subtitle = get_post_meta($post->ID, '_legal_information_subtitle', true);
+
+    echo '<table class="form-table">';
+
+    echo '<tr><th><label for="legal_info_subtitle">' . __('Subtitle', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="text" id="legal_info_subtitle" name="legal_info_subtitle" value="' . esc_attr($subtitle) . '" class="regular-text" />';
+    echo '<p class="description">' . __('Brief subtitle for the legal information', 'law-firm-pyeongjeong') . '</p></td></tr>';
+
+    echo '</table>';
+    echo '<p class="description">' . __('Content Description: Use the main editor below to add the full content. Featured Image: Upload an image for the card display on archive pages', 'law-firm-pyeongjeong') . '</p>';
+}
+
+/**
+ * News Board Meta Box Callback
+ */
+function law_firm_news_board_meta_box_callback($post) {
+    wp_nonce_field('law_firm_news_board_meta_box', 'law_firm_news_board_meta_box_nonce');
+
+    $date = get_post_meta($post->ID, '_news_board_date', true);
+    $subtitle = get_post_meta($post->ID, '_news_board_subtitle', true);
+    $description = get_post_meta($post->ID, '_news_board_description', true);
+
+    echo '<table class="form-table">';
+
+    echo '<tr><th><label for="news_board_date">' . __('Date', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="date" id="news_board_date" name="news_board_date" value="' . esc_attr($date) . '" class="regular-text" /></td></tr>';
+
+    echo '<tr><th><label for="news_board_subtitle">' . __('Subtitle', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="text" id="news_board_subtitle" name="news_board_subtitle" value="' . esc_attr($subtitle) . '" class="regular-text" />';
+    echo '<p class="description">' . __('Brief subtitle for the news', 'law-firm-pyeongjeong') . '</p></td></tr>';
+
+    echo '<tr><th><label for="news_board_description">' . __('Description', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><textarea id="news_board_description" name="news_board_description" rows="5" class="regular-text">' . esc_textarea($description) . '</textarea>';
+    echo '<p class="description">' . __('Brief description of the news article', 'law-firm-pyeongjeong') . '</p></td></tr>';
+
+    echo '</table>';
+    echo '<p class="description">' . __('Content Description: Use the main editor below to add the full content. Featured Image: Upload an image for the card display on archive pages', 'law-firm-pyeongjeong') . '</p>';
+}
+
+/**
  * Save Meta Box Data
  */
 function law_firm_save_meta_box_data($post_id) {
@@ -359,6 +484,26 @@ function law_firm_save_meta_box_data($post_id) {
         }
         if (isset($_POST['subtitle'])) {
             update_post_meta($post_id, '_successful_case_subtitle', sanitize_text_field($_POST['subtitle']));
+        }
+    }
+
+    // Legal Information Meta
+    if (isset($_POST['law_firm_legal_information_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_legal_information_meta_box_nonce'], 'law_firm_legal_information_meta_box')) {
+        if (isset($_POST['legal_info_subtitle'])) {
+            update_post_meta($post_id, '_legal_information_subtitle', sanitize_text_field($_POST['legal_info_subtitle']));
+        }
+    }
+
+    // News Board Meta
+    if (isset($_POST['law_firm_news_board_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_news_board_meta_box_nonce'], 'law_firm_news_board_meta_box')) {
+        if (isset($_POST['news_board_date'])) {
+            update_post_meta($post_id, '_news_board_date', sanitize_text_field($_POST['news_board_date']));
+        }
+        if (isset($_POST['news_board_subtitle'])) {
+            update_post_meta($post_id, '_news_board_subtitle', sanitize_text_field($_POST['news_board_subtitle']));
+        }
+        if (isset($_POST['news_board_description'])) {
+            update_post_meta($post_id, '_news_board_description', sanitize_textarea_field($_POST['news_board_description']));
         }
     }
 }
