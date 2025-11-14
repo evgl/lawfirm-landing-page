@@ -71,9 +71,6 @@
         // Quick menu interactions
         $('.quick-menu-item').on('click', handleQuickMenuClick);
         
-        // Practice area cards hover effects
-        $('.practice-area-card').on('mouseenter', handleCardHover);
-        $('.practice-area-card').on('mouseleave', handleCardLeave);
     }
 
     /**
@@ -722,7 +719,7 @@
      */
     function initializeAnimations() {
         // Fade in animations for cards
-        $('.practice-area-card, .attorney-card, .post-card').each(function(index) {
+        $('.post-card').each(function(index) {
             const $card = $(this);
             setTimeout(function() {
                 $card.addClass('animate-fade-in');

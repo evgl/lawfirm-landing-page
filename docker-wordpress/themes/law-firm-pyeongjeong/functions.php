@@ -30,9 +30,7 @@ function law_firm_setup() {
     ));
     
     // Add custom image sizes
-    add_image_size('attorney-profile', 300, 400, true);
     add_image_size('case-thumbnail', 400, 300, true);
-    add_image_size('practice-area-icon', 100, 100, true);
     
     // Register navigation menus
     register_nav_menus(array(
@@ -101,70 +99,6 @@ function law_firm_fallback_menu() {
  * Register Custom Post Types
  */
 function law_firm_custom_post_types() {
-    
-    // Attorney Post Type
-    register_post_type('attorney', array(
-        'labels' => array(
-            'name' => __('Attorneys', 'law-firm-pyeongjeong'),
-            'singular_name' => __('Attorney', 'law-firm-pyeongjeong'),
-            'add_new' => __('Add New Attorney', 'law-firm-pyeongjeong'),
-            'add_new_item' => __('Add New Attorney', 'law-firm-pyeongjeong'),
-            'edit_item' => __('Edit Attorney', 'law-firm-pyeongjeong'),
-            'new_item' => __('New Attorney', 'law-firm-pyeongjeong'),
-            'view_item' => __('View Attorney', 'law-firm-pyeongjeong'),
-            'search_items' => __('Search Attorneys', 'law-firm-pyeongjeong'),
-        ),
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'menu_icon' => 'dashicons-businessman',
-        'menu_position' => 25,
-        'has_archive' => true,
-        'rewrite' => array('slug' => 'attorneys')
-    ));
-
-
-    // Practice Area Post Type
-    register_post_type('practice_area', array(
-        'labels' => array(
-            'name' => __('Practice Areas', 'law-firm-pyeongjeong'),
-            'singular_name' => __('Practice Area', 'law-firm-pyeongjeong'),
-            'add_new' => __('Add New Practice Area', 'law-firm-pyeongjeong'),
-            'add_new_item' => __('Add New Practice Area', 'law-firm-pyeongjeong'),
-            'edit_item' => __('Edit Practice Area', 'law-firm-pyeongjeong'),
-            'new_item' => __('New Practice Area', 'law-firm-pyeongjeong'),
-            'view_item' => __('View Practice Area', 'law-firm-pyeongjeong'),
-            'search_items' => __('Search Practice Areas', 'law-firm-pyeongjeong'),
-        ),
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'menu_icon' => 'dashicons-balance-scale',
-        'menu_position' => 27,
-        'has_archive' => true,
-        'rewrite' => array('slug' => 'practice-areas')
-    ));
-    
-    // Testimonial Post Type
-    register_post_type('testimonial', array(
-        'labels' => array(
-            'name' => __('Testimonials', 'law-firm-pyeongjeong'),
-            'singular_name' => __('Testimonial', 'law-firm-pyeongjeong'),
-            'add_new' => __('Add New Testimonial', 'law-firm-pyeongjeong'),
-            'add_new_item' => __('Add New Testimonial', 'law-firm-pyeongjeong'),
-            'edit_item' => __('Edit Testimonial', 'law-firm-pyeongjeong'),
-            'new_item' => __('New Testimonial', 'law-firm-pyeongjeong'),
-            'view_item' => __('View Testimonial', 'law-firm-pyeongjeong'),
-            'search_items' => __('Search Testimonials', 'law-firm-pyeongjeong'),
-        ),
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'custom-fields'),
-        'menu_icon' => 'dashicons-format-quote',
-        'menu_position' => 28,
-        'has_archive' => false,
-        'rewrite' => array('slug' => 'testimonials')
-    ));
 
     // Successful Cases Post Type
     register_post_type('successful_case', array(
@@ -301,24 +235,7 @@ add_action('after_switch_theme', 'law_firm_flush_rewrite_rules');
  * Register Custom Taxonomies
  */
 function law_firm_custom_taxonomies() {
-    
-    // Practice Area Taxonomy for Attorneys
-    register_taxonomy('attorney_specialty', 'attorney', array(
-        'labels' => array(
-            'name' => __('Attorney Specialties', 'law-firm-pyeongjeong'),
-            'singular_name' => __('Attorney Specialty', 'law-firm-pyeongjeong'),
-            'search_items' => __('Search Specialties', 'law-firm-pyeongjeong'),
-            'all_items' => __('All Specialties', 'law-firm-pyeongjeong'),
-            'edit_item' => __('Edit Specialty', 'law-firm-pyeongjeong'),
-            'update_item' => __('Update Specialty', 'law-firm-pyeongjeong'),
-            'add_new_item' => __('Add New Specialty', 'law-firm-pyeongjeong'),
-            'new_item_name' => __('New Specialty Name', 'law-firm-pyeongjeong'),
-        ),
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'rewrite' => array('slug' => 'specialty')
-    ));
+    // No custom taxonomies currently in use
 }
 add_action('init', 'law_firm_custom_taxonomies');
 
@@ -382,26 +299,6 @@ add_action('widgets_init', 'law_firm_widgets_init');
  * Custom Meta Boxes
  */
 function law_firm_add_meta_boxes() {
-    
-    // Attorney Meta Box
-    add_meta_box(
-        'attorney_details',
-        __('Attorney Details', 'law-firm-pyeongjeong'),
-        'law_firm_attorney_meta_box_callback',
-        'attorney',
-        'normal',
-        'high'
-    );
-    
-    // Practice Area Meta Box
-    add_meta_box(
-        'practice_area_details',
-        __('Practice Area Details', 'law-firm-pyeongjeong'),
-        'law_firm_practice_area_meta_box_callback',
-        'practice_area',
-        'normal',
-        'high'
-    );
 
     // Successful Case Meta Box
     add_meta_box(
@@ -414,64 +311,6 @@ function law_firm_add_meta_boxes() {
     );
 }
 add_action('add_meta_boxes', 'law_firm_add_meta_boxes');
-
-/**
- * Attorney Meta Box Callback
- */
-function law_firm_attorney_meta_box_callback($post) {
-    wp_nonce_field('law_firm_attorney_meta_box', 'law_firm_attorney_meta_box_nonce');
-    
-    $position = get_post_meta($post->ID, '_attorney_position', true);
-    $phone = get_post_meta($post->ID, '_attorney_phone', true);
-    $email = get_post_meta($post->ID, '_attorney_email', true);
-    $education = get_post_meta($post->ID, '_attorney_education', true);
-    $experience_years = get_post_meta($post->ID, '_attorney_experience_years', true);
-    $bar_admission = get_post_meta($post->ID, '_attorney_bar_admission', true);
-    
-    echo '<table class="form-table">';
-    echo '<tr><th><label for="attorney_position">' . __('Position/Title', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="attorney_position" name="attorney_position" value="' . esc_attr($position) . '" class="regular-text" /></td></tr>';
-    
-    echo '<tr><th><label for="attorney_phone">' . __('Phone Number', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="attorney_phone" name="attorney_phone" value="' . esc_attr($phone) . '" class="regular-text" /></td></tr>';
-    
-    echo '<tr><th><label for="attorney_email">' . __('Email Address', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="email" id="attorney_email" name="attorney_email" value="' . esc_attr($email) . '" class="regular-text" /></td></tr>';
-    
-    echo '<tr><th><label for="attorney_education">' . __('Education', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><textarea id="attorney_education" name="attorney_education" rows="3" class="large-text">' . esc_textarea($education) . '</textarea></td></tr>';
-    
-    echo '<tr><th><label for="attorney_experience_years">' . __('Years of Experience', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="number" id="attorney_experience_years" name="attorney_experience_years" value="' . esc_attr($experience_years) . '" class="small-text" /></td></tr>';
-    
-    echo '<tr><th><label for="attorney_bar_admission">' . __('Bar Admission', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="attorney_bar_admission" name="attorney_bar_admission" value="' . esc_attr($bar_admission) . '" class="regular-text" /></td></tr>';
-    echo '</table>';
-}
-
-/**
- * Practice Area Meta Box Callback
- */
-function law_firm_practice_area_meta_box_callback($post) {
-    wp_nonce_field('law_firm_practice_area_meta_box', 'law_firm_practice_area_meta_box_nonce');
-    
-    $icon = get_post_meta($post->ID, '_practice_area_icon', true);
-    $order = get_post_meta($post->ID, '_practice_area_order', true);
-    $featured = get_post_meta($post->ID, '_practice_area_featured', true);
-    
-    echo '<table class="form-table">';
-    echo '<tr><th><label for="practice_area_icon">' . __('Icon Class', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="practice_area_icon" name="practice_area_icon" value="' . esc_attr($icon) . '" class="regular-text" />';
-    echo '<p class="description">' . __('Font Awesome icon class (e.g., fas fa-balance-scale)', 'law-firm-pyeongjeong') . '</p></td></tr>';
-    
-    echo '<tr><th><label for="practice_area_order">' . __('Display Order', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="number" id="practice_area_order" name="practice_area_order" value="' . esc_attr($order) . '" class="small-text" /></td></tr>';
-    
-    echo '<tr><th><label for="practice_area_featured">' . __('Featured', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="checkbox" id="practice_area_featured" name="practice_area_featured" value="1" ' . checked($featured, '1', false) . ' />';
-    echo '<label for="practice_area_featured">' . __('Display on homepage', 'law-firm-pyeongjeong') . '</label></td></tr>';
-    echo '</table>';
-}
 
 /**
  * Successful Case Meta Box Callback
@@ -507,39 +346,6 @@ function law_firm_successful_case_meta_box_callback($post) {
  * Save Meta Box Data
  */
 function law_firm_save_meta_box_data($post_id) {
-    // Attorney Meta
-    if (isset($_POST['law_firm_attorney_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_attorney_meta_box_nonce'], 'law_firm_attorney_meta_box')) {
-        if (isset($_POST['attorney_position'])) {
-            update_post_meta($post_id, '_attorney_position', sanitize_text_field($_POST['attorney_position']));
-        }
-        if (isset($_POST['attorney_phone'])) {
-            update_post_meta($post_id, '_attorney_phone', sanitize_text_field($_POST['attorney_phone']));
-        }
-        if (isset($_POST['attorney_email'])) {
-            update_post_meta($post_id, '_attorney_email', sanitize_email($_POST['attorney_email']));
-        }
-        if (isset($_POST['attorney_education'])) {
-            update_post_meta($post_id, '_attorney_education', sanitize_textarea_field($_POST['attorney_education']));
-        }
-        if (isset($_POST['attorney_experience_years'])) {
-            update_post_meta($post_id, '_attorney_experience_years', intval($_POST['attorney_experience_years']));
-        }
-        if (isset($_POST['attorney_bar_admission'])) {
-            update_post_meta($post_id, '_attorney_bar_admission', sanitize_text_field($_POST['attorney_bar_admission']));
-        }
-    }
-    // Practice Area Meta
-    if (isset($_POST['law_firm_practice_area_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_practice_area_meta_box_nonce'], 'law_firm_practice_area_meta_box')) {
-        if (isset($_POST['practice_area_icon'])) {
-            update_post_meta($post_id, '_practice_area_icon', sanitize_text_field($_POST['practice_area_icon']));
-        }
-        if (isset($_POST['practice_area_order'])) {
-            update_post_meta($post_id, '_practice_area_order', intval($_POST['practice_area_order']));
-        }
-        $featured = isset($_POST['practice_area_featured']) ? '1' : '0';
-        update_post_meta($post_id, '_practice_area_featured', $featured);
-    }
-
     // Successful Case Meta
     if (isset($_POST['law_firm_successful_case_meta_box_nonce']) && wp_verify_nonce($_POST['law_firm_successful_case_meta_box_nonce'], 'law_firm_successful_case_meta_box')) {
         if (isset($_POST['legal_case'])) {
@@ -748,48 +554,6 @@ if (!function_exists('law_firm_fallback_menu')) {
 /**
  * Helper Functions
  */
-
-// Get attorney by ID
-function law_firm_get_attorney($attorney_id) {
-    if (!$attorney_id) return null;
-    
-    $attorney = get_post($attorney_id);
-    if (!$attorney || $attorney->post_type !== 'attorney') return null;
-    
-    return array(
-        'id' => $attorney->ID,
-        'name' => $attorney->post_title,
-        'position' => get_post_meta($attorney->ID, '_attorney_position', true),
-        'phone' => get_post_meta($attorney->ID, '_attorney_phone', true),
-        'email' => get_post_meta($attorney->ID, '_attorney_email', true),
-        'education' => get_post_meta($attorney->ID, '_attorney_education', true),
-        'experience_years' => get_post_meta($attorney->ID, '_attorney_experience_years', true),
-        'bar_admission' => get_post_meta($attorney->ID, '_attorney_bar_admission', true),
-        'bio' => $attorney->post_content,
-        'photo' => get_the_post_thumbnail_url($attorney->ID, 'attorney-profile'),
-        'url' => get_permalink($attorney->ID)
-    );
-}
-
-// Get featured practice areas
-function law_firm_get_featured_practice_areas($limit = 6) {
-    $args = array(
-        'post_type' => 'practice_area',
-        'posts_per_page' => $limit,
-        'meta_query' => array(
-            array(
-                'key' => '_practice_area_featured',
-                'value' => '1',
-                'compare' => '='
-            )
-        ),
-        'meta_key' => '_practice_area_order',
-        'orderby' => 'meta_value_num',
-        'order' => 'ASC'
-    );
-    
-    return get_posts($args);
-}
 
 /**
  * Performance Optimizations

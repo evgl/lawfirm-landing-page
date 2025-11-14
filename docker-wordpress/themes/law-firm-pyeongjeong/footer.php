@@ -30,31 +30,6 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Footer Column 2: Practice Areas -->
-                <div class="footer-section footer-practice-areas">
-                    <?php if (is_active_sidebar('footer-2')) : ?>
-                        <?php dynamic_sidebar('footer-2'); ?>
-                    <?php else : ?>
-                        <h3><?php _e('주요 업무분야', 'law-firm-pyeongjeong'); ?></h3>
-                        <ul>
-                            <?php
-                            $practice_areas = law_firm_get_featured_practice_areas(6);
-                            if ($practice_areas) :
-                                foreach ($practice_areas as $area) : ?>
-                                    <li><a href="<?php echo get_permalink($area->ID); ?>"><?php echo esc_html($area->post_title); ?></a></li>
-                                <?php endforeach;
-                            else : ?>
-                                <li><a href="#"><?php _e('기업법무', 'law-firm-pyeongjeong'); ?></a></li>
-                                <li><a href="#"><?php _e('형사변호', 'law-firm-pyeongjeong'); ?></a></li>
-                                <li><a href="#"><?php _e('민사소송', 'law-firm-pyeongjeong'); ?></a></li>
-                                <li><a href="#"><?php _e('부동산', 'law-firm-pyeongjeong'); ?></a></li>
-                                <li><a href="#"><?php _e('가족법', 'law-firm-pyeongjeong'); ?></a></li>
-                                <li><a href="#"><?php _e('손해배상', 'law-firm-pyeongjeong'); ?></a></li>
-                            <?php endif; ?>
-                        </ul>
-                    <?php endif; ?>
-                </div>
-
                 <!-- Footer Column 3: Quick Links -->
                 <div class="footer-section footer-links">
                     <?php if (is_active_sidebar('footer-3')) : ?>
@@ -63,9 +38,7 @@
                         <h3><?php _e('바로가기', 'law-firm-pyeongjeong'); ?></h3>
                         <ul>
                             <li><a href="<?php echo esc_url(home_url('/about')); ?>"><?php _e('사무소 소개', 'law-firm-pyeongjeong'); ?></a></li>
-                            <li><a href="<?php echo esc_url(get_post_type_archive_link('attorney')); ?>"><?php _e('변호사 소개', 'law-firm-pyeongjeong'); ?></a></li>
-                            <li><a href="<?php echo esc_url(get_post_type_archive_link('legal_case')); ?>"><?php _e('성공사례', 'law-firm-pyeongjeong'); ?></a></li>
-                            <li><a href="<?php echo esc_url(home_url('/news')); ?>"><?php _e('법률정보', 'law-firm-pyeongjeong'); ?></a></li>
+                            <li><a href="<?php echo esc_url(get_post_type_archive_link('successful_case')); ?>"><?php _e('성공사례', 'law-firm-pyeongjeong'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/contact')); ?>"><?php _e('온라인 상담', 'law-firm-pyeongjeong'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/contact')); ?>"><?php _e('오시는 길', 'law-firm-pyeongjeong'); ?></a></li>
                         </ul>

@@ -50,8 +50,6 @@ WordPress Admin → Appearance → Menus
 
 Primary Menu:
 - About (Homepage)
-- Practice Areas (Practice Areas Archive)
-- Attorneys (Attorneys Archive) 
 - Success Cases (Legal Cases Archive)
 - Contact (Contact Page)
 
@@ -73,9 +71,7 @@ Footer Column 1-4: Footer information sections
 
 ### Homepage (index.php)
 - Hero section with search
-- Main practice areas section
 - Success stories table
-- Attorney introductions
 - Online consultation form
 
 ### Contact Page (contact.php)
@@ -103,21 +99,7 @@ Business Hours: Weekday Hours | 10:00 - 19:00
 
 Content types automatically created when theme is activated:
 
-### 1. Attorneys
-```
-WordPress Admin → Attorneys → Add New
-
-Fields:
-- Position/Title
-- Phone Number  
-- Email
-- Education
-- Years of Experience
-- Bar Admission
-- Specialties (Taxonomy)
-```
-
-### 2. Legal Cases
+### 1. Legal Cases
 ```
 WordPress Admin → Legal Cases → Add New
 
@@ -130,25 +112,6 @@ Fields:
 - Case Type (Taxonomy)
 ```
 
-### 3. Practice Areas
-```
-WordPress Admin → Practice Areas → Add New
-
-Fields:
-- Icon Class (Font Awesome)
-- Display Order
-- Featured on Homepage
-```
-
-### 4. Testimonials
-```
-WordPress Admin → Testimonials → Add New
-
-Fields:
-- Client Name
-- Testimonial Content
-- Rating
-```
 
 ## 🎨 Style Customization
 
@@ -216,19 +179,10 @@ initFormValidation()
 ```php
 // After consultation form submission
 do_action('law_firm_after_consultation_submit', $consultation_id);
-
-// Before displaying attorney information
-apply_filters('law_firm_attorney_display_data', $attorney_data);
 ```
 
 #### Utility Functions
 ```php
-// Get attorney information
-law_firm_get_attorney($attorney_id)
-
-// Get featured practice areas
-law_firm_get_featured_practice_areas($limit)
-
 // Get recent successful cases
 law_firm_get_recent_cases($limit)
 
