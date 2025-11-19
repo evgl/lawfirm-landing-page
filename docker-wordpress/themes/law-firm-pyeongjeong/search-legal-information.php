@@ -420,9 +420,16 @@ global $post;
                             $hidden_class = ($post_count > 3) ? 'hidden' : '';
                             ?>
                             <a href="<?php the_permalink(); ?>" class="info-card <?php echo esc_attr($hidden_class); ?>" data-post-index="<?php echo esc_attr($post_count); ?>" style="text-decoration: none; color: inherit;">
-                                <?php if (has_post_thumbnail()) : ?>
+                                <?php
+                                $content_image = law_firm_get_first_content_image();
+                                if (has_post_thumbnail()) :
+                                ?>
                                     <div class="info-card-image">
                                         <?php the_post_thumbnail('case-thumbnail'); ?>
+                                    </div>
+                                <?php elseif ($content_image) : ?>
+                                    <div class="info-card-image">
+                                        <img src="<?php echo esc_url($content_image); ?>" alt="<?php the_title_attribute(); ?>" style="width: 100%; height: 100%; object-fit: cover;" />
                                     </div>
                                 <?php else : ?>
                                     <div class="info-card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>

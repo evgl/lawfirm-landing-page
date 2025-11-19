@@ -701,6 +701,33 @@ if (!function_exists('law_firm_fallback_menu')) {
  */
 
 /**
+ * Get the first image from post content
+ *
+ * @param int $post_id The post ID
+ * @return string|false The image URL or false if no image found
+ */
+function law_firm_get_first_content_image($post_id = null) {
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+
+    $post = get_post($post_id);
+    if (!$post) {
+        return false;
+    }
+
+    // Get post content
+    $content = $post->post_content;
+
+    // Use regex to find first img tag and extract src attribute
+    if (preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches)) {
+        return $matches[1];
+    }
+
+    return false;
+}
+
+/**
  * Performance Optimizations
  */
 
