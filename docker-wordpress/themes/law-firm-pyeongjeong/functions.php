@@ -447,7 +447,7 @@ function law_firm_news_board_meta_box_callback($post) {
     wp_nonce_field('law_firm_news_board_meta_box', 'law_firm_news_board_meta_box_nonce');
 
     $date = get_post_meta($post->ID, '_news_board_date', true);
-    $subtitle = get_post_meta($post->ID, '_news_board_subtitle', true);
+    $newspaper_name = get_post_meta($post->ID, '_news_board_newspaper_name', true);
     $description = get_post_meta($post->ID, '_news_board_description', true);
 
     echo '<table class="form-table">';
@@ -455,9 +455,9 @@ function law_firm_news_board_meta_box_callback($post) {
     echo '<tr><th><label for="news_board_date">' . __('Date', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><input type="date" id="news_board_date" name="news_board_date" value="' . esc_attr($date) . '" class="regular-text" /></td></tr>';
 
-    echo '<tr><th><label for="news_board_subtitle">' . __('Subtitle', 'law-firm-pyeongjeong') . '</label></th>';
-    echo '<td><input type="text" id="news_board_subtitle" name="news_board_subtitle" value="' . esc_attr($subtitle) . '" class="regular-text" />';
-    echo '<p class="description">' . __('Brief subtitle for the news', 'law-firm-pyeongjeong') . '</p></td></tr>';
+    echo '<tr><th><label for="news_board_newspaper_name">' . __('Newspaper Name', 'law-firm-pyeongjeong') . '</label></th>';
+    echo '<td><input type="text" id="news_board_newspaper_name" name="news_board_newspaper_name" value="' . esc_attr($newspaper_name) . '" class="regular-text" />';
+    echo '<p class="description">' . __('Name of the newspaper source', 'law-firm-pyeongjeong') . '</p></td></tr>';
 
     echo '<tr><th><label for="news_board_description">' . __('Description', 'law-firm-pyeongjeong') . '</label></th>';
     echo '<td><textarea id="news_board_description" name="news_board_description" rows="5" class="regular-text">' . esc_textarea($description) . '</textarea>';
@@ -499,8 +499,8 @@ function law_firm_save_meta_box_data($post_id) {
         if (isset($_POST['news_board_date'])) {
             update_post_meta($post_id, '_news_board_date', sanitize_text_field($_POST['news_board_date']));
         }
-        if (isset($_POST['news_board_subtitle'])) {
-            update_post_meta($post_id, '_news_board_subtitle', sanitize_text_field($_POST['news_board_subtitle']));
+        if (isset($_POST['news_board_newspaper_name'])) {
+            update_post_meta($post_id, '_news_board_newspaper_name', sanitize_text_field($_POST['news_board_newspaper_name']));
         }
         if (isset($_POST['news_board_description'])) {
             update_post_meta($post_id, '_news_board_description', sanitize_textarea_field($_POST['news_board_description']));
@@ -824,4 +824,41 @@ function law_firm_seo_meta_tags() {
     }
 }
 add_action('wp_head', 'law_firm_seo_meta_tags');
+
+/**
+ * Migrate News Board Subtitle to Newspaper Name
+ * This function migrates existing _news_board_subtitle data to _news_board_newspaper_name
+ * Runs once on admin load to avoid repeated execution
+ */
+function law_firm_migrate_news_board_subtitle() {
+    // Check if migration has already been done
+    if (get_option('law_firm_news_board_migration_done')) {
+        return;
+    }
+
+    // Get all news_board posts
+    $args = array(
+        'post_type' => 'news_board',
+        'posts_per_page' => -1,
+        'post_status' => 'any',
+    );
+
+    $posts = get_posts($args);
+
+    foreach ($posts as $post) {
+        // Get old subtitle value
+        $old_subtitle = get_post_meta($post->ID, '_news_board_subtitle', true);
+
+        // If old subtitle exists and new one doesn't, migrate it
+        if ($old_subtitle && !get_post_meta($post->ID, '_news_board_newspaper_name', true)) {
+            update_post_meta($post->ID, '_news_board_newspaper_name', $old_subtitle);
+        }
+    }
+
+    // Mark migration as complete
+    update_option('law_firm_news_board_migration_done', true);
+}
+
+// Run migration on admin init
+add_action('admin_init', 'law_firm_migrate_news_board_subtitle');
 ?>

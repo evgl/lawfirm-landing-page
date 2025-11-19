@@ -297,6 +297,14 @@ global $post;
             font-family: 'Noto Sans KR', sans-serif;
         }
 
+        .news-board-newspaper-name {
+            font-size: 14px;
+            color: #4a90e2;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
         .case-card-date {
             font-size: 13px;
             color: #999999;
@@ -752,7 +760,7 @@ global $post;
                                 $news_count++;
                                 $hidden_class = ($news_count > 4) ? 'hidden' : '';
                                 $legal_case = get_post_meta(get_the_ID(), '_news_board_category', true);
-                                $subtitle = get_post_meta(get_the_ID(), '_news_board_subtitle', true);
+                                $newspaper_name = get_post_meta(get_the_ID(), '_news_board_newspaper_name', true);
                                 $date = get_post_meta(get_the_ID(), '_news_board_date', true);
                                 ?>
                                 <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage" data-post-index="<?php echo esc_attr($news_count); ?>">
@@ -762,7 +770,7 @@ global $post;
                                     <div class="case-card-content">
                                         <div class="case-card-icon-section">
                                             <div class="case-card-info">
-                                                <div class="case-card-description"><?php echo esc_html($subtitle ? $subtitle : the_title()); ?></div>
+                                                <div class="news-board-newspaper-name"><?php echo esc_html($newspaper_name ? $newspaper_name : the_title()); ?></div>
                                             </div>
                                         </div>
                                         <?php if ($date) : ?>

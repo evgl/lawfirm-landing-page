@@ -180,9 +180,9 @@ global $post;
             font-family: 'Noto Sans KR', sans-serif;
         }
 
-        .news-card-subtitle {
+        .news-card-newspaper-name {
             font-size: 13px;
-            color: #666666;
+            color: #4a90e2;
             margin: 0;
             line-height: 1.4;
             font-family: 'Noto Sans KR', sans-serif;
@@ -422,7 +422,7 @@ global $post;
                         <?php
                         while ($news->have_posts()) : $news->the_post();
                             $date = get_post_meta(get_the_ID(), '_news_board_date', true);
-                            $subtitle = get_post_meta(get_the_ID(), '_news_board_subtitle', true);
+                            $newspaper_name = get_post_meta(get_the_ID(), '_news_board_newspaper_name', true);
                             $post_count++;
                             $hidden_class = ($post_count > 4) ? 'hidden' : '';
                             ?>
@@ -439,8 +439,8 @@ global $post;
                                         <div class="news-card-date"><?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></div>
                                     <?php endif; ?>
                                     <h3 class="news-card-title"><?php the_title(); ?></h3>
-                                    <?php if ($subtitle) : ?>
-                                        <p class="news-card-subtitle"><?php echo esc_html($subtitle); ?></p>
+                                    <?php if ($newspaper_name) : ?>
+                                        <p class="news-card-newspaper-name"><?php echo esc_html($newspaper_name); ?></p>
                                     <?php endif; ?>
                                 </div>
                             </a>

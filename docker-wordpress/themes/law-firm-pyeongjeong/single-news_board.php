@@ -14,7 +14,7 @@ get_header();
 // Get news board data
 $news_id = get_the_ID();
 $date = get_post_meta($news_id, '_news_board_date', true);
-$subtitle = get_post_meta($news_id, '_news_board_subtitle', true);
+$newspaper_name = get_post_meta($news_id, '_news_board_newspaper_name', true);
 $description = get_post_meta($news_id, '_news_board_description', true);
 ?>
 
@@ -43,9 +43,9 @@ $description = get_post_meta($news_id, '_news_board_description', true);
         color: #ffffff;
     }
 
-    .news-detail-subtitle {
+    .news-detail-newspaper-name {
         font-size: 18px;
-        color: rgba(255, 255, 255, 0.7);
+        color: #4a90e2;
         margin-bottom: 20px;
         font-style: italic;
     }
@@ -211,8 +211,8 @@ $description = get_post_meta($news_id, '_news_board_description', true);
         <div class="news-detail-header">
             <h1 class="news-detail-title"><?php the_title(); ?></h1>
 
-            <?php if ($subtitle) : ?>
-                <p class="news-detail-subtitle"><?php echo esc_html($subtitle); ?></p>
+            <?php if ($newspaper_name) : ?>
+                <p class="news-detail-newspaper-name"><?php echo esc_html($newspaper_name); ?></p>
             <?php endif; ?>
 
             <div class="news-detail-meta">
