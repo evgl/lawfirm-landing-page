@@ -129,7 +129,7 @@ global $post;
         /* Info List Styles */
         .info-list {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -249,7 +249,7 @@ global $post;
             }
 
             .info-list {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
             }
 
@@ -294,6 +294,7 @@ global $post;
             }
 
             .info-list {
+                grid-template-columns: 1fr;
                 gap: 12px;
             }
 
@@ -416,7 +417,7 @@ global $post;
                         while ($legal_info->have_posts()) : $legal_info->the_post();
                             $subtitle = get_post_meta(get_the_ID(), '_legal_information_subtitle', true);
                             $post_count++;
-                            $hidden_class = ($post_count > 4) ? 'hidden' : '';
+                            $hidden_class = ($post_count > 3) ? 'hidden' : '';
                             ?>
                             <a href="<?php the_permalink(); ?>" class="info-card <?php echo esc_attr($hidden_class); ?>" data-post-index="<?php echo esc_attr($post_count); ?>" style="text-decoration: none; color: inherit;">
                                 <?php if (has_post_thumbnail()) : ?>
@@ -439,7 +440,7 @@ global $post;
                         ?>
                     </div>
 
-                    <?php if ($post_count > 4) : ?>
+                    <?php if ($post_count > 3) : ?>
                     <div class="load-more-wrapper">
                         <button class="load-more-btn" id="load-more-legal-info-btn">더보기 +</button>
                     </div>
@@ -490,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const hiddenCards = document.querySelectorAll('#legal-info-list .info-card.hidden');
         let count = 0;
         hiddenCards.forEach(card => {
-            if (count < 4) {
+            if (count < 3) {
                 card.classList.remove('hidden');
                 count++;
             }

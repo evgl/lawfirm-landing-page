@@ -307,6 +307,71 @@ global $post;
             display: none;
         }
 
+        /* Legal Information Card Styles */
+        .legal-info-card {
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            padding: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .legal-info-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .legal-info-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .legal-info-card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .legal-info-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 10px;
+            line-height: 1.4;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .legal-info-card-subtitle {
+            font-size: 13px;
+            color: #666666;
+            margin: 0;
+            line-height: 1.4;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .legal-info-card.hidden {
+            display: none;
+        }
+
+        /* Grid layout adjustments based on active filter */
+        .cases-list.legal-info-active {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .cases-list.success-cases-active,
+        .cases-list.press-coverage-active,
+        .cases-list.all-active {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
         /* Show More Button */
         .load-more-wrapper {
             display: flex;
@@ -385,8 +450,12 @@ global $post;
             }
 
             .cases-list {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
+            }
+
+            .cases-list.legal-info-active {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .case-card-header {
@@ -402,6 +471,22 @@ global $post;
                 width: 40px;
                 height: 40px;
                 font-size: 18px;
+            }
+
+            .legal-info-card-image {
+                height: 150px;
+            }
+
+            .legal-info-card-content {
+                padding: 16px;
+            }
+
+            .legal-info-card-title {
+                font-size: 15px;
+            }
+
+            .legal-info-card-subtitle {
+                font-size: 12px;
             }
 
             .cases-section-title {
@@ -438,7 +523,12 @@ global $post;
             }
 
             .cases-list {
+                grid-template-columns: 1fr;
                 gap: 12px;
+            }
+
+            .cases-list.legal-info-active {
+                grid-template-columns: 1fr;
             }
 
             .case-card-content {
@@ -451,6 +541,18 @@ global $post;
 
             .case-card-description {
                 font-size: 13px;
+            }
+
+            .legal-info-card-image {
+                height: 120px;
+            }
+
+            .legal-info-card-content {
+                padding: 12px 14px;
+            }
+
+            .legal-info-card-title {
+                font-size: 14px;
             }
 
             .cases-section-title {
@@ -572,9 +674,9 @@ global $post;
                 <h2 class="cases-section-title active" id="cases-section-title">성공사례</h2>
 
                 <?php
-                // Query successful cases
+                // Query multiple post types
                 $args = array(
-                    'post_type' => 'successful_case',
+                    'post_type' => array('successful_case', 'legal_information', 'news_board'),
                     'posts_per_page' => -1,
                     'orderby' => 'date',
                     'order' => 'DESC'
@@ -582,43 +684,93 @@ global $post;
                 $cases = new WP_Query($args);
 
                 if ($cases->have_posts()) :
-                    $post_count = 0;
+                    $success_count = 0;
+                    $legal_info_count = 0;
+                    $news_count = 0;
                     ?>
                     <div class="cases-list" id="cases-list">
                         <?php
                         while ($cases->have_posts()) : $cases->the_post();
-                            $legal_case = get_post_meta(get_the_ID(), '_successful_case_legal_case', true);
-                            $decision = get_post_meta(get_the_ID(), '_successful_case_decision', true);
-                            $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
-                            $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
-                            $post_count++;
-                            $hidden_class = ($post_count > 4) ? 'hidden' : '';
-                            ?>
-                            <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="success-cases" data-post-index="<?php echo esc_attr($post_count); ?>">
-                                <div class="case-card-header">
-                                    <span class="case-card-badge"><?php echo esc_html($legal_case ? $legal_case : 'Legal case'); ?></span>
-                                </div>
-                                <div class="case-card-content">
-                                    <div class="case-card-icon-section">
-                                        <div class="case-card-avatar">
-                                            <span class="decision-text"><?php echo esc_html($decision ? $decision : 'N/A'); ?></span>
-                                        </div>
-                                        <div class="case-card-info">
-                                            <div class="case-card-description"><?php echo esc_html($subtitle ? $subtitle : the_title()); ?></div>
-                                        </div>
+                            $post_type = get_post_type();
+
+                            if ($post_type === 'successful_case') {
+                                $success_count++;
+                                $hidden_class = ($success_count > 4) ? 'hidden' : '';
+                                $legal_case = get_post_meta(get_the_ID(), '_successful_case_legal_case', true);
+                                $decision = get_post_meta(get_the_ID(), '_successful_case_decision', true);
+                                $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
+                                $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
+                                ?>
+                                <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="success-cases" data-post-index="<?php echo esc_attr($success_count); ?>">
+                                    <div class="case-card-header">
+                                        <span class="case-card-badge"><?php echo esc_html($legal_case ? $legal_case : 'Legal case'); ?></span>
                                     </div>
-                                    <?php if ($date) : ?>
-                                        <div class="case-card-date"><?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></div>
-                                    <?php endif; ?>
+                                    <div class="case-card-content">
+                                        <div class="case-card-icon-section">
+                                            <div class="case-card-avatar">
+                                                <span class="decision-text"><?php echo esc_html($decision ? $decision : 'N/A'); ?></span>
+                                            </div>
+                                            <div class="case-card-info">
+                                                <div class="case-card-description"><?php echo esc_html($subtitle ? $subtitle : the_title()); ?></div>
+                                            </div>
+                                        </div>
+                                        <?php if ($date) : ?>
+                                            <div class="case-card-date"><?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></div>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <?php
+                                <?php
+                            } elseif ($post_type === 'legal_information') {
+                                $legal_info_count++;
+                                $hidden_class = ($legal_info_count > 3) ? 'hidden' : '';
+                                $subtitle = get_post_meta(get_the_ID(), '_legal_information_subtitle', true);
+                                ?>
+                                <a href="<?php the_permalink(); ?>" class="legal-info-card <?php echo esc_attr($hidden_class); ?>" data-category="legal-info" data-post-index="<?php echo esc_attr($legal_info_count); ?>" style="text-decoration: none; color: inherit;">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <div class="legal-info-card-image">
+                                            <?php the_post_thumbnail('case-thumbnail'); ?>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="legal-info-card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                                    <?php endif; ?>
+                                    <div class="legal-info-card-content">
+                                        <h3 class="legal-info-card-title"><?php the_title(); ?></h3>
+                                        <?php if ($subtitle) : ?>
+                                            <p class="legal-info-card-subtitle"><?php echo esc_html($subtitle); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </a>
+                                <?php
+                            } elseif ($post_type === 'news_board') {
+                                $news_count++;
+                                $hidden_class = ($news_count > 4) ? 'hidden' : '';
+                                $legal_case = get_post_meta(get_the_ID(), '_news_board_category', true);
+                                $subtitle = get_post_meta(get_the_ID(), '_news_board_subtitle', true);
+                                $date = get_post_meta(get_the_ID(), '_news_board_date', true);
+                                ?>
+                                <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage" data-post-index="<?php echo esc_attr($news_count); ?>">
+                                    <div class="case-card-header">
+                                        <span class="case-card-badge"><?php echo esc_html($legal_case ? $legal_case : 'News'); ?></span>
+                                    </div>
+                                    <div class="case-card-content">
+                                        <div class="case-card-icon-section">
+                                            <div class="case-card-info">
+                                                <div class="case-card-description"><?php echo esc_html($subtitle ? $subtitle : the_title()); ?></div>
+                                            </div>
+                                        </div>
+                                        <?php if ($date) : ?>
+                                            <div class="case-card-date"><?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
                         endwhile;
                         wp_reset_postdata();
                         ?>
                     </div>
 
-                    <?php if ($post_count > 4) : ?>
+                    <?php if ($success_count > 4 || $legal_info_count > 3 || $news_count > 4) : ?>
                     <div class="load-more-wrapper">
                         <button class="load-more-btn" id="load-more-cases-btn">더보기 +</button>
                     </div>
@@ -626,7 +778,7 @@ global $post;
 
                     <?php
                 else :
-                    echo '<p class="no-cases">' . esc_html__('No successful cases found.', 'law-firm-pyeongjeong') . '</p>';
+                    echo '<p class="no-cases">' . esc_html__('No cases found.', 'law-firm-pyeongjeong') . '</p>';
                 endif;
                 ?>
             </div>
@@ -667,5 +819,184 @@ global $post;
 </main>
 
 <?php wp_footer(); ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const casesList = document.getElementById('cases-list');
+    const loadMoreBtn = document.getElementById('load-more-cases-btn');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const allCards = document.querySelectorAll('#cases-list [data-category]');
+
+    // Track active category
+    let activeCategory = 'all';
+
+    // Define how many cards to show initially per category
+    const initialVisibleCount = {
+        'success-cases': 4,
+        'legal-info': 3,
+        'press-coverage': 4,
+        'all': -1 // Show all initially when "all" is selected
+    };
+
+    // Function to filter and display cards based on category
+    function filterCardsByCategory(category) {
+        let successCount = 0;
+        let legalInfoCount = 0;
+        let newsCount = 0;
+
+        allCards.forEach(card => {
+            const cardCategory = card.dataset.category;
+
+            if (category === 'all') {
+                // Show first N cards of each category type
+                if (cardCategory === 'success-cases') {
+                    successCount++;
+                    if (successCount <= 4) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                } else if (cardCategory === 'legal-info') {
+                    legalInfoCount++;
+                    if (legalInfoCount <= 3) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                } else if (cardCategory === 'press-coverage') {
+                    newsCount++;
+                    if (newsCount <= 4) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                } else {
+                    card.classList.add('hidden');
+                }
+            } else {
+                // Show only cards matching the selected category
+                if (cardCategory === category) {
+                    // For each category type, show first N cards only
+                    if (cardCategory === 'legal-info') {
+                        legalInfoCount++;
+                        if (legalInfoCount <= 3) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    } else if (cardCategory === 'success-cases') {
+                        successCount++;
+                        if (successCount <= 4) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    } else if (cardCategory === 'press-coverage') {
+                        newsCount++;
+                        if (newsCount <= 4) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                } else {
+                    // Hide cards that don't match the selected category
+                    card.classList.add('hidden');
+                }
+            }
+        });
+    }
+
+    // Handle category button clicks
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            activeCategory = this.dataset.category;
+
+            // Update grid layout based on category
+            if (casesList) {
+                casesList.classList.remove('legal-info-active', 'success-cases-active', 'press-coverage-active', 'all-active');
+                if (activeCategory === 'legal-info') {
+                    casesList.classList.add('legal-info-active');
+                } else if (activeCategory === 'success-cases') {
+                    casesList.classList.add('success-cases-active');
+                } else if (activeCategory === 'press-coverage') {
+                    casesList.classList.add('press-coverage-active');
+                } else if (activeCategory === 'all') {
+                    casesList.classList.add('all-active');
+                }
+            }
+
+            // Filter cards based on category
+            filterCardsByCategory(activeCategory);
+
+            // Reset Load More button visibility
+            updateLoadMoreButton();
+        });
+    });
+
+    // Handle Load More button
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            let cardsToLoad = 4; // Default for success-cases and press-coverage
+
+            if (activeCategory === 'legal-info') {
+                cardsToLoad = 3;
+            }
+
+            const hiddenCards = document.querySelectorAll('#cases-list .hidden');
+            let count = 0;
+
+            hiddenCards.forEach(card => {
+                // Check if card matches active category
+                const cardCategory = card.dataset.category;
+
+                if (activeCategory === 'all') {
+                    // Show all hidden cards
+                    if (count < cardsToLoad) {
+                        card.classList.remove('hidden');
+                        count++;
+                    }
+                } else {
+                    // Show only cards matching the active category
+                    if (cardCategory === activeCategory && count < cardsToLoad) {
+                        card.classList.remove('hidden');
+                        count++;
+                    }
+                }
+            });
+
+            updateLoadMoreButton();
+        });
+    }
+
+    // Update Load More button visibility
+    function updateLoadMoreButton() {
+        if (!loadMoreBtn) return;
+
+        const visibleCards = document.querySelectorAll('#cases-list [data-category]:not(.hidden)');
+        const hiddenCards = document.querySelectorAll('#cases-list .hidden');
+        let hasHiddenCardsInCategory = false;
+
+        hiddenCards.forEach(card => {
+            if (activeCategory === 'all' || card.dataset.category === activeCategory) {
+                hasHiddenCardsInCategory = true;
+            }
+        });
+
+        if (hasHiddenCardsInCategory) {
+            loadMoreBtn.classList.remove('hidden');
+        } else {
+            loadMoreBtn.classList.add('hidden');
+        }
+    }
+
+    // Set initial grid layout and filter
+    if (casesList) {
+        casesList.classList.add('all-active');
+        filterCardsByCategory('all');
+    }
+});
+</script>
+
 </body>
 </html>
