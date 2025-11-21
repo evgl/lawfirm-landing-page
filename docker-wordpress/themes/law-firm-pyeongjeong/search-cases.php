@@ -538,6 +538,10 @@ global $post;
             .cases-list.legal-info-active {
                 grid-template-columns: 1fr;
             }
+            
+            .cases-list.press-coverage-active {
+                grid-template-columns: 1fr;
+            }
 
             .case-card-content {
                 padding: 12px 14px;
@@ -572,6 +576,125 @@ global $post;
                 padding: 10px 24px;
                 font-size: 13px;
             }
+            
+            .news-body {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .news-image-wrapper {
+                width: 100%;
+                flex: none;
+                height: 200px;
+            }
+            
+            .news-title {
+                font-size: 18px;
+            }
+        }
+        
+        /* News Card Styles */
+        .news-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            background: #ffffff;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            padding: 24px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .news-card:hover .news-title {
+            text-decoration: underline;
+            color: #4A90E2;
+        }
+
+        .news-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .news-newspaper {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4A90E2;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .news-date {
+            font-size: 15px;
+            color: #888888;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .news-body {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .news-image-wrapper {
+            flex: 0 0 280px;
+            height: 180px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #f0f0f0;
+            position: relative;
+        }
+
+        .news-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .news-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .news-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 12px;
+            line-height: 1.4;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .news-excerpt {
+            font-size: 15px;
+            color: #555555;
+            line-height: 1.6;
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .cases-list.press-coverage-active {
+            grid-template-columns: 1fr;
+            gap: 40px;
         }
     </style>
 </head>
@@ -763,21 +886,54 @@ global $post;
                                 $newspaper_name = get_post_meta(get_the_ID(), '_news_board_newspaper_name', true);
                                 $date = get_post_meta(get_the_ID(), '_news_board_date', true);
                                 ?>
-                                <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage" data-post-index="<?php echo esc_attr($news_count); ?>">
-                                    <div class="case-card-header">
-                                        <span class="case-card-badge"><?php echo esc_html($legal_case ? $legal_case : 'News'); ?></span>
-                                    </div>
-                                    <div class="case-card-content">
-                                        <div class="case-card-icon-section">
-                                            <div class="case-card-info">
-                                                <div class="news-board-newspaper-name"><?php echo esc_html($newspaper_name ? $newspaper_name : the_title()); ?></div>
-                                            </div>
-                                        </div>
+                                <article class="news-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage" data-post-index="<?php echo esc_attr($news_count); ?>">
+                                    <div class="news-header">
+                                        <?php if ($newspaper_name) : ?>
+                                            <span class="news-newspaper"><?php echo esc_html($newspaper_name); ?></span>
+                                        <?php endif; ?>
                                         <?php if ($date) : ?>
-                                            <div class="case-card-date"><?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></div>
+                                            <span class="news-date"><?php echo esc_html(date_i18n('Y-m-d', strtotime($date))); ?></span>
                                         <?php endif; ?>
                                     </div>
-                                </div>
+                                    
+                                    <a href="<?php the_permalink(); ?>" class="news-body">
+                                        <div class="news-image-wrapper">
+                                            <?php 
+                                            $content_image = law_firm_get_first_content_image();
+                                            $attachment_image = '';
+                                            
+                                            if (!$content_image && !has_post_thumbnail()) {
+                                                $attachments = get_posts(array(
+                                                    'post_type'      => 'attachment',
+                                                    'post_mime_type' => 'image',
+                                                    'post_parent'    => get_the_ID(),
+                                                    'posts_per_page' => 1,
+                                                    'post_status'    => 'inherit',
+                                                ));
+                                                if ($attachments) {
+                                                    $attachment_image = wp_get_attachment_image_url($attachments[0]->ID, 'large');
+                                                }
+                                            }
+
+                                            if (has_post_thumbnail()) : 
+                                                the_post_thumbnail('large'); 
+                                            elseif ($content_image) : 
+                                            ?>
+                                                <img src="<?php echo esc_url($content_image); ?>" alt="<?php the_title_attribute(); ?>" />
+                                            <?php elseif ($attachment_image) : ?>
+                                                <img src="<?php echo esc_url($attachment_image); ?>" alt="<?php the_title_attribute(); ?>" />
+                                            <?php else : ?>
+                                                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="news-content">
+                                            <h3 class="news-title"><?php the_title(); ?></h3>
+                                            <div class="news-excerpt">
+                                                <?php echo wp_trim_words(get_the_excerpt(), 40, '...'); ?>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
                                 <?php
                             }
                         endwhile;

@@ -162,7 +162,7 @@ function law_firm_custom_post_types() {
         'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
         'menu_icon' => 'dashicons-yes-alt',
         'menu_position' => 28,
-        'has_archive' => true,
+        'has_archive' => false,
         'rewrite' => array('slug' => 'news-board')
     ));
 }
@@ -177,7 +177,7 @@ function law_firm_add_custom_rewrite_rules() {
     add_rewrite_rule('^cases/?$', 'index.php?custom_page=cases', 'top');
     add_rewrite_rule('^contact/?$', 'index.php?custom_page=contact', 'top');
     add_rewrite_rule('^legal-information/?$', 'index.php?custom_page=legal-information', 'top');
-    add_rewrite_rule('^news-board/?$', 'index.php?custom_page=news-board', 'top');
+    add_rewrite_rule('^legal-information/?$', 'index.php?custom_page=legal-information', 'top');
 }
 add_action('init', 'law_firm_add_custom_rewrite_rules');
 
@@ -212,8 +212,8 @@ function law_firm_custom_template_redirect() {
         $template_file = 'contact.php';
     } elseif (preg_match('#/legal-information/?$#', $path)) {
         $template_file = 'search-legal-information.php';
-    } elseif (preg_match('#/news-board/?$#', $path)) {
-        $template_file = 'search-news-board.php';
+    } elseif (preg_match('#/legal-information/?$#', $path)) {
+        $template_file = 'search-legal-information.php';
     }
 
     // Also check the original query var method as fallback
@@ -235,8 +235,8 @@ function law_firm_custom_template_redirect() {
             case 'legal-information':
                 $template_file = 'search-legal-information.php';
                 break;
-            case 'news-board':
-                $template_file = 'search-news-board.php';
+            case 'legal-information':
+                $template_file = 'search-legal-information.php';
                 break;
         }
     }
@@ -269,8 +269,8 @@ function law_firm_early_request_handler() {
             $template_file = 'contact.php';
         } elseif (preg_match('#/legal-information/?$#', $path)) {
             $template_file = 'search-legal-information.php';
-        } elseif (preg_match('#/news-board/?$#', $path)) {
-            $template_file = 'search-news-board.php';
+        } elseif (preg_match('#/legal-information/?$#', $path)) {
+            $template_file = 'search-legal-information.php';
         }
 
         if ($template_file && file_exists(get_template_directory() . '/' . $template_file)) {
