@@ -5,7 +5,7 @@
  * @since 1.0.0
  */
 
-(function($) {
+(function ($) {
     'use strict';
 
     // Global variables
@@ -16,7 +16,7 @@
     /**
      * Document Ready Functions
      */
-    $(document).ready(function() {
+    $(document).ready(function () {
         initializeTheme();
         bindEvents();
         handleAccessibility();
@@ -25,7 +25,7 @@
     /**
      * Window Load Functions
      */
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         hideLoadingOverlay();
         initializeAnimations();
     });
@@ -56,21 +56,21 @@
         // Window events
         $(window).on('scroll', throttle(handleScroll, 16));
         $(window).on('resize', debounce(handleResize, 250));
-        
+
         // Form events
         $('form').on('submit', handleFormSubmission);
         $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('blur', validateField);
-        
+
         // Modal events
         $('.modal-close, .modal-overlay').on('click', closeModal);
         $(document).on('keydown', handleKeydown);
-        
+
         // Search form
         $('.hero-search form').on('submit', handleHeroSearch);
-        
+
         // Quick menu interactions
         $('.quick-menu-item').on('click', handleQuickMenuClick);
-        
+
     }
 
     /**
@@ -79,16 +79,16 @@
     function initMobileMenu() {
         const $menuToggle = $('.mobile-menu-toggle');
         const $navigation = $('.main-navigation');
-        
-        $menuToggle.on('click', function(e) {
+
+        $menuToggle.on('click', function (e) {
             e.preventDefault();
-            
+
             const isExpanded = $(this).attr('aria-expanded') === 'true';
             $(this).attr('aria-expanded', !isExpanded);
-            
+
             $navigation.toggleClass('active');
             $('body').toggleClass('menu-open');
-            
+
             // Update icon
             const $icon = $(this).find('i');
             if ($navigation.hasClass('active')) {
@@ -99,14 +99,14 @@
         });
 
         // Close mobile menu on outside click
-        $(document).on('click', function(e) {
+        $(document).on('click', function (e) {
             if (!$(e.target).closest('.main-navigation, .mobile-menu-toggle').length) {
                 closeMobileMenu();
             }
         });
 
         // Close mobile menu on link click
-        $('.main-navigation a').on('click', function() {
+        $('.main-navigation a').on('click', function () {
             closeMobileMenu();
         });
     }
@@ -126,8 +126,8 @@
      */
     function initScrollToTop() {
         const $backToTop = $('.back-to-top, .scroll-to-top');
-        
-        $backToTop.on('click', function(e) {
+
+        $backToTop.on('click', function (e) {
             e.preventDefault();
             $('html, body').animate({ scrollTop: 0 }, 600, 'swing');
         });
@@ -138,7 +138,7 @@
      */
     function initQuickMenu() {
         const $quickMenu = $('.quick-menu');
-        
+
         // Position quick menu based on viewport
         function positionQuickMenu() {
             const windowHeight = $(window).height();
@@ -146,7 +146,7 @@
             const headerHeight = $('.site-header').outerHeight();
             const footerHeight = $('.site-footer').outerHeight();
             const availableHeight = windowHeight - headerHeight - footerHeight;
-            
+
             if (menuHeight > availableHeight) {
                 $quickMenu.addClass('compact');
             } else {
@@ -159,11 +159,11 @@
 
         // Hide quick menu on scroll for mobile
         let quickMenuTimer;
-        $(window).on('scroll', function() {
+        $(window).on('scroll', function () {
             if ($(window).width() <= 768) {
                 $quickMenu.addClass('hidden');
                 clearTimeout(quickMenuTimer);
-                quickMenuTimer = setTimeout(function() {
+                quickMenuTimer = setTimeout(function () {
                     $quickMenu.removeClass('hidden');
                 }, 1000);
             }
@@ -174,19 +174,19 @@
      * Smooth Scroll Initialization
      */
     function initSmoothScroll() {
-        $('a[data-scroll-to]').on('click', function(e) {
+        $('a[data-scroll-to]').on('click', function (e) {
             e.preventDefault();
-            
+
             const target = $(this).data('scroll-to');
             const $target = $('#' + target);
-            
+
             if ($target.length) {
                 const headerHeight = $('.site-header').outerHeight();
                 const offsetTop = $target.offset().top - headerHeight - 20;
-                
+
                 $('html, body').animate({
                     scrollTop: offsetTop
-                }, 800, 'swing', function() {
+                }, 800, 'swing', function () {
                     // Focus on target for accessibility
                     $target.focus();
                 });
@@ -199,7 +199,7 @@
      */
     function initConsultationForms() {
         // Phone number formatting
-        $('input[type="tel"]').on('input', function() {
+        $('input[type="tel"]').on('input', function () {
             let value = $(this).val().replace(/\D/g, '');
             if (value.length >= 3 && value.length <= 7) {
                 value = value.replace(/(\d{3})(\d{1,4})/, '$1-$2');
@@ -210,13 +210,13 @@
         });
 
         // Case type dependent fields
-        $('select[name="case_type"]').on('change', function() {
+        $('select[name="case_type"]').on('change', function () {
             const caseType = $(this).val();
             const $form = $(this).closest('form');
-            
+
             // Remove existing dynamic fields
             $form.find('.dynamic-field').remove();
-            
+
             // Add case-specific fields
             if (caseType === 'criminal') {
                 addCriminalFields($form);
@@ -228,22 +228,22 @@
         });
 
         // Auto-save form data to localStorage
-        $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('input change', function() {
+        $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('input change', function () {
             const formId = $(this).closest('form').attr('id');
             const fieldName = $(this).attr('name');
             const fieldValue = $(this).val();
-            
+
             if (formId && fieldName) {
                 localStorage.setItem(`${formId}_${fieldName}`, fieldValue);
             }
         });
 
         // Restore form data from localStorage
-        $('.consultation-form').each(function() {
+        $('.consultation-form').each(function () {
             const formId = $(this).attr('id');
             if (formId) {
                 const $form = $(this);
-                $form.find('input, select, textarea').each(function() {
+                $form.find('input, select, textarea').each(function () {
                     const fieldName = $(this).attr('name');
                     if (fieldName) {
                         const savedValue = localStorage.getItem(`${formId}_${fieldName}`);
@@ -281,7 +281,7 @@
                 </select>
             </div>
         `;
-        
+
         $form.find('textarea[name="message"]').closest('.form-group').before(criminalFields);
     }
 
@@ -304,7 +304,7 @@
                 </select>
             </div>
         `;
-        
+
         $form.find('textarea[name="message"]').closest('.form-group').before(civilFields);
     }
 
@@ -333,7 +333,7 @@
                 </select>
             </div>
         `;
-        
+
         $form.find('textarea[name="message"]').closest('.form-group').before(familyFields);
     }
 
@@ -342,14 +342,14 @@
      */
     function initModalSystem() {
         // Open modal triggers
-        $('[data-modal]').on('click', function(e) {
+        $('[data-modal]').on('click', function (e) {
             e.preventDefault();
             const modalId = $(this).data('modal');
             openModal(modalId);
         });
 
         // Consultation modal trigger from various buttons
-        $('.consultation-trigger, .btn-consultation').on('click', function(e) {
+        $('.consultation-trigger, .btn-consultation').on('click', function (e) {
             e.preventDefault();
             openModal('consultation-modal');
         });
@@ -363,12 +363,12 @@
         if ($modal.length) {
             $modal.show().attr('aria-hidden', 'false');
             $('body').addClass('modal-open');
-            
+
             // Focus on first form element
-            setTimeout(function() {
+            setTimeout(function () {
                 $modal.find('input, select, textarea').first().focus();
             }, 100);
-            
+
             // Trap focus within modal
             trapFocus($modal);
         }
@@ -381,10 +381,10 @@
         if (e) {
             e.preventDefault();
         }
-        
+
         $('.modal').hide().attr('aria-hidden', 'true');
         $('body').removeClass('modal-open');
-        
+
         // Return focus to trigger button
         $('.modal-trigger:focus').blur();
     }
@@ -398,19 +398,19 @@
             required: '필수 입력 항목입니다.',
             email: '올바른 이메일 주소를 입력해주세요.',
             tel: '올바른 전화번호를 입력해주세요.',
-            minlength: function(length) {
+            minlength: function (length) {
                 return `최소 ${length}자 이상 입력해주세요.`;
             },
             pattern: '올바른 형식으로 입력해주세요.'
         };
 
         // Real-time validation
-        $('.consultation-form input[required], .consultation-form select[required], .consultation-form textarea[required]').on('blur', function() {
+        $('.consultation-form input[required], .consultation-form select[required], .consultation-form textarea[required]').on('blur', function () {
             validateField($(this));
         });
 
         // Remove validation on focus
-        $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('focus', function() {
+        $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('focus', function () {
             $(this).removeClass('error');
             $(this).next('.error-message').remove();
         });
@@ -424,11 +424,11 @@
         const fieldType = $field.attr('type');
         const isRequired = $field.prop('required');
         const fieldName = $field.attr('name');
-        
+
         // Remove previous error
         $field.removeClass('error');
         $field.next('.error-message').remove();
-        
+
         let isValid = true;
         let errorMessage = '';
 
@@ -466,13 +466,13 @@
      */
     function handleFormSubmission(e) {
         e.preventDefault();
-        
+
         const $form = $(this);
         const formData = new FormData($form[0]);
-        
+
         // Validate all required fields
         let isFormValid = true;
-        $form.find('input[required], select[required], textarea[required]').each(function() {
+        $form.find('input[required], select[required], textarea[required]').each(function () {
             if (!validateField($(this))) {
                 isFormValid = false;
             }
@@ -491,7 +491,7 @@
 
         // Show loading
         showLoadingOverlay();
-        
+
         // Add AJAX data
         formData.append('action', 'law_firm_consultation');
         formData.append('nonce', law_firm_ajax.nonce);
@@ -503,17 +503,17 @@
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 hideLoadingOverlay();
-                
+
                 if (response.success) {
                     showNotification(response.data.message, 'success');
                     $form[0].reset();
-                    
+
                     // Clear localStorage
                     const formId = $form.attr('id');
                     if (formId) {
-                        Object.keys(localStorage).forEach(function(key) {
+                        Object.keys(localStorage).forEach(function (key) {
                             if (key.startsWith(formId + '_')) {
                                 localStorage.removeItem(key);
                             }
@@ -521,19 +521,19 @@
                     }
 
                     showContactSuccessModal($form);
-                    
+
                     // Close modal if in modal
                     if ($form.closest('.modal').length) {
                         closeModal();
                     }
-                    
+
                     // Scroll to top
                     $('html, body').animate({ scrollTop: 0 }, 600);
                 } else {
                     showNotification(response.data.message || '오류가 발생했습니다.', 'error');
                 }
             },
-            error: function() {
+            error: function () {
                 hideLoadingOverlay();
                 showNotification('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'error');
             }
@@ -553,7 +553,7 @@
             if ($successModal.length) {
                 openModal('consultation-success-modal');
 
-                setTimeout(function() {
+                setTimeout(function () {
                     const $focusTarget = $successModal.find('.modal-close').first();
                     if ($focusTarget.length) {
                         $focusTarget.trigger('focus');
@@ -569,23 +569,23 @@
     function initHeaderScroll() {
         const $header = $('.site-header');
         let lastScrollTop = 0;
-        
-        $(window).on('scroll', function() {
+
+        $(window).on('scroll', function () {
             const scrollTop = $(window).scrollTop();
-            
+
             if (scrollTop > 100) {
                 $header.addClass('scrolled');
             } else {
                 $header.removeClass('scrolled');
             }
-            
+
             // Hide/show header on scroll
             if (scrollTop > lastScrollTop && scrollTop > 200) {
                 $header.addClass('hidden');
             } else {
                 $header.removeClass('hidden');
             }
-            
+
             lastScrollTop = scrollTop;
         });
     }
@@ -595,14 +595,14 @@
      */
     function handleScroll() {
         const scrollTop = $(window).scrollTop();
-        
+
         // Show/hide back to top button
         if (scrollTop > 300) {
             $('.back-to-top').fadeIn();
         } else {
             $('.back-to-top').fadeOut();
         }
-        
+
         // Parallax effects for hero section
         if ($('.hero-section').length) {
             const heroHeight = $('.hero-section').outerHeight();
@@ -614,14 +614,14 @@
                 });
             }
         }
-        
+
         // Animate elements on scroll
-        $('.section').each(function() {
+        $('.section').each(function () {
             const $section = $(this);
             const sectionTop = $section.offset().top;
             const sectionHeight = $section.outerHeight();
             const windowHeight = $(window).height();
-            
+
             if (scrollTop + windowHeight > sectionTop + 100 && scrollTop < sectionTop + sectionHeight) {
                 $section.addClass('in-view');
             }
@@ -636,10 +636,10 @@
         if ($(window).width() > 768) {
             closeMobileMenu();
         }
-        
+
         // Recalculate quick menu position
         initQuickMenu();
-        
+
         // Adjust hero section height
         if ($('.hero-section').length) {
             const windowHeight = $(window).height();
@@ -653,14 +653,14 @@
      */
     function handleAccessibility() {
         // Skip links
-        $('.skip-link').on('click', function(e) {
+        $('.skip-link').on('click', function (e) {
             e.preventDefault();
             const target = $(this).attr('href');
             $(target).focus();
         });
 
         // Keyboard navigation for mobile menu
-        $('.mobile-menu-toggle').on('keydown', function(e) {
+        $('.mobile-menu-toggle').on('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 $(this).click();
@@ -681,7 +681,7 @@
         if (e.key === 'Escape') {
             closeModal();
         }
-        
+
         // Handle tab trapping in modals
         if (e.key === 'Tab' && $('.modal:visible').length) {
             trapFocus($('.modal:visible'), e);
@@ -695,12 +695,12 @@
         const focusableElements = $element.find('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
         const firstElement = focusableElements.first();
         const lastElement = focusableElements.last();
-        
+
         if (!e) {
             firstElement.focus();
             return;
         }
-        
+
         if (e.shiftKey) {
             if (document.activeElement === firstElement[0]) {
                 lastElement.focus();
@@ -719,22 +719,22 @@
      */
     function initializeAnimations() {
         // Fade in animations for cards
-        $('.post-card').each(function(index) {
+        $('.post-card').each(function (index) {
             const $card = $(this);
-            setTimeout(function() {
+            setTimeout(function () {
                 $card.addClass('animate-fade-in');
             }, index * 100);
         });
 
         // Counter animations for statistics
-        $('.counter').each(function() {
+        $('.counter').each(function () {
             const $counter = $(this);
             const target = parseInt($counter.data('target'), 10);
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;
-            
-            const timer = setInterval(function() {
+
+            const timer = setInterval(function () {
                 current += step;
                 if (current >= target) {
                     current = target;
@@ -750,17 +750,17 @@
      */
     function handleHeroSearch(e) {
         const query = $(this).find('input[name="s"]').val().trim();
-        
+
         if (!query) {
             e.preventDefault();
             showNotification('검색어를 입력해주세요.', 'warning');
             return false;
         }
-        
+
         // Add loading state
         $(this).find('button').prop('disabled', true);
         $(this).find('button i').removeClass('fa-search').addClass('fa-spinner fa-spin');
-        
+
         // Allow form submission to proceed
     }
 
@@ -769,13 +769,13 @@
      */
     function handleQuickMenuClick(e) {
         const $item = $(this);
-        
+
         // Add click effect
         $item.addClass('clicked');
-        setTimeout(function() {
+        setTimeout(function () {
             $item.removeClass('clicked');
         }, 300);
-        
+
         // Track analytics
         if (typeof gtag !== 'undefined') {
             const action = $item.find('span').text() || $item.attr('title') || 'Quick Menu Click';
@@ -800,7 +800,7 @@
     /**
      * Utility Functions
      */
-    
+
     /**
      * Email Validation
      */
@@ -837,7 +837,7 @@
     function showNotification(message, type = 'info') {
         // Remove existing notifications
         $('.notification').remove();
-        
+
         const notificationHtml = `
             <div class="notification notification-${type}" role="alert" aria-live="assertive">
                 <div class="notification-content">
@@ -849,25 +849,25 @@
                 </div>
             </div>
         `;
-        
+
         $('body').prepend(notificationHtml);
-        
+
         const $notification = $('.notification');
-        
+
         // Auto-hide after 5 seconds
-        setTimeout(function() {
-            $notification.fadeOut(300, function() {
+        setTimeout(function () {
+            $notification.fadeOut(300, function () {
                 $(this).remove();
             });
         }, 5000);
-        
+
         // Close button
-        $notification.find('.notification-close').on('click', function() {
-            $notification.fadeOut(300, function() {
+        $notification.find('.notification-close').on('click', function () {
+            $notification.fadeOut(300, function () {
                 $(this).remove();
             });
         });
-        
+
         // Update ARIA live region
         $('#aria-live-region').text(message);
     }
@@ -876,7 +876,7 @@
      * Get Notification Icon
      */
     function getNotificationIcon(type) {
-        switch(type) {
+        switch (type) {
             case 'success':
                 return 'fa-check-circle';
             case 'error':
@@ -893,7 +893,7 @@
      */
     function throttle(func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -909,9 +909,9 @@
      */
     function debounce(func, wait, immediate) {
         let timeout;
-        return function() {
+        return function () {
             const context = this, args = arguments;
-            const later = function() {
+            const later = function () {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
             };
@@ -934,8 +934,8 @@
      */
     function initLazyLoading() {
         if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(function(entry) {
+            const imageObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         img.src = img.dataset.src;
@@ -945,7 +945,7 @@
                 });
             });
 
-            document.querySelectorAll('img[data-src]').forEach(function(img) {
+            document.querySelectorAll('img[data-src]').forEach(function (img) {
                 imageObserver.observe(img);
             });
         }
@@ -964,16 +964,16 @@
             return;
         }
 
-        const animationObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
+        const animationObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
                     const target = entry.target;
-                    
+
                     // Add animation class with slight delay for smoother effect
-                    setTimeout(function() {
+                    setTimeout(function () {
                         target.classList.add('animate-in');
                     }, 100);
-                    
+
                     // Stop observing once animated
                     animationObserver.unobserve(target);
                 }
@@ -984,7 +984,7 @@
         });
 
         // Observe all elements with scroll-animate class
-        document.querySelectorAll('.scroll-animate').forEach(function(element) {
+        document.querySelectorAll('.scroll-animate').forEach(function (element) {
             animationObserver.observe(element);
         });
 
@@ -998,22 +998,22 @@
     function addScrollAnimationClasses() {
         // About section animations
         $('.about-content .section-header').addClass('scroll-animate');
-        $('.value-item').each(function(index) {
+        $('.value-item').each(function (index) {
             $(this).addClass('scroll-animate delay-' + ((index + 1) * 100));
         });
-        $('.stat-item').each(function(index) {
+        $('.stat-item').each(function (index) {
             $(this).addClass('scroll-animate animate-scale delay-' + ((index + 2) * 100));
         });
 
         // Services section animations
         $('.services-content .section-header').addClass('scroll-animate');
-        $('.service-card').each(function(index) {
+        $('.service-card').each(function (index) {
             $(this).addClass('scroll-animate delay-' + ((index % 3 + 1) * 100));
         });
 
         // Team section animations
         $('.team-content .section-header').addClass('scroll-animate');
-        $('.team-member').each(function(index) {
+        $('.team-member').each(function (index) {
             $(this).addClass('scroll-animate delay-' + ((index + 1) * 150));
         });
 
@@ -1037,11 +1037,11 @@
         }
 
         // Update progress on scroll
-        $(window).on('scroll', function() {
+        $(window).on('scroll', function () {
             const scrollTop = window.pageYOffset;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
-            
+
             $('.scroll-progress').css('width', Math.min(scrollPercent, 100) + '%');
         });
     }
@@ -1053,13 +1053,13 @@
         const heroSection = document.querySelector('.homepage-hero');
         if (!heroSection) return;
 
-        $(window).on('scroll', function() {
+        $(window).on('scroll', function () {
             const scrolled = window.pageYOffset;
             const parallax = scrolled * 0.5;
-            
+
             // Apply parallax to hero background
             $('.hero-bg-image').css('transform', 'translate3d(0, ' + parallax + 'px, 0)');
-            
+
             // Apply subtle parallax to hero content
             $('.hero-content').css('transform', 'translate3d(0, ' + (parallax * 0.3) + 'px, 0)');
         });
@@ -1070,23 +1070,23 @@
      */
     function initAdvancedInteractions() {
         // Enhanced hover effects for service cards
-        $('.service-card').on('mouseenter', function() {
+        $('.service-card').on('mouseenter', function () {
             $(this).addClass('hover-lift');
             $(this).find('.service-icon').addClass('pulse-animation');
-        }).on('mouseleave', function() {
+        }).on('mouseleave', function () {
             $(this).removeClass('hover-lift');
             $(this).find('.service-icon').removeClass('pulse-animation');
         });
 
         // Enhanced hover effects for team members
-        $('.team-member').on('mouseenter', function() {
+        $('.team-member').on('mouseenter', function () {
             $(this).addClass('hover-lift');
-        }).on('mouseleave', function() {
+        }).on('mouseleave', function () {
             $(this).removeClass('hover-lift');
         });
 
         // Case filter functionality with animations
-        $('.category-btn').on('click', function() {
+        $('.category-btn').on('click', function () {
             const category = $(this).data('category');
 
             // Update active button
@@ -1109,7 +1109,7 @@
 
             // Filter cases with animation (supports both .case-card and .case-item)
             let visibleCount = 0;
-            $('.case-card, .case-item').each(function(index) {
+            $('.case-card, .case-item').each(function (index) {
                 const itemCategory = $(this).data('category');
                 const shouldShow = category === 'all' || itemCategory === category;
 
@@ -1131,24 +1131,15 @@
                 }
             });
 
-            // Show no results message if needed
-            const container = $('.cases-list');
-            if (container.length && container.find('.case-card, .case-item').not('.hidden').length === 0) {
-                if (!container.find('.no-results-message').length) {
-                    container.append('<p class="no-cases">' + 'No posts found in this category.' + '</p>');
-                }
-                container.find('.no-results-message').removeClass('hidden');
-            } else {
-                container.find('.no-results-message').addClass('hidden');
-            }
+
         });
 
         // Load More button functionality
-        $('#load-more-cases-btn').on('click', function() {
+        $('#load-more-cases-btn').on('click', function () {
             const hiddenCases = $('.case-card.hidden');
             let revealCount = 0;
 
-            hiddenCases.each(function() {
+            hiddenCases.each(function () {
                 if (revealCount < 4) {
                     $(this).removeClass('hidden').addClass('scroll-animate');
                     setTimeout(() => {
@@ -1165,7 +1156,7 @@
         });
 
         // Smooth scroll enhancement for navigation links
-        $('a[href^="#"]').on('click', function(e) {
+        $('a[href^="#"]').on('click', function (e) {
             const target = $(this.getAttribute('href'));
             if (target.length) {
                 e.preventDefault();
@@ -1178,9 +1169,9 @@
         });
 
         // Form field enhancements
-        $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('focus', function() {
+        $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('focus', function () {
             $(this).parent().addClass('focused');
-        }).on('blur', function() {
+        }).on('blur', function () {
             if (!$(this).val()) {
                 $(this).parent().removeClass('focused');
             }
@@ -1200,13 +1191,13 @@
         let lastScrollTop = 0;
         const header = $('.site-header');
         const headerHeight = header.outerHeight();
-        
-        $(window).on('scroll', throttle(function() {
+
+        $(window).on('scroll', throttle(function () {
             const scrollTop = window.pageYOffset;
-            
+
             if (scrollTop > headerHeight) {
                 header.addClass('scrolled');
-                
+
                 // Hide/show header based on scroll direction
                 if (scrollTop > lastScrollTop && scrollTop > headerHeight * 2) {
                     header.addClass('header-hidden');
@@ -1216,7 +1207,7 @@
             } else {
                 header.removeClass('scrolled header-hidden');
             }
-            
+
             lastScrollTop = scrollTop;
         }, 16));
     }
@@ -1227,9 +1218,9 @@
     function initTouchInteractions() {
         // Touch-friendly hover states for mobile
         if ('ontouchstart' in window) {
-            $('.service-card, .team-member, .case-card').on('touchstart', function() {
+            $('.service-card, .team-member, .case-card').on('touchstart', function () {
                 $(this).addClass('touch-active');
-            }).on('touchend', function() {
+            }).on('touchend', function () {
                 setTimeout(() => {
                     $(this).removeClass('touch-active');
                 }, 300);
@@ -1244,20 +1235,20 @@
     function showLoadingState(form) {
         const submitBtn = form.find('.submit-btn');
         const originalText = submitBtn.text();
-        
+
         submitBtn.prop('disabled', true)
-                 .html('<i class="fas fa-spinner fa-spin"></i> 전송 중...')
-                 .addClass('loading-state');
-        
+            .html('<i class="fas fa-spinner fa-spin"></i> 전송 중...')
+            .addClass('loading-state');
+
         return originalText;
     }
 
     function hideLoadingState(form, originalText) {
         const submitBtn = form.find('.submit-btn');
-        
+
         submitBtn.prop('disabled', false)
-                 .html('<i class="fas fa-paper-plane"></i> ' + originalText)
-                 .removeClass('loading-state');
+            .html('<i class="fas fa-paper-plane"></i> ' + originalText)
+            .removeClass('loading-state');
     }
 
     // Initialize touch interactions
@@ -1279,7 +1270,7 @@
         loadCases(1);
 
         // Toggle dropdown on cases menu item click
-        $casesMenuItem.on('click', function(e) {
+        $casesMenuItem.on('click', function (e) {
             if (window.innerWidth > 768) {
                 // Navigation allowed - removed e.preventDefault() to enable link navigation
                 $casesDropdown.toggleClass('active');
@@ -1287,24 +1278,24 @@
         });
 
         // Close dropdown when clicking on a case card
-        $(document).on('click', '.case-card', function() {
+        $(document).on('click', '.case-card', function () {
             $casesDropdown.removeClass('active');
         });
 
         // Close dropdown when clicking outside
-        $(document).on('click', function(e) {
+        $(document).on('click', function (e) {
             if (!$(e.target).closest('#casesDropdown, .primary-menu').length) {
                 $casesDropdown.removeClass('active');
             }
         });
 
         // Close dropdown when clicking other menu items
-        $('.primary-menu li a').not($casesMenuItem).on('click', function() {
+        $('.primary-menu li a').not($casesMenuItem).on('click', function () {
             $casesDropdown.removeClass('active');
         });
 
         // Load more button
-        $loadMoreBtn.on('click', function(e) {
+        $loadMoreBtn.on('click', function (e) {
             e.preventDefault();
             if (!isLoading && hasMore) {
                 loadCases(currentPage + 1);
@@ -1328,7 +1319,7 @@
                     page: page,
                     nonce: law_firm_ajax.nonce
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         const cases = response.data.cases;
                         const hasMore = response.data.has_more;
@@ -1339,7 +1330,7 @@
                             $casesGrid.html('');
                         }
 
-                        cases.forEach(function(caseData) {
+                        cases.forEach(function (caseData) {
                             const profileInitials = caseData.profile_name
                                 ? caseData.profile_name.substring(0, 2).toUpperCase()
                                 : 'CA';
@@ -1375,11 +1366,11 @@
                         $loadMoreBtn.prop('disabled', true).text('더 이상 없습니다');
                     }
                 },
-                error: function() {
+                error: function () {
                     console.error('Failed to load cases');
                     $loadMoreBtn.removeClass('loading').prop('disabled', false);
                 },
-                complete: function() {
+                complete: function () {
                     isLoading = false;
                 }
             });
@@ -1396,7 +1387,7 @@
                 '"': '&quot;',
                 "'": '&#039;'
             };
-            return text ? text.replace(/[&<>"']/g, function(m) { return map[m]; }) : '';
+            return text ? text.replace(/[&<>"']/g, function (m) { return map[m]; }) : '';
         }
 
         /**
