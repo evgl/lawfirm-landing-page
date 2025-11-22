@@ -617,6 +617,10 @@ global $post;
             color: #4A90E2;
         }
 
+        .news-card.hidden {
+            display: none;
+        }
+
         .news-left-section {
             flex: 0 0 50%;
             display: flex;
