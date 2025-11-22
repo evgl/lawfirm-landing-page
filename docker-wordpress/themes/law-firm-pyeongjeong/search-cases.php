@@ -617,37 +617,39 @@ global $post;
             color: #4A90E2;
         }
 
-        .news-header {
+        .news-left-section {
+            flex: 0 0 50%;
             display: flex;
-            align-items: baseline;
+            flex-direction: column;
             gap: 12px;
-            margin-bottom: 12px;
         }
 
         .news-newspaper {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            color: #4A90E2;
+            color: #1a1a1a;
             font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
         }
 
         .news-date {
-            font-size: 15px;
+            font-size: 14px;
             color: #888888;
             font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
         }
 
         .news-body {
             display: flex;
             gap: 24px;
-            align-items: flex-start;
+            align-items: stretch;
             text-decoration: none;
             color: inherit;
         }
 
         .news-image-wrapper {
-            flex: 0 0 280px;
-            height: 180px;
+            width: 100%;
+            height: 200px;
             border-radius: 4px;
             overflow: hidden;
             background: #f0f0f0;
@@ -666,9 +668,10 @@ global $post;
         }
 
         .news-content {
-            flex: 1;
+            flex: 0 0 50%;
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .news-title {
@@ -887,44 +890,45 @@ global $post;
                                 $date = get_post_meta(get_the_ID(), '_news_board_date', true);
                                 ?>
                                 <article class="news-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage" data-post-index="<?php echo esc_attr($news_count); ?>">
-                                    <div class="news-header">
-                                        <?php if ($newspaper_name) : ?>
-                                            <span class="news-newspaper"><?php echo esc_html($newspaper_name); ?></span>
-                                        <?php endif; ?>
-                                        <?php if ($date) : ?>
-                                            <span class="news-date"><?php echo esc_html(date_i18n('Y-m-d', strtotime($date))); ?></span>
-                                        <?php endif; ?>
-                                    </div>
-                                    
                                     <a href="<?php the_permalink(); ?>" class="news-body">
-                                        <div class="news-image-wrapper">
-                                            <?php 
-                                            $content_image = law_firm_get_first_content_image();
-                                            $attachment_image = '';
-                                            
-                                            if (!$content_image && !has_post_thumbnail()) {
-                                                $attachments = get_posts(array(
-                                                    'post_type'      => 'attachment',
-                                                    'post_mime_type' => 'image',
-                                                    'post_parent'    => get_the_ID(),
-                                                    'posts_per_page' => 1,
-                                                    'post_status'    => 'inherit',
-                                                ));
-                                                if ($attachments) {
-                                                    $attachment_image = wp_get_attachment_image_url($attachments[0]->ID, 'large');
+                                        <div class="news-left-section">
+                                            <div class="news-header-meta" style="display: flex; gap: 10px; align-items: baseline; margin-bottom: 8px;">
+                                                <?php if ($newspaper_name) : ?>
+                                                    <div class="news-newspaper"><?php echo esc_html($newspaper_name); ?></div>
+                                                <?php endif; ?>
+                                                <?php if ($date) : ?>
+                                                    <div class="news-date"><?php echo esc_html(date_i18n('Y-m-d', strtotime($date))); ?></div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="news-image-wrapper">
+                                                <?php 
+                                                $content_image = law_firm_get_first_content_image();
+                                                $attachment_image = '';
+                                                
+                                                if (!$content_image && !has_post_thumbnail()) {
+                                                    $attachments = get_posts(array(
+                                                        'post_type'      => 'attachment',
+                                                        'post_mime_type' => 'image',
+                                                        'post_parent'    => get_the_ID(),
+                                                        'posts_per_page' => 1,
+                                                        'post_status'    => 'inherit',
+                                                    ));
+                                                    if ($attachments) {
+                                                        $attachment_image = wp_get_attachment_image_url($attachments[0]->ID, 'large');
+                                                    }
                                                 }
-                                            }
 
-                                            if (has_post_thumbnail()) : 
-                                                the_post_thumbnail('large'); 
-                                            elseif ($content_image) : 
-                                            ?>
-                                                <img src="<?php echo esc_url($content_image); ?>" alt="<?php the_title_attribute(); ?>" />
-                                            <?php elseif ($attachment_image) : ?>
-                                                <img src="<?php echo esc_url($attachment_image); ?>" alt="<?php the_title_attribute(); ?>" />
-                                            <?php else : ?>
-                                                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-                                            <?php endif; ?>
+                                                if (has_post_thumbnail()) : 
+                                                    the_post_thumbnail('large'); 
+                                                elseif ($content_image) : 
+                                                ?>
+                                                    <img src="<?php echo esc_url($content_image); ?>" alt="<?php the_title_attribute(); ?>" />
+                                                <?php elseif ($attachment_image) : ?>
+                                                    <img src="<?php echo esc_url($attachment_image); ?>" alt="<?php the_title_attribute(); ?>" />
+                                                <?php else : ?>
+                                                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
                                         <div class="news-content">
                                             <h3 class="news-title"><?php the_title(); ?></h3>
