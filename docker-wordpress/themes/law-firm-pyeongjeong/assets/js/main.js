@@ -1085,7 +1085,8 @@
             $(this).removeClass('hover-lift');
         });
 
-        // Case filter functionality with animations
+        // Case filter functionality with animations - DISABLED (Handled in search-cases.php)
+        /*
         $('.category-btn').on('click', function () {
             const category = $(this).data('category');
 
@@ -1133,8 +1134,10 @@
 
 
         });
+        */
 
-        // Load More button functionality
+        // Load More button functionality - DISABLED (Handled in search-cases.php)
+        /*
         $('#load-more-cases-btn').on('click', function () {
             const hiddenCases = $('.case-card.hidden');
             let revealCount = 0;
@@ -1154,6 +1157,7 @@
                 $('#load-more-cases-btn').addClass('hidden');
             }
         });
+        */
 
         // Smooth scroll enhancement for navigation links
         $('a[href^="#"]').on('click', function (e) {

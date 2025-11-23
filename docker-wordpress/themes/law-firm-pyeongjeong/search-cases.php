@@ -320,7 +320,7 @@ global $post;
         }
 
         .case-card.hidden {
-            display: none;
+            display: none !important;
         }
 
         /* Legal Information Card Styles */
@@ -374,7 +374,7 @@ global $post;
         }
 
         .legal-info-card.hidden {
-            display: none;
+            display: none !important;
         }
 
         /* Grid layout adjustments based on active filter */
@@ -623,7 +623,7 @@ global $post;
         }
 
         .news-card.hidden {
-            display: none;
+            display: none !important;
         }
 
         .news-left-section {
@@ -1068,6 +1068,33 @@ document.addEventListener('DOMContentLoaded', function() {
         'press-coverage': document.getElementById('btn-load-more-news')
     };
     
+    // Initial limits for "All" view
+    const allViewLimits = {
+        'success-cases': 4,    // 4 items (2x2 grid)
+        'legal-info': 6,       // 6 items (2x3 grid)
+        'press-coverage': 4    // 4 items (2x2 grid)
+    };
+
+    // Initial limits for "Individual" view (start with these, then load more)
+    const individualViewLimits = {
+        'success-cases': 4,
+        'legal-info': 3,       // Starts with 3? Or 6? User said 2x3 for All. Usually individual has same or more. Let's stick to 3 or 6. Previous code was 3. Let's use 6 to match "All" or keep 3? 
+                               // User request: "Legal information 2 x 3 gridView" was under "All category". 
+                               // Let's set individual to 6 as well for consistency, or keep 3 if that was the preference. 
+                               // Previous code had 3. I'll bump individual to 6 to match the "All" view request if it makes sense, or keep 3. 
+                               // Safest is to keep individual at 3 (or 6) but ensure "All" is 6. 
+                               // Actually, if "All" shows 6, individual should probably show at least 6.
+        'press-coverage': 4
+    };
+
+    // Track current visible count for each category in Individual mode
+    // We initialize with the default limits
+    let categoryVisibleCounts = {
+        'success-cases': 4,
+        'legal-info': 6, // Updated to 6 to match All view request
+        'press-coverage': 4
+    };
+    
     // Track active category
     let activeCategory = 'all';
 
@@ -1086,19 +1113,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (category === 'all') {
             // Show all sections
-            Object.values(sections).forEach(section => {
+            Object.keys(sections).forEach(key => {
+                const section = sections[key];
                 if (section) {
                     section.style.display = 'block';
-                    // Show title in "All" view
+                    
+                    // Show title
                     const title = section.querySelector('.cases-section-title');
                     if (title) title.style.display = 'block';
                     
-                    // Hide load more button in "All" view
+                    // Hide load more button
                     const btn = section.querySelector('.load-more-btn');
                     if (btn) btn.style.display = 'none';
                     
-                    // Reset to initial visible count
-                    resetSectionVisibility(section);
+                    // Enforce "All" view limits strictly
+                    const limit = allViewLimits[key];
+                    applyVisibilityLimit(section, limit);
                 }
             });
         } else {
@@ -1108,21 +1138,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (section) {
                     if (key === category) {
                         section.style.display = 'block';
-                        // Hide title in individual view (optional, but cleaner if redundant with tab)
-                        // Keeping it hidden as per typical design, or show if needed. 
-                        // User request: "Each category should be shown below each other... with their corresponding grid layout" for ALL view.
-                        // For individual view, usually we just show the grid.
+                        
+                        // Hide title
                         const title = section.querySelector('.cases-section-title');
                         if (title) title.style.display = 'none';
                         
-                        // Show load more button if needed
+                        // Restore visibility based on tracked count for this category
+                        // This ensures if user clicked "Load More", it persists (or we can reset if preferred).
+                        // The user complaint was about "All" view being wrong. 
+                        // To be safe and fix the "leak", we can just re-apply the current tracked count.
+                        const currentCount = categoryVisibleCounts[key];
+                        applyVisibilityLimit(section, currentCount);
+
+                        // Update Load More button visibility
                         const btn = loadMoreBtns[key];
-                        if (btn && !btn.classList.contains('hidden')) {
-                            btn.style.display = 'block';
+                        if (btn) {
+                            const totalCards = section.querySelectorAll('.case-card, .legal-info-card, .news-card').length;
+                            if (currentCount < totalCards) {
+                                btn.classList.remove('hidden');
+                                btn.style.display = 'block';
+                            } else {
+                                btn.classList.add('hidden');
+                                btn.style.display = 'none';
+                            }
                         }
-                        
-                        // Reset visibility (or keep current state? Resetting is safer for consistency)
-                        resetSectionVisibility(section);
                     } else {
                         section.style.display = 'none';
                     }
@@ -1131,29 +1170,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to reset section visibility to initial count
-    function resetSectionVisibility(section) {
-        const category = section.querySelector('.cases-section-title').dataset.category;
+    // Helper to apply visibility limit to a section
+    function applyVisibilityLimit(section, limit) {
         const cards = section.querySelectorAll('.case-card, .legal-info-card, .news-card');
-        const limit = (category === 'legal-info') ? 3 : 4;
         
+        // First, ensure all are hidden to reset state
+        cards.forEach(card => {
+            card.classList.add('hidden');
+        });
+
+        // Then, unhide only those within the limit
         cards.forEach((card, index) => {
             if (index < limit) {
                 card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
             }
         });
-        
-        // Update load more button visibility state (class only, display handled by updateView)
-        const btn = section.querySelector('.load-more-btn');
-        if (btn) {
-            if (cards.length > limit) {
-                btn.classList.remove('hidden');
-            } else {
-                btn.classList.add('hidden');
-            }
-        }
     }
 
     // Handle category button clicks
@@ -1165,24 +1196,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Handle Load More buttons
-    Object.values(loadMoreBtns).forEach(btn => {
+    Object.keys(loadMoreBtns).forEach(key => {
+        const btn = loadMoreBtns[key];
         if (btn) {
             btn.addEventListener('click', function() {
-                const targetCategory = this.dataset.target;
-                const section = sections[targetCategory];
-                const hiddenCards = section.querySelectorAll('.hidden');
-                const loadCount = (targetCategory === 'legal-info') ? 3 : 4;
+                const section = sections[key];
+                const totalCards = section.querySelectorAll('.case-card, .legal-info-card, .news-card').length;
                 
-                let count = 0;
-                hiddenCards.forEach(card => {
-                    if (count < loadCount) {
-                        card.classList.remove('hidden');
-                        count++;
-                    }
-                });
+                // Increase visible count
+                // Load 4 more (or 3 for legal)
+                const increment = (key === 'legal-info') ? 3 : 4;
+                categoryVisibleCounts[key] += increment;
+                
+                // Apply new limit
+                applyVisibilityLimit(section, categoryVisibleCounts[key]);
 
-                // Check if more hidden cards exist
-                if (section.querySelectorAll('.hidden').length === 0) {
+                // Check if we reached the end
+                if (categoryVisibleCounts[key] >= totalCards) {
                     this.classList.add('hidden');
                     this.style.display = 'none';
                 }
