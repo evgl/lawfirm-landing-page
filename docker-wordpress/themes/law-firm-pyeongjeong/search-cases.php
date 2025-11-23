@@ -602,9 +602,10 @@ global $post;
             background: #ffffff;
             border: 1px solid #d0d0d0;
             border-radius: 8px;
-            padding: 24px;
+            padding: 0;
             width: 100%;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
 
         .news-card:hover {
@@ -622,10 +623,20 @@ global $post;
         }
 
         .news-left-section {
-            flex: 0 0 50%;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 0;
+        }
+
+        .news-header-meta {
+            padding: 16px 20px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            min-height: 50px;
         }
 
         .news-newspaper {
@@ -645,10 +656,12 @@ global $post;
 
         .news-body {
             display: flex;
-            gap: 24px;
+            flex-direction: column;
+            gap: 0;
             align-items: stretch;
             text-decoration: none;
             color: inherit;
+            height: 100%;
         }
 
         .news-image-wrapper {
@@ -672,10 +685,10 @@ global $post;
         }
 
         .news-content {
-            flex: 0 0 50%;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            flex: 1;
         }
 
         .news-title {
@@ -700,8 +713,8 @@ global $post;
         }
         
         .cases-list.press-coverage-active {
-            grid-template-columns: 1fr;
-            gap: 40px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
     </style>
 </head>
@@ -896,9 +909,9 @@ global $post;
                                 <article class="news-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage" data-post-index="<?php echo esc_attr($news_count); ?>">
                                     <a href="<?php the_permalink(); ?>" class="news-body">
                                         <div class="news-left-section">
-                                            <div class="news-header-meta" style="display: flex; gap: 10px; align-items: baseline; margin-bottom: 8px;">
+                                            <div class="news-header-meta">
                                                 <?php if ($newspaper_name) : ?>
-                                                    <div class="news-newspaper"><?php echo esc_html($newspaper_name); ?></div>
+                                                    <div class="news-newspaper" style="margin: 0;"><?php echo esc_html($newspaper_name); ?></div>
                                                 <?php endif; ?>
                                                 <?php if ($date) : ?>
                                                     <div class="news-date"><?php echo esc_html(date_i18n('Y-m-d', strtotime($date))); ?></div>
