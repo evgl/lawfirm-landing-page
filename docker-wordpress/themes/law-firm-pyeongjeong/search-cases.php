@@ -195,6 +195,14 @@ global $post;
             display: block;
         }
 
+        .case-section {
+            margin-bottom: 60px;
+        }
+
+        .case-section:last-child {
+            margin-bottom: 0;
+        }
+
         /* Cases Grid Styles */
         .cases-list {
             display: grid;
@@ -370,14 +378,18 @@ global $post;
         }
 
         /* Grid layout adjustments based on active filter */
-        .cases-list.legal-info-active {
+        /* Grid layout adjustments */
+        .success-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .legal-grid {
             grid-template-columns: repeat(3, 1fr);
         }
 
-        .cases-list.success-cases-active,
-        .cases-list.press-coverage-active,
-        .cases-list.all-active {
+        .news-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
         /* Show More Button */
@@ -457,13 +469,11 @@ global $post;
                 flex-shrink: 0;
             }
 
-            .cases-list {
+            .success-grid,
+            .legal-grid,
+            .news-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
-            }
-
-            .cases-list.legal-info-active {
-                grid-template-columns: repeat(2, 1fr);
             }
 
             .case-card-header {
@@ -530,17 +540,11 @@ global $post;
                 font-size: 12px;
             }
 
-            .cases-list {
+            .success-grid,
+            .legal-grid,
+            .news-grid {
                 grid-template-columns: 1fr;
                 gap: 12px;
-            }
-
-            .cases-list.legal-info-active {
-                grid-template-columns: 1fr;
-            }
-            
-            .cases-list.press-coverage-active {
-                grid-template-columns: 1fr;
             }
 
             .case-card-content {
@@ -712,10 +716,7 @@ global $post;
             overflow: hidden;
         }
         
-        .cases-list.press-coverage-active {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
+
     </style>
 </head>
 
@@ -822,29 +823,23 @@ global $post;
 
             <!-- Successful Cases Display -->
             <div class="successful-cases-container">
-                <h2 class="cases-section-title active" id="cases-section-title">성공사례</h2>
-
-                <?php
-                // Query multiple post types
-                $args = array(
-                    'post_type' => array('successful_case', 'legal_information', 'news_board'),
-                    'posts_per_page' => -1,
-                    'orderby' => 'date',
-                    'order' => 'DESC'
-                );
-                $cases = new WP_Query($args);
-
-                if ($cases->have_posts()) :
-                    $success_count = 0;
-                    $legal_info_count = 0;
-                    $news_count = 0;
-                    ?>
-                    <div class="cases-list" id="cases-list">
+                
+                <!-- Section: Successful Cases -->
+                <section id="section-success-cases" class="case-section">
+                    <h2 class="cases-section-title active" data-category="success-cases">성공사례</h2>
+                    <div class="cases-list success-grid" id="list-success-cases">
                         <?php
-                        while ($cases->have_posts()) : $cases->the_post();
-                            $post_type = get_post_type();
+                        $args_success = array(
+                            'post_type' => 'successful_case',
+                            'posts_per_page' => -1,
+                            'orderby' => 'date',
+                            'order' => 'DESC'
+                        );
+                        $query_success = new WP_Query($args_success);
+                        $success_count = 0;
 
-                            if ($post_type === 'successful_case') {
+                        if ($query_success->have_posts()) :
+                            while ($query_success->have_posts()) : $query_success->the_post();
                                 $success_count++;
                                 $hidden_class = ($success_count > 4) ? 'hidden' : '';
                                 $legal_case = get_post_meta(get_the_ID(), '_successful_case_legal_case', true);
@@ -852,7 +847,7 @@ global $post;
                                 $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
                                 $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
                                 ?>
-                                <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="success-cases" data-post-index="<?php echo esc_attr($success_count); ?>">
+                                <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="success-cases">
                                     <div class="case-card-header">
                                         <span class="case-card-badge"><?php echo esc_html($legal_case ? $legal_case : 'Legal case'); ?></span>
                                     </div>
@@ -871,12 +866,39 @@ global $post;
                                     </div>
                                 </div>
                                 <?php
-                            } elseif ($post_type === 'legal_information') {
-                                $legal_info_count++;
-                                $hidden_class = ($legal_info_count > 3) ? 'hidden' : '';
+                            endwhile;
+                            wp_reset_postdata();
+                        else :
+                            echo '<p class="no-cases" data-category="success-cases">' . esc_html__('No successful cases found.', 'law-firm-pyeongjeong') . '</p>';
+                        endif;
+                        ?>
+                    </div>
+                    <div class="load-more-wrapper">
+                        <button class="load-more-btn <?php echo ($success_count > 4) ? '' : 'hidden'; ?>" id="btn-load-more-success" data-target="success-cases">더보기 +</button>
+                    </div>
+                </section>
+
+                <!-- Section: Legal Information -->
+                <section id="section-legal-info" class="case-section">
+                    <h2 class="cases-section-title active" data-category="legal-info">법률정보</h2>
+                    <div class="cases-list legal-grid" id="list-legal-info">
+                        <?php
+                        $args_legal = array(
+                            'post_type' => 'legal_information',
+                            'posts_per_page' => -1,
+                            'orderby' => 'date',
+                            'order' => 'DESC'
+                        );
+                        $query_legal = new WP_Query($args_legal);
+                        $legal_count = 0;
+
+                        if ($query_legal->have_posts()) :
+                            while ($query_legal->have_posts()) : $query_legal->the_post();
+                                $legal_count++;
+                                $hidden_class = ($legal_count > 3) ? 'hidden' : '';
                                 $subtitle = get_post_meta(get_the_ID(), '_legal_information_subtitle', true);
                                 ?>
-                                <a href="<?php the_permalink(); ?>" class="legal-info-card <?php echo esc_attr($hidden_class); ?>" data-category="legal-info" data-post-index="<?php echo esc_attr($legal_info_count); ?>" style="text-decoration: none; color: inherit;">
+                                <a href="<?php the_permalink(); ?>" class="legal-info-card <?php echo esc_attr($hidden_class); ?>" data-category="legal-info" style="text-decoration: none; color: inherit;">
                                     <?php
                                     $content_image = law_firm_get_first_content_image();
                                     if (has_post_thumbnail()) :
@@ -899,14 +921,40 @@ global $post;
                                     </div>
                                 </a>
                                 <?php
-                            } elseif ($post_type === 'news_board') {
+                            endwhile;
+                            wp_reset_postdata();
+                        else :
+                            echo '<p class="no-cases" data-category="legal-info">' . esc_html__('No legal information found.', 'law-firm-pyeongjeong') . '</p>';
+                        endif;
+                        ?>
+                    </div>
+                    <div class="load-more-wrapper">
+                        <button class="load-more-btn <?php echo ($legal_count > 3) ? '' : 'hidden'; ?>" id="btn-load-more-legal" data-target="legal-info">더보기 +</button>
+                    </div>
+                </section>
+
+                <!-- Section: News Board (Press Coverage) -->
+                <section id="section-press-coverage" class="case-section">
+                    <h2 class="cases-section-title active" data-category="press-coverage">언론보도</h2>
+                    <div class="cases-list news-grid" id="list-press-coverage">
+                        <?php
+                        $args_news = array(
+                            'post_type' => 'news_board',
+                            'posts_per_page' => -1,
+                            'orderby' => 'date',
+                            'order' => 'DESC'
+                        );
+                        $query_news = new WP_Query($args_news);
+                        $news_count = 0;
+
+                        if ($query_news->have_posts()) :
+                            while ($query_news->have_posts()) : $query_news->the_post();
                                 $news_count++;
                                 $hidden_class = ($news_count > 4) ? 'hidden' : '';
-                                $legal_case = get_post_meta(get_the_ID(), '_news_board_category', true);
                                 $newspaper_name = get_post_meta(get_the_ID(), '_news_board_newspaper_name', true);
                                 $date = get_post_meta(get_the_ID(), '_news_board_date', true);
                                 ?>
-                                <article class="news-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage" data-post-index="<?php echo esc_attr($news_count); ?>">
+                                <article class="news-card <?php echo esc_attr($hidden_class); ?>" data-category="press-coverage">
                                     <a href="<?php the_permalink(); ?>" class="news-body">
                                         <div class="news-left-section">
                                             <div class="news-header-meta">
@@ -956,23 +1004,17 @@ global $post;
                                     </a>
                                 </article>
                                 <?php
-                            }
-                        endwhile;
-                        wp_reset_postdata();
+                            endwhile;
+                            wp_reset_postdata();
+                        else :
+                            echo '<p class="no-cases" data-category="press-coverage">' . esc_html__('No press coverage found.', 'law-firm-pyeongjeong') . '</p>';
+                        endif;
                         ?>
                     </div>
-
-                    <?php if ($success_count > 4 || $legal_info_count > 3 || $news_count > 4) : ?>
                     <div class="load-more-wrapper">
-                        <button class="load-more-btn" id="load-more-cases-btn">더보기 +</button>
+                        <button class="load-more-btn <?php echo ($news_count > 4) ? '' : 'hidden'; ?>" id="btn-load-more-news" data-target="press-coverage">더보기 +</button>
                     </div>
-                    <?php endif; ?>
-
-                    <?php
-                else :
-                    echo '<p class="no-cases">' . esc_html__('No cases found.', 'law-firm-pyeongjeong') . '</p>';
-                endif;
-                ?>
+                </section>
             </div>
         </div>
     </section>
@@ -1014,179 +1056,142 @@ global $post;
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const casesList = document.getElementById('cases-list');
-    const loadMoreBtn = document.getElementById('load-more-cases-btn');
     const categoryBtns = document.querySelectorAll('.category-btn');
-    const allCards = document.querySelectorAll('#cases-list [data-category]');
-
+    const sections = {
+        'success-cases': document.getElementById('section-success-cases'),
+        'legal-info': document.getElementById('section-legal-info'),
+        'press-coverage': document.getElementById('section-press-coverage')
+    };
+    const loadMoreBtns = {
+        'success-cases': document.getElementById('btn-load-more-success'),
+        'legal-info': document.getElementById('btn-load-more-legal'),
+        'press-coverage': document.getElementById('btn-load-more-news')
+    };
+    
     // Track active category
     let activeCategory = 'all';
 
-    // Define how many cards to show initially per category
-    const initialVisibleCount = {
-        'success-cases': 4,
-        'legal-info': 3,
-        'press-coverage': 4,
-        'all': -1 // Show all initially when "all" is selected
-    };
-
-    // Function to filter and display cards based on category
-    function filterCardsByCategory(category) {
-        let successCount = 0;
-        let legalInfoCount = 0;
-        let newsCount = 0;
-
-        allCards.forEach(card => {
-            const cardCategory = card.dataset.category;
-
-            if (category === 'all') {
-                // Show first N cards of each category type
-                if (cardCategory === 'success-cases') {
-                    successCount++;
-                    if (successCount <= 4) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                } else if (cardCategory === 'legal-info') {
-                    legalInfoCount++;
-                    if (legalInfoCount <= 3) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                } else if (cardCategory === 'press-coverage') {
-                    newsCount++;
-                    if (newsCount <= 4) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                } else {
-                    card.classList.add('hidden');
-                }
+    // Function to update view based on category
+    function updateView(category) {
+        // Update button states
+        categoryBtns.forEach(btn => {
+            if (btn.dataset.category === category) {
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
             } else {
-                // Show only cards matching the selected category
-                if (cardCategory === category) {
-                    // For each category type, show first N cards only
-                    if (cardCategory === 'legal-info') {
-                        legalInfoCount++;
-                        if (legalInfoCount <= 3) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    } else if (cardCategory === 'success-cases') {
-                        successCount++;
-                        if (successCount <= 4) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    } else if (cardCategory === 'press-coverage') {
-                        newsCount++;
-                        if (newsCount <= 4) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    }
-                } else {
-                    // Hide cards that don't match the selected category
-                    card.classList.add('hidden');
-                }
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
             }
         });
+
+        if (category === 'all') {
+            // Show all sections
+            Object.values(sections).forEach(section => {
+                if (section) {
+                    section.style.display = 'block';
+                    // Show title in "All" view
+                    const title = section.querySelector('.cases-section-title');
+                    if (title) title.style.display = 'block';
+                    
+                    // Hide load more button in "All" view
+                    const btn = section.querySelector('.load-more-btn');
+                    if (btn) btn.style.display = 'none';
+                    
+                    // Reset to initial visible count
+                    resetSectionVisibility(section);
+                }
+            });
+        } else {
+            // Show only selected section
+            Object.keys(sections).forEach(key => {
+                const section = sections[key];
+                if (section) {
+                    if (key === category) {
+                        section.style.display = 'block';
+                        // Hide title in individual view (optional, but cleaner if redundant with tab)
+                        // Keeping it hidden as per typical design, or show if needed. 
+                        // User request: "Each category should be shown below each other... with their corresponding grid layout" for ALL view.
+                        // For individual view, usually we just show the grid.
+                        const title = section.querySelector('.cases-section-title');
+                        if (title) title.style.display = 'none';
+                        
+                        // Show load more button if needed
+                        const btn = loadMoreBtns[key];
+                        if (btn && !btn.classList.contains('hidden')) {
+                            btn.style.display = 'block';
+                        }
+                        
+                        // Reset visibility (or keep current state? Resetting is safer for consistency)
+                        resetSectionVisibility(section);
+                    } else {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        }
+    }
+
+    // Function to reset section visibility to initial count
+    function resetSectionVisibility(section) {
+        const category = section.querySelector('.cases-section-title').dataset.category;
+        const cards = section.querySelectorAll('.case-card, .legal-info-card, .news-card');
+        const limit = (category === 'legal-info') ? 3 : 4;
+        
+        cards.forEach((card, index) => {
+            if (index < limit) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+        
+        // Update load more button visibility state (class only, display handled by updateView)
+        const btn = section.querySelector('.load-more-btn');
+        if (btn) {
+            if (cards.length > limit) {
+                btn.classList.remove('hidden');
+            } else {
+                btn.classList.add('hidden');
+            }
+        }
     }
 
     // Handle category button clicks
     categoryBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             activeCategory = this.dataset.category;
-
-            // Update grid layout based on category
-            if (casesList) {
-                casesList.classList.remove('legal-info-active', 'success-cases-active', 'press-coverage-active', 'all-active');
-                if (activeCategory === 'legal-info') {
-                    casesList.classList.add('legal-info-active');
-                } else if (activeCategory === 'success-cases') {
-                    casesList.classList.add('success-cases-active');
-                } else if (activeCategory === 'press-coverage') {
-                    casesList.classList.add('press-coverage-active');
-                } else if (activeCategory === 'all') {
-                    casesList.classList.add('all-active');
-                }
-            }
-
-            // Filter cards based on category
-            filterCardsByCategory(activeCategory);
-
-            // Reset Load More button visibility
-            updateLoadMoreButton();
+            updateView(activeCategory);
         });
     });
 
-    // Handle Load More button
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            let cardsToLoad = 4; // Default for success-cases and press-coverage
-
-            if (activeCategory === 'legal-info') {
-                cardsToLoad = 3;
-            }
-
-            const hiddenCards = document.querySelectorAll('#cases-list .hidden');
-            let count = 0;
-
-            hiddenCards.forEach(card => {
-                // Check if card matches active category
-                const cardCategory = card.dataset.category;
-
-                if (activeCategory === 'all') {
-                    // Show all hidden cards
-                    if (count < cardsToLoad) {
+    // Handle Load More buttons
+    Object.values(loadMoreBtns).forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', function() {
+                const targetCategory = this.dataset.target;
+                const section = sections[targetCategory];
+                const hiddenCards = section.querySelectorAll('.hidden');
+                const loadCount = (targetCategory === 'legal-info') ? 3 : 4;
+                
+                let count = 0;
+                hiddenCards.forEach(card => {
+                    if (count < loadCount) {
                         card.classList.remove('hidden');
                         count++;
                     }
-                } else {
-                    // Show only cards matching the active category
-                    if (cardCategory === activeCategory && count < cardsToLoad) {
-                        card.classList.remove('hidden');
-                        count++;
-                    }
+                });
+
+                // Check if more hidden cards exist
+                if (section.querySelectorAll('.hidden').length === 0) {
+                    this.classList.add('hidden');
+                    this.style.display = 'none';
                 }
             });
-
-            updateLoadMoreButton();
-        });
-    }
-
-    // Update Load More button visibility
-    function updateLoadMoreButton() {
-        if (!loadMoreBtn) return;
-
-        const visibleCards = document.querySelectorAll('#cases-list [data-category]:not(.hidden)');
-        const hiddenCards = document.querySelectorAll('#cases-list .hidden');
-        let hasHiddenCardsInCategory = false;
-
-        hiddenCards.forEach(card => {
-            if (activeCategory === 'all' || card.dataset.category === activeCategory) {
-                hasHiddenCardsInCategory = true;
-            }
-        });
-
-        if (hasHiddenCardsInCategory) {
-            loadMoreBtn.classList.remove('hidden');
-        } else {
-            loadMoreBtn.classList.add('hidden');
         }
-    }
+    });
 
-    // Set initial grid layout and filter
-    if (casesList) {
-        casesList.classList.add('all-active');
-        filterCardsByCategory('all');
-    }
+    // Initialize view
+    updateView('all');
 });
 </script>
 
