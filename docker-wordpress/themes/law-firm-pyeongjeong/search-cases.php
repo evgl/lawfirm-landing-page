@@ -847,7 +847,7 @@ global $post;
                                 $subtitle = get_post_meta(get_the_ID(), '_successful_case_subtitle', true);
                                 $date = get_post_meta(get_the_ID(), '_successful_case_date', true);
                                 ?>
-                                <div class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="success-cases">
+                                <a href="<?php the_permalink(); ?>" class="case-card <?php echo esc_attr($hidden_class); ?>" data-category="success-cases" style="text-decoration: none; color: inherit;">
                                     <div class="case-card-header">
                                         <span class="case-card-badge"><?php echo esc_html($legal_case ? $legal_case : 'Legal case'); ?></span>
                                     </div>
@@ -864,7 +864,7 @@ global $post;
                                             <div class="case-card-date"><?php echo esc_html(date_i18n('Y.m.d', strtotime($date))); ?></div>
                                         <?php endif; ?>
                                     </div>
-                                </div>
+                                </a>
                                 <?php
                             endwhile;
                             wp_reset_postdata();

@@ -239,7 +239,7 @@ $description = get_post_meta($news_id, '_news_board_description', true);
                 </div>
             <?php endif; ?>
 
-            <?php if (has_content()) : ?>
+            <?php if (!empty(get_the_content())) : ?>
                 <h2 class="news-detail-section-title"><?php _e('Content', 'law-firm-pyeongjeong'); ?></h2>
                 <div class="news-detail-text">
                     <?php the_content(); ?>

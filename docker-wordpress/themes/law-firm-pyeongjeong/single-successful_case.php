@@ -223,7 +223,7 @@ $subtitle = get_post_meta($case_id, '_successful_case_subtitle', true);
                 <p class="case-detail-text"><?php echo wp_kses_post($decision); ?></p>
             <?php endif; ?>
 
-            <?php if (has_content()) : ?>
+            <?php if (!empty(get_the_content())) : ?>
                 <h2 class="case-detail-section-title"><?php _e('Case Description', 'law-firm-pyeongjeong'); ?></h2>
                 <div class="case-detail-text">
                     <?php the_content(); ?>

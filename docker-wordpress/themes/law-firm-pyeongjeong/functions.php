@@ -165,6 +165,9 @@ function law_firm_custom_post_types() {
         'has_archive' => false,
         'rewrite' => array('slug' => 'news-board')
     ));
+
+    // Flush rewrite rules to fix redirection issues
+    flush_rewrite_rules();
 }
 add_action('init', 'law_firm_custom_post_types');
 
