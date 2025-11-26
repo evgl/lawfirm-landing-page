@@ -159,9 +159,9 @@ $subtitle = get_post_meta($info_id, '_legal_information_subtitle', true);
 
 <section class="info-detail-section">
     <div class="info-detail-container">
-        <a href="<?php echo esc_url(home_url('/legal-information/')); ?>" class="back-link">
+        <a href="<?php echo esc_url(home_url('/cases/')); ?>" class="back-link">
             <i class="fas fa-arrow-left"></i>
-            <?php _e('법률정보로 돌아가기', 'law-firm-pyeongjeong'); ?>
+            <?php _e('성공사례로 돌아가기', 'law-firm-pyeongjeong'); ?>
         </a>
 
         <div class="info-detail-header">

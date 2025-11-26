@@ -179,8 +179,6 @@ function law_firm_add_custom_rewrite_rules() {
     add_rewrite_rule('^services/?$', 'index.php?custom_page=services', 'top');
     add_rewrite_rule('^cases/?$', 'index.php?custom_page=cases', 'top');
     add_rewrite_rule('^contact/?$', 'index.php?custom_page=contact', 'top');
-    add_rewrite_rule('^legal-information/?$', 'index.php?custom_page=legal-information', 'top');
-    add_rewrite_rule('^legal-information/?$', 'index.php?custom_page=legal-information', 'top');
 }
 add_action('init', 'law_firm_add_custom_rewrite_rules');
 
@@ -213,10 +211,6 @@ function law_firm_custom_template_redirect() {
         $template_file = 'search-cases.php';
     } elseif (preg_match('#/contact/?$#', $path)) {
         $template_file = 'contact.php';
-    } elseif (preg_match('#/legal-information/?$#', $path)) {
-        $template_file = 'search-legal-information.php';
-    } elseif (preg_match('#/legal-information/?$#', $path)) {
-        $template_file = 'search-legal-information.php';
     }
 
     // Also check the original query var method as fallback
@@ -234,12 +228,6 @@ function law_firm_custom_template_redirect() {
                 break;
             case 'contact':
                 $template_file = 'contact.php';
-                break;
-            case 'legal-information':
-                $template_file = 'search-legal-information.php';
-                break;
-            case 'legal-information':
-                $template_file = 'search-legal-information.php';
                 break;
         }
     }
@@ -270,10 +258,6 @@ function law_firm_early_request_handler() {
             $template_file = 'search-cases.php';
         } elseif (preg_match('#/contact/?$#', $path)) {
             $template_file = 'contact.php';
-        } elseif (preg_match('#/legal-information/?$#', $path)) {
-            $template_file = 'search-legal-information.php';
-        } elseif (preg_match('#/legal-information/?$#', $path)) {
-            $template_file = 'search-legal-information.php';
         }
 
         if ($template_file && file_exists(get_template_directory() . '/' . $template_file)) {
