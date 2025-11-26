@@ -22,7 +22,7 @@ $description = get_post_meta($news_id, '_news_board_description', true);
     .news-detail-section {
         min-height: 100vh;
         padding: 100px 20px 80px;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background: linear-gradient(135deg, #1a2642 0%, #2B3D66 100%);
         color: #ffffff;
     }
 

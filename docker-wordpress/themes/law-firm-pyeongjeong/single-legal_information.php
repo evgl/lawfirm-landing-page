@@ -20,7 +20,7 @@ $subtitle = get_post_meta($info_id, '_legal_information_subtitle', true);
     .info-detail-section {
         min-height: 100vh;
         padding: 100px 20px 80px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1a2642 0%, #2B3D66 100%);
         color: #ffffff;
     }
 
