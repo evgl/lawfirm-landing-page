@@ -786,18 +786,34 @@ global $post;
 
             <!-- Search Container -->
             <div class="search-container">
-                <form class="search-bar-form" role="search">
+                <?php
+                // Get search query
+                $search_query = get_query_var('s') ? get_query_var('s') : (isset($_GET['s']) ? sanitize_text_field($_GET['s']) : '');
+                ?>
+
+                <form class="search-bar-form" role="search" method="get" action="/cases/">
                     <input
                         type="text"
+                        name="s"
                         class="search-input"
                         placeholder="<?php esc_attr_e('Search cases...', 'law-firm-pyeongjeong'); ?>"
                         aria-label="<?php esc_attr_e('Search cases', 'law-firm-pyeongjeong'); ?>"
+                        value="<?php echo esc_attr($search_query); ?>"
                     >
                     <button type="submit" class="search-button" aria-label="<?php esc_attr_e('Search', 'law-firm-pyeongjeong'); ?>">
                         <?php esc_html_e('검색', 'law-firm-pyeongjeong'); ?>
                     </button>
                 </form>
             </div>
+
+            <!-- Search Result Message -->
+            <?php if ($search_query) : ?>
+                <div class="search-result-message">
+                    <p>
+                        <?php printf(esc_html__('Search results for: "%s"', 'law-firm-pyeongjeong'), '<strong>' . esc_html($search_query) . '</strong>'); ?>
+                    </p>
+                </div>
+            <?php endif; ?>
 
             <!-- Category Filter Buttons -->
             <div class="category-filter-wrapper">
@@ -835,6 +851,11 @@ global $post;
                             'orderby' => 'date',
                             'order' => 'DESC'
                         );
+                        
+                        if ($search_query) {
+                            $args_success['s'] = $search_query;
+                        }
+
                         $query_success = new WP_Query($args_success);
                         $success_count = 0;
 
@@ -889,6 +910,11 @@ global $post;
                             'orderby' => 'date',
                             'order' => 'DESC'
                         );
+
+                        if ($search_query) {
+                            $args_legal['s'] = $search_query;
+                        }
+
                         $query_legal = new WP_Query($args_legal);
                         $legal_count = 0;
 
@@ -944,6 +970,11 @@ global $post;
                             'orderby' => 'date',
                             'order' => 'DESC'
                         );
+
+                        if ($search_query) {
+                            $args_news['s'] = $search_query;
+                        }
+
                         $query_news = new WP_Query($args_news);
                         $news_count = 0;
 
