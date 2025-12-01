@@ -58,7 +58,7 @@
         $(window).on('resize', debounce(handleResize, 250));
 
         // Form events
-        $('form').on('submit', handleFormSubmission);
+        $('form:not(.search-bar-form)').on('submit', handleFormSubmission);
         $('.consultation-form input, .consultation-form select, .consultation-form textarea').on('blur', validateField);
 
         // Modal events
