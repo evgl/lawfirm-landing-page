@@ -31,7 +31,7 @@ get_header(); ?>
         </div>
 
         <!-- Professional Search Section -->
-        <div class="hero-search-section">
+        <!-- <div class="hero-search-section">
             <div class="search-container">
                 <form class="hero-search-form" method="get" action="<?php echo esc_url(home_url('/')); ?>" role="search">
                     <div class="search-input-wrapper">
@@ -47,7 +47,7 @@ get_header(); ?>
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <!-- Scroll Indicator -->
         <div class="scroll-indicator">
