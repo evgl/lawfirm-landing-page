@@ -890,7 +890,7 @@ global $post;
                             endwhile;
                             wp_reset_postdata();
                         else :
-                            echo '<p class="no-cases" data-category="success-cases">' . esc_html__('No successful cases found.', 'law-firm-pyeongjeong') . '</p>';
+                            echo '<p class="no-cases" data-category="success-cases">' . esc_html__('검색된 성공사례가 없습니다.', 'law-firm-pyeongjeong') . '</p>';
                         endif;
                         ?>
                     </div>
@@ -950,7 +950,7 @@ global $post;
                             endwhile;
                             wp_reset_postdata();
                         else :
-                            echo '<p class="no-cases" data-category="legal-info">' . esc_html__('No legal information found.', 'law-firm-pyeongjeong') . '</p>';
+                            echo '<p class="no-cases" data-category="legal-info">' . esc_html__('검색된 법률정보가 없습니다.', 'law-firm-pyeongjeong') . '</p>';
                         endif;
                         ?>
                     </div>
@@ -1038,7 +1038,7 @@ global $post;
                             endwhile;
                             wp_reset_postdata();
                         else :
-                            echo '<p class="no-cases" data-category="press-coverage">' . esc_html__('No press coverage found.', 'law-firm-pyeongjeong') . '</p>';
+                            echo '<p class="no-cases" data-category="press-coverage">' . esc_html__('검색된 언론보도가 없습니다.', 'law-firm-pyeongjeong') . '</p>';
                         endif;
                         ?>
                     </div>
