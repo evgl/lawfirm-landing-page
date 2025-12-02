@@ -830,7 +830,7 @@ global $post;
                     <?php esc_html_e('법률정보', 'law-firm-pyeongjeong'); ?>
                 </button>
                 <button class="category-btn" data-category="press-coverage" aria-pressed="false">
-                    <?php esc_html_e('언론보도', 'law-firm-pyeongjeong'); ?>
+                    <?php esc_html_e('언론보드', 'law-firm-pyeongjeong'); ?>
                 </button>
                 <button class="category-btn" data-category="practice-areas" aria-pressed="false">
                     <?php esc_html_e('업무분야', 'law-firm-pyeongjeong'); ?>
@@ -961,7 +961,7 @@ global $post;
 
                 <!-- Section: News Board (Press Coverage) -->
                 <section id="section-press-coverage" class="case-section">
-                    <h2 class="cases-section-title active" data-category="press-coverage">언론보도</h2>
+                    <h2 class="cases-section-title active" data-category="press-coverage">언론보드</h2>
                     <div class="cases-list news-grid" id="list-press-coverage">
                         <?php
                         $args_news = array(
@@ -1038,7 +1038,7 @@ global $post;
                             endwhile;
                             wp_reset_postdata();
                         else :
-                            echo '<p class="no-cases" data-category="press-coverage">' . esc_html__('검색된 언론보도가 없습니다.', 'law-firm-pyeongjeong') . '</p>';
+                            echo '<p class="no-cases" data-category="press-coverage">' . esc_html__('검색된 언론보드가 없습니다.', 'law-firm-pyeongjeong') . '</p>';
                         endif;
                         ?>
                     </div>

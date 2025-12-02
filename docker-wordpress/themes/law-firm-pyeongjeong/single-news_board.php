@@ -205,7 +205,7 @@ $description = get_post_meta($news_id, '_news_board_description', true);
     <div class="news-detail-container">
         <a href="<?php echo esc_url(home_url('/cases/')); ?>" class="back-link">
             <i class="fas fa-arrow-left"></i>
-            <?php _e('언론보도로 돌아가기', 'law-firm-pyeongjeong'); ?>
+            <?php _e('언론보드로 돌아가기', 'law-firm-pyeongjeong'); ?>
         </a>
 
         <div class="news-detail-header">
