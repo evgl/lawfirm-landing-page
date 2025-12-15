@@ -486,9 +486,10 @@ global $post;
             }
 
             .case-card-avatar {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
+                width: 50px;
+                height: 50px;
+                min-width: 50px;
+                font-size: 12px;
             }
 
             .legal-info-card-image {
@@ -560,7 +561,7 @@ global $post;
             }
 
             .legal-info-card-image {
-                height: 120px;
+                height: 100px;
             }
 
             .legal-info-card-content {
@@ -568,7 +569,12 @@ global $post;
             }
 
             .legal-info-card-title {
-                font-size: 14px;
+                font-size: 13px;
+                margin-bottom: 6px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
             }
 
             .cases-section-title {
