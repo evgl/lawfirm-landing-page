@@ -561,7 +561,7 @@ global $post;
             }
 
             .legal-info-card-image {
-                height: 100px;
+                height: 140px !important;
             }
 
             .legal-info-card-content {
