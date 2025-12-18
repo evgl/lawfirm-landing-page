@@ -561,7 +561,8 @@ global $post;
             }
 
             .legal-info-card-image {
-                height: 140px !important;
+                height: auto !important;
+                aspect-ratio: 16 / 9;
             }
 
             .legal-info-card-content {
