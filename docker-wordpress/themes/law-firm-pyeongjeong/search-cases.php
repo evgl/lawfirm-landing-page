@@ -457,12 +457,19 @@ global $post;
 
             .category-filter-wrapper {
                 overflow-x: auto;
-                justify-content: flex-start;
+                justify-content: flex-start; /* Important: keep flex-start for overflow behavior */
                 gap: 0;
                 -webkit-overflow-scrolling: touch;
                 border-bottom: 1px solid #e0e0e0;
                 flex-wrap: nowrap;
-                padding-bottom: 5px; /* Add some space for scrollbar if visible, or touch area */
+                padding-bottom: 5px;
+            }
+
+            /* Safe centering: Centers if fits, left-aligns if overflows */
+            .category-filter-wrapper::after,
+            .category-filter-wrapper::before {
+                content: '';
+                margin: auto;
             }
 
             .category-btn {
