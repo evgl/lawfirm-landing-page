@@ -4102,6 +4102,10 @@ body.contact-page-no-scroll .contact-section {
             padding: 40px 16px;
         }
 
+        .contact-section {
+            padding-top: 120px;
+        }
+
         .search-section-wrapper {
             gap: 24px;
         }
