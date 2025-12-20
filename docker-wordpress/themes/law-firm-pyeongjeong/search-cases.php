@@ -461,6 +461,8 @@ global $post;
                 gap: 0;
                 -webkit-overflow-scrolling: touch;
                 border-bottom: 1px solid #e0e0e0;
+                flex-wrap: nowrap;
+                padding-bottom: 5px; /* Add some space for scrollbar if visible, or touch area */
             }
 
             .category-btn {
