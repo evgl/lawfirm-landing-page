@@ -432,7 +432,7 @@ global $post;
 
         @media (max-width: 768px) {
             .search-section {
-                padding: 40px 16px;
+                padding: 120px 16px 40px;
             }
 
             .search-section-wrapper {
@@ -458,7 +458,7 @@ global $post;
             .category-filter-wrapper {
                 overflow-x: auto;
                 justify-content: flex-start; /* Important: keep flex-start for overflow behavior */
-                gap: 0;
+                gap: 10px;
                 -webkit-overflow-scrolling: touch;
                 border-bottom: 1px solid #e0e0e0;
                 flex-wrap: nowrap;
@@ -524,7 +524,7 @@ global $post;
 
         @media (max-width: 480px) {
             .search-section {
-                padding: 30px 12px;
+                padding: 120px 12px 30px;
             }
 
             .search-section-wrapper {
