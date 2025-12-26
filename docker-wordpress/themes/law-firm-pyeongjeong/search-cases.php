@@ -462,7 +462,7 @@ global $post;
                 -webkit-overflow-scrolling: touch;
                 border-bottom: 1px solid #e0e0e0;
                 flex-wrap: nowrap;
-                padding-bottom: 5px;
+                padding: 10px 0 15px;
             }
 
             /* Safe centering: Centers if fits, left-aligns if overflows */
@@ -474,6 +474,7 @@ global $post;
 
             .category-btn {
                 padding: 10px 16px;
+                margin-top: 2px;
                 font-size: 13px;
                 flex-shrink: 0;
             }
