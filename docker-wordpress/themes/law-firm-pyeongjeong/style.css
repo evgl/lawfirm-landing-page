@@ -2033,6 +2033,11 @@ body.contact-page-no-scroll .contact-section {
     text-align: left;
 }
 
+.contact-info-section {
+    width: 100%;
+    text-align: left;
+}
+
 .contact-info-section>h3 {
     color: var(--white);
     font-size: 24px;
