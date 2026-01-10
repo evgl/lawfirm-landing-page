@@ -18,6 +18,7 @@ services:
       - ./themes:/var/www/html/wp-content/themes
       - ./plugins:/var/www/html/wp-content/plugins
       - ./uploads:/var/www/html/wp-content/uploads
+      - ./apache-wordpress.conf:/etc/apache2/conf-available/wordpress.conf:ro
     depends_on:
       - db
     networks:
