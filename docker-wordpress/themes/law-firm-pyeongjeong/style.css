@@ -1696,7 +1696,7 @@ body.contact-page-no-scroll .contact-section {
 
 /* Right Layout: Content left, photo right */
 .lawyer-profile-right {
-    grid-template-columns: 1fr 416px;
+    grid-template-columns: 416px 1fr;
 }
 
 .lawyer-profile-right .profile-photo {
