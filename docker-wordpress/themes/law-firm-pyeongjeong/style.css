@@ -1723,10 +1723,16 @@ body.contact-page-no-scroll .contact-section {
     margin-bottom: 80px;
 }
 
+/* Second profile headline uses darker navy */
+.lawyer-profile-right .profile-headline h2 {
+    color: #1e2944;
+}
+
 .profile-name h3 {
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 60px;
+    color: #000000;
 }
 
 .profile-name .title {
@@ -1748,11 +1754,13 @@ body.contact-page-no-scroll .contact-section {
 .detail-label {
     font-size: 15px;
     font-weight: normal;
+    color: #000000;
 }
 
 .detail-content {
     font-size: 15px;
     line-height: 22px;
+    color: #000000;
 }
 
 .detail-content p {
