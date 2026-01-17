@@ -1666,6 +1666,216 @@ body.contact-page-no-scroll .contact-section {
     }
 }
 
+/* ================================
+   About Profiles Section - Lawyer Cards
+   ================================ */
+
+.about-profiles-section {
+    background-color: #edeeef;
+    padding: 80px 0 120px;
+}
+
+.lawyer-profile {
+    max-width: 1200px;
+    margin: 0 auto 200px;
+    display: grid;
+    grid-template-columns: 416px 1fr;
+    gap: 80px;
+    align-items: start;
+    padding: 0 30px;
+}
+
+.lawyer-profile:last-child {
+    margin-bottom: 0;
+}
+
+/* Left Layout: Photo left, content right */
+.lawyer-profile-left {
+    grid-template-columns: 416px 1fr;
+}
+
+/* Right Layout: Content left, photo right */
+.lawyer-profile-right {
+    grid-template-columns: 1fr 416px;
+}
+
+.lawyer-profile-right .profile-photo {
+    order: 2;
+}
+
+.lawyer-profile-right .profile-content {
+    order: 1;
+}
+
+/* Profile Photo */
+.profile-photo img {
+    width: 416px;
+    height: 520px;
+    object-fit: cover;
+}
+
+/* Profile Content */
+.profile-headline h2 {
+    font-family: 'KoPubWorldBatang Pro', 'KoPubWorldBatang', serif;
+    font-size: 32px;
+    line-height: 1.5;
+    color: #3d4f7b;
+    margin-bottom: 80px;
+}
+
+.profile-name h3 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.profile-name .title {
+    font-size: 15px;
+    font-weight: normal;
+    margin-left: 8px;
+}
+
+/* Profile Details Table */
+.detail-row {
+    display: grid;
+    grid-template-columns: 67px 1fr;
+    gap: 15px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.detail-label {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.detail-content {
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.detail-content p {
+    margin: 0 0 4px;
+}
+
+.detail-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .lawyer-profile {
+        grid-template-columns: 350px 1fr;
+        gap: 60px;
+    }
+
+    .lawyer-profile-right {
+        grid-template-columns: 1fr 350px;
+    }
+
+    .profile-photo img {
+        width: 350px;
+        height: 440px;
+    }
+
+    .profile-headline h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-profiles-section {
+        padding: 60px 0 100px;
+    }
+
+    .lawyer-profile,
+    .lawyer-profile-right {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-bottom: 120px;
+        padding: 0 20px;
+    }
+
+    .lawyer-profile-right .profile-photo {
+        order: 1;
+    }
+
+    .lawyer-profile-right .profile-content {
+        order: 2;
+    }
+
+    .profile-photo img {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .profile-headline h2 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .profile-name {
+        text-align: center;
+    }
+
+    .profile-name h3 {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .profile-details {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-profiles-section {
+        padding: 50px 15px 80px;
+    }
+
+    .lawyer-profile {
+        padding: 0;
+    }
+
+    .profile-headline h2 {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .profile-name h3 {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .profile-name .title {
+        font-size: 13px;
+        margin-left: 6px;
+    }
+
+    .detail-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+    }
+
+    .detail-label {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .detail-content {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
 .content-section {
     min-height: 100vh;
     padding: 100px 30px;

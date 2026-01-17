@@ -78,7 +78,70 @@
 <main id="main" class="site-main" role="main" style="background-color: white;">
 
 <!-- About Content Area with Background -->
-<section class="about-hero-section">
+<section class="about-profiles-section">
+    <!-- First Lawyer Profile: Lee Si-wan -->
+    <div class="lawyer-profile lawyer-profile-left">
+        <div class="profile-photo">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/lawyer-lee-siwan.png" alt="<?php echo esc_attr__('이시완 변호사 프로필 사진', 'law-firm-pyeongjeong'); ?>" />
+        </div>
+        <div class="profile-content">
+            <div class="profile-headline">
+                <h2><?php echo esc_html__('책임감을 바탕으로', 'law-firm-pyeongjeong'); ?><br><?php echo esc_html__('최선의 결과를 가져다 드립니다.', 'law-firm-pyeongjeong'); ?></h2>
+            </div>
+            <div class="profile-name">
+                <h3><?php echo esc_html__('이시완', 'law-firm-pyeongjeong'); ?> <span class="title"><?php echo esc_html__('변호사', 'law-firm-pyeongjeong'); ?></span></h3>
+            </div>
+            <div class="profile-details">
+                <div class="detail-row">
+                    <div class="detail-label"><?php echo esc_html__('학력', 'law-firm-pyeongjeong'); ?></div>
+                    <div class="detail-content">
+                        <p><?php echo esc_html__('서울대학교 인문대학 최우등 졸업', 'law-firm-pyeongjeong'); ?></p>
+                        <p><?php echo esc_html__('서울대학교 법학전문대학원 졸업', 'law-firm-pyeongjeong'); ?></p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label"><?php echo esc_html__('경력', 'law-firm-pyeongjeong'); ?></div>
+                    <div class="detail-content">
+                        <p><?php echo esc_html__('김앤장 법률사무소 인턴', 'law-firm-pyeongjeong'); ?></p>
+                        <p><?php echo esc_html__('법무법인(유한) 대륜 본사', 'law-firm-pyeongjeong'); ?></p>
+                        <p><?php echo esc_html__('現 법률사무소 평정', 'law-firm-pyeongjeong'); ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Lawyer Profile: Gong Seon-young -->
+    <div class="lawyer-profile lawyer-profile-right">
+        <div class="profile-content">
+            <div class="profile-headline">
+                <h2><?php echo esc_html__('진심으로 소통하고,', 'law-firm-pyeongjeong'); ?><br><?php echo esc_html__('끝까지 함께하는 법률 서비스', 'law-firm-pyeongjeong'); ?></h2>
+            </div>
+            <div class="profile-name">
+                <h3><?php echo esc_html__('공선영', 'law-firm-pyeongjeong'); ?> <span class="title"><?php echo esc_html__('변호사', 'law-firm-pyeongjeong'); ?></span></h3>
+            </div>
+            <div class="profile-details">
+                <div class="detail-row">
+                    <div class="detail-label"><?php echo esc_html__('학력', 'law-firm-pyeongjeong'); ?></div>
+                    <div class="detail-content">
+                        <p><?php echo esc_html__('고려대학교 졸업', 'law-firm-pyeongjeong'); ?></p>
+                        <p><?php echo esc_html__('동아대학교 법학전문대학원 졸업', 'law-firm-pyeongjeong'); ?></p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label"><?php echo esc_html__('경력', 'law-firm-pyeongjeong'); ?></div>
+                    <div class="detail-content">
+                        <p><?php echo esc_html__('부산지방법원 인턴', 'law-firm-pyeongjeong'); ?></p>
+                        <p><?php echo esc_html__('법률사무소 제언', 'law-firm-pyeongjeong'); ?></p>
+                        <p><?php echo esc_html__('現 법률사무소 평정', 'law-firm-pyeongjeong'); ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-photo">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/lawyer-gong-seonyoung.png" alt="<?php echo esc_attr__('공선영 변호사 프로필 사진', 'law-firm-pyeongjeong'); ?>" />
+        </div>
+    </div>
 </section>
 
 <!-- Bottom Contact Bar (Same as Main Page) -->
