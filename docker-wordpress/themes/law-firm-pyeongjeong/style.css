@@ -1672,7 +1672,7 @@ body.contact-page-no-scroll .contact-section {
 
 .about-profiles-section {
     background-color: #edeeef;
-    padding: 80px 0 120px;
+    padding: 150px 0 120px;
 }
 
 .lawyer-profile {
@@ -1794,7 +1794,7 @@ body.contact-page-no-scroll .contact-section {
 
 @media (max-width: 768px) {
     .about-profiles-section {
-        padding: 60px 0 100px;
+        padding: 130px 0 100px;
     }
 
     .lawyer-profile,
@@ -1844,7 +1844,7 @@ body.contact-page-no-scroll .contact-section {
 
 @media (max-width: 480px) {
     .about-profiles-section {
-        padding: 50px 15px 80px;
+        padding: 120px 15px 80px;
     }
 
     .lawyer-profile {
