@@ -90,6 +90,21 @@ body.services-page .services-text-image--bottom {
 }
 
 /* ==========================================================================
+   About Page Background
+   ========================================================================== */
+body.about-page {
+    background: #ffffff;
+    color: var(--primary-navy);
+}
+
+body.about-page .site-main {
+    background: transparent;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
    Header Styles
    ========================================================================== */
 .site-header {
@@ -1673,6 +1688,19 @@ body.contact-page-no-scroll .contact-section {
 .about-profiles-section {
     background-color: #edeeef;
     padding: 150px 0 120px;
+    flex: 1;
+}
+
+body.about-page::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color: #edeeef;
+    z-index: 999;
+    pointer-events: none;
 }
 
 .lawyer-profile {

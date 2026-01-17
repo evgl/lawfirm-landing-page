@@ -22,7 +22,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?> style="background-color: white;">
+<body <?php body_class('about-page'); ?>>
 <?php wp_body_open(); ?>
 
 <!-- Skip to main content for accessibility -->
@@ -75,7 +75,7 @@
 </header>
 
 <!-- Main Content Area -->
-<main id="main" class="site-main" role="main" style="background-color: white;">
+<main id="main" class="site-main" role="main">
 
 <!-- About Content Area with Background -->
 <section class="about-profiles-section">
