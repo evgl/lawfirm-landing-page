@@ -1748,19 +1748,46 @@ body.contact-page-no-scroll .contact-section {
     gap: 15px;
     margin-bottom: 24px;
     padding-bottom: 24px;
-    border-bottom: 2px solid #d9d9d9;
 }
 
 .detail-label {
     font-size: 15px;
     font-weight: normal;
     color: #000000;
+    position: relative;
+    padding-top: 13px;
+}
+
+.detail-label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 67px;
+    height: 2px;
+    background-image: url('assets/images/about/line-short.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .detail-content {
     font-size: 15px;
     line-height: 22px;
     color: #000000;
+    position: relative;
+    padding-top: 13px;
+}
+
+.detail-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 2px;
+    background-image: url('assets/images/about/line-long.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .detail-content p {
