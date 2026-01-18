@@ -1687,8 +1687,10 @@ body.contact-page-no-scroll .contact-section {
 
 .about-profiles-section {
     background-color: #edeeef;
-    padding: 150px 0 120px;
+    padding: 150px 20px 120px 220px;
     flex: 1;
+    margin: 0 auto;
+    width: 100%;
 }
 
 body.about-page::after {
@@ -1710,7 +1712,7 @@ body.about-page::after {
     grid-template-columns: 416px 1fr;
     gap: 80px;
     align-items: start;
-    padding: 0 30px;
+    padding: 0;
 }
 
 .lawyer-profile:last-child {
@@ -1849,7 +1851,7 @@ body.about-page::after {
 
 @media (max-width: 768px) {
     .about-profiles-section {
-        padding: 130px 0 100px;
+        padding: 130px 20px 100px 120px;
     }
 
     .lawyer-profile,
@@ -1857,7 +1859,7 @@ body.about-page::after {
         grid-template-columns: 1fr;
         gap: 40px;
         margin-bottom: 120px;
-        padding: 0 20px;
+        padding: 0;
     }
 
     .lawyer-profile-right .profile-photo {
@@ -1904,6 +1906,7 @@ body.about-page::after {
 
     .lawyer-profile {
         padding: 0;
+        margin: 0 auto 120px;
     }
 
     .profile-headline h2 {
