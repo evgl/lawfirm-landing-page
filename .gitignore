@@ -23,3 +23,4 @@ sitemap.xml.gz
 *.sql
 *.tar
 *.zip
+.agent/*
