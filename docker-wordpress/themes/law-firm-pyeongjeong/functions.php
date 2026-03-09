@@ -802,10 +802,9 @@ add_action('init', 'law_firm_optimize_queries');
  */
 function law_firm_seo_meta_tags() {
     if (is_front_page()) {
-        echo '<meta name="description" content="법률사무소 평정 (LEE & PARTNERS) - 민사, 형사, 가족법, 부동산법 전문. 15년 경력의 전문 변호사진이 최상의 법률 서비스를 제공합니다.">' . "\n";
+        echo '<meta name="description" content="당신의 승리를 위하여! 서울대학교 법학과 & 대형로펌 출신 변호사가 최선의 솔루션을 바탕으로 24시 · 연중무휴 · 끝까지 싸웁니다">' . "\n";
         echo '<meta name="keywords" content="법률사무소, 변호사, 민사소송, 형사소송, 가족법, 부동산법, 서울 법률사무소, 법률상담">' . "\n";
         echo '<meta property="og:title" content="법률사무소 평정 | LEE & PARTNERS">' . "\n";
-        echo '<meta property="og:description" content="전문 변호사진이 제공하는 최상의 법률 서비스. 민사, 형사, 가족법, 부동산법 전문.">' . "\n";
         echo '<meta property="og:type" content="website">' . "\n";
         echo '<meta property="og:locale" content="ko_KR">' . "\n";
     }
