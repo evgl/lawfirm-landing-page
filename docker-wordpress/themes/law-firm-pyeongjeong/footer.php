@@ -209,7 +209,7 @@
     "@context": "https://schema.org",
     "@type": "LegalService",
     "name": "<?php echo esc_js(get_bloginfo('name') ?: '법률사무소 평정'); ?>",
-    "description": "<?php echo esc_js(get_bloginfo('description') ?: '전문적인 법률 서비스를 제공하는 법률사무소'); ?>",
+    "description": "<?php echo esc_js(function_exists('law_firm_get_schema_description') ? law_firm_get_schema_description() : (get_bloginfo('description') ?: '전문적인 법률 서비스를 제공하는 법률사무소')); ?>",
     "url": "<?php echo esc_js(home_url()); ?>",
     "telephone": "<?php echo esc_js(get_theme_mod('law_firm_phone', '02-554-6674')); ?>",
     "address": {

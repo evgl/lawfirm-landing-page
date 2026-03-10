@@ -800,9 +800,21 @@ add_action('init', 'law_firm_optimize_queries');
 /**
  * SEO and Meta Tags
  */
+function law_firm_get_homepage_meta_description() {
+    return '당신의 승리를 위하여! 서울대학교 법학과 & 대형로펌 출신 변호사가 최선의 솔루션을 바탕으로 24시 · 연중무휴 · 끝까지 싸웁니다';
+}
+
+function law_firm_get_schema_description() {
+    if (is_front_page()) {
+        return law_firm_get_homepage_meta_description();
+    }
+
+    return get_bloginfo('description') ?: '전문적인 법률 서비스를 제공하는 법률사무소';
+}
+
 function law_firm_seo_meta_tags() {
     if (is_front_page()) {
-        echo '<meta name="description" content="당신의 승리를 위하여! 서울대학교 법학과 & 대형로펌 출신 변호사가 최선의 솔루션을 바탕으로 24시 · 연중무휴 · 끝까지 싸웁니다">' . "\n";
+        echo '<meta name="description" content="' . esc_attr(law_firm_get_homepage_meta_description()) . '">' . "\n";
         echo '<meta name="keywords" content="법률사무소, 변호사, 민사소송, 형사소송, 가족법, 부동산법, 서울 법률사무소, 법률상담">' . "\n";
         echo '<meta property="og:title" content="법률사무소 평정 | LEE & PARTNERS">' . "\n";
         echo '<meta property="og:type" content="website">' . "\n";
