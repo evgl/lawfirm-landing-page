@@ -19,8 +19,7 @@ services:
       - ./plugins:/var/www/html/wp-content/plugins
       - ./uploads:/var/www/html/wp-content/uploads
       - ./.htaccess:/var/www/html/.htaccess:ro
-      - ./apache-wordpress.conf:/etc/apache2/conf-available/wordpress.conf:ro
-    command: bash -c "a2enmod rewrite && a2enconf wordpress && apache2-foreground"
+      - ./apache-wordpress.conf:/etc/apache2/conf-enabled/wordpress.conf:ro
     depends_on:
       - db
     networks:
