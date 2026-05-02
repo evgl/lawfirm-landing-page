@@ -643,7 +643,7 @@ function law_firm_customize_register($wp_customize) {
     
     // Address setting
     $wp_customize->add_setting('law_firm_address', array(
-        'default' => '서울 강남구 논현로63길 7',
+        'default' => '서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12',
         'sanitize_callback' => 'sanitize_textarea_field',
     ));
     
