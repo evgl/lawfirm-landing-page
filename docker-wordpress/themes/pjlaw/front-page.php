@@ -163,23 +163,28 @@ get_header();
         <div class="container">
             <h2 class="cta-main-title"><?php esc_html_e('결과로 답하는 평정의 전문성', 'pjlaw'); ?><br /><?php esc_html_e('이제 당신의 사건에서 증명하겠습니다', 'pjlaw'); ?></h2>
             
-            <div class="cta-split">
-                <div class="cta-half-box">
-                    <h3><?php esc_html_e('온라인 상담신청', 'pjlaw'); ?></h3>
-                    <p><?php esc_html_e('궁금하신 부분을 속 시원히 해결해 드립니다.', 'pjlaw'); ?></p>
-                    <a href="<?php echo esc_url(home_url('/consultation/')); ?>" class="btn-action">
-                        <?php esc_html_e('문의하기', 'pjlaw'); ?>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+            <div class="cta-banner" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/cta-bg.png'); ?>');">
+                <div class="cta-overlay"></div>
+                <div class="cta-banner-content">
+                    <div class="cta-banner-box">
+                        <h3><?php esc_html_e('온라인 상담신청', 'pjlaw'); ?></h3>
+                        <p><?php esc_html_e('궁금하신 부분을 속 시원히 해결해 드립니다.', 'pjlaw'); ?></p>
+                        <a href="<?php echo esc_url(home_url('/consultation/')); ?>" class="btn-banner">
+                            <span><?php esc_html_e('문의하기', 'pjlaw'); ?></span>
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/btn-arrow.svg'); ?>" alt="" />
+                        </a>
+                    </div>
 
-                <div class="cta-half-box">
-                    <h3><?php esc_html_e('평정 오시는길', 'pjlaw'); ?></h3>
-                    <p><?php esc_html_e('법무법인평정 찾아오시는길을 안내해 드립니다.', 'pjlaw'); ?></p>
-                    <a href="<?php echo esc_url(home_url('/directions/')); ?>" class="btn-action">
-                        <?php esc_html_e('자세히보기', 'pjlaw'); ?>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <div class="cta-banner-separator"></div>
+
+                    <div class="cta-banner-box">
+                        <h3><?php esc_html_e('평정 오시는길', 'pjlaw'); ?></h3>
+                        <p><?php esc_html_e('법무법인평정 찾아오시는길을 안내해 드립니다.', 'pjlaw'); ?></p>
+                        <a href="<?php echo esc_url(home_url('/directions/')); ?>" class="btn-banner">
+                            <span><?php esc_html_e('자세히보기', 'pjlaw'); ?></span>
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/btn-arrow.svg'); ?>" alt="" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

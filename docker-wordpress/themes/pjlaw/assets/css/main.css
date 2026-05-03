@@ -399,7 +399,7 @@
 
 /* Bottom CTA Section */
 .bottom-cta {
-    padding: 180px 0;
+    padding: 120px 0 180px;
     background-color: #fff;
 }
 
@@ -408,63 +408,96 @@
     font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.2;
-    margin-bottom: 100px;
+    margin-bottom: 90px;
     letter-spacing: -0.04em;
+    color: #181a1e;
 }
 
-.cta-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+.cta-banner {
+    position: relative;
+    height: 482px;
+    border-radius: 60px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cta-half-box {
-    background-color: var(--bg-light);
-    padding: 100px 60px;
-    border-radius: 40px;
+.cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 9, 0.35);
+    z-index: 1;
+}
+
+.cta-banner-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 100px;
+    color: #fff;
+}
+
+.cta-banner-box {
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    max-width: 400px;
 }
 
-.cta-half-box:hover {
-    transform: translateY(-10px);
-    background-color: #f0f0f3;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-}
-
-.cta-half-box h3 {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
+.cta-banner-box h3 {
+    font-size: 2.2rem;
     font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: -0.02em;
 }
 
-.cta-half-box p {
-    color: var(--text-dark);
-    font-size: 1.2rem;
-    opacity: 0.7;
-    margin-bottom: 50px;
+.cta-banner-box p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
 }
 
-.btn-action {
+.cta-banner-separator {
+    width: 1px;
+    height: 220px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-banner {
     display: inline-flex;
     align-items: center;
-    gap: 15px;
-    background-color: var(--primary-dark);
-    color: #fff;
-    padding: 18px 50px;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid #fff;
     border-radius: 100px;
+    padding: 12px 10px 12px 30px;
+    color: #fff;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    min-width: 180px;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.btn-action:hover {
-    background-color: var(--primary-color);
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(85, 128, 255, 0.4);
+.btn-banner:hover {
+    background-color: #fff;
+    color: var(--primary-dark);
 }
+
+.btn-banner img {
+    width: 34px;
+    height: 34px;
+    transition: transform 0.3s ease;
+}
+
+.btn-banner:hover img {
+    transform: rotate(-45deg);
+}
+
 
 /* ===========================
    HEADER & NAVBAR
