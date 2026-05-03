@@ -9,12 +9,44 @@
         // Mobile menu toggle
         initMobileMenu();
         
+        // Header scroll behavior
+        initHeaderScroll();
+        
         // Smooth scroll for anchor links
         initSmoothScroll();
         
         // Consultation form handling
         initConsultationForm();
+        
+        // Scroll to top
+        initScrollTop();
     });
+
+    /**
+     * Initialize header scroll behavior
+     */
+    function initHeaderScroll() {
+        var $header = $('.header');
+        
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() > 50) {
+                $header.addClass('scrolled');
+            } else {
+                $header.removeClass('scrolled');
+            }
+        });
+    }
+
+    /**
+     * Initialize scroll to top
+     */
+    function initScrollTop() {
+        $('.scroll-top').on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, 800);
+        });
+    }
+
 
     /**
      * Initialize mobile menu

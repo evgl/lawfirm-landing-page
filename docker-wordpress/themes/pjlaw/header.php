@@ -18,38 +18,32 @@ if (!defined('ABSPATH')) {
     <?php wp_body_open(); ?>
     
     <header class="header" role="banner">
-        <div class="header-top">
-            <div class="container">
-                <nav class="navbar" role="navigation" aria-label="<?php esc_attr_e('Main Navigation', 'pjlaw'); ?>">
-                    <div class="navbar-brand">
-                        <?php
-                        if (has_custom_logo()) {
-                            the_custom_logo();
-                        } else {
-                            echo '<div class="site-logo">' . esc_html(get_bloginfo('name')) . '</div>';
-                        }
-                        ?>
-                    </div>
-                    
-                    <div class="navbar-menu">
-                        <?php
-                        wp_nav_menu(array(
-                            'theme_location' => 'primary',
-                            'container' => false,
-                            'items_wrap' => '<ul class="navbar-nav">%3$s</ul>',
-                            'fallback_cb' => 'pjlaw_fallback_menu',
-                        ));
-                        ?>
-                    </div>
-                    
-                    <div class="navbar-actions">
-                        <button class="btn btn-primary"><?php esc_html_e('상담예약', 'pjlaw'); ?></button>
-                        <button class="navbar-toggle" id="navbar-toggle" aria-label="<?php esc_attr_e('Toggle Menu', 'pjlaw'); ?>">
-                            <span class="hamburger"></span>
-                        </button>
-                    </div>
-                </nav>
-            </div>
+        <div class="container-full">
+            <nav class="navbar" role="navigation" aria-label="<?php esc_attr_e('Main Navigation', 'pjlaw'); ?>">
+                <div class="navbar-brand">
+                    <a href="<?php echo esc_url(home_url('/')); ?>">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-white.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-white" />
+                    </a>
+                </div>
+                
+                <div class="navbar-menu">
+                    <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'primary',
+                        'container' => false,
+                        'items_wrap' => '<ul class="navbar-nav">%3$s</ul>',
+                        'fallback_cb' => 'pjlaw_fallback_menu',
+                    ));
+                    ?>
+                </div>
+                
+                <div class="navbar-actions">
+                    <a href="<?php echo esc_url(home_url('/consultation/')); ?>" class="btn-reserve"><?php esc_html_e('상담예약', 'pjlaw'); ?></a>
+                    <button class="navbar-toggle" id="navbar-toggle" aria-label="<?php esc_attr_e('Toggle Menu', 'pjlaw'); ?>">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
         </div>
     </header>
 
