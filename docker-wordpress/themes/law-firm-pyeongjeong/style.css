@@ -2010,6 +2010,7 @@ body.about-page::after {
 /* Location Section Layout */
 .location-content {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     width: 100%;
@@ -2030,8 +2031,8 @@ body.about-page::after {
 .location-right {
     flex: 0 0 auto;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: 30px;
 }
 
@@ -2064,14 +2065,11 @@ body.about-page::after {
     align-items: center;
     gap: 12px;
     padding: 20px 30px;
-    background-color: rgba(255, 255, 255, 0.15);
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
 }
 
 .address-box i {
-    font-size: 28px;
+    font-size: 56px;
     color: var(--white);
     flex-shrink: 0;
 }
