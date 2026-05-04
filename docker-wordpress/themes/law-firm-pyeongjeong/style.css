@@ -2059,6 +2059,28 @@ body.about-page::after {
     width: clamp(300px, 35vw, 480px);
 }
 
+.address-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+}
+
+.address-box i {
+    font-size: 24px;
+    color: var(--primary-navy);
+    flex-shrink: 0;
+}
+
+.address-text {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--primary-navy);
+    line-height: 1.3;
+}
+
 /* Location Section Mobile Responsive */
 @media (max-width: 768px) {
     .location-content {
