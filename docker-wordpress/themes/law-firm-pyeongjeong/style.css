@@ -2058,6 +2058,7 @@ body.about-page::after {
 
 .location-text-image:nth-child(2) {
     width: clamp(300px, 35vw, 480px);
+    margin-left: -50px;
 }
 
 .address-box {
@@ -2066,6 +2067,7 @@ body.about-page::after {
     gap: 12px;
     padding: 20px 30px;
     border-radius: 8px;
+    margin-left: -40px;
 }
 
 .address-box i {
