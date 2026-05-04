@@ -56,7 +56,7 @@
                                 <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                                 <div>
                                     <strong><?php _e('주소', 'law-firm-pyeongjeong'); ?></strong><br>
-                                    <?php echo wp_kses_post(nl2br(get_theme_mod('law_firm_address', '서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12'))); ?>
+                                    <?php echo wp_kses_post(nl2br(get_theme_mod('law_firm_address', '서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층))); ?>
                                 </div>
                             </div>
                             
@@ -214,7 +214,7 @@
     "telephone": "<?php echo esc_js(get_theme_mod('law_firm_phone', '02-554-6674')); ?>",
     "address": {
         "@type": "PostalAddress",
-        "streetAddress": "<?php echo esc_js(get_theme_mod('law_firm_address', '서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12')); ?>",
+        "streetAddress": "<?php echo esc_js(get_theme_mod('law_firm_address', '서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층')); ?>",
         "addressLocality": "서울",
         "addressCountry": "KR"
     },

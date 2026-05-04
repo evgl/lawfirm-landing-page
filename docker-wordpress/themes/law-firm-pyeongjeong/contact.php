@@ -181,7 +181,7 @@
                             </div>
                             <div class="info-content">
                                 <h4><?php esc_html_e('주소', 'law-firm-pyeongjeong'); ?></h4>
-                                <p><?php esc_html_e('서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12', 'law-firm-pyeongjeong'); ?></p>
+                                <p><?php esc_html_e('서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층', 'law-firm-pyeongjeong'); ?></p>
                             </div>
                         </div>
 
