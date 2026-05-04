@@ -2063,21 +2063,23 @@ body.about-page::after {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 15px 20px;
-    background-color: var(--light-gray);
+    padding: 20px 30px;
+    background-color: rgba(255, 255, 255, 0.15);
     border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .address-box i {
-    font-size: 24px;
-    color: var(--primary-navy);
+    font-size: 28px;
+    color: var(--white);
     flex-shrink: 0;
 }
 
 .address-text {
     font-size: 48px;
     font-weight: 600;
-    color: var(--primary-navy);
+    color: var(--white);
     line-height: 1.3;
 }
 
