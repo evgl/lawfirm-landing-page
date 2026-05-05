@@ -101,41 +101,6 @@ $about_sections = array(
         </section>
     <?php endforeach; ?>
 
-    <aside class="about-quick-menu" aria-label="<?php esc_attr_e('Quick actions', 'pjlaw'); ?>">
-        <a class="about-quick-menu__item about-quick-menu__item--call" href="tel:15886999">
-            <span class="about-quick-menu__icon-wrap">
-                <img src="<?php echo esc_url($theme_uri . '/assets/icons/about/icon-phone.svg'); ?>" alt="" aria-hidden="true" />
-            </span>
-            <span class="about-quick-menu__label">전화상담</span>
-            <span class="about-quick-menu__phone">
-                <span>1588</span>
-                <span class="about-quick-menu__dot" aria-hidden="true"></span>
-                <span>6999</span>
-            </span>
-        </a>
-
-        <a class="about-quick-menu__item about-quick-menu__item--online" href="<?php echo esc_url(home_url('/consultation/')); ?>">
-            <span class="about-quick-menu__icon-wrap">
-                <img src="<?php echo esc_url($theme_uri . '/assets/icons/about/icon-online.svg'); ?>" alt="" aria-hidden="true" />
-            </span>
-            <span class="about-quick-menu__label about-quick-menu__label--dark">온라인상담</span>
-        </a>
-
-        <a class="about-quick-menu__item about-quick-menu__item--kakao" href="https://pf.kakao.com/_XzMxmn" target="_blank" rel="noopener noreferrer">
-            <span class="about-quick-menu__icon-wrap">
-                <img src="<?php echo esc_url($theme_uri . '/assets/icons/about/icon-kakao.svg'); ?>" alt="" aria-hidden="true" />
-            </span>
-            <span class="about-quick-menu__label about-quick-menu__label--dark">카톡상담</span>
-        </a>
-
-        <a class="about-quick-menu__item about-quick-menu__item--directions" href="<?php echo esc_url(home_url('/directions/')); ?>">
-            <span class="about-quick-menu__icon-wrap">
-                <img src="<?php echo esc_url($theme_uri . '/assets/icons/about/icon-directions.svg'); ?>" alt="" aria-hidden="true" />
-            </span>
-            <span class="about-quick-menu__label">오시는길</span>
-        </a>
-    </aside>
-
     <footer class="footer about-footer" role="contentinfo">
         <div class="footer-bottom about-footer__bottom">
             <div class="container">
@@ -162,6 +127,8 @@ $about_sections = array(
             </a>
         </div>
     </footer>
+
+    <?php pjlaw_render_quick_actions_menu(); ?>
 </main>
 
 <?php wp_footer(); ?>

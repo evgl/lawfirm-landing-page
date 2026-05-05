@@ -89,6 +89,8 @@ if (!defined('ABSPATH')) {
         </div>
     </footer>
 
+    <?php pjlaw_render_quick_actions_menu(); ?>
+
     <?php wp_footer(); ?>
 </body>
 </html>
