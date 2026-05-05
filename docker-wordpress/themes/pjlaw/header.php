@@ -54,10 +54,11 @@ if (!defined('ABSPATH')) {
  */
 function pjlaw_fallback_menu() {
     echo '<ul class="navbar-nav">';
-    echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('소개', 'pjlaw') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('평정소개', 'pjlaw') . '</a></li>';
     echo '<li><a href="' . esc_url(home_url('/services/')) . '">' . esc_html__('업무분야', 'pjlaw') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/cases/')) . '">' . esc_html__('성공사례', 'pjlaw') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/contact/')) . '">' . esc_html__('상담문의', 'pjlaw') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/cases/')) . '">' . esc_html__('업무사례', 'pjlaw') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/blog/')) . '">' . esc_html__('블로그', 'pjlaw') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/careers/')) . '">' . esc_html__('인재채용', 'pjlaw') . '</a></li>';
     echo '</ul>';
 }
 ?>
