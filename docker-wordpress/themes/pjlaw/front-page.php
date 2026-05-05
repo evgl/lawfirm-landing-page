@@ -12,7 +12,7 @@ get_header();
 
 <main id="main-content" role="main">
     <!-- Hero Section -->
-    <section class="hero" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-bg.png'); ?>');">
+    <section class="hero" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/hero-bg.png'); ?>');">
         <div class="hero-overlay">
             <div class="container hero-container">
                 <div class="hero-content">
@@ -28,7 +28,7 @@ get_header();
         <div class="logo-bg-text">PYEONG JEONG</div>
         <div class="container">
             <div class="logo-content">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-white.png'); ?>" alt="PyeongJeong Logo" class="pj-logo-large" />
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/logo-white.png'); ?>" alt="PyeongJeong Logo" class="pj-logo-large" />
             </div>
         </div>
     </section>
@@ -51,7 +51,7 @@ get_header();
         <div class="container-full">
             <div class="services-scroller">
                 <!-- Civil Law -->
-                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/civil.png'); ?>');">
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/civil.png'); ?>');">
                     <div class="service-box-content">
                         <h3><?php esc_html_e('민사', 'pjlaw'); ?></h3>
                         <p><?php esc_html_e('철저한 법리 검토를 통한 실질적인 권리 구제와 재산권 확보', 'pjlaw'); ?></p>
@@ -59,7 +59,7 @@ get_header();
                 </div>
 
                 <!-- Criminal Law -->
-                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/criminal.png'); ?>');">
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/criminal.png'); ?>');">
                     <div class="service-box-content">
                         <h3><?php esc_html_e('형사', 'pjlaw'); ?></h3>
                         <p><?php esc_html_e('수사 단계부터 재판까지 치밀한 증거 분석과 정교한 법리 대응', 'pjlaw'); ?></p>
@@ -67,7 +67,7 @@ get_header();
                 </div>
 
                 <!-- Sex Crime -->
-                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/sex-crime.png'); ?>');">
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/sex-crime.png'); ?>');">
                     <div class="service-box-content">
                         <h3><?php esc_html_e('성범죄', 'pjlaw'); ?></h3>
                         <p><?php esc_html_e('사건의 특수성을 고려한 세밀한 정황 분석과 의뢰인 권익 보호', 'pjlaw'); ?></p>
@@ -75,7 +75,7 @@ get_header();
                 </div>
 
                 <!-- Real Estate -->
-                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/real-estate.png'); ?>');">
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/real-estate.png'); ?>');">
                     <div class="service-box-content">
                         <h3><?php esc_html_e('부동산', 'pjlaw'); ?></h3>
                         <p><?php esc_html_e('복잡한 권리관계의 명확한 분석과 소중한 자산 가치 수호', 'pjlaw'); ?></p>
@@ -83,7 +83,7 @@ get_header();
                 </div>
 
                 <!-- Family Law -->
-                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/family-law.png'); ?>');">
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/family-law.png'); ?>');">
                     <div class="service-box-content">
                         <h3><?php esc_html_e('가사', 'pjlaw'); ?></h3>
                         <p><?php esc_html_e('상속·증여 등 가족 간 재산 분쟁의 명확한 정리와 법적 갈등 해소', 'pjlaw'); ?></p>
@@ -91,7 +91,7 @@ get_header();
                 </div>
 
                 <!-- Divorce Law -->
-                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/divorce.png'); ?>');">
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/divorce.png'); ?>');">
                     <div class="service-box-content">
                         <h3><?php esc_html_e('이혼', 'pjlaw'); ?></h3>
                         <p><?php esc_html_e('체계적인 법률 조력을 통한 정당한 재산분할 및 양육권 확보', 'pjlaw'); ?></p>
@@ -99,7 +99,7 @@ get_header();
                 </div>
 
                 <!-- Corporate Law -->
-                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/corporate.png'); ?>');">
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/corporate.png'); ?>');">
                     <div class="service-box-content">
                         <h3><?php esc_html_e('기업', 'pjlaw'); ?></h3>
                         <p><?php esc_html_e('기업 리스크의 선제적 관리와 안정적인 경영을 위한 법률 지원', 'pjlaw'); ?></p>
@@ -120,7 +120,7 @@ get_header();
             <div class="stats-grid-premium">
                 <div class="stat-item">
                     <div class="stat-icon-wrapper">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/stat-icon-1.svg'); ?>" alt="" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/stat-icon-1.svg'); ?>" alt="" />
                     </div>
                     <div class="stat-value">30+</div>
                     <div class="stat-label-group">
@@ -131,7 +131,7 @@ get_header();
 
                 <div class="stat-item">
                     <div class="stat-icon-wrapper">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/stat-icon-2.svg'); ?>" alt="" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/stat-icon-2.svg'); ?>" alt="" />
                     </div>
                     <div class="stat-value">2,850+</div>
                     <div class="stat-label-group">
@@ -142,7 +142,7 @@ get_header();
 
                 <div class="stat-item">
                     <div class="stat-icon-wrapper">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/stat-icon-3.svg'); ?>" alt="" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/stat-icon-3.svg'); ?>" alt="" />
                     </div>
                     <div class="stat-value">14,060+</div>
                     <div class="stat-label-group">
@@ -165,56 +165,56 @@ get_header();
             <div class="cases-slider">
                 <div class="case-item">
                     <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/case-1.png'); ?>" alt="" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-1.png'); ?>" alt="" />
                     </div>
                     <div class="case-info">
                         <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
                         <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
                             <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
                 </div>
                 <div class="case-item">
                     <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/case-2.png'); ?>" alt="" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-2.png'); ?>" alt="" />
                     </div>
                     <div class="case-info">
                         <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
                         <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
                             <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
                 </div>
                 <div class="case-item">
                     <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/case-3.png'); ?>" alt="" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-3.png'); ?>" alt="" />
                     </div>
                     <div class="case-info">
                         <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
                         <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
                             <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
                 </div>
                 <div class="case-item">
                     <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/case-4.png'); ?>" alt="" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-4.png'); ?>" alt="" />
                     </div>
                     <div class="case-info">
                         <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
                         <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
                             <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
@@ -228,7 +228,7 @@ get_header();
         <div class="container">
             <h2 class="cta-main-title"><?php esc_html_e('결과로 답하는 평정의 전문성', 'pjlaw'); ?><br /><?php esc_html_e('이제 당신의 사건에서 증명하겠습니다', 'pjlaw'); ?></h2>
             
-            <div class="cta-banner" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/cta-bg.png'); ?>');">
+            <div class="cta-banner" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/cta-bg.png'); ?>');">
                 <div class="cta-overlay"></div>
                 <div class="cta-banner-content">
                     <div class="cta-banner-box">
@@ -236,7 +236,7 @@ get_header();
                         <p><?php esc_html_e('궁금하신 부분을 속 시원히 해결해 드립니다.', 'pjlaw'); ?></p>
                         <a href="<?php echo esc_url(home_url('/consultation/')); ?>" class="btn-banner">
                             <span><?php esc_html_e('문의하기', 'pjlaw'); ?></span>
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/btn-arrow.svg'); ?>" alt="" />
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/btn-arrow.svg'); ?>" alt="" />
                         </a>
                     </div>
 
@@ -247,7 +247,7 @@ get_header();
                         <p><?php esc_html_e('법무법인평정 찾아오시는길을 안내해 드립니다.', 'pjlaw'); ?></p>
                         <a href="<?php echo esc_url(home_url('/directions/')); ?>" class="btn-banner">
                             <span><?php esc_html_e('자세히보기', 'pjlaw'); ?></span>
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/btn-arrow.svg'); ?>" alt="" />
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/btn-arrow.svg'); ?>" alt="" />
                         </a>
                     </div>
                 </div>

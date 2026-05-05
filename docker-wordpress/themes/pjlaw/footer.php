@@ -77,13 +77,13 @@ if (!defined('ABSPATH')) {
                             <p class="copyright"><?php esc_html_e('Copyright ⓒ Pyeongjeong. All Rights Reserved', 'pjlaw'); ?></p>
                         </div>
                         <div class="footer-logo-wrap">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/footer-logo.png'); ?>" alt="Logo" class="footer-logo" />
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/footer-logo.png'); ?>" alt="Logo" class="footer-logo" />
                         </div>
                     </div>
                 </div>
             </div>
             <a href="#" class="scroll-top">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/scroll-top.svg'); ?>" alt="Top" />
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/scroll-top.svg'); ?>" alt="Top" />
             </a>
         </div>
     </footer>

@@ -19,7 +19,8 @@ pjlaw/
 ├── assets/
 │   ├── css/
 │   │   └── main.css          # Extended styling for all sections
-│   ├── images/               # Image assets
+│   ├── images/
+│   │   └── home/             # Home page image assets
 │   └── js/
 │       └── main.js           # Theme JavaScript
 ├── template-parts/
@@ -191,7 +192,7 @@ The theme includes:
 ## Troubleshooting
 
 ### Images not displaying
-- Ensure images are uploaded to `/assets/images/`
+- Ensure images are uploaded to `/assets/images/home/` for home page assets
 - Check file permissions
 - Verify image paths in `front-page.php`
 
