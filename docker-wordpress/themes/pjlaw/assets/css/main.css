@@ -1083,12 +1083,12 @@
 .about-quick-menu__item--call {
     min-height: 130px;
     background: #3668fa;
-    padding: 17px 16px 14px;
+    padding: 17px 12px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 5px;
 }
 
 .about-quick-menu__item--online,
@@ -1111,14 +1111,19 @@
 }
 
 .about-quick-menu__item--directions {
-    min-height: 76px;
+    min-height: 106px;
     background: #3cb111;
-    padding: 17px 18px 15px;
+    padding: 16px 11px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
+}
+
+.about-quick-menu__item--directions .about-quick-menu__label {
+    white-space: nowrap;
+    font-size: 12px;
 }
 
 .about-quick-menu__icon-wrap {
@@ -1147,10 +1152,11 @@
 
 .about-quick-menu__label {
     color: #fff;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: -0.03em;
     line-height: 1;
+    text-align: center;
 }
 
 .about-quick-menu__label--dark {
@@ -1159,19 +1165,22 @@
 
 .about-quick-menu__phone {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
+    gap: 4px;
     color: #fff;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: -0.03em;
-    line-height: 1.05;
+    line-height: 1;
+    white-space: nowrap;
 }
 
 .about-quick-menu__phone span {
-    display: inline-flex;
-    align-items: center;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .about-quick-menu__dot {
@@ -1179,7 +1188,7 @@
     height: 3px;
     border-radius: 999px;
     background: #fff;
-    margin: 0 3px;
+    margin: 0;
 }
 
 @media (max-width: 1280px) {
