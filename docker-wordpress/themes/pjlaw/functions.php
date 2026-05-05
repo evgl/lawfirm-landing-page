@@ -125,4 +125,23 @@ function pjlaw_security_headers() {
     }
 }
 add_action('send_headers', 'pjlaw_security_headers');
+
+/**
+ * Force the about page template for /about/ so the design renders even if the
+ * WordPress page object or permalink rules are not configured yet.
+ */
+function pjlaw_template_include($template) {
+    $request_path = isset($_SERVER['REQUEST_URI']) ? wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH) : '';
+    $request_path = trim((string) $request_path, '/');
+
+    if ('about' === $request_path) {
+        $about_template = locate_template('page-about.php');
+        if ($about_template) {
+            return $about_template;
+        }
+    }
+
+    return $template;
+}
+add_filter('template_include', 'pjlaw_template_include');
 ?>
