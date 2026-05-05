@@ -153,7 +153,48 @@ get_header();
                         </div>
                     </div>
                 </div>
-                <!-- Repeat for other cases or use dynamic content if available -->
+                <div class="case-item">
+                    <div class="case-img-box">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/case-2.png'); ?>" alt="" />
+                    </div>
+                    <div class="case-info">
+                        <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
+                        <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
+                        <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
+                        <div class="case-author">
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
+                            <span><?php esc_html_e('문희용 변호사', 'pjlaw'); ?></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-item">
+                    <div class="case-img-box">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/case-3.png'); ?>" alt="" />
+                    </div>
+                    <div class="case-info">
+                        <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
+                        <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
+                        <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
+                        <div class="case-author">
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
+                            <span><?php esc_html_e('문희용 변호사', 'pjlaw'); ?></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-item">
+                    <div class="case-img-box">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/case-4.png'); ?>" alt="" />
+                    </div>
+                    <div class="case-info">
+                        <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
+                        <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
+                        <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
+                        <div class="case-author">
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
+                            <span><?php esc_html_e('문희용 변호사', 'pjlaw'); ?></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
