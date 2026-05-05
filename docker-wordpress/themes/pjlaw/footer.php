@@ -31,6 +31,7 @@ if (!defined('ABSPATH')) {
                         <h3 class="footer-title"><?php esc_html_e('블로그', 'pjlaw'); ?></h3>
                         <ul class="footer-links-list">
                             <li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('법률정보', 'pjlaw'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/strategy/')); ?>"><?php esc_html_e('대응전략', 'pjlaw'); ?></a></li>
                         </ul>
                     </div>
                     
@@ -38,15 +39,14 @@ if (!defined('ABSPATH')) {
                         <h3 class="footer-title"><?php esc_html_e('업무사례', 'pjlaw'); ?></h3>
                         <ul class="footer-links-list">
                             <li><a href="<?php echo esc_url(home_url('/cases/')); ?>"><?php esc_html_e('성공사례', 'pjlaw'); ?></a></li>
-                            <li><a href="<?php echo esc_url(home_url('/strategy/')); ?>"><?php esc_html_e('대응전략', 'pjlaw'); ?></a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-column">
                         <h3 class="footer-title"><?php esc_html_e('인재채용', 'pjlaw'); ?></h3>
                         <ul class="footer-links-list">
-                            <li><a href="<?php echo esc_url(home_url('/careers/')); ?>"><?php esc_html_e('인재상', 'pjlaw'); ?></a></li>
-                            <li><a href="<?php echo esc_url(home_url('/careers/')); ?>"><?php esc_html_e('채용공고', 'pjlaw'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/careers/introduction/')); ?>"><?php esc_html_e('인재상', 'pjlaw'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/careers/jobs/')); ?>"><?php esc_html_e('채용공고', 'pjlaw'); ?></a></li>
                         </ul>
                     </div>
                     
