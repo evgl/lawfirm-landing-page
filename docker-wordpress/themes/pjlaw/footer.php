@@ -73,7 +73,7 @@ if (!defined('ABSPATH')) {
                     <div class="legal-separator"></div>
                     <div class="legal-bottom">
                         <div class="legal-info">
-                            <p><?php esc_html_e('서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층 Tel : 02-554-5674', 'pjlaw'); ?></p>
+                            <p><?php esc_html_e('서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층       Tel : 02-554-5674', 'pjlaw'); ?></p>
                             <p class="copyright"><?php esc_html_e('Copyright ⓒ Pyeongjeong. All Rights Reserved', 'pjlaw'); ?></p>
                         </div>
                         <div class="footer-logo-wrap">
