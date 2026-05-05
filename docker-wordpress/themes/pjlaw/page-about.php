@@ -19,7 +19,7 @@ $about_sections = array(
         'eyebrow'  => '권익과 가치의',
         'title'    => '평정(評定)',
         'description' => '사건의 본질을 정확히 꿰뚫어 보고 의뢰인님의 억울함이\n조금도 남지 않도록 끝까지 함께합니다.',
-        'image'    => $theme_uri . '/assets/images/about/value-01-handshake.png',
+        'image'    => $theme_uri . '/assets/images/about/value-01-hands.png',
     ),
     array(
         'modifier' => 'about-value--dispute',
@@ -54,11 +54,15 @@ $about_sections = array(
                 <div class="about-hero__pager" aria-label="About section navigation">
                     <a class="about-hero__pager-item" href="#about-intro">
                         <span>평정소개</span>
-                        <span class="about-hero__pager-arrow" aria-hidden="true"></span>
+                        <svg class="about-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                     </a>
                     <a class="about-hero__pager-item" href="#about-vision">
                         <span>가치관</span>
-                        <span class="about-hero__pager-arrow" aria-hidden="true"></span>
+                        <svg class="about-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                     </a>
                 </div>
             </div>

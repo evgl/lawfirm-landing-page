@@ -838,12 +838,11 @@
 }
 
 .about-hero__pager-arrow {
-    width: 14px;
-    height: 8px;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: rotate(45deg);
-    margin-top: -2px;
+    width: 12px;
+    height: 7px;
+    flex: 0 0 auto;
+    display: block;
+    margin-top: 1px;
 }
 
 .about-intro {
@@ -1136,6 +1135,11 @@
 
     .about-hero__pager-item {
         font-size: 14px;
+    }
+
+    .about-hero__pager-arrow {
+        width: 11px;
+        height: 6px;
     }
 
     .about-intro {
