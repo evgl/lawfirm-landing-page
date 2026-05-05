@@ -14,7 +14,8 @@ if (!defined('ABSPATH')) {
                     <div class="footer-column">
                         <h3 class="footer-title"><?php esc_html_e('평정소개', 'pjlaw'); ?></h3>
                         <ul class="footer-links-list">
-                            <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><?php esc_html_e('평정소개', 'pjlaw'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><?php esc_html_e('가치관', 'pjlaw'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/why-pjlaw/')); ?>"><?php esc_html_e('왜 평정인가', 'pjlaw'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/team/')); ?>"><?php esc_html_e('구성원소개', 'pjlaw'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/directions/')); ?>"><?php esc_html_e('오시는길', 'pjlaw'); ?></a></li>
                         </ul>
