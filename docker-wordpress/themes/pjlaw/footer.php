@@ -24,7 +24,6 @@ if (!defined('ABSPATH')) {
                         <h3 class="footer-title"><?php esc_html_e('업무분야', 'pjlaw'); ?></h3>
                         <ul class="footer-links-list">
                             <li><a href="<?php echo esc_url(home_url('/services/')); ?>"><?php esc_html_e('업무 분야별', 'pjlaw'); ?></a></li>
-                            <li><a href="<?php echo esc_url(home_url('/team/')); ?>"><?php esc_html_e('구성원소개', 'pjlaw'); ?></a></li>
                         </ul>
                     </div>
                     

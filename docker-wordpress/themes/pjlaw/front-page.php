@@ -81,6 +81,30 @@ get_header();
                         <p><?php esc_html_e('복잡한 권리관계의 명확한 분석과 소중한 자산 가치 수호', 'pjlaw'); ?></p>
                     </div>
                 </div>
+
+                <!-- Family Law -->
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/family-law.png'); ?>');">
+                    <div class="service-box-content">
+                        <h3><?php esc_html_e('가사', 'pjlaw'); ?></h3>
+                        <p><?php esc_html_e('상속·증여 등 가족 간 재산 분쟁의 명확한 정리와 법적 갈등 해소', 'pjlaw'); ?></p>
+                    </div>
+                </div>
+
+                <!-- Divorce Law -->
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/divorce.png'); ?>');">
+                    <div class="service-box-content">
+                        <h3><?php esc_html_e('이혼', 'pjlaw'); ?></h3>
+                        <p><?php esc_html_e('체계적인 법률 조력을 통한 정당한 재산분할 및 양육권 확보', 'pjlaw'); ?></p>
+                    </div>
+                </div>
+
+                <!-- Corporate Law -->
+                <div class="service-box" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/corporate.png'); ?>');">
+                    <div class="service-box-content">
+                        <h3><?php esc_html_e('기업', 'pjlaw'); ?></h3>
+                        <p><?php esc_html_e('기업 리스크의 선제적 관리와 안정적인 경영을 위한 법률 지원', 'pjlaw'); ?></p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
