@@ -32,6 +32,7 @@ if (!defined('ABSPATH')) {
                         'theme_location' => 'primary',
                         'container' => false,
                         'items_wrap' => '<ul class="navbar-nav">%3$s</ul>',
+                        'depth' => 2,
                         'fallback_cb' => 'pjlaw_fallback_menu',
                     ));
                     ?>
@@ -54,7 +55,15 @@ if (!defined('ABSPATH')) {
  */
 function pjlaw_fallback_menu() {
     echo '<ul class="navbar-nav">';
-    echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('평정소개', 'pjlaw') . '</a></li>';
+    echo '<li class="menu-item menu-item-has-children">';
+    echo '<a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('평정소개', 'pjlaw') . '</a>';
+    echo '<ul class="sub-menu">';
+    echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('가치관', 'pjlaw') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/why-pjlaw/')) . '">' . esc_html__('왜 평정인가', 'pjlaw') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/team/')) . '">' . esc_html__('구성원소개', 'pjlaw') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/directions/')) . '">' . esc_html__('오시는길', 'pjlaw') . '</a></li>';
+    echo '</ul>';
+    echo '</li>';
     echo '<li><a href="' . esc_url(home_url('/services/')) . '">' . esc_html__('업무분야', 'pjlaw') . '</a></li>';
     echo '<li><a href="' . esc_url(home_url('/cases/')) . '">' . esc_html__('업무사례', 'pjlaw') . '</a></li>';
     echo '<li><a href="' . esc_url(home_url('/blog/')) . '">' . esc_html__('블로그', 'pjlaw') . '</a></li>';
