@@ -173,7 +173,7 @@ get_header();
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
                             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('문희용 변호사', 'pjlaw'); ?></span>
+                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@ get_header();
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
                             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('문희용 변호사', 'pjlaw'); ?></span>
+                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@ get_header();
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
                             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('문희용 변호사', 'pjlaw'); ?></span>
+                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ get_header();
                         <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
                         <div class="case-author">
                             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('문희용 변호사', 'pjlaw'); ?></span>
+                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
                         </div>
                     </div>
                 </div>
