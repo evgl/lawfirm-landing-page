@@ -148,6 +148,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('team' === $request_path) {
+        $team_template = locate_template('page-team.php');
+        if ($team_template) {
+            return $team_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');

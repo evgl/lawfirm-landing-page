@@ -1284,3 +1284,315 @@
         font-size: 1rem;
     }
 }
+
+/* ==========================================================================
+   Team Page
+   ========================================================================== */
+
+.team-page {
+    background-color: #171718;
+}
+
+.team-hero {
+    position: relative;
+    width: 100%;
+    min-height: 760px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 190px;
+    -webkit-mask-size: 1920px 760px;
+    mask-size: 1920px 760px;
+    -webkit-mask-position: center top;
+    mask-position: center top;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.team-hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.team-hero__shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(217,217,217,0) 0%, rgba(0,0,0,0.15) 100%);
+    z-index: 2;
+}
+
+.team-hero__inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 160px;
+}
+
+.team-hero__header {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.team-hero__breadcrumb {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.team-hero__eyebrow {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 18px;
+    color: #fff;
+    letter-spacing: -0.66px;
+}
+
+.team-hero__line {
+    width: 120px;
+    height: 1px;
+    background-color: #fff;
+    opacity: 0.4;
+}
+
+.team-hero__title {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 70px;
+    color: #fff;
+    letter-spacing: -1.8px;
+    margin: 0;
+}
+
+.team-hero__footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.team-hero__pager {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.team-hero__pager-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.team-hero__pager-arrow {
+    width: 14px;
+    height: 8px;
+}
+
+.team-members {
+    position: relative;
+    background-color: #fff;
+    padding-top: 57px; /* 817 - 760 */
+    padding-bottom: 260px;
+}
+
+.team-members__bg-text {
+    font-family: 'Fellix', sans-serif;
+    font-weight: 700;
+    font-size: 164px;
+    line-height: 166px;
+    letter-spacing: -4.92px;
+    color: #f7f7f7; /* Very light color for background text, the design had it white on white? Wait, the design has it white text on a black background? No, the background is white starting from top 760. Ah, the design context: text-white, but where is it? Ah, it's inside the dark area? Let's check design: left 0 top 817, gap 260px, items center. text-[164px] text-right text-white. Wait, if it's text-white and background is white, it's invisible? No, the text is probably light grey or has opacity or it's placed over a dark background. Let's make it color #f5f5f5 so it's a watermark. */
+    color: #f5f5f5;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 104px;
+}
+
+.team-members__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 26px;
+    margin-bottom: 50px;
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.team-member__image-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 125%; /* Aspect ratio for 416x520 */
+}
+
+.team-member__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: rgba(0,0,0,0.04);
+}
+
+.team-member__shape {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+.team-member__photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+}
+
+.team-member__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 212px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 48.08%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px 26px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+.team-member__name {
+    margin: 0 0 14px 0;
+    color: #fff;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.9px;
+}
+
+.team-member__name .name {
+    font-size: 30px;
+    line-height: 34px;
+}
+
+.team-member__name .role {
+    font-size: 26px;
+    line-height: 34px;
+}
+
+.team-member__specialties {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.team-member__specialties .dot {
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.team-member__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.team-member__tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 14px;
+    background-color: #fff;
+    border: 1px solid #dcdddf;
+    border-radius: 100px;
+    color: #595b5f;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: -0.39px;
+}
+
+.team-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.team-pagination__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Assuming subtle shadow */
+    color: #3d3d3d;
+}
+
+.team-pagination__pages {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.team-pagination__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #3d3d3d;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.team-pagination__page.active {
+    background-color: #1e1e1e;
+    color: #fff;
+}
