@@ -103,26 +103,28 @@ $members = array(
             <div class="team-members__grid">
                 <?php foreach ($members as $member) : ?>
                     <div class="team-member">
-                        <div class="team-member__image-wrap">
-                            <div class="team-member__mask" style="-webkit-mask-image: url('<?php echo esc_url($theme_uri . '/assets/images/team/member-mask.svg'); ?>'); mask-image: url('<?php echo esc_url($theme_uri . '/assets/images/team/member-mask.svg'); ?>');">
-                                <img src="<?php echo esc_url($theme_uri . '/assets/images/team/shape-outline.png'); ?>" alt="" class="team-member__shape" />
-                                <img src="<?php echo esc_url($member['photo']); ?>" alt="<?php echo esc_attr($member['name']); ?>" class="team-member__photo" />
-                                <div class="team-member__overlay">
-                                    <h3 class="team-member__name">
-                                        <span class="name"><?php echo esc_html($member['name']); ?></span>
-                                        <span class="role"><?php echo esc_html($member['role']); ?></span>
-                                    </h3>
-                                    <div class="team-member__specialties">
-                                        <?php foreach ($member['specialties'] as $index => $specialty) : ?>
-                                            <span><?php echo esc_html($specialty); ?></span>
-                                            <?php if ($index < count($member['specialties']) - 1) : ?>
-                                                <span class="dot"></span>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
+                        <a href="<?php echo esc_url(home_url('/team/member/')); ?>" class="team-member__link">
+                            <div class="team-member__image-wrap">
+                                <div class="team-member__mask" style="-webkit-mask-image: url('<?php echo esc_url($theme_uri . '/assets/images/team/member-mask.svg'); ?>'); mask-image: url('<?php echo esc_url($theme_uri . '/assets/images/team/member-mask.svg'); ?>');">
+                                    <img src="<?php echo esc_url($theme_uri . '/assets/images/team/shape-outline.png'); ?>" alt="" class="team-member__shape" />
+                                    <img src="<?php echo esc_url($member['photo']); ?>" alt="<?php echo esc_attr($member['name']); ?>" class="team-member__photo" />
+                                    <div class="team-member__overlay">
+                                        <h3 class="team-member__name">
+                                            <span class="name"><?php echo esc_html($member['name']); ?></span>
+                                            <span class="role"><?php echo esc_html($member['role']); ?></span>
+                                        </h3>
+                                        <div class="team-member__specialties">
+                                            <?php foreach ($member['specialties'] as $index => $specialty) : ?>
+                                                <span><?php echo esc_html($specialty); ?></span>
+                                                <?php if ($index < count($member['specialties']) - 1) : ?>
+                                                    <span class="dot"></span>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         <div class="team-member__tags">
                             <?php foreach ($member['tags'] as $tag) : ?>
                                 <span class="team-member__tag"><?php echo esc_html($tag); ?></span>
