@@ -141,6 +141,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('why-pjlaw' === $request_path) {
+        $why_pjlaw_template = locate_template('page-why-pjlaw.php');
+        if ($why_pjlaw_template) {
+            return $why_pjlaw_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
