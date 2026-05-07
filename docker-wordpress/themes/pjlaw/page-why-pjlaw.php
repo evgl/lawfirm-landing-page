@@ -138,6 +138,8 @@ $theme_uri = get_template_directory_uri();
             </div>
         </div>
     </section>
+
+    <?php pjlaw_render_quick_actions_menu(); ?>
 </main>
 
 <?php get_footer(); ?>
