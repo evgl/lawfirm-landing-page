@@ -280,43 +280,6 @@ a:hover {
     margin-top: auto;
 }
 
-.why-hero__pager {
-    display: flex;
-    align-items: center;
-    gap: 26px;
-}
-
-.why-hero__pager-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    color: #fff;
-    text-decoration: none;
-    font-family: 'Pretendard', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.54px;
-}
-
-.why-hero__pager-item--home {
-    gap: 8px;
-}
-
-.why-hero__pager-home-icon {
-    width: 18px;
-    height: 18px;
-    display: block;
-    flex: 0 0 auto;
-}
-
-.why-hero__pager-arrow {
-    width: 12px;
-    height: 7px;
-    flex: 0 0 auto;
-    display: block;
-    margin-top: 1px;
-}
-
 .why-features {
     padding-top: 184px;
     padding-bottom: 192px;
