@@ -2124,3 +2124,358 @@
     background-color: #181a1e;
     color: #fff;
 }
+
+/* ==========================================================================
+   Directions Page (오시는길)
+   ========================================================================== */
+
+.directions-page {
+    background-color: #fff;
+}
+
+/* --- Hero --- */
+.directions-hero {
+    position: relative;
+    width: 100%;
+    min-height: 760px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.directions-hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    z-index: 1;
+}
+
+.directions-hero__shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(28,28,30,0.2) 0%, rgba(28,28,30,0.2) 100%);
+    z-index: 2;
+}
+
+.directions-hero__inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 760px;
+    padding-top: 160px;
+    padding-bottom: 80px;
+}
+
+.directions-hero__header {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.directions-hero__breadcrumb {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.directions-hero__eyebrow {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 18px;
+    color: #fff;
+    letter-spacing: -0.66px;
+}
+
+.directions-hero__line {
+    width: 120px;
+    height: 1px;
+    background-color: #fff;
+    opacity: 0.4;
+    margin-bottom: 3px;
+}
+
+.directions-hero__title {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 70px;
+    color: #fff;
+    letter-spacing: -1.8px;
+    margin: 0;
+}
+
+.directions-hero__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+/* Breadcrumb nav in footer of hero */
+.directions-hero__breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.directions-hero__breadcrumb-home {
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.directions-hero__breadcrumb-home:hover {
+    opacity: 1;
+}
+
+.directions-hero__breadcrumb-home img {
+    width: 20px;
+    height: 18px;
+}
+
+.directions-hero__breadcrumb-items {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+}
+
+.directions-hero__breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.54px;
+}
+
+.directions-hero__breadcrumb-arrow {
+    width: 14px;
+    height: 8.5px;
+}
+
+/* --- Map Section --- */
+.directions-map-section {
+    padding-top: 80px;
+    padding-bottom: 0;
+    background-color: #fff;
+}
+
+.directions-map-section__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.directions-map-section__intro {
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.directions-map-section__intro-text {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 52px;
+    color: #181a1e;
+    letter-spacing: -1.2px;
+    text-align: center;
+}
+
+.directions-map-section__content {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+
+.directions-map-section__map-wrap {
+    width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.directions-map-section__map-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Info Row */
+.directions-map-section__info-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.directions-map-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.directions-map-info__name {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 40px;
+    color: #181a1e;
+    letter-spacing: -0.9px;
+    margin: 0;
+}
+
+.directions-map-info__details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.directions-map-info__detail-row {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+}
+
+.directions-map-info__label {
+    font-weight: 700;
+    color: #181a1e;
+    width: 68px;
+    flex-shrink: 0;
+}
+
+.directions-map-info__value {
+    font-weight: 500;
+    color: #4a4c51;
+    white-space: nowrap;
+}
+
+.directions-map-info__actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.directions-map-info__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 50px;
+    padding: 0 29px;
+    background-color: #181a1e;
+    border-radius: 100px;
+    color: #fff;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.45px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    min-width: 150px;
+}
+
+.directions-map-info__btn img {
+    width: 18px;
+    height: auto;
+    flex-shrink: 0;
+    filter: invert(1);
+}
+
+.directions-map-info__btn:hover {
+    background-color: #3668fa;
+    color: #fff;
+}
+
+.directions-map-section__divider {
+    width: 100%;
+    height: 1px;
+    background-color: #d9d9d9;
+}
+
+/* --- Directions Footer --- */
+.directions-footer {
+    background-color: #050505;
+    margin-top: 260px;
+}
+
+.directions-footer__bottom {
+    background-color: #050505;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .directions-hero__title {
+        font-size: 44px;
+        line-height: 54px;
+    }
+    .directions-map-section__intro-text {
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .directions-hero__inner {
+        min-height: 640px;
+        padding-top: 132px;
+        padding-bottom: 56px;
+    }
+    .directions-hero__title {
+        font-size: 32px;
+        line-height: 42px;
+    }
+    .directions-hero__eyebrow {
+        font-size: 16px;
+    }
+    .directions-map-section {
+        padding-top: 60px;
+    }
+    .directions-map-section__intro-text {
+        font-size: 22px;
+        line-height: 32px;
+    }
+    .directions-map-section__info-row {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .directions-map-info__detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 16px;
+    }
+    .directions-map-info__label {
+        width: auto;
+    }
+    .directions-map-info__value {
+        white-space: normal;
+    }
+    .directions-hero__breadcrumb-nav {
+        gap: 20px;
+    }
+    .directions-footer {
+        margin-top: 80px;
+    }
+}

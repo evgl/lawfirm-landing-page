@@ -165,6 +165,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('directions' === $request_path) {
+        $directions_template = locate_template('page-directions.php');
+        if ($directions_template) {
+            return $directions_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
