@@ -43,17 +43,16 @@ $theme_uri = get_template_directory_uri();
 
             <div class="why-hero__footer">
                 <div class="why-hero__pager" aria-label="Breadcrumb">
-                    <div class="why-hero__breadcrumb-item">
-                        <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/icon-home.svg'); ?>" alt="Home" class="why-hero__breadcrumb-home" />
-                    </div>
-                    <div class="why-hero__breadcrumb-item">
+                    <a class="why-hero__pager-item why-hero__pager-item--home" href="<?php echo esc_url(home_url('/')); ?>">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/icon-home.svg'); ?>" alt="" aria-hidden="true" class="why-hero__pager-home-icon" />
                         <span>평정소개</span>
-                        <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/icon-arrow.svg'); ?>" alt=">" class="why-hero__breadcrumb-arrow" />
-                    </div>
-                    <div class="why-hero__breadcrumb-item">
+                    </a>
+                    <a class="why-hero__pager-item" href="<?php echo esc_url(home_url('/why-pjlaw/')); ?>">
                         <span>왜 평정인가?</span>
-                        <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/icon-arrow.svg'); ?>" alt=">" class="why-hero__breadcrumb-arrow" />
-                    </div>
+                        <svg class="why-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -82,9 +81,6 @@ $theme_uri = get_template_directory_uri();
 
             <!-- Feature 2 -->
             <div class="why-feature why-feature--right">
-                <div class="why-feature__image">
-                    <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/feature-2.png'); ?>" alt="집중・전담 법률 서비스 제공" />
-                </div>
                 <div class="why-feature__content">
                     <h2 class="why-feature__title">
                         집중・전담<br />
@@ -94,6 +90,9 @@ $theme_uri = get_template_directory_uri();
                     <p class="why-feature__desc">
                         모든 사건은 의뢰인님의 인생과 맞닿아 있습니다. 평정은 과다한 사건의 수임을 지양하고 의뢰인님 한 사람, 한 사람의 사건을 끝까지 책임지는 길을 고수합니다.
                     </p>
+                </div>
+                <div class="why-feature__image">
+                    <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/feature-2.png'); ?>" alt="집중・전담 법률 서비스 제공" />
                 </div>
             </div>
 
@@ -106,8 +105,8 @@ $theme_uri = get_template_directory_uri();
                     </h2>
                     <div class="why-feature__line"></div>
                     <p class="why-feature__desc">
-                        평정은 소송에 착수한 이후 집중적으로사건<br />
-                        해결에매진하여 모든 사건을 신속하고<br />
+                        평정은 소송에 착수한 이후 집중적으로 사건<br />
+                        해결에 매진하여 모든 사건을 신속하고<br />
                         정확하게 마무리합니다.
                     </p>
                 </div>
@@ -118,9 +117,6 @@ $theme_uri = get_template_directory_uri();
 
             <!-- Feature 4 -->
             <div class="why-feature why-feature--right">
-                <div class="why-feature__image">
-                    <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/feature-4.png'); ?>" alt="의뢰인 맞춤형 소통 서비스" />
-                </div>
                 <div class="why-feature__content">
                     <h2 class="why-feature__title">
                         의뢰인 맞춤형<br />
@@ -128,12 +124,15 @@ $theme_uri = get_template_directory_uri();
                     </h2>
                     <div class="why-feature__line"></div>
                     <p class="why-feature__desc">
-                        의뢰인님과 의원활한 의사소통은변호사의 기본<br />
+                        의뢰인님과 원활한 의사소통은 변호사의 기본<br />
                         소임입니다. 평정은 의뢰인님의 불안함을 해소하기<br />
                         위해 변호사가 포함된 개별 카카오톡 채팅방을<br />
                         마련하여 소송 진행에 대한 정보를 전달하고,<br />
                         질문에 답해드리고 있습니다.
                     </p>
+                </div>
+                <div class="why-feature__image">
+                    <img src="<?php echo esc_url($theme_uri . '/assets/images/why-pjlaw/feature-4.png'); ?>" alt="의뢰인 맞춤형 소통 서비스" />
                 </div>
             </div>
         </div>
