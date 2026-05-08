@@ -43,7 +43,10 @@ $about_sections = array(
         <div class="about-hero__shade"></div>
         <div class="container about-hero__inner">
             <div class="about-hero__header">
-                <span class="about-hero__eyebrow">가치관</span>
+                <div class="about-hero__eyebrow-wrap">
+                    <span class="about-hero__eyebrow">가치관</span>
+                    <span class="about-hero__eyebrow-line"></span>
+                </div>
                 <h1 class="about-hero__title">
                     평정은 의뢰인과<br />
                     처음부터 끝까지 함께합니다

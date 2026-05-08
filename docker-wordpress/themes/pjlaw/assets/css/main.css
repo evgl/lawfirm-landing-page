@@ -890,13 +890,25 @@
     max-width: 760px;
 }
 
-.about-hero__eyebrow {
-    display: inline-block;
+.about-hero__eyebrow-wrap {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
     margin-bottom: 34px;
+}
+
+.about-hero__eyebrow {
     font-size: 22px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.03em;
+}
+
+.about-hero__eyebrow-line {
+    width: 120px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 3px;
 }
 
 .about-hero__title {
