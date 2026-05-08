@@ -1290,7 +1290,7 @@
    ========================================================================== */
 
 .team-page {
-    background-color: #171718;
+    background-color: #fff;
 }
 
 .team-hero {
@@ -1300,7 +1300,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 190px;
+    padding-top: 0;
     -webkit-mask-size: 1920px 760px;
     mask-size: 1920px 760px;
     -webkit-mask-position: center top;
@@ -1336,7 +1336,10 @@
     z-index: 3;
     display: flex;
     flex-direction: column;
-    gap: 160px;
+    justify-content: space-between;
+    min-height: 760px;
+    padding-top: 160px;
+    padding-bottom: 80px;
 }
 
 .team-hero__header {
@@ -1380,29 +1383,15 @@
 .team-hero__footer {
     display: flex;
     justify-content: flex-end;
+    margin-top: auto;
 }
 
-.team-hero__pager {
-    display: flex;
-    align-items: center;
-    gap: 26px;
-}
-
-.team-hero__pager-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #fff;
-    text-decoration: none;
-    font-family: 'Pretendard', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-}
-
-.team-hero__pager-arrow {
-    width: 14px;
-    height: 8px;
+@media (max-width: 768px) {
+    .team-hero__inner {
+        min-height: 640px;
+        padding-top: 132px;
+        padding-bottom: 56px;
+    }
 }
 
 .team-members {

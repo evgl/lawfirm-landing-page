@@ -76,16 +76,16 @@ $members = array(
             </div>
 
             <div class="team-hero__footer">
-                <div class="team-hero__pager" aria-label="Team section navigation">
-                    <a class="team-hero__pager-item" href="#team-members">
+                <div class="about-hero__pager" aria-label="About section navigation">
+                    <a class="about-hero__pager-item" href="<?php echo esc_url(home_url('/about/')); ?>">
                         <span>평정소개</span>
-                        <svg class="team-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="about-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
-                    <a class="team-hero__pager-item" href="#team-members">
+                    <a class="about-hero__pager-item" href="<?php echo esc_url(home_url('/team/')); ?>">
                         <span>구성원소개</span>
-                        <svg class="team-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="about-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
