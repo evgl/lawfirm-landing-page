@@ -1,0 +1,86 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Main Navigation" [ref=e4]:
+      - link "pjlaw-theme" [ref=e6] [cursor=pointer]:
+        - /url: http://localhost:8082/
+        - img "pjlaw-theme" [ref=e7]
+      - list [ref=e9]:
+        - listitem [ref=e10]:
+          - link "평정소개 ▾" [ref=e11] [cursor=pointer]:
+            - /url: http://localhost:8082/about/
+        - listitem [ref=e12]:
+          - link "업무분야" [ref=e13] [cursor=pointer]:
+            - /url: http://localhost:8082/services/
+        - listitem [ref=e14]:
+          - link "업무사례" [ref=e15] [cursor=pointer]:
+            - /url: http://localhost:8082/cases/
+        - listitem [ref=e16]:
+          - link "블로그" [ref=e17] [cursor=pointer]:
+            - /url: http://localhost:8082/blog/
+        - listitem [ref=e18]:
+          - link "인재채용" [ref=e19] [cursor=pointer]:
+            - /url: http://localhost:8082/careers/
+      - generic [ref=e20]:
+        - link "상담예약" [ref=e21] [cursor=pointer]:
+          - /url: http://localhost:8082/consultation/
+        - button "Toggle Menu" [ref=e22] [cursor=pointer]:
+          - generic [ref=e23]: 
+  - main [ref=e24]:
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e31]: 오시는길
+        - heading "법률사무소 평정을 찾아오시는길을 안내합니다" [level=1] [ref=e33]:
+          - text: 법률사무소 평정을
+          - text: 찾아오시는길을 안내합니다
+      - navigation "페이지 경로" [ref=e35]:
+        - link "홈" [ref=e36] [cursor=pointer]:
+          - /url: http://localhost:8082/
+          - img [ref=e37]
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - generic [ref=e40]: 평정소개
+            - img [ref=e41]
+          - generic [ref=e42]:
+            - generic [ref=e43]: 오시는길
+            - img [ref=e44]
+    - generic [ref=e46]:
+      - paragraph [ref=e48]:
+        - text: 일상의 평온을 되찾기 위한 첫걸음
+        - text: 법률사무소 평정이 든든한 버팀목이 되어 드리겠습니다
+      - generic [ref=e49]:
+        - img "법률사무소 평정 지도" [ref=e51]
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - heading "법률사무소 평정" [level=2] [ref=e54]
+            - generic [ref=e55]:
+              - generic [ref=e56]:
+                - generic [ref=e57]: 주소
+                - generic [ref=e58]: 서울특별시 강남구 논현로63길 71, 6층
+              - generic [ref=e59]:
+                - generic [ref=e60]: 대표전화
+                - generic [ref=e61]: 02-554-5674
+          - generic [ref=e62]:
+            - link "지도로 보기" [ref=e63] [cursor=pointer]:
+              - /url: https://map.naver.com/v5/search/서울특별시 강남구 논현로63길 71
+              - img [ref=e64]
+              - generic [ref=e65]: 지도로 보기
+            - link "거리뷰로 보기" [ref=e66] [cursor=pointer]:
+              - /url: https://map.naver.com/v5/entry/address/37.5101,127.0283?lng=127.0283&lat=37.5101&type=0
+              - img [ref=e67]
+              - generic [ref=e68]: 거리뷰로 보기
+    - contentinfo [ref=e70]:
+      - generic [ref=e71]:
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - link "오시는길" [ref=e75] [cursor=pointer]:
+              - /url: http://localhost:8082/directions/
+            - link "개인정보처리방침" [ref=e77] [cursor=pointer]:
+              - /url: http://localhost:8082/privacy/
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - paragraph [ref=e81]: "서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층 Tel : 02-554-5674"
+              - paragraph [ref=e82]: Copyright ⓒ Pyeongjeong. All Rights Reserved
+            - img "법률사무소 평정" [ref=e84]
+        - link "Top" [ref=e85] [cursor=pointer]:
+          - /url: "#"
+          - img "Top" [ref=e86]

@@ -73,6 +73,7 @@ $theme_uri = get_template_directory_uri();
                         src="<?php echo esc_url($theme_uri . '/assets/images/directions/map.png'); ?>"
                         alt="<?php esc_attr_e('법률사무소 평정 지도', 'pjlaw'); ?>"
                     />
+                    <div class="directions-map-section__map-pin" aria-hidden="true"></div>
                 </div>
 
                 <!-- Info Row -->
@@ -99,7 +100,7 @@ $theme_uri = get_template_directory_uri();
                             class="directions-map-info__btn"
                             id="btn-naver-map"
                         >
-                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-map.svg'); ?>" alt="" aria-hidden="true" />
+                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/about/icon-directions.svg'); ?>" alt="" aria-hidden="true" class="directions-map-info__btn-icon directions-map-info__btn-icon--map" />
                             <span>지도로 보기</span>
                         </a>
                         <a
@@ -109,7 +110,7 @@ $theme_uri = get_template_directory_uri();
                             class="directions-map-info__btn"
                             id="btn-street-view"
                         >
-                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-street.svg'); ?>" alt="" aria-hidden="true" />
+                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-street.svg'); ?>" alt="" aria-hidden="true" class="directions-map-info__btn-icon directions-map-info__btn-icon--street" />
                             <span>거리뷰로 보기</span>
                         </a>
                     </div>
@@ -132,9 +133,9 @@ $theme_uri = get_template_directory_uri();
                         <a href="<?php echo esc_url(home_url('/privacy/')); ?>" class="bold">개인정보처리방침</a>
                     </div>
                     <div class="legal-separator"></div>
-                    <div class="legal-bottom">
-                        <div class="legal-info">
-                            <p>서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel : 02-554-5674</p>
+                        <div class="legal-bottom">
+                            <div class="legal-info">
+                            <p>서울특별시 강남구 논현로63길 71, 6층&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel : 02-554-5674</p>
                             <p class="copyright">Copyright ⓒ Pyeongjeong. All Rights Reserved</p>
                         </div>
                         <div class="footer-logo-wrap">
