@@ -73,7 +73,12 @@ $theme_uri = get_template_directory_uri();
                         src="<?php echo esc_url($theme_uri . '/assets/images/directions/map.png'); ?>"
                         alt="<?php esc_attr_e('법률사무소 평정 지도', 'pjlaw'); ?>"
                     />
-                    <div class="directions-map-section__map-pin" aria-hidden="true"></div>
+                    <img
+                        class="directions-map-section__map-pin"
+                        src="<?php echo esc_url($theme_uri . '/assets/icons/directions/location-sign.svg'); ?>"
+                        alt=""
+                        aria-hidden="true"
+                    />
                 </div>
 
                 <!-- Info Row -->
