@@ -39,14 +39,14 @@ $theme_uri = get_template_directory_uri();
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-home.svg'); ?>" alt="" aria-hidden="true" width="20" height="18" />
                     </a>
                     <div class="directions-hero__breadcrumb-items">
-                        <div class="directions-hero__breadcrumb-item">
+                        <a class="directions-hero__breadcrumb-item" href="<?php echo esc_url(home_url('/about/')); ?>">
                             <span>평정소개</span>
                             <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
-                        </div>
-                        <div class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active">
+                        </a>
+                        <a class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active" href="#directions-map-section">
                             <span>오시는길</span>
                             <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
-                        </div>
+                        </a>
                     </div>
                 </nav>
             </div>
@@ -54,7 +54,7 @@ $theme_uri = get_template_directory_uri();
     </section>
 
     <!-- Map Section -->
-    <section class="directions-map-section">
+    <section class="directions-map-section" id="directions-map-section">
         <div class="container directions-map-section__inner">
 
             <div class="directions-map-section__intro">
