@@ -17,8 +17,7 @@ $theme_uri = get_template_directory_uri();
 <main id="main" class="site-main services-page" role="main">
     <section class="services-hero">
         <div class="services-hero__bg">
-            <img src="<?php echo esc_url($theme_uri . '/assets/images/services/hero-bg.png'); ?>" alt="" class="services-hero__image" />
-            <img src="<?php echo esc_url($theme_uri . '/assets/images/services/hero-overlay.png'); ?>" alt="" class="services-hero__overlay" />
+            <img src="<?php echo esc_url($theme_uri . '/assets/images/services/hero.png'); ?>" alt="" class="services-hero__image" />
             <div class="services-hero__gradient"></div>
         </div>
         
@@ -88,8 +87,7 @@ $theme_uri = get_template_directory_uri();
             <div class="services-grid">
                 <a href="#civil" class="services-grid__item active">
                     <div class="services-grid__icon">
-                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-civil-1.svg'); ?>" alt="" class="icon-part-1" />
-                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-civil-2.svg'); ?>" alt="" class="icon-part-2" />
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-civil.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">민사</span>
                 </a>

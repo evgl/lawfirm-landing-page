@@ -2532,15 +2532,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.services-hero__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     mix-blend-mode: multiply;
 }
 
@@ -2857,6 +2848,16 @@
 
 .services-grid__item.active .services-grid__icon img {
     filter: brightness(0) invert(1);
+}
+
+/* Specific sizing for Civil icon (Scale) */
+.services-grid__item[href="#civil"] .services-grid__icon {
+    width: 48.2px;
+}
+
+.services-grid__item:not(.active)[href="#civil"] .services-grid__icon img {
+    /* Target Color: #1A2E69 from white base */
+    filter: invert(13%) sepia(90%) saturate(1915%) hue-rotate(209deg) brightness(94%) contrast(98%);
 }
 
 .services-grid__label {
