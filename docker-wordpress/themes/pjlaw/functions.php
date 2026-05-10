@@ -172,6 +172,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('services' === $request_path) {
+        $services_template = locate_template('page-services.php');
+        if ($services_template) {
+            return $services_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
