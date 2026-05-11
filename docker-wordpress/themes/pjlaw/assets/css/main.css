@@ -1648,6 +1648,14 @@
     gap: 30px;
 }
 
+.member-detail-nav__home-link,
+.member-detail-nav__close-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
 .member-detail-nav__separator {
     width: 1px;
     height: 80px;
@@ -1668,8 +1676,9 @@
 }
 
 .member-detail-nav__icon, .member-detail-nav__icon-close {
-    width: 20px;
-    height: 20px;
+    width: 19.527px;
+    height: 17.851px;
+    display: block;
 }
 
 .member-detail-nav__line-wrap {
@@ -1799,20 +1808,22 @@
 }
 
 .member-experience-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
 }
 
 .member-experience-item {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
 }
 
 .member-experience-icon {
     width: 38px;
     height: 29px;
+    flex: 0 0 auto;
 }
 
 .member-experience-text {
@@ -1823,6 +1834,7 @@
     color: #181a1e;
     letter-spacing: -0.6px;
     margin: 0;
+    min-width: 0;
 }
 
 .member-fields-list {

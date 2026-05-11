@@ -20,7 +20,9 @@ $theme_uri = get_template_directory_uri();
         <div class="member-detail-header">
             <div class="member-detail-nav">
                 <div class="member-detail-nav__links">
-                    <img src="<?php echo esc_url($theme_uri . '/assets/images/team/member-mask.svg'); ?>" alt="" class="member-detail-nav__icon" style="opacity: 0; width: 19px;" />
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="member-detail-nav__home-link" aria-label="<?php esc_attr_e('홈으로 이동', 'pjlaw'); ?>">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-home-dark.svg'); ?>" alt="" aria-hidden="true" class="member-detail-nav__icon" width="19.527" height="17.851" />
+                    </a>
                     <div class="member-detail-nav__separator"></div>
                     <div class="member-detail-nav__current">
                         <span>이시완 변호사</span>
@@ -30,7 +32,9 @@ $theme_uri = get_template_directory_uri();
                     </div>
                     <div class="member-detail-nav__separator"></div>
                 </div>
-                <img src="<?php echo esc_url($theme_uri . '/assets/images/team/member-mask.svg'); ?>" alt="" class="member-detail-nav__icon-close" style="opacity: 0; width: 20px;" />
+                <a href="<?php echo esc_url(home_url('/team/')); ?>" class="member-detail-nav__close-link" aria-label="<?php esc_attr_e('구성원 목록으로 닫기', 'pjlaw'); ?>">
+                    <img src="<?php echo esc_url($theme_uri . '/assets/icons/team/icon-close.svg'); ?>" alt="" aria-hidden="true" class="member-detail-nav__icon-close" width="20" height="20" />
+                </a>
             </div>
             <div class="member-detail-nav__line-wrap">
                 <div class="member-detail-nav__line-bg"></div>
