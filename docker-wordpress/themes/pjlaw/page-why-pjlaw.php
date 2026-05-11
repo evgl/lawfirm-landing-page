@@ -42,20 +42,21 @@ $theme_uri = get_template_directory_uri();
             </div>
 
             <div class="why-hero__footer">
-                <div class="about-hero__pager" aria-label="About section navigation">
-                    <a class="about-hero__pager-item" href="<?php echo esc_url(home_url('/about/')); ?>">
-                        <span>평정소개</span>
-                        <svg class="about-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                <nav class="directions-hero__breadcrumb-nav" aria-label="<?php esc_attr_e('페이지 경로', 'pjlaw'); ?>">
+                    <a class="directions-hero__breadcrumb-home" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('홈', 'pjlaw'); ?>">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-home.svg'); ?>" alt="" aria-hidden="true" width="20" height="18" />
                     </a>
-                    <a class="about-hero__pager-item" href="<?php echo esc_url(home_url('/why-pjlaw/')); ?>">
-                        <span>왜 평정인가?</span>
-                        <svg class="about-hero__pager-arrow" aria-hidden="true" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
+                    <div class="directions-hero__breadcrumb-items">
+                        <a class="directions-hero__breadcrumb-item" href="<?php echo esc_url(home_url('/about/')); ?>">
+                            <span>평정소개</span>
+                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                        </a>
+                        <a class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active" href="<?php echo esc_url(home_url('/why-pjlaw/')); ?>">
+                            <span>왜 평정인가?</span>
+                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                        </a>
+                    </div>
+                </nav>
             </div>
         </div>
     </section>

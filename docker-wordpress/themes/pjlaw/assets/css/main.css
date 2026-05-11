@@ -2262,6 +2262,19 @@
     letter-spacing: -0.54px;
 }
 
+.directions-hero__breadcrumb-item--active {
+    opacity: 1;
+}
+
+.directions-hero__breadcrumb-item:not(.directions-hero__breadcrumb-item--active) {
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.directions-hero__breadcrumb-item:not(.directions-hero__breadcrumb-item--active):hover {
+    opacity: 1;
+}
+
 .directions-hero__breadcrumb-arrow {
     width: 14px;
     height: 8.5px;
