@@ -186,6 +186,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if (strpos($request_path, 'blog/') === 0) {
+        $blog_post_template = locate_template('page-blog-post.php');
+        if ($blog_post_template) {
+            return $blog_post_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');

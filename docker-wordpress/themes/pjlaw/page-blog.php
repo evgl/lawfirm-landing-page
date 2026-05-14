@@ -207,7 +207,7 @@ $theme_uri = get_template_directory_uri();
 
                 foreach ($cards as $card) :
                 ?>
-                <a href="#" class="blog-card">
+                <a href="<?php echo esc_url(home_url('/blog/post/')); ?>" class="blog-card">
                     <div class="blog-card__image-wrap">
                         <img src="<?php echo esc_url($theme_uri . '/assets/images/blog/' . $card['image']); ?>" alt="<?php echo esc_attr($card['title']); ?>" class="blog-card__image" />
                     </div>
