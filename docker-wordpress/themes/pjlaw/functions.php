@@ -179,6 +179,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('blog' === $request_path) {
+        $blog_template = locate_template('page-blog.php');
+        if ($blog_template) {
+            return $blog_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
