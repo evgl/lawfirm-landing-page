@@ -2826,13 +2826,130 @@
     color: #97999D;
 }
 
-/* Services Grid */
+.services-tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.services-tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Services Grid (Category Tab) */
 .services-grid {
     display: flex;
     gap: 9px;
     width: 100%;
     max-width: 1300px;
     margin: 0 auto 60px;
+}
+
+/* Services All Tab Content */
+.services-alpha-nav {
+    display: flex;
+    gap: 9px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto 60px;
+}
+
+.services-alpha-item {
+    flex: 0 0 100px;
+    width: 100px;
+    background: #FFFFFF;
+    border: 1px solid #E7E9EB;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.services-alpha-item.active {
+    background: #1A2E69;
+    border-color: #1A2E69;
+}
+
+.services-alpha-item .char {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.54px;
+    color: #181A1E;
+}
+
+.services-alpha-item .count {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.54px;
+    color: #8B8D92;
+    margin-top: 4px;
+}
+
+.services-alpha-item.active .char,
+.services-alpha-item.active .count {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.services-all-content {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.services-all-title {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 32px;
+    letter-spacing: -0.66px;
+    color: #181A1E;
+    margin-bottom: 20px;
+}
+
+.services-all-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.services-all-tag {
+    background: #FFFFFF;
+    border: 1px solid #D9DBDD;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 26px;
+    box-sizing: border-box;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.48px;
+    color: #545558;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.services-all-tag:hover {
+    background: #F4F4F7;
+    border-color: #C0C2C5;
+    color: #181A1E;
 }
 
 .services-grid__item {
