@@ -80,9 +80,9 @@ $theme_uri = get_template_directory_uri();
                 </div>
             </div>
 
-            <div class="blog-filters">
-                <a href="#all" class="blog-filter blog-filter--active">
-                    <div class="blog-filter__icon">
+            <div class="services-grid" style="margin-bottom: 60px;">
+                <a href="#all" class="services-grid__item active">
+                    <div class="services-grid__icon">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.25 11.25H18.75V18.75H11.25V11.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M5 5H10V10H5V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -91,53 +91,53 @@ $theme_uri = get_template_directory_uri();
                             <path d="M20 20H25V25H20V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <span class="blog-filter__label">전체</span>
+                    <span class="services-grid__label">전체</span>
                 </a>
-                <a href="#civil" class="blog-filter">
-                    <div class="blog-filter__icon">
+                <a href="#civil" class="services-grid__item">
+                    <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-civil.svg'); ?>" alt="" />
                     </div>
-                    <span class="blog-filter__label">민사</span>
+                    <span class="services-grid__label">민사</span>
                 </a>
-                <a href="#criminal" class="blog-filter">
-                    <div class="blog-filter__icon">
+                <a href="#criminal" class="services-grid__item">
+                    <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-criminal.svg'); ?>" alt="" />
                     </div>
-                    <span class="blog-filter__label">형사</span>
+                    <span class="services-grid__label">형사</span>
                 </a>
-                <a href="#sexual" class="blog-filter">
-                    <div class="blog-filter__icon">
+                <a href="#sexual" class="services-grid__item">
+                    <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-sexual-crime.svg'); ?>" alt="" />
                     </div>
-                    <span class="blog-filter__label">성범죄</span>
+                    <span class="services-grid__label">성범죄</span>
                 </a>
-                <a href="#divorce" class="blog-filter">
-                    <div class="blog-filter__icon">
+                <a href="#divorce" class="services-grid__item">
+                    <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-divorce.svg'); ?>" alt="" />
                     </div>
-                    <span class="blog-filter__label">이혼</span>
+                    <span class="services-grid__label">이혼</span>
                 </a>
-                <a href="#inheritance" class="blog-filter">
-                    <div class="blog-filter__icon">
+                <a href="#inheritance" class="services-grid__item">
+                    <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-inheritance.svg'); ?>" alt="" />
                     </div>
-                    <span class="blog-filter__label">상속</span>
+                    <span class="services-grid__label">상속</span>
                 </a>
-                <a href="#realestate" class="blog-filter">
-                    <div class="blog-filter__icon">
+                <a href="#realestate" class="services-grid__item">
+                    <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-real-estate.svg'); ?>" alt="" />
                     </div>
-                    <span class="blog-filter__label">부동산</span>
+                    <span class="services-grid__label">부동산</span>
                 </a>
-                <a href="#corporate" class="blog-filter">
-                    <div class="blog-filter__icon corporate-icon">
+                <a href="#corporate" class="services-grid__item">
+                    <div class="services-grid__icon corporate-icon">
                         <div class="corporate-icon-wrapper">
                             <div class="corporate-building-1"></div>
                             <div class="corporate-building-2"></div>
                             <div class="corporate-building-3"></div>
                         </div>
                     </div>
-                    <span class="blog-filter__label">기업</span>
+                    <span class="services-grid__label">기업</span>
                 </a>
             </div>
 

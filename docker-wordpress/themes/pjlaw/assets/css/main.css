@@ -3419,63 +3419,6 @@
     position: relative;
 }
 
-/* Blog Filters */
-.blog-filters {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    max-width: 1300px;
-    margin: 0 auto 60px;
-}
-
-.blog-filter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    height: 74px;
-    width: 154px;
-    background: #FFFFFF;
-    border: 1px solid #E7E9EB;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
-    text-decoration: none;
-    box-sizing: border-box;
-}
-
-.blog-filter__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-}
-
-.blog-filter__icon img,
-.blog-filter__icon svg {
-    max-width: 100%;
-    height: auto;
-}
-
-.blog-filter__label {
-    font-family: 'Pretendard', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    letter-spacing: -0.54px;
-    color: #181A1E;
-}
-
-.blog-filter--active {
-    background: #1A2E69;
-    border-color: #1A2E69;
-}
-
-.blog-filter--active .blog-filter__label,
-.blog-filter--active .blog-filter__icon {
-    color: #FFFFFF;
-}
-
 /* Blog Results */
 .blog-results-header {
     max-width: 1300px;
