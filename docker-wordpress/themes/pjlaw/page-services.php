@@ -19,6 +19,28 @@ $theme_uri = get_template_directory_uri();
 
 <main id="main" class="site-main services-page" role="main">
     <?php if ($is_detail) : ?>
+        <div class="blog-post-nav">
+            <div class="blog-post-nav__inner">
+                <div class="blog-post-nav__links">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="blog-post-nav__home-link" aria-label="<?php esc_attr_e('홈으로 이동', 'pjlaw'); ?>">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-home-nav.svg'); ?>" alt="" aria-hidden="true" class="blog-post-nav__icon" width="19" height="18" />
+                    </a>
+                    <div class="blog-post-nav__separator"></div>
+                    <div class="blog-post-nav__current">
+                        <span class="blog-post-nav__title"><?php echo esc_html($service_name); ?></span>
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-chevron-down-small.svg'); ?>" alt="" />
+                    </div>
+                    <div class="blog-post-nav__separator"></div>
+                </div>
+                <a href="<?php echo esc_url(home_url('/services/')); ?>" class="blog-post-nav__close-link" aria-label="<?php esc_attr_e('목록으로 돌아가기', 'pjlaw'); ?>">
+                    <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-close-nav.svg'); ?>" alt="" aria-hidden="true" class="blog-post-nav__icon-close" width="20" height="20" />
+                </a>
+            </div>
+            <div class="blog-post-nav__line-wrap">
+                <div class="blog-post-nav__line-bg"></div>
+                <div class="blog-post-nav__line-active"></div>
+            </div>
+        </div>
         <section class="sd-header">
             <div class="container sd-header__inner">
                 <div class="sd-header__content">

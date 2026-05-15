@@ -16,23 +16,22 @@ $theme_uri = get_template_directory_uri();
 
 <main id="main" class="site-main blog-post-page" role="main">
     <div class="blog-post-nav">
-        <div class="blog-post-nav__links">
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="blog-post-nav__home-link" aria-label="<?php esc_attr_e('홈으로 이동', 'pjlaw'); ?>">
-                <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-home-dark.svg'); ?>" alt="" aria-hidden="true" class="blog-post-nav__icon" width="19.527" height="17.851" />
-            </a>
-            <div class="blog-post-nav__separator"></div>
-            <div class="blog-post-nav__current">
-                <span>블로그</span>
-                <span class="blog-post-nav__title">몰카 카메라등이용촬영죄 성립요건 · 처벌수위 · 양형기준은?</span>
-                <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L5.5 5L10 1" stroke="#181a1e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <div class="blog-post-nav__inner">
+            <div class="blog-post-nav__links">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="blog-post-nav__home-link" aria-label="<?php esc_attr_e('홈으로 이동', 'pjlaw'); ?>">
+                    <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-home-nav.svg'); ?>" alt="" aria-hidden="true" class="blog-post-nav__icon" width="19" height="18" />
+                </a>
+                <div class="blog-post-nav__separator"></div>
+                <div class="blog-post-nav__current">
+                    <span class="blog-post-nav__title">명예훼손</span>
+                    <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-chevron-down-small.svg'); ?>" alt="" />
+                </div>
+                <div class="blog-post-nav__separator"></div>
             </div>
-            <div class="blog-post-nav__separator"></div>
+            <a href="<?php echo esc_url(home_url('/services/')); ?>" class="blog-post-nav__close-link" aria-label="<?php esc_attr_e('목록으로 돌아가기', 'pjlaw'); ?>">
+                <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-close-nav.svg'); ?>" alt="" aria-hidden="true" class="blog-post-nav__icon-close" width="20" height="20" />
+            </a>
         </div>
-        <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-post-nav__close-link" aria-label="<?php esc_attr_e('블로그 목록으로 돌아가기', 'pjlaw'); ?>">
-            <img src="<?php echo esc_url($theme_uri . '/assets/icons/team/icon-close.svg'); ?>" alt="" aria-hidden="true" class="blog-post-nav__icon-close" width="20" height="20" />
-        </a>
         <div class="blog-post-nav__line-wrap">
             <div class="blog-post-nav__line-bg"></div>
             <div class="blog-post-nav__line-active"></div>

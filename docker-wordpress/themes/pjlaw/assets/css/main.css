@@ -4022,6 +4022,12 @@
     margin-left: auto;
 }
 
+.sd-sidebar__top-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .sd-sidebar-card {
     background: #1A2E69;
     border-radius: 14px;
@@ -4134,6 +4140,48 @@
     }
 }
 
+/* Services Detail Pagination Navigation */
+.sd-nav-row {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #1a2e69;
+    padding-top: 20px;
+    margin-top: 40px;
+}
+
+.sd-nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sd-nav-next {
+    align-items: flex-end;
+}
+
+.sd-nav-link-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #181a1e;
+    text-decoration: none;
+}
+
+.sd-nav-link-wrap img {
+    max-width: 60px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.sd-nav-text {
+    font-size: 15px;
+    color: #8b8e96;
+}
+
 /* ==========================================================================
    Blog Post Detail Page
    ========================================================================== */
@@ -4148,14 +4196,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.blog-post-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1300px;
+    margin: 0 auto;
     position: relative;
 }
 
 .blog-post-nav__links {
     display: flex;
     align-items: center;
-    width: 1300px;
-    margin: 0 auto;
 }
 
 .blog-post-nav__home-link {
@@ -4178,18 +4235,28 @@
     font-weight: 600;
     font-size: 18px;
     color: #181a1e;
-    flex: 1;
+}
+
+.blog-post-nav__current img {
+    max-width: 12px;
+    height: auto;
+    flex-shrink: 0;
 }
 
 .blog-post-nav__title {
-    margin-left: 5px;
+    margin: 0;
 }
 
 .blog-post-nav__close-link {
-    position: absolute;
-    right: max(20px, calc((100% - 1300px) / 2));
     display: flex;
     align-items: center;
+}
+
+.blog-post-nav__icon,
+.blog-post-nav__icon-close {
+    flex-shrink: 0;
+    max-width: 20px;
+    height: auto;
 }
 
 .blog-post-nav__line-wrap {
@@ -4788,6 +4855,15 @@
     font-weight: 600;
     font-size: 16px;
     color: #181a1e;
+}
+
+.blog-post__nav-icon svg,
+.blog-post__nav-icon img {
+    max-width: 60px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
 }
 
 .blog-post__nav-text {
