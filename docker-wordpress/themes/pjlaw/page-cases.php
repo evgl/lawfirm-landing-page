@@ -20,7 +20,8 @@ $cases = [
         'type'     => 'criminal',
         'title'    => '아청법 위반 혐의로 기소당했으나 변호인 조력을 통해 기소유예 처분을 받은 성범죄 사례',
         'desc'     => '아청법 위반 혐의로 기소당해 성범죄 변호사의 조력을 구하셨습니다. 법무법인 평정은 피의자 신분의 의뢰인을 대리했습니다.',
-        'image'    => $theme_uri . '/assets/images/cases/case-thumb-1.jpg',
+        'image'    => $theme_uri . '/assets/images/cases/case-base.jpg',
+        'label'    => 'seungso',
     ],
     [
         'badge'    => '승소',
@@ -28,7 +29,8 @@ $cases = [
         'type'     => 'criminal',
         'title'    => '폭행 혐의로 수사를 받던 중 변호인의 적극적 대응으로 불기소 처분을 받은 형사 사례',
         'desc'     => '피의자 신분으로 경찰 조사를 받게 되어 형사 전문 변호사를 선임했습니다. 증거 분석과 진술 조력으로 불기소 처분을 이끌어냈습니다.',
-        'image'    => $theme_uri . '/assets/images/cases/case-thumb-1.jpg',
+        'image'    => $theme_uri . '/assets/images/cases/case-base.jpg',
+        'label'    => 'kisooyue',
     ],
     [
         'badge'    => '승소',
@@ -36,7 +38,8 @@ $cases = [
         'type'     => 'civil',
         'title'    => '계약 불이행으로 인한 손해배상 청구 소송에서 원고 승소 판결을 받은 민사 사례',
         'desc'     => '거래처의 계약 위반으로 큰 손해를 입어 법적 조치를 취했습니다. 치밀한 증거 수집과 법리 구성으로 전액 손해배상을 받았습니다.',
-        'image'    => $theme_uri . '/assets/images/cases/case-thumb-1.jpg',
+        'image'    => $theme_uri . '/assets/images/cases/case-base.jpg',
+        'label'    => 'seungso',
     ],
     [
         'badge'    => '승소',
@@ -44,7 +47,8 @@ $cases = [
         'type'     => 'divorce',
         'title'    => '장기 별거 상태에서 재산분할 및 위자료 청구 소송으로 정당한 권리를 찾은 사례',
         'desc'     => '배우자의 귀책 사유로 혼인 파탄에 이르렀고, 재산분할 및 위자료 청구를 통해 의뢰인의 정당한 몫을 확보했습니다.',
-        'image'    => $theme_uri . '/assets/images/cases/case-thumb-1.jpg',
+        'image'    => $theme_uri . '/assets/images/cases/case-base.jpg',
+        'label'    => 'kisooyue',
     ],
     [
         'badge'    => '승소',
@@ -52,7 +56,8 @@ $cases = [
         'type'     => 'inheritance',
         'title'    => '유류분 침해를 주장하며 제기한 유류분반환청구 소송에서 승소 판결을 받은 사례',
         'desc'     => '부모님 사망 후 특정 상속인에게 재산이 편중되어 유류분 침해가 발생했습니다. 법원의 적절한 심리를 통해 유류분을 회복했습니다.',
-        'image'    => $theme_uri . '/assets/images/cases/case-thumb-1.jpg',
+        'image'    => $theme_uri . '/assets/images/cases/case-base.jpg',
+        'label'    => 'seungso',
     ],
     [
         'badge'    => '승소',
@@ -60,7 +65,8 @@ $cases = [
         'type'     => 'realestate',
         'title'    => '전세보증금 반환 거부에 맞서 법적 절차를 통해 전액 반환 받은 부동산 사례',
         'desc'     => '임대차 계약 종료 후 임대인이 보증금 반환을 거부해 법적 조치를 취했습니다. 신속한 법원 절차로 전액 반환 판결을 받았습니다.',
-        'image'    => $theme_uri . '/assets/images/cases/case-thumb-1.jpg',
+        'image'    => $theme_uri . '/assets/images/cases/case-base.jpg',
+        'label'    => 'kisooyue',
     ],
 ];
 ?>
@@ -230,7 +236,8 @@ $cases = [
                         <p class="case-card__desc"><?php echo esc_html($case['desc']); ?></p>
                     </div>
                     <div class="case-card__image">
-                        <img src="<?php echo esc_url($case['image']); ?>" alt="" loading="lazy" />
+                        <img class="case-card__image-base" src="<?php echo esc_url($case['image']); ?>" alt="" loading="lazy" />
+                        <img class="case-card__image-label" src="<?php echo esc_url($theme_uri . '/assets/images/cases/case-label-' . esc_attr($case['label']) . '.png'); ?>" alt="" />
                     </div>
                 </article>
                 <?php endforeach; ?>

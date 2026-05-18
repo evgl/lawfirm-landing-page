@@ -5258,6 +5258,7 @@
     flex-direction: column;
     overflow: hidden;
     border-radius: 18px;
+    height: 100%;
 }
 
 .case-card__info {
@@ -5267,6 +5268,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex: 1;
 }
 
 .case-card__meta {
@@ -5324,6 +5326,7 @@
 }
 
 .case-card__image {
+    position: relative;
     width: 100%;
     aspect-ratio: 416 / 240;
     overflow: hidden;
@@ -5331,11 +5334,19 @@
     flex-shrink: 0;
 }
 
-.case-card__image img {
+.case-card__image-base {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.case-card__image-label {
+    position: absolute;
+    left: 27.9%;
+    top: 28.8%;
+    width: 44.5%;
+    object-fit: contain;
 }
 
 /* Pagination */
