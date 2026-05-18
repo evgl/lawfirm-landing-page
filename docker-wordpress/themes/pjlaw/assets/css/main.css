@@ -2996,16 +2996,6 @@
     filter: brightness(0) invert(1);
 }
 
-/* Specific sizing for Civil icon (Scale) */
-.services-grid__item[href="#civil"] .services-grid__icon {
-    width: 36px;
-    height: 30px;
-}
-
-.services-grid__item:not(.active)[href="#civil"] .services-grid__icon img {
-    filter: none;
-}
-
 .services-grid__label {
     font-family: 'Pretendard', sans-serif;
     font-weight: 600;
