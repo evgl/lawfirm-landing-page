@@ -9,7 +9,19 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$post_title = get_the_title();
+$post_title = '';
+
+if (!empty($_GET['title'])) {
+    $post_title = sanitize_text_field(wp_unslash($_GET['title']));
+}
+
+if (!$post_title) {
+    $queried_object_id = get_queried_object_id();
+    $post_title = $queried_object_id ? get_the_title($queried_object_id) : '';
+}
+
+$post_title = $post_title ? $post_title : get_the_title();
+$post_title = $post_title ? $post_title : __('블로그', 'pjlaw');
 $theme_uri = get_template_directory_uri();
 ?>
 
