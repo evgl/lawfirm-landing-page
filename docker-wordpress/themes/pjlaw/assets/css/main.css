@@ -2987,6 +2987,9 @@
     max-width: 100%;
     max-height: 100%;
     display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .services-grid__item.active .services-grid__icon img {
@@ -2995,12 +2998,12 @@
 
 /* Specific sizing for Civil icon (Scale) */
 .services-grid__item[href="#civil"] .services-grid__icon {
-    width: 48.2px;
+    width: 36px;
+    height: 30px;
 }
 
 .services-grid__item:not(.active)[href="#civil"] .services-grid__icon img {
-    /* Target Color: #1A2E69 from white base */
-    filter: invert(13%) sepia(90%) saturate(1915%) hue-rotate(209deg) brightness(94%) contrast(98%);
+    filter: none;
 }
 
 .services-grid__label {
