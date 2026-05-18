@@ -4623,12 +4623,12 @@
     width: 400px;
     height: 56px;
     margin: 40px auto 0;
-    border: none;
-    border-radius: 10px;
+    border: 1px solid #1a2e69;
+    border-radius: 28px;
     font-weight: 600;
     font-size: 16px;
-    color: #fff;
-    background: #181a1e;
+    color: #1a2e69;
+    background: #fff;
     text-decoration: none;
 }
 
