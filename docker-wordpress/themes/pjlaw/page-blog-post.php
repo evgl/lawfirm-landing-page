@@ -9,12 +9,21 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-get_header();
-
+$post_title = get_the_title();
 $theme_uri = get_template_directory_uri();
 ?>
 
-<main id="main" class="site-main blog-post-page" role="main">
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <?php wp_head(); ?>
+</head>
+<body <?php body_class('blog-post-page'); ?>>
+    <?php wp_body_open(); ?>
+
+    <main id="main" class="site-main blog-post-page" role="main">
     <div class="blog-post-nav">
         <div class="blog-post-nav__inner">
             <div class="blog-post-nav__links">
@@ -23,8 +32,7 @@ $theme_uri = get_template_directory_uri();
                 </a>
                 <div class="blog-post-nav__separator"></div>
                 <div class="blog-post-nav__current">
-                    <span class="blog-post-nav__title">명예훼손</span>
-                    <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-chevron-down-small.svg'); ?>" alt="" />
+                    <span class="blog-post-nav__title"><?php echo esc_html($post_title); ?></span>
                 </div>
                 <div class="blog-post-nav__separator"></div>
             </div>
