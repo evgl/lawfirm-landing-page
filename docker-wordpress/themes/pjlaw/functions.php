@@ -193,6 +193,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('cases' === $request_path) {
+        $cases_template = locate_template('page-cases.php');
+        if ($cases_template) {
+            return $cases_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
