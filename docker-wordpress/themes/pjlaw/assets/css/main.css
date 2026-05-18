@@ -4348,8 +4348,9 @@
 
 .blog-post__intro-text {
     font-family: 'Pretendard', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: -0.54px;
     color: #414347;
     margin: 0;
 }
@@ -4468,16 +4469,24 @@
 .blog-post__chapter-num {
     font-family: 'Pretendard', sans-serif;
     font-weight: 700;
-    font-size: 30px;
-    color: #1a2e69;
-    margin-right: 15px;
+    font-size: 24px;
+    color: #fff;
+    background: #1a2e69;
+    width: 66px;
+    height: 66px;
+    border-radius: 14px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 20px;
 }
 
 .blog-post__chapter-title {
     font-family: 'Pretendard', sans-serif;
     font-weight: 700;
     font-size: 28px;
-    color: #181a1e;
+    color: #1a2e69;
     margin: 0;
 }
 
@@ -4510,14 +4519,15 @@
 
 .blog-post__text {
     font-family: 'Pretendard', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: -0.54px;
     color: #414347;
     margin: 0;
 }
 
 .blog-post__law-box {
-    background: #eeeff2;
+    background: #eef4ff;
     border-radius: 14px;
     padding: 30px;
     margin: 20px 0;
@@ -4613,12 +4623,12 @@
     width: 400px;
     height: 56px;
     margin: 40px auto 0;
-    border: 1px solid #1a2e69;
-    border-radius: 28px;
+    border: none;
+    border-radius: 10px;
     font-weight: 600;
     font-size: 16px;
-    color: #1a2e69;
-    background: #fff;
+    color: #fff;
+    background: #181a1e;
     text-decoration: none;
 }
 
@@ -4818,14 +4828,14 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 150px;
     height: 56px;
-    background: #fff;
-    border: 1px solid #e3e5e9;
-    border-radius: 28px;
+    padding: 0 53px;
+    background: #181a1e;
+    border: none;
+    border-radius: 10px;
     font-weight: 600;
     font-size: 16px;
-    color: #181a1e;
+    color: #fff;
     text-decoration: none;
 }
 
