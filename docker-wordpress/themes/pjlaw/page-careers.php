@@ -131,6 +131,7 @@ $talent_values = array(
 
             <div class="careers-grid">
                 <?php foreach ($job_cards as $card) : ?>
+                <a href="<?php echo esc_url(home_url('/careers-detail/')); ?>" class="careers-card-link">
                     <article class="careers-card">
                         <div class="careers-card__header">
                             <div class="careers-card__meta">
@@ -151,11 +152,12 @@ $talent_values = array(
                             </div>
                         </div>
                     </article>
+                </a>
                 <?php endforeach; ?>
             </div>
 
             <div class="careers-viewall-wrap">
-                <a href="#" class="careers-viewall">전체보기</a>
+                <a href="<?php echo esc_url(home_url('/careers-all/')); ?>" class="careers-viewall">전체보기</a>
             </div>
             </div><!-- /.careers-listings__inner -->
         </div><!-- /.careers-listings__frame-wrap -->

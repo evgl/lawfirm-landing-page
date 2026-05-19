@@ -207,6 +207,20 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('careers-all' === $request_path) {
+        $careers_all_template = locate_template('page-careers-all.php');
+        if ($careers_all_template) {
+            return $careers_all_template;
+        }
+    }
+
+    if ('careers-detail' === $request_path) {
+        $detail_template = locate_template('page-careers-detail.php');
+        if ($detail_template) {
+            return $detail_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
