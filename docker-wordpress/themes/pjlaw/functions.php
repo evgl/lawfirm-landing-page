@@ -200,6 +200,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('careers' === $request_path) {
+        $careers_template = locate_template('page-careers.php');
+        if ($careers_template) {
+            return $careers_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
