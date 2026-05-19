@@ -123,7 +123,7 @@ $talent_values = array(
                 </div>
                 <div class="careers-listings__arrows">
                     <button class="careers-arrow careers-arrow--prev" aria-label="이전">
-                        <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/arrow-prev.svg'); ?>" alt="" width="60" height="60">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/arrow-next.svg'); ?>" alt="" width="60" height="60" style="transform:rotate(180deg);">
                     </button>
                     <button class="careers-arrow careers-arrow--next" aria-label="다음">
                         <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/arrow-next.svg'); ?>" alt="" width="60" height="60">
@@ -148,7 +148,7 @@ $talent_values = array(
                         <div class="careers-card__body">
                             <h3 class="careers-card__title"><?php echo esc_html($card['title']); ?></h3>
                             <div class="careers-card__date">
-                                <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/calendar-icon.png'); ?>" alt="" width="15" height="16">
+                                <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/calendar-icon.svg'); ?>" alt="" width="15" height="16">
                                 <span><?php echo esc_html($card['date']); ?></span>
                             </div>
                         </div>
