@@ -101,11 +101,9 @@ $talent_values = array(
 
     <!-- Job Listings Section -->
     <section class="careers-listings">
-        <div class="careers-right-people" aria-hidden="true">
-            <span>RIGHT PEOPLE</span>
-            <span>RIGHT PEOPLE</span>
-        </div>
-        <div class="careers-listings__inner container">
+        <div class="careers-listings__frame-wrap">
+            <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/folder-frame.svg'); ?>" alt="" class="careers-listings__frame-svg" aria-hidden="true">
+            <div class="careers-listings__inner">
             <div class="careers-listings__header">
                 <div class="careers-listings__header-left">
                     <h2 class="careers-listings__title">현재 진행중인 공고</h2>
@@ -159,11 +157,16 @@ $talent_values = array(
             <div class="careers-viewall-wrap">
                 <a href="#" class="careers-viewall">전체보기</a>
             </div>
-        </div>
+            </div><!-- /.careers-listings__inner -->
+        </div><!-- /.careers-listings__frame-wrap -->
     </section>
 
     <!-- Talent Values Section -->
     <section class="careers-values">
+        <div class="careers-right-people" aria-hidden="true">
+            <span>RIGHT PEOPLE</span>
+            <span>RIGHT PEOPLE</span>
+        </div>
         <div class="container">
             <h2 class="careers-values__title">평정의 인재상</h2>
             <div class="careers-values__list">
