@@ -2974,6 +2974,20 @@
     border-color: #1A2E69;
 }
 
+.services-grid__item.active .services-grid__icon svg path,
+.services-grid__item.active .services-grid__icon svg rect,
+.services-grid__item.active .services-grid__icon svg circle,
+.services-grid__item.active .services-grid__icon svg line {
+    stroke: #fff;
+    fill: #fff;
+}
+.services-grid__item.active .services-grid__icon svg [fill="none"] {
+    fill: none;
+}
+.services-grid__item.active .services-grid__icon img {
+    filter: brightness(0) invert(1);
+}
+
 .services-grid__icon {
     width: 40px;
     height: 40px;

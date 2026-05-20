@@ -138,85 +138,74 @@ $cases = [
 
     <section class="cases-tabs-section">
         <div class="cases-container">
-            <div class="cases-tabs" id="cases-tabs">
-                <button class="cases-tab cases-tab--active" data-tab="all">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="3" width="10" height="10" rx="2" fill="white" fill-opacity="0.8"/>
-                            <rect x="17" y="3" width="10" height="10" rx="2" fill="white" fill-opacity="0.8"/>
-                            <rect x="3" y="17" width="10" height="10" rx="2" fill="white" fill-opacity="0.8"/>
-                            <rect x="17" y="17" width="10" height="10" rx="2" fill="white" fill-opacity="0.8"/>
+            <div class="services-grid" id="cases-tabs">
+                <button class="services-grid__item active" data-tab="all">
+                    <div class="services-grid__icon">
+                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <mask id="cases-grid-icon-all" fill="white">
+                                <path d="M9 14C10.6569 14 12 15.3431 12 17V23C12 24.6569 10.6569 26 9 26H3C1.34315 26 0 24.6569 0 23V17C0 15.3431 1.34315 14 3 14H9ZM23 14C24.6569 14 26 15.3431 26 17V23C26 24.6569 24.6569 26 23 26H17C15.3431 26 14 24.6569 14 23V17C14 15.3431 15.3431 14 17 14H23ZM9 0C10.6569 0 12 1.34315 12 3V9C12 10.6569 10.6569 12 9 12H3C1.34315 12 0 10.6569 0 9V3C0 1.34315 1.34315 0 3 0H9ZM23 0C24.6569 0 26 1.34315 26 3V9C26 10.6569 24.6569 12 23 12H17C15.3431 12 14 10.6569 14 9V3C14 1.34315 15.3431 0 17 0H23Z"/>
+                            </mask>
+                            <path d="M9 14V15.88C9.61856 15.88 10.12 16.3814 10.12 17H12H13.88C13.88 14.3049 11.6951 12.12 9 12.12V14ZM12 17H10.12V23H12H13.88V17H12ZM12 23H10.12C10.12 23.6186 9.61856 24.12 9 24.12V26V27.88C11.6951 27.88 13.88 25.6952 13.88 23H12ZM9 26V24.12H3V26V27.88H9V26ZM3 26V24.12C2.38144 24.12 1.88 23.6186 1.88 23H0H-1.88C-1.88 25.6952 0.30485 27.88 3 27.88V26ZM0 23H1.88V17H0H-1.88V23H0ZM0 17H1.88C1.88 16.3814 2.38144 15.88 3 15.88V14V12.12C0.30485 12.12 -1.88 14.3049 -1.88 17H0ZM3 14V15.88H9V14V12.12H3V14ZM23 14V15.88C23.6186 15.88 24.12 16.3814 24.12 17H26H27.88C27.88 14.3049 25.6952 12.12 23 12.12V14ZM26 17H24.12V23H26H27.88V17H26ZM26 23H24.12C24.12 23.6186 23.6186 24.12 23 24.12V26V27.88C25.6952 27.88 27.88 25.6952 27.88 23H26ZM23 26V24.12H17V26V27.88H23V26ZM17 26V24.12C16.3814 24.12 15.88 23.6186 15.88 23H14H12.12C12.12 25.6952 14.3049 27.88 17 27.88V26ZM14 23H15.88V17H14H12.12V23H14ZM14 17H15.88C15.88 16.3814 16.3814 15.88 17 15.88V14V12.12C14.3049 12.12 12.12 14.3049 12.12 17H14ZM17 14V15.88H23V14V12.12H17V14ZM9 0V1.88C9.61856 1.88 10.12 2.38144 10.12 3H12H13.88C13.88 0.30485 11.6951 -1.88 9 -1.88V0ZM12 3H10.12V9H12H13.88V3H12ZM12 9H10.12C10.12 9.61856 9.61856 10.12 9 10.12V12V13.88C11.6951 13.88 13.88 11.6951 13.88 9H12ZM9 12V10.12H3V12V13.88H9V12ZM3 12V10.12C2.38144 10.12 1.88 9.61856 1.88 9H0H-1.88C-1.88 11.6951 0.30485 13.88 3 13.88V12ZM0 9H1.88V3H0H-1.88V9H0ZM0 3H1.88C1.88 2.38144 2.38144 1.88 3 1.88V0V-1.88C0.30485 -1.88 -1.88 0.30485 -1.88 3H0ZM3 0V1.88H9V0V-1.88H3V0ZM23 0V1.88C23.6186 1.88 24.12 2.38144 24.12 3H26H27.88C27.88 0.30485 25.6952 -1.88 23 -1.88V0ZM26 3H24.12V9H26H27.88V3H26ZM26 9H24.12C24.12 9.61856 23.6186 10.12 23 10.12V12V13.88C25.6952 13.88 27.88 11.6951 27.88 9H26ZM23 12V10.12H17V12V13.88H23V12ZM17 12V10.12C16.3814 10.12 15.88 9.61856 15.88 9H14H12.12C12.12 11.6951 14.3049 13.88 17 13.88V12ZM14 9H15.88V3H14H12.12V9H14ZM14 3H15.88C15.88 2.38144 16.3814 1.88 17 1.88V0V-1.88C14.3049 -1.88 12.12 0.30485 12.12 3H14ZM17 0V1.88H23V0V-1.88H17V0Z" fill="#181A1E" mask="url(#cases-grid-icon-all)"/>
                         </svg>
-                    </span>
-                    <span class="cases-tab__label">전체</span>
+                    </div>
+                    <span class="services-grid__label">전체</span>
                 </button>
-                <button class="cases-tab" data-tab="civil">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="6" width="22" height="18" rx="2" stroke="#181a1e" stroke-width="1.88"/>
-                            <path d="M9 12H21M9 16H17" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
+                <button class="services-grid__item" data-tab="civil">
+                    <div class="services-grid__icon">
+                        <svg width="40" height="40" viewBox="0 0 37 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" overflow="visible" preserveAspectRatio="xMidYMid meet">
+                            <path d="M18 4.31543C18.9306 4.31543 19.6846 5.0694 19.6846 6V26.4346H16.3154V6C16.3154 5.0694 17.0694 4.31543 18 4.31543Z" stroke="#181A1E" stroke-width="1.88"/>
+                            <rect x="16.315" y="0.94" width="3.37" height="3.37" rx="1.685" stroke="#181A1E" stroke-width="1.88"/>
+                            <rect x="5.88867" y="5.49414" width="11.087" height="1.875" rx="0.9375" fill="#181A1E"/>
+                            <rect x="19.1895" y="5.49414" width="11.087" height="1.875" rx="0.9375" fill="#181A1E"/>
+                            <path d="M12.4717 17.0654C12.0308 19.4105 9.97314 21.1846 7.5 21.1846H6C3.52686 21.1846 1.46918 19.4105 1.02832 17.0654H12.4717Z" fill="#88A6FF" stroke="#181A1E" stroke-width="1.88"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.69628 5.53469C7.07788 5.5131 7.44998 5.72785 7.61034 6.09914L12.0156 16.2993C12.2205 16.7745 12.0014 17.3255 11.5264 17.5308C11.0511 17.7361 10.4993 17.5178 10.2939 17.0425L6.70116 8.72414L3.10839 17.0425C2.90298 17.5177 2.3512 17.7361 1.87596 17.5308C1.40092 17.3253 1.18241 16.7735 1.38768 16.2984L5.79296 6.09914C5.95183 5.73139 6.3185 5.5177 6.69628 5.53469Z" fill="#181A1E"/>
+                            <path d="M35.1279 17.0654C34.6871 19.4105 32.6294 21.1846 30.1562 21.1846H28.6562C26.1831 21.1846 24.1254 19.4105 23.6846 17.0654H35.1279Z" fill="#88A6FF" stroke="#181A1E" stroke-width="1.88"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M29.3486 5.53469C29.7302 5.5131 30.1023 5.72785 30.2627 6.09914L34.668 16.2993C34.8729 16.7745 34.6538 17.3255 34.1787 17.5308C33.7034 17.7361 33.1516 17.5178 32.9463 17.0425L29.3535 8.72414L25.7607 17.0425C25.5553 17.5177 25.0035 17.7361 24.5283 17.5308C24.0533 17.3253 23.8348 16.7735 24.04 16.2984L28.4453 6.09914C28.6042 5.73139 28.9708 5.5177 29.3486 5.53469Z" fill="#181A1E"/>
+                            <rect x="10.125" y="25.5" width="15.75" height="1.875" rx="0.9375" fill="#181A1E"/>
+                            <rect x="7.875" y="28.125" width="20.25" height="1.875" rx="0.9375" fill="#181A1E"/>
                         </svg>
-                    </span>
-                    <span class="cases-tab__label">민사</span>
+                    </div>
+                    <span class="services-grid__label">민사</span>
                 </button>
-                <button class="cases-tab" data-tab="criminal">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 3L4 10V20C4 24 9 27 15 27C21 27 26 24 26 20V10L15 3Z" stroke="#181a1e" stroke-width="1.88" stroke-linejoin="round"/>
-                            <path d="M11 15L14 18L20 12" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                    <span class="cases-tab__label">형사</span>
+                <button class="services-grid__item" data-tab="criminal">
+                    <div class="services-grid__icon">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-criminal.svg'); ?>" alt="" />
+                    </div>
+                    <span class="services-grid__label">형사</span>
                 </button>
-                <button class="cases-tab" data-tab="sex-crime">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="15" cy="11" r="5" stroke="#181a1e" stroke-width="1.88"/>
-                            <path d="M7 27C7 22.029 10.582 18 15 18C19.418 18 23 22.029 23 27" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
-                            <line x1="21" y1="6" x2="27" y2="6" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
-                            <line x1="24" y1="3" x2="24" y2="9" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="cases-tab__label">성범죄</span>
+                <button class="services-grid__item" data-tab="sex-crime">
+                    <div class="services-grid__icon">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-sexual-crime.svg'); ?>" alt="" />
+                    </div>
+                    <span class="services-grid__label">성범죄</span>
                 </button>
-                <button class="cases-tab" data-tab="divorce">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 6C11 6 7 9 7 13C7 19 15 26 15 26C15 26 23 19 23 13C23 9 19 6 15 6Z" stroke="#181a1e" stroke-width="1.88" stroke-linejoin="round"/>
-                            <line x1="12" y1="12" x2="18" y2="18" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
-                            <line x1="18" y1="12" x2="12" y2="18" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="cases-tab__label">이혼</span>
+                <button class="services-grid__item" data-tab="divorce">
+                    <div class="services-grid__icon">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-divorce.svg'); ?>" alt="" />
+                    </div>
+                    <span class="services-grid__label">이혼</span>
                 </button>
-                <button class="cases-tab" data-tab="inheritance">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5" y="8" width="20" height="16" rx="2" stroke="#181a1e" stroke-width="1.88"/>
-                            <path d="M10 8V6C10 4.895 10.895 4 12 4H18C19.105 4 20 4.895 20 6V8" stroke="#181a1e" stroke-width="1.88"/>
-                            <path d="M10 16H20M13 20H17" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="cases-tab__label">상속</span>
+                <button class="services-grid__item" data-tab="inheritance">
+                    <div class="services-grid__icon">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-inheritance.svg'); ?>" alt="" />
+                    </div>
+                    <span class="services-grid__label">상속</span>
                 </button>
-                <button class="cases-tab" data-tab="realestate">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 13L15 5L25 13V26H19V19H11V26H5V13Z" stroke="#181a1e" stroke-width="1.88" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                    <span class="cases-tab__label">부동산</span>
+                <button class="services-grid__item" data-tab="realestate">
+                    <div class="services-grid__icon">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-real-estate.svg'); ?>" alt="" />
+                    </div>
+                    <span class="services-grid__label">부동산</span>
                 </button>
-                <button class="cases-tab" data-tab="corporate">
-                    <span class="cases-tab__icon">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="9" y="3" width="12" height="24" rx="1" stroke="#181a1e" stroke-width="1.88"/>
-                            <rect x="3" y="10" width="8" height="17" rx="1" stroke="#181a1e" stroke-width="1.88"/>
-                            <rect x="19" y="10" width="8" height="17" rx="1" stroke="#181a1e" stroke-width="1.88"/>
-                            <path d="M13 9H17M13 13H17M13 17H17" stroke="#181a1e" stroke-width="1.88" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="cases-tab__label">기업</span>
+                <button class="services-grid__item" data-tab="corporate">
+                    <div class="services-grid__icon corporate-icon">
+                        <div class="corporate-icon-wrapper">
+                            <div class="corporate-building-1"></div>
+                            <div class="corporate-building-2"></div>
+                            <div class="corporate-building-3"></div>
+                        </div>
+                    </div>
+                    <span class="services-grid__label">기업</span>
                 </button>
             </div>
         </div>
@@ -287,7 +276,7 @@ $cases = [
 
 <script>
 (function () {
-    const tabs = document.querySelectorAll('.cases-tab');
+    const tabs = document.querySelectorAll('#cases-tabs .services-grid__item');
     const cards = document.querySelectorAll('.case-card');
     const chips = document.querySelectorAll('.cases-chip');
     const searchInput = document.getElementById('cases-search-input');
@@ -305,8 +294,8 @@ $cases = [
 
     tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
-            tabs.forEach(function (t) { t.classList.remove('cases-tab--active'); });
-            tab.classList.add('cases-tab--active');
+            tabs.forEach(function (t) { t.classList.remove('active'); });
+            tab.classList.add('active');
             activeTab = tab.dataset.tab;
             filterCards(activeTab, searchInput ? searchInput.value : '');
         });
