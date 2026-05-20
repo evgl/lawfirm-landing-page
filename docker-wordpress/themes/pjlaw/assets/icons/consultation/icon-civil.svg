@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 1261158144">
+<path id="Rectangle 39590991" d="M30 6.5C31.3807 6.5 32.5 7.61929 32.5 9V43.5H27.5V9C27.5 7.61929 28.6193 6.5 30 6.5Z" stroke="var(--stroke-0, white)" stroke-width="3"/>
+<rect id="Rectangle 39590997" x="27.5" y="1.5" width="5" height="5" rx="2.5" stroke="var(--stroke-0, white)" stroke-width="3"/>
+<rect id="Rectangle 39590996" x="32" y="9" width="19" height="3" rx="1.5" fill="var(--fill-0, white)"/>
+<rect id="Rectangle 39591000" x="9" y="9" width="19" height="3" rx="1.5" fill="var(--fill-0, white)"/>
+<rect id="Rectangle 39590998" x="17" y="42" width="26" height="3" rx="1.5" fill="var(--fill-0, white)"/>
+<rect id="Rectangle 39590999" x="13" y="47" width="34" height="3" rx="1.5" fill="var(--fill-0, white)"/>
+<path id="Ellipse 599" d="M60 27C60 32.5228 55.5228 37 50 37C44.4772 37 40 32.5228 40 27C40 21.4772 48.5 9 50 9C51.5 9 60 21.4772 60 27Z" fill="var(--fill-0, #4373FF)"/>
+<path id="Ellipse 600" d="M20 27C20 32.5228 15.5228 37 10 37C4.47715 37 0 32.5228 0 27C0 21.4772 8.5 9 10 9C11.5 9 20 21.4772 20 27Z" fill="var(--fill-0, #4373FF)"/>
+</g>
+</svg>

@@ -114,6 +114,24 @@ function pjlaw_register_post_types() {
         'supports' => array('title', 'editor', 'thumbnail'),
         'menu_icon' => 'dashicons-gavel',
     ));
+
+    // Consultation Post Type
+    register_post_type('consultation', array(
+        'labels' => array(
+            'name' => __('Consultations', 'pjlaw'),
+            'singular_name' => __('Consultation', 'pjlaw'),
+        ),
+        'public' => false,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_icon' => 'dashicons-email-alt',
+        'supports' => array('title', 'editor'),
+        'capability_type' => 'post',
+        'capabilities' => array(
+            'create_posts' => false,
+        ),
+        'map_meta_cap' => true,
+    ));
 }
 add_action('init', 'pjlaw_register_post_types');
 
@@ -136,6 +154,13 @@ add_action('send_headers', 'pjlaw_security_headers');
 function pjlaw_template_include($template) {
     $request_path = isset($_SERVER['REQUEST_URI']) ? wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH) : '';
     $request_path = trim((string) $request_path, '/');
+
+    if ('consultation' === $request_path) {
+        $consultation_template = locate_template('page-consultation.php');
+        if ($consultation_template) {
+            return $consultation_template;
+        }
+    }
 
     if ('about' === $request_path) {
         $about_template = locate_template('page-about.php');
@@ -221,6 +246,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('consultation-step' === $request_path) {
+        $consultation_step_template = locate_template('page-consultation-step.php');
+        if ($consultation_step_template) {
+            return $consultation_step_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
@@ -266,4 +298,73 @@ function pjlaw_render_quick_actions_menu() {
     </aside>
     <?php
 }
+
+/**
+ * AJAX Handler for Consultation Form
+ */
+function pjlaw_handle_consultation_form() {
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pjlaw_nonce')) {
+        wp_send_json_error(array('message' => __('보안 검증에 실패했습니다. 페이지를 새로고침한 후 다시 시도해 주세요.', 'pjlaw')));
+        return;
+    }
+
+    // Sanitize form data
+    $name = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+    $phone = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
+    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+    $subject = isset($_POST['subject']) ? sanitize_text_field($_POST['subject']) : '';
+    $message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
+    $privacy = isset($_POST['privacy']) ? intval($_POST['privacy']) : 0;
+
+    // Validate required fields
+    if (empty($name) || empty($phone)) {
+        wp_send_json_error(array('message' => __('이름과 연락처는 필수 입력 항목입니다.', 'pjlaw')));
+        return;
+    }
+
+    // Validate privacy consent
+    if (1 !== $privacy) {
+        wp_send_json_error(array('message' => __('개인정보처리방침에 동의해 주세요.', 'pjlaw')));
+        return;
+    }
+
+    // Format content
+    $formatted_content = "=== 연락처 정보 / Contact Information ===\n\n";
+    $formatted_content .= "이름 (Name): " . $name . "\n";
+    $formatted_content .= "전화번호 (Phone): " . $phone . "\n";
+    if (!empty($email)) {
+        $formatted_content .= "이메일 (Email): " . $email . "\n";
+    }
+    if (!empty($subject)) {
+        $formatted_content .= "상담분야 (Consultation Area): " . $subject . "\n";
+    }
+    $formatted_content .= "\n=== 상담내용 / Message ===\n\n";
+    $formatted_content .= $message;
+
+    // Insert post
+    $post_data = array(
+        'post_title' => sprintf(__('[상담신청] %s', 'pjlaw'), $name),
+        'post_content' => $formatted_content,
+        'post_status' => 'publish',
+        'post_type' => 'consultation',
+        'meta_input' => array(
+            '_consultation_name' => $name,
+            '_consultation_phone' => $phone,
+            '_consultation_email' => $email,
+            '_consultation_subject' => $subject,
+            '_consultation_date' => current_time('mysql')
+        )
+    );
+
+    $consultation_id = wp_insert_post($post_data);
+
+    if ($consultation_id && !is_wp_error($consultation_id)) {
+        wp_send_json_success(array('message' => __('상담 신청이 성공적으로 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.', 'pjlaw')));
+    } else {
+        wp_send_json_error(array('message' => __('상담 접수 중 오류가 발생했습니다. 다시 시도해 주세요.', 'pjlaw')));
+    }
+}
+add_action('wp_ajax_pjlaw_consultation', 'pjlaw_handle_consultation_form');
+add_action('wp_ajax_nopriv_pjlaw_consultation', 'pjlaw_handle_consultation_form');
 ?>
