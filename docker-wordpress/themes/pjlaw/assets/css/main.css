@@ -7028,11 +7028,11 @@
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 100px); /* Adjust based on header height */
-    background-color: var(--color-white);
+    background-color: #ffffff;
 }
 
 .wizard-top-section {
-    background-color: var(--color-primary-dark);
+    background-color: #1a2e69;
     padding: 240px 0 180px;
     position: relative;
     display: flex;
@@ -7052,7 +7052,7 @@
     font-size: 30px;
     line-height: 1.2;
     letter-spacing: -0.03em;
-    color: var(--color-white);
+    color: #ffffff;
     margin: 0 0 20px 0;
 }
 
@@ -7062,14 +7062,14 @@
     font-size: 56px;
     line-height: 1.2;
     letter-spacing: -0.03em;
-    color: var(--color-white);
+    color: #ffffff;
     margin: 0;
 }
 
 .wizard-bottom-section {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-white);
+    background-color: #ffffff;
     flex: 1;
 }
 
@@ -7109,7 +7109,7 @@
 }
 
 .wizard-option-btn {
-    background-color: var(--color-white);
+    background-color: #ffffff;
     border: 1px solid #cdced6;
     border-radius: 100px;
     padding: 26px 50px;
@@ -7124,14 +7124,14 @@
 }
 
 .wizard-option-btn:hover {
-    border-color: var(--color-primary);
+    border-color: #1a2e69;
     background-color: rgba(26, 46, 105, 0.03);
 }
 
 .wizard-option-btn.active {
-    border-color: var(--color-primary);
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    border-color: #1a2e69;
+    background-color: #1a2e69;
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -7165,7 +7165,7 @@
 }
 
 .wizard-next-btn:not(:disabled):hover .wizard-next-text {
-    color: var(--color-primary);
+    color: #1a2e69;
 }
 
 .wizard-next-icon {
@@ -7197,7 +7197,7 @@
 }
 
 .wizard-next-icon .chevron-bottom {
-    background-color: var(--color-primary-dark);
+    background-color: #1a2e69;
     transform: rotate(45deg);
     bottom: -5px;
     left: 10px;
