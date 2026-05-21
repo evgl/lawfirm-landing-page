@@ -47,10 +47,12 @@ get_header();
                     <div class="wizard-actions">
                         <button class="wizard-next-btn" id="wizard-next" disabled>
                             <span class="wizard-next-text"><?php esc_html_e('다음', 'pjlaw'); ?></span>
-                            <div class="wizard-next-icon">
-                                <span class="chevron-top"></span>
-                                <span class="chevron-bottom"></span>
-                            </div>
+                            <svg class="wizard-next-icon" width="28" height="44" viewBox="0 0 28 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <!-- Upper arm of chevron: top-left to centre-right -->
+                                <line x1="5" y1="5" x2="23" y2="22" stroke="#7396ff" stroke-width="9" stroke-linecap="round"/>
+                                <!-- Lower arm of chevron: centre-right to bottom-left -->
+                                <line x1="23" y1="22" x2="5" y2="39" stroke="#1a2e69" stroke-width="9" stroke-linecap="round"/>
+                            </svg>
                         </button>
                     </div>
                 </div>
