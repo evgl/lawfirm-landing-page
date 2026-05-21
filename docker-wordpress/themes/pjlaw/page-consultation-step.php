@@ -21,38 +21,41 @@ get_header();
 
 <main id="main" class="site-main consultation-wizard" role="main">
     <div class="wizard-top-section">
-        <div class="container">
-            <div class="wizard-header-content">
-                <p class="wizard-step">01.</p>
-                <h1 class="wizard-question"><?php esc_html_e('고소나 신고가 이루어졌나요?', 'pjlaw'); ?></h1>
-            </div>
+        <div class="container" id="wizard-completed-steps">
+            <!-- Completed steps will be appended here -->
+        </div>
+        <div class="container" id="wizard-active-step">
+            <!-- Active step question will be rendered here -->
         </div>
     </div>
     
     <div class="wizard-bottom-section">
         <div class="wizard-progress-bar">
-            <!-- Representing 1 out of maybe 7 steps (width approx 13-15%) -->
-            <div class="wizard-progress-active" style="width: 15%;"></div>
+            <div class="wizard-progress-active" id="wizard-progress" style="width: 15%;"></div>
         </div>
         
         <div class="wizard-options-area">
             <div class="container">
                 <div class="wizard-options-container">
-                    <div class="wizard-options">
-                        <button class="wizard-option-btn" data-value="예"><?php esc_html_e('예', 'pjlaw'); ?></button>
-                        <button class="wizard-option-btn" data-value="아니오"><?php esc_html_e('아니오', 'pjlaw'); ?></button>
-                        <button class="wizard-option-btn" data-value="잘 모르겠습니다."><?php esc_html_e('잘 모르겠습니다.', 'pjlaw'); ?></button>
+                    <div class="wizard-options" id="wizard-options">
+                        <!-- Options will be rendered here -->
                     </div>
                     
                     <div class="wizard-actions">
-                        <button class="wizard-next-btn" id="wizard-next" disabled>
-                            <span class="wizard-next-text"><?php esc_html_e('다음', 'pjlaw'); ?></span>
-                            <svg class="wizard-next-icon" width="28" height="44" viewBox="0 0 28 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Upper arm of chevron: top-left to centre-right -->
-                                <line x1="5" y1="5" x2="23" y2="22" stroke="#7396ff" stroke-width="9" stroke-linecap="round"/>
-                                <!-- Lower arm of chevron: centre-right to bottom-left -->
-                                <line x1="23" y1="22" x2="5" y2="39" stroke="#1a2e69" stroke-width="9" stroke-linecap="round"/>
-                            </svg>
+                        <button class="wizard-next-btn" id="wizard-next" disabled style="display: flex; gap: 14px; align-items: center; border: none; background: transparent; cursor: pointer;">
+                            <span class="wizard-next-text" style="font-family: 'Pretendard', sans-serif; font-weight: 600; font-size: 20px; color: #666a73; white-space: nowrap;"><?php esc_html_e('다음', 'pjlaw'); ?></span>
+                            <div style="display: inline-grid; place-items: start; position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: center; position: relative; width: 29.7px; height: 29.7px; grid-area: 1 / 1;">
+                                    <div style="transform: rotate(-45deg);">
+                                        <div style="background-color: #7396ff; height: 32px; width: 10px; border-radius: 10px;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; justify-content: center; position: relative; width: 29.7px; height: 29.7px; margin-top: 15.5px; grid-area: 1 / 1;">
+                                    <div style="transform: rotate(-135deg);">
+                                        <div style="background-color: #1a2e69; height: 32px; width: 10px; border-radius: 10px;"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </button>
                     </div>
                 </div>
@@ -63,30 +66,124 @@ get_header();
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const optionBtns = document.querySelectorAll('.wizard-option-btn');
+    const category = '<?php echo esc_js($category); ?>';
+    const activeStepContainer = document.getElementById('wizard-active-step');
+    const completedStepsContainer = document.getElementById('wizard-completed-steps');
+    const optionsContainer = document.getElementById('wizard-options');
     const nextBtn = document.getElementById('wizard-next');
+    const progressBar = document.getElementById('wizard-progress');
+    
+    const wizardData = {
+        '민사상담': [
+            {
+                number: '01.',
+                question: '고소나 신고가 이루어졌나요?',
+                options: ['예', '아니오', '잘 모르겠습니다.']
+            },
+            {
+                number: '02.',
+                question: '고소나 신고를 하시는 상황인가요, 혹은 이를 당하시는 상황인가요?',
+                options: [
+                    '고소나 신고를 하는 상황입니다. (원고)',
+                    '당하는 상황입니다. (피고)',
+                    '쌍방이 서로 하는 상황입니다. (맞고소)',
+                    '잘 모르겠습니다.'
+                ]
+            }
+        ],
+        '형사상담': [
+            {
+                number: '01.',
+                question: '고소나 신고가 이루어졌나요?',
+                options: ['예', '아니오', '잘 모르겠습니다.']
+            },
+            {
+                number: '02.',
+                question: '고소나 신고를 하시는 상황인가요, 혹은 이를 당하시는 상황인가요?',
+                options: [
+                    '고소나 신고를 하는 상황입니다. (원고)',
+                    '당하는 상황입니다. (피고)',
+                    '쌍방이 서로 하는 상황입니다. (맞고소)',
+                    '잘 모르겠습니다.'
+                ]
+            }
+        ]
+    };
+    
+    // Fallback to 민사상담 if category not found in data
+    const steps = wizardData[category] || wizardData['민사상담'];
+    let currentStepIndex = 0;
     let selectedValue = '';
-
-    optionBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove active class from all
-            optionBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked
-            this.classList.add('active');
+    
+    function renderStep() {
+        const step = steps[currentStepIndex];
+        
+        // Render Active Question
+        activeStepContainer.innerHTML = `
+            <div class="wizard-header-content">
+                <p class="wizard-step">${step.number}</p>
+                <h1 class="wizard-question">${step.question}</h1>
+            </div>
+        `;
+        
+        // Render Options
+        optionsContainer.innerHTML = '';
+        step.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'wizard-option-btn';
+            btn.setAttribute('data-value', opt);
+            btn.textContent = opt;
             
-            selectedValue = this.getAttribute('data-value');
+            btn.addEventListener('click', function() {
+                // Remove active from all
+                const allBtns = optionsContainer.querySelectorAll('.wizard-option-btn');
+                allBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active to clicked
+                this.classList.add('active');
+                selectedValue = this.getAttribute('data-value');
+                nextBtn.removeAttribute('disabled');
+            });
             
-            // Enable next button
-            nextBtn.removeAttribute('disabled');
+            optionsContainer.appendChild(btn);
         });
-    });
-
+        
+        // Disable next button initially
+        selectedValue = '';
+        nextBtn.setAttribute('disabled', 'true');
+        
+        // Update progress bar (assuming ~5 steps total)
+        const progressPercentage = Math.min(((currentStepIndex + 1) / 5) * 100, 100);
+        progressBar.style.width = `${progressPercentage}%`;
+    }
+    
     nextBtn.addEventListener('click', function() {
         if (!selectedValue) return;
         
-        // For now, since we only have step 1 design, we just alert
-        alert('선택한 항목: ' + selectedValue + '\n(다음 단계 화면은 아직 디자인이 없습니다.)');
+        const currentStep = steps[currentStepIndex];
+        
+        // Move current step to completed section
+        const completedHtml = `
+            <div class="wizard-completed-item">
+                <p class="wizard-step">${currentStep.number}</p>
+                <h2 class="wizard-completed-question">${currentStep.question}</h2>
+                <div class="wizard-completed-answer">${selectedValue}</div>
+            </div>
+        `;
+        completedStepsContainer.insertAdjacentHTML('beforeend', completedHtml);
+        
+        // Advance to next step
+        currentStepIndex++;
+        
+        if (currentStepIndex < steps.length) {
+            renderStep();
+        } else {
+            alert('상담 예약이 완료되었습니다. (다음 화면 설계 필요)');
+        }
     });
+    
+    // Initial Render
+    renderStep();
 });
 </script>
 
