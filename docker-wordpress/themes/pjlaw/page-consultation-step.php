@@ -183,12 +183,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const params = answers.map(function(a, i) {
                 return 'q' + (i + 1) + '=' + encodeURIComponent(a);
             }).join('&');
-            window.location.href = '/consultation-form/?category=' + encodeURIComponent(category) + '&' + params;
+            window.location.replace('/consultation-form/?category=' + encodeURIComponent(category) + '&' + params);
         }
     });
     
     // Initial Render
     renderStep();
+});
+
+// Handle bfcache restore: if page is restored from back-forward cache, redirect to consultation home
+window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+        window.location.replace('/consultation/');
+    }
 });
 </script>
 
