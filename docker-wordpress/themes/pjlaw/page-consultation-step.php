@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 number: '01.',
                 question: '고소나 신고가 이루어졌나요?',
-                options: ['예', '아니오', '잘 모르겠습니다.']
+                options: ['네', '아니오', '잘 모르겠습니다.']
             },
             {
                 number: '02.',
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 number: '01.',
                 question: '고소나 신고가 이루어졌나요?',
-                options: ['예', '아니오', '잘 모르겠습니다.']
+                options: ['네', '아니오', '잘 모르겠습니다.']
             },
             {
                 number: '02.',
@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const steps = wizardData[category] || wizardData['민사상담'];
     let currentStepIndex = 0;
     let selectedValue = '';
+    const answers = [];
     
     function renderStep() {
         const step = steps[currentStepIndex];
@@ -171,8 +172,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         completedStepsContainer.insertAdjacentHTML('beforeend', completedHtml);
-        
+
         // Advance to next step
+        answers.push(selectedValue);
         currentStepIndex++;
         
         if (currentStepIndex < steps.length) {

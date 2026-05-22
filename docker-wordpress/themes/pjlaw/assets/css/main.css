@@ -7248,3 +7248,673 @@
 .wizard-option-btn {
     white-space: nowrap;
 }
+
+/* ============================================================
+   CONSULTATION FORM PAGE (/consultation-form/)
+   ============================================================ */
+
+.consult-form-page {
+    background: #fff;
+    min-height: 100vh;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* Nav bar */
+.consult-form-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: #fff;
+}
+
+.consult-form-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 310px;
+}
+
+.consult-form-nav__left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 100%;
+}
+
+.consult-form-nav__logo {
+    display: flex;
+    align-items: center;
+}
+
+.consult-form-nav__logo img {
+    display: block;
+    width: 20px;
+    height: auto;
+}
+
+.consult-form-nav__divider {
+    width: 1px;
+    height: 80px;
+    background: #e3e5e9;
+}
+
+.consult-form-nav__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 240px;
+    justify-content: space-between;
+}
+
+.consult-form-nav__breadcrumb-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #181a1e;
+    letter-spacing: -0.54px;
+    white-space: nowrap;
+}
+
+.consult-form-nav__chevron {
+    width: 10px;
+    height: 6px;
+}
+
+.consult-form-nav__close {
+    display: flex;
+    align-items: center;
+}
+
+.consult-form-nav__close img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.consult-form-nav__progress-track {
+    width: 100%;
+    height: 2px;
+    background: #e3e5e9;
+    position: relative;
+}
+
+.consult-form-nav__progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 300px;
+    background: #1a2e69;
+}
+
+/* Hero section */
+.consult-form-hero {
+    background: #1a2e69;
+    padding-top: calc(80px + 96px);
+    padding-bottom: 96px;
+}
+
+.consult-form-hero__inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+.consult-form-hero__label-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.consult-form-hero__label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: -0.54px;
+    line-height: 32px;
+}
+
+.consult-form-hero__title {
+    font-size: 50px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -1.5px;
+    line-height: 62px;
+    white-space: nowrap;
+}
+
+/* Step cards row */
+.consult-form-steps-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.consult-form-step-arrow {
+    width: 16px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.consult-form-step-card {
+    width: 220px;
+    height: 230px;
+    background: #1a2e69;
+    border: 1px solid #4b609d;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 40px 0;
+    box-shadow: 0 6px 10px rgba(3, 14, 43, 0.2);
+}
+
+.consult-form-step-card__icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.consult-form-step-card__icon img {
+    max-width: 52px;
+    max-height: 44px;
+    display: block;
+}
+
+.consult-form-step-card__text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.consult-form-step-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.54px;
+    line-height: 28px;
+}
+
+.consult-form-step-card__desc {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: -0.42px;
+    line-height: 20px;
+}
+
+/* Main content */
+.consult-form-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 96px 0 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+/* Shared card */
+.consult-form-card {
+    background: #fff;
+    border: 1px solid #ebedf1;
+    border-radius: 20px;
+    box-shadow: 0 6px 5px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+/* Q&A card rows */
+.consult-form-qa-row {
+    padding: 34px 30px;
+}
+
+.consult-form-qa-row__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.consult-form-qa-row__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.consult-form-qa-row__icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.consult-form-qa-row__question {
+    font-size: 24px;
+    font-weight: 700;
+    color: #181a1e;
+    letter-spacing: -0.72px;
+    line-height: 34px;
+    white-space: nowrap;
+}
+
+.consult-form-qa-row__chevron {
+    width: 11px;
+    height: 6px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.consult-form-qa-row__chevron--up {
+    transform: rotate(180deg);
+}
+
+.consult-form-qa-row__options {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding-left: 44px;
+}
+
+.consult-form-qa-row__options--wrap {
+    flex-wrap: wrap;
+}
+
+.consult-form-qa-separator {
+    height: 1px;
+    background: #f4f5f9;
+    margin: 0 0;
+}
+
+/* Option buttons */
+.consult-form-option-btn {
+    background: #fff;
+    border: 1px solid #cdced6;
+    border-radius: 100px;
+    padding: 14px 30px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #7f8188;
+    letter-spacing: -0.48px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.consult-form-option-btn:hover {
+    border-color: #1a2e69;
+    color: #1a2e69;
+}
+
+.consult-form-option-btn--selected {
+    background: #181a1e;
+    border-color: #181a1e;
+    color: #fff;
+}
+
+/* Date scroll */
+.consult-form-date-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    flex-wrap: nowrap;
+    padding-left: 44px;
+}
+
+.consult-form-date-scroll::-webkit-scrollbar {
+    height: 4px;
+}
+
+.consult-form-date-scroll::-webkit-scrollbar-track {
+    background: #f4f5f7;
+}
+
+.consult-form-date-scroll::-webkit-scrollbar-thumb {
+    background: #cdced6;
+    border-radius: 2px;
+}
+
+.consult-form-date-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    flex-shrink: 0;
+    width: 52px;
+}
+
+.consult-form-date-cell__num {
+    width: 52px;
+    height: 52px;
+    background: #f4f5f7;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #181a1e;
+    letter-spacing: -0.66px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.consult-form-date-cell:not(.consult-form-date-cell--disabled):hover .consult-form-date-cell__num {
+    background: rgba(26, 46, 105, 0.1);
+}
+
+.consult-form-date-cell__num--selected {
+    background: #181a1e !important;
+    color: #fff !important;
+}
+
+.consult-form-date-cell__num--disabled {
+    background: #e1e3e8;
+    color: #a4a7ad;
+}
+
+.consult-form-date-cell__day {
+    font-size: 16px;
+    font-weight: 400;
+    color: #181a1e;
+    letter-spacing: -0.48px;
+    text-align: center;
+    line-height: 1;
+}
+
+.consult-form-date-cell__day--today {
+    color: #ff4112;
+}
+
+.consult-form-date-cell__day--disabled {
+    color: #a4a7ad;
+}
+
+/* Time slots */
+.consult-form-time-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.consult-form-time-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #181a1e;
+    letter-spacing: -0.48px;
+    line-height: 20px;
+}
+
+.consult-form-time-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.consult-form-time-btn {
+    width: 98px;
+    background: #fff;
+    border: 1px solid #cdced6;
+    border-radius: 100px;
+    padding: 14px 0;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #7f8188;
+    letter-spacing: -0.48px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.consult-form-time-btn:hover {
+    border-color: #1a2e69;
+    color: #1a2e69;
+}
+
+.consult-form-time-btn--selected {
+    background: #181a1e;
+    border-color: #181a1e;
+    color: #fff;
+}
+
+.consult-form-qa-row__options.consult-form-date-scroll {
+    padding-left: 44px;
+}
+
+.consult-form-qa-row__options--time {
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 44px;
+}
+
+/* Info form section */
+.consult-form-info-section,
+.consult-form-terms-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.consult-form-section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #181a1e;
+    letter-spacing: -0.84px;
+    line-height: 38px;
+}
+
+.consult-form-info-card,
+.consult-form-terms-card {
+    border-color: #eaebef;
+}
+
+.consult-form-info-row {
+    padding: 34px 30px;
+}
+
+.consult-form-info-row--last {
+    /* no separator after this row */
+}
+
+.consult-form-info-row__inner {
+    display: flex;
+    gap: 20px;
+}
+
+.consult-form-info-separator {
+    height: 1px;
+    background: #f4f5f9;
+    margin: 0 30px;
+}
+
+.consult-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 460px;
+}
+
+.consult-form-field--full {
+    width: 940px;
+}
+
+.consult-form-field__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.consult-form-field__label label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #181a1e;
+    letter-spacing: -0.48px;
+    line-height: 20px;
+}
+
+.consult-form-field__dot {
+    width: 6px;
+    height: 6px;
+}
+
+.consult-form-input {
+    width: 460px;
+    height: 58px;
+    background: #fff;
+    border: 1px solid #dfe1e7;
+    border-radius: 8px;
+    padding: 0 20px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #181a1e;
+    letter-spacing: -0.48px;
+    box-sizing: border-box;
+}
+
+.consult-form-input--full {
+    width: 940px;
+}
+
+.consult-form-input::placeholder {
+    color: #848891;
+}
+
+.consult-form-input:focus {
+    outline: none;
+    border-color: #1a2e69;
+}
+
+.consult-form-textarea {
+    width: 940px;
+    height: 209px;
+    background: #fff;
+    border: 1px solid #dfe1e7;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #181a1e;
+    letter-spacing: -0.48px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.consult-form-textarea::placeholder {
+    color: #848891;
+}
+
+.consult-form-textarea:focus {
+    outline: none;
+    border-color: #1a2e69;
+}
+
+/* Terms */
+.consult-form-terms-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    cursor: pointer;
+}
+
+.consult-form-terms-header__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.consult-form-terms-header__checkbox {
+    width: 22px;
+    height: 22px;
+}
+
+.consult-form-terms-header__label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #181a1e;
+    letter-spacing: -0.54px;
+    line-height: 24px;
+}
+
+.consult-form-terms-separator {
+    height: 1px;
+    background: #f4f5f9;
+    margin: 0 30px;
+}
+
+.consult-form-terms-body {
+    display: none;
+    padding: 30px;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.consult-form-terms-body--visible {
+    display: flex;
+}
+
+.consult-form-terms-body__heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #181a1e;
+    letter-spacing: -0.54px;
+    line-height: 28px;
+}
+
+.consult-form-terms-body__block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.consult-form-terms-body__subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: #181a1e;
+    letter-spacing: -0.48px;
+    line-height: 24px;
+}
+
+.consult-form-terms-body__text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #545558;
+    letter-spacing: -0.48px;
+    line-height: 24px;
+}
+
+/* Submit button */
+.consult-form-submit {
+    align-self: center;
+    background: #093bcd;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 56px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.48px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.consult-form-submit:hover {
+    background: #0730a8;
+}
+
