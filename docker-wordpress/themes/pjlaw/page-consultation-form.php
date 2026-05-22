@@ -345,7 +345,7 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
         <div class="consult-form-card consult-form-terms-card">
             <div class="consult-form-terms-header" id="consult-terms-toggle">
                 <div class="consult-form-terms-header__left">
-                    <img src="<?php echo esc_url($icons_url . 'icon-checkbox.svg'); ?>" alt="" class="consult-form-terms-header__checkbox" aria-hidden="true" id="consult-terms-check">
+                    <div class="consult-form-terms-header__checkbox" id="consult-terms-check" role="checkbox" aria-checked="false" tabindex="0"></div>
                     <span class="consult-form-terms-header__label">개인정보 수집동의</span>
                 </div>
                 <img src="<?php echo esc_url($icons_url . 'icon-arrow-down.svg'); ?>" alt="" class="consult-form-qa-row__chevron" id="consult-terms-chevron" aria-hidden="true">
@@ -473,12 +473,21 @@ document.addEventListener('DOMContentLoaded', function () {
     var termsChevron = document.getElementById('consult-terms-chevron');
     var termsCheck = document.getElementById('consult-terms-check');
     var termsAgreed = false;
+    var termsExpanded = false;
 
+    // Accordion: toggled by clicking the header row (excluding the checkbox)
     termsToggle.addEventListener('click', function() {
+        termsExpanded = !termsExpanded;
+        termsBody.classList.toggle('consult-form-terms-body--visible', termsExpanded);
+        termsChevron.classList.toggle('consult-form-qa-row__chevron--up', termsExpanded);
+    });
+
+    // Agreement: toggled only by clicking the checkbox div
+    termsCheck.addEventListener('click', function(e) {
+        e.stopPropagation(); // prevent accordion from firing
         termsAgreed = !termsAgreed;
         termsCheck.classList.toggle('consult-form-terms-header__checkbox--checked', termsAgreed);
-        termsBody.classList.toggle('consult-form-terms-body--visible', termsAgreed);
-        termsChevron.classList.toggle('consult-form-qa-row__chevron--up', !termsAgreed);
+        termsCheck.setAttribute('aria-checked', String(termsAgreed));
     });
 
     /* ---------- Submit ---------- */
@@ -498,6 +507,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var selectedTime = '';
         var timeBtn = document.querySelector('.consult-form-time-btn--selected');
         if (timeBtn) selectedTime = timeBtn.getAttribute('data-time');
+
+        if (!termsAgreed) {
+            alert('개인정보 수집동의에 동의해 주세요.');
+            return;
+        }
 
         if (!name || !phone || !client || !caseDesc) {
             alert('이름, 연락처, 의뢰인, 사건 항목은 필수 입력사항입니다.');
