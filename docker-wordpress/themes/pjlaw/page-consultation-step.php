@@ -178,7 +178,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentStepIndex < steps.length) {
             renderStep();
         } else {
-            alert('상담 예약이 완료되었습니다. (다음 화면 설계 필요)');
+            const params = answers.map(function(a, i) {
+                return 'q' + (i + 1) + '=' + encodeURIComponent(a);
+            }).join('&');
+            window.location.href = '/consultation-form/?category=' + encodeURIComponent(category) + '&' + params;
         }
     });
     

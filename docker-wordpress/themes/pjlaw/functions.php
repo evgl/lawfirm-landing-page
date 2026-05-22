@@ -253,6 +253,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('consultation-form' === $request_path) {
+        $consultation_form_template = locate_template('page-consultation-form.php');
+        if ($consultation_form_template) {
+            return $consultation_form_template;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
