@@ -7526,6 +7526,10 @@
     padding-left: 44px;
 }
 
+.consult-form-qa-row__options--hidden {
+    display: none !important;
+}
+
 .consult-form-qa-row__options--wrap {
     flex-wrap: wrap;
 }

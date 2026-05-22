@@ -456,6 +456,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    /* ---------- Q1-Q5 accordion toggle ---------- */
+    document.querySelectorAll('.consult-form-qa-row__header').forEach(function(header) {
+        header.addEventListener('click', function() {
+            var row = header.closest('.consult-form-qa-row');
+            var options = row.querySelector('.consult-form-qa-row__options');
+            var chevron = header.querySelector('.consult-form-qa-row__chevron');
+            options.classList.toggle('consult-form-qa-row__options--hidden');
+            chevron.classList.toggle('consult-form-qa-row__chevron--up');
+        });
+    });
+
     /* ---------- Terms toggle ---------- */
     var termsToggle = document.getElementById('consult-terms-toggle');
     var termsBody = document.getElementById('consult-terms-body');
