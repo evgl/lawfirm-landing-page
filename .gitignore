@@ -25,3 +25,4 @@ sitemap.xml.gz
 *.zip
 .agent/*
 .playwright-mcp/*
+*.DS_Store
