@@ -132,7 +132,10 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
             <div class="consult-form-qa-row__header">
                 <div class="consult-form-qa-row__left">
                     <img src="<?php echo esc_url($icons_url . 'icon-q1.svg'); ?>" alt="" class="consult-form-qa-row__icon" aria-hidden="true">
-                    <p class="consult-form-qa-row__question">고소나 신고가 이루어졌나요?</p>
+                    <div class="consult-form-qa-row__text">
+                        <p class="consult-form-qa-row__question">고소나 신고가 이루어졌나요?</p>
+                        <span class="consult-form-qa-row__selected"></span>
+                    </div>
                 </div>
                 <img src="<?php echo esc_url($icons_url . 'icon-arrow-down.svg'); ?>" alt="" class="consult-form-qa-row__chevron consult-form-qa-row__chevron--up" aria-hidden="true">
             </div>
@@ -153,7 +156,10 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
             <div class="consult-form-qa-row__header">
                 <div class="consult-form-qa-row__left">
                     <img src="<?php echo esc_url($icons_url . 'icon-q2.svg'); ?>" alt="" class="consult-form-qa-row__icon" aria-hidden="true">
-                    <p class="consult-form-qa-row__question">고소나 신고를 하시는 상황인가요, 혹은 이를 당하시는 상황인가요?</p>
+                    <div class="consult-form-qa-row__text">
+                        <p class="consult-form-qa-row__question">고소나 신고를 하시는 상황인가요, 혹은 이를 당하시는 상황인가요?</p>
+                        <span class="consult-form-qa-row__selected"></span>
+                    </div>
                 </div>
                 <img src="<?php echo esc_url($icons_url . 'icon-arrow-down.svg'); ?>" alt="" class="consult-form-qa-row__chevron consult-form-qa-row__chevron--up" aria-hidden="true">
             </div>
@@ -179,7 +185,10 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
             <div class="consult-form-qa-row__header">
                 <div class="consult-form-qa-row__left">
                     <img src="<?php echo esc_url($icons_url . 'icon-q3.svg'); ?>" alt="" class="consult-form-qa-row__icon" aria-hidden="true">
-                    <p class="consult-form-qa-row__question">상담방식을 선택해 주세요.</p>
+                    <div class="consult-form-qa-row__text">
+                        <p class="consult-form-qa-row__question">상담방식을 선택해 주세요.</p>
+                        <span class="consult-form-qa-row__selected"></span>
+                    </div>
                 </div>
                 <img src="<?php echo esc_url($icons_url . 'icon-arrow-down.svg'); ?>" alt="" class="consult-form-qa-row__chevron consult-form-qa-row__chevron--up" aria-hidden="true">
             </div>
@@ -195,7 +204,10 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
             <div class="consult-form-qa-row__header">
                 <div class="consult-form-qa-row__left">
                     <img src="<?php echo esc_url($icons_url . 'icon-q4.svg'); ?>" alt="" class="consult-form-qa-row__icon" aria-hidden="true">
-                    <p class="consult-form-qa-row__question">상담일을 선택해 주세요.</p>
+                    <div class="consult-form-qa-row__text">
+                        <p class="consult-form-qa-row__question">상담일을 선택해 주세요.</p>
+                        <span class="consult-form-qa-row__selected"></span>
+                    </div>
                 </div>
                 <img src="<?php echo esc_url($icons_url . 'icon-arrow-down.svg'); ?>" alt="" class="consult-form-qa-row__chevron consult-form-qa-row__chevron--up" aria-hidden="true">
             </div>
@@ -210,7 +222,10 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
             <div class="consult-form-qa-row__header">
                 <div class="consult-form-qa-row__left">
                     <img src="<?php echo esc_url($icons_url . 'icon-q5.svg'); ?>" alt="" class="consult-form-qa-row__icon" aria-hidden="true">
-                    <p class="consult-form-qa-row__question">시간을 선택해 주세요.</p>
+                    <div class="consult-form-qa-row__text">
+                        <p class="consult-form-qa-row__question">시간을 선택해 주세요.</p>
+                        <span class="consult-form-qa-row__selected"></span>
+                    </div>
                 </div>
                 <img src="<?php echo esc_url($icons_url . 'icon-arrow-down.svg'); ?>" alt="" class="consult-form-qa-row__chevron consult-form-qa-row__chevron--up" aria-hidden="true">
             </div>
@@ -457,13 +472,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     /* ---------- Q1-Q5 accordion toggle ---------- */
+    function getRowSelectedText(row) {
+        var btn = row.querySelector('.consult-form-option-btn--selected');
+        if (btn) return btn.getAttribute('data-value');
+
+        if (selectedDate && row.querySelector('.consult-form-date-cell__num--selected')) {
+            var d = new Date(selectedDate + 'T00:00:00');
+            var dn = ['일', '월', '화', '수', '목', '금', '토'];
+            return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 (' + dn[d.getDay()] + ')';
+        }
+
+        var timeBtn = row.querySelector('.consult-form-time-btn--selected');
+        if (timeBtn) return timeBtn.getAttribute('data-time');
+
+        return '';
+    }
+
     document.querySelectorAll('.consult-form-qa-row__header').forEach(function(header) {
         header.addEventListener('click', function() {
             var row = header.closest('.consult-form-qa-row');
             var options = row.querySelector('.consult-form-qa-row__options');
             var chevron = header.querySelector('.consult-form-qa-row__chevron');
+            var isCollapsing = !options.classList.contains('consult-form-qa-row__options--hidden');
+
             options.classList.toggle('consult-form-qa-row__options--hidden');
             chevron.classList.toggle('consult-form-qa-row__chevron--up');
+
+            var selectedEl = row.querySelector('.consult-form-qa-row__selected');
+            if (selectedEl) {
+                if (isCollapsing) {
+                    var text = getRowSelectedText(row);
+                    selectedEl.textContent = text;
+                    selectedEl.classList.toggle('consult-form-qa-row__selected--visible', !!text);
+                } else {
+                    selectedEl.classList.remove('consult-form-qa-row__selected--visible');
+                }
+            }
         });
     });
 

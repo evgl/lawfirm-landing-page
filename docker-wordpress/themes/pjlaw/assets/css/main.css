@@ -7508,6 +7508,24 @@
     white-space: nowrap;
 }
 
+.consult-form-qa-row__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.consult-form-qa-row__selected {
+    font-size: 16px;
+    font-weight: 500;
+    color: #3065cc;
+    letter-spacing: -0.3px;
+    display: none;
+}
+
+.consult-form-qa-row__selected--visible {
+    display: block;
+}
+
 .consult-form-qa-row__chevron {
     width: 11px;
     height: 6px;
