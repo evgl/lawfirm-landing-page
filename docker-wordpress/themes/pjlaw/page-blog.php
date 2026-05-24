@@ -12,6 +12,30 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $theme_uri = get_template_directory_uri();
+
+// Filters from URL
+$current_cat     = isset($_GET['cat'])     ? sanitize_text_field($_GET['cat'])     : '';
+$current_service = isset($_GET['service']) ? sanitize_text_field($_GET['service']) : '';
+$current_tag     = isset($_GET['tag'])     ? sanitize_text_field($_GET['tag'])     : '';
+$current_search  = isset($_GET['s'])       ? sanitize_text_field($_GET['s'])       : '';
+$paged           = max(1, (int) get_query_var('paged'));
+
+$query_args = array(
+    'post_type'      => 'pj_blog_post',
+    'posts_per_page' => 9,
+    'paged'          => $paged,
+    'post_status'    => 'publish',
+    'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
+);
+
+$tax_query = array('relation' => 'AND');
+if ($current_cat)     $tax_query[] = array('taxonomy' => 'pj_blog_category', 'field' => 'slug', 'terms' => $current_cat);
+if ($current_service) $tax_query[] = array('taxonomy' => 'pj_blog_service',  'field' => 'slug', 'terms' => $current_service);
+if ($current_tag)     $tax_query[] = array('taxonomy' => 'pj_blog_tag',       'field' => 'slug', 'terms' => $current_tag);
+if (count($tax_query) > 1) $query_args['tax_query'] = $tax_query;
+if ($current_search)  $query_args['s'] = $current_search;
+
+$blog_query = new WP_Query($query_args);
 ?>
 
 <main id="main" class="site-main blog-page" role="main">
@@ -57,11 +81,14 @@ $theme_uri = get_template_directory_uri();
                 </button>
             </div>
             <div class="blog-search__tags">
-                <span class="blog-search__tag">#사이버범죄</span>
-                <span class="blog-search__tag">#따돌림</span>
-                <span class="blog-search__tag">#분리조치</span>
-                <span class="blog-search__tag">#학폭위</span>
-                <span class="blog-search__tag">#생기부</span>
+                <?php
+                $popular_tags = get_terms(array('taxonomy' => 'pj_blog_tag', 'orderby' => 'count', 'order' => 'DESC', 'number' => 5, 'hide_empty' => false));
+                foreach ((array) $popular_tags as $pt) :
+                    if (is_wp_error($pt)) continue;
+                    $tag_url = add_query_arg('tag', $pt->slug, home_url('/blog/'));
+                ?>
+                    <a href="<?php echo esc_url($tag_url); ?>" class="blog-search__tag">#<?php echo esc_html($pt->name); ?></a>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -69,15 +96,19 @@ $theme_uri = get_template_directory_uri();
     <section class="blog-content">
         <div class="container">
             <div class="blog-tabs">
-                <div class="blog-tab blog-tab--active">
+                <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-tab<?php echo !$current_cat ? ' blog-tab--active' : ''; ?>">
                     <span class="blog-tab__text">전체</span>
-                </div>
-                <div class="blog-tab">
-                    <span class="blog-tab__text">법률정보</span>
-                </div>
-                <div class="blog-tab">
-                    <span class="blog-tab__text">대응전략</span>
-                </div>
+                </a>
+                <?php
+                $cat_terms = get_terms(array('taxonomy' => 'pj_blog_category', 'hide_empty' => false));
+                foreach ((array) $cat_terms as $ct) :
+                    if (is_wp_error($ct)) continue;
+                    $cat_url = add_query_arg('cat', $ct->slug, home_url('/blog/'));
+                ?>
+                <a href="<?php echo esc_url($cat_url); ?>" class="blog-tab<?php echo ($current_cat === $ct->slug) ? ' blog-tab--active' : ''; ?>">
+                    <span class="blog-tab__text"><?php echo esc_html($ct->name); ?></span>
+                </a>
+                <?php endforeach; ?>
             </div>
 
             <div class="services-grid" style="margin-bottom: 60px;">
@@ -152,121 +183,53 @@ $theme_uri = get_template_directory_uri();
             </div>
 
             <div class="blog-results-header">
-                <p class="blog-results-count">총 <strong>134건</strong>의 검색 결과가 있습니다.</p>
+                <p class="blog-results-count">총 <strong><?php echo (int) $blog_query->found_posts; ?>건</strong>의 검색 결과가 있습니다.</p>
             </div>
 
             <div class="blog-grid">
-                <?php
-                // Repeated sample data according to Figma design
-                $cards = array(
-                    array(
-                        'image' => 'card-01.jpg',
-                        'tags' => array('마약', '향정신성의약품(향정)'),
-                        'title' => '졸피뎀 처벌 수위 및 사례, 대응 방법',
-                        'excerpt' => '혹시 잠이 오지 않아 친구에게 약을 빌려 먹거나, 병원 가기\n귀찮아서 다른 사람 명의로 약을 타온 적 있으신가요?'
-                    ),
-                    array(
-                        'image' => 'card-02.jpg',
-                        'tags' => array('교통사고', '무면허운전'),
-                        'title' => '무면허사고 처벌 수위와 보험처리 및 대응 방법',
-                        'excerpt' => '단순 교통법규 위반이 아닙니다. 교통사고처리특례법상 12대\n중과실에 해당하며, 피해자와 합의를 하더라도 형사처벌이 면제...'
-                    ),
-                    array(
-                        'image' => 'card-03.jpg',
-                        'tags' => array('형사', '특수경제범죄(특경법)'),
-                        'title' => '특정경제범죄(특경법) 뜻, 가중 처벌 기준',
-                        'excerpt' => '특경법은 사기·횡령·배임 등 특정 경제범죄가 일정 금액을 넘는\n경우 형법보다 훨씬 무겁게 처벌하도록 규정한 법률입니다.'
-                    ),
-                    array(
-                        'image' => 'card-01.jpg',
-                        'tags' => array('마약', '향정신성의약품(향정)'),
-                        'title' => '졸피뎀 처벌 수위 및 사례, 대응 방법',
-                        'excerpt' => '혹시 잠이 오지 않아 친구에게 약을 빌려 먹거나, 병원 가기\n귀찮아서 다른 사람 명의로 약을 타온 적 있으신가요?'
-                    ),
-                    array(
-                        'image' => 'card-02.jpg',
-                        'tags' => array('교통사고', '무면허운전'),
-                        'title' => '무면허사고 처벌 수위와 보험처리 및 대응 방법',
-                        'excerpt' => '단순 교통법규 위반이 아닙니다. 교통사고처리특례법상 12대\n중과실에 해당하며, 피해자와 합의를 하더라도 형사처벌이 면제...'
-                    ),
-                    array(
-                        'image' => 'card-03.jpg',
-                        'tags' => array('형사', '특수경제범죄(특경법)'),
-                        'title' => '특정경제범죄(특경법) 뜻, 가중 처벌 기준',
-                        'excerpt' => '특경법은 사기·횡령·배임 등 특정 경제범죄가 일정 금액을 넘는\n경우 형법보다 훨씬 무겁게 처벌하도록 규정한 법률입니다.'
-                    ),
-                    array(
-                        'image' => 'card-01.jpg',
-                        'tags' => array('마약', '향정신성의약품(향정)'),
-                        'title' => '졸피뎀 처벌 수위 및 사례, 대응 방법',
-                        'excerpt' => '혹시 잠이 오지 않아 친구에게 약을 빌려 먹거나, 병원 가기\n귀찮아서 다른 사람 명의로 약을 타온 적 있으신가요?'
-                    ),
-                    array(
-                        'image' => 'card-02.jpg',
-                        'tags' => array('교통사고', '무면허운전'),
-                        'title' => '무면허사고 처벌 수위와 보험처리 및 대응 방법',
-                        'excerpt' => '단순 교통법규 위반이 아닙니다. 교통사고처리특례법상 12대\n중과실에 해당하며, 피해자와 합의를 하더라도 형사처벌이 면제...'
-                    ),
-                    array(
-                        'image' => 'card-03.jpg',
-                        'tags' => array('형사', '특수경제범죄(특경법)'),
-                        'title' => '특정경제범죄(특경법) 뜻, 가중 처벌 기준',
-                        'excerpt' => '특경법은 사기·횡령·배임 등 특정 경제범죄가 일정 금액을 넘는\n경우 형법보다 훨씬 무겁게 처벌하도록 규정한 법률입니다.'
-                    )
-                );
-
-                foreach ($cards as $card) :
-                ?>
-                <?php $card_detail_url = add_query_arg('title', rawurlencode($card['title']), home_url('/blog/post/')); ?>
-                <a href="<?php echo esc_url($card_detail_url); ?>" class="blog-card">
-                    <div class="blog-card__image-wrap">
-                        <img src="<?php echo esc_url($theme_uri . '/assets/images/blog/' . $card['image']); ?>" alt="<?php echo esc_attr($card['title']); ?>" class="blog-card__image" />
-                    </div>
-                    <div class="blog-card__content">
-                        <div class="blog-card__tags">
-                            <?php foreach ($card['tags'] as $tag) : ?>
-                                <span class="blog-card__tag"><?php echo esc_html($tag); ?></span>
-                            <?php endforeach; ?>
+                <?php if ($blog_query->have_posts()) : ?>
+                    <?php while ($blog_query->have_posts()) : $blog_query->the_post(); ?>
+                    <a href="<?php the_permalink(); ?>" class="blog-card">
+                        <div class="blog-card__image-wrap">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <img src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'large')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="blog-card__image" loading="lazy" />
+                            <?php endif; ?>
                         </div>
-                        <h3 class="blog-card__title"><?php echo esc_html($card['title']); ?></h3>
-                        <p class="blog-card__excerpt"><?php echo nl2br(esc_html($card['excerpt'])); ?></p>
-                    </div>
-                </a>
-                <?php endforeach; ?>
+                        <div class="blog-card__content">
+                            <div class="blog-card__tags">
+                                <?php
+                                $post_tags = get_the_terms(get_the_ID(), 'pj_blog_tag');
+                                if ($post_tags && !is_wp_error($post_tags)) :
+                                    foreach ($post_tags as $pt) :
+                                ?>
+                                    <span class="blog-card__tag"><?php echo esc_html($pt->name); ?></span>
+                                <?php endforeach; endif; ?>
+                            </div>
+                            <h3 class="blog-card__title"><?php the_title(); ?></h3>
+                            <p class="blog-card__excerpt"><?php echo nl2br(esc_html(get_the_excerpt())); ?></p>
+                        </div>
+                    </a>
+                    <?php endwhile; wp_reset_postdata(); ?>
+                <?php else : ?>
+                    <p class="blog-no-results">검색 결과가 없습니다.</p>
+                <?php endif; ?>
             </div>
 
             <div class="blog-pagination">
-                <a href="#" class="blog-pagination__arrow blog-pagination__arrow--prev-double">
-                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.5215 13.06L7.49948 7L14.5215 0.939999" stroke="#C4C4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7.49902 13.06L0.477021 7L7.49902 0.939999" stroke="#C4C4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-                <a href="#" class="blog-pagination__arrow blog-pagination__arrow--prev">
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.49902 13.06L0.477021 7L7.49902 0.939999" stroke="#C4C4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-                
-                <div class="blog-pagination__numbers">
-                    <a href="#" class="blog-pagination__number blog-pagination__number--active">1</a>
-                    <a href="#" class="blog-pagination__number">2</a>
-                    <a href="#" class="blog-pagination__number">3</a>
-                    <a href="#" class="blog-pagination__number">4</a>
-                    <a href="#" class="blog-pagination__number">5</a>
-                </div>
-
-                <a href="#" class="blog-pagination__arrow blog-pagination__arrow--next">
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.500977 13.06L7.52298 7L0.500977 0.939999" stroke="#C4C4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-                <a href="#" class="blog-pagination__arrow blog-pagination__arrow--next-double">
-                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.478516 13.06L7.50052 7L0.478516 0.939999" stroke="#C4C4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7.50098 13.06L14.523 7L7.50098 0.939999" stroke="#C4C4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
+                <?php
+                $pagination = paginate_links(array(
+                    'total'     => $blog_query->max_num_pages,
+                    'current'   => $paged,
+                    'type'      => 'array',
+                    'prev_text' => '&lsaquo;',
+                    'next_text' => '&rsaquo;',
+                ));
+                if ($pagination) :
+                    foreach ($pagination as $page_link) :
+                        echo '<span class="blog-pagination__number">' . $page_link . '</span>';
+                    endforeach;
+                endif;
+                ?>
             </div>
         </div>
     </section>

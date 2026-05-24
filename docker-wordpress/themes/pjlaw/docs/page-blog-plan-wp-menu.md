@@ -80,15 +80,20 @@ Map each piece of data to either a **WP core field**, a **taxonomy**, or a **cus
 
 Goal: A new `블로그` menu appears in the WP admin sidebar with the standard `All Posts / Add New` items.
 
-- [ ] In `functions.php`, inside `pjlaw_register_post_types()`, register `pj_blog_post` CPT.
-- [ ] Configure labels (Korean + English): `name`, `singular_name`, `add_new`, `edit_item`, `view_item`, `search_items`, `not_found`, `menu_name = 블로그`.
-- [ ] Set `public => true`, `show_in_rest => true` (enables Gutenberg), `has_archive => false`.
-- [ ] Set `menu_icon => 'dashicons-edit-page'` (or `dashicons-welcome-write-blog`).
-- [ ] Set `menu_position` to put it just below `legal_case`.
-- [ ] Enable `supports => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes']`.
-- [ ] Set `rewrite => ['slug' => 'blog/post', 'with_front' => false]` so URLs match the existing `/blog/post/...` pattern.
-- [ ] Add `flush_rewrite_rules()` hook on theme activation/deactivation.
+- [x] In `functions.php`, inside `pjlaw_register_post_types()`, register `pj_blog_post` CPT.
+- [x] Configure labels (Korean + English): `name`, `singular_name`, `add_new`, `edit_item`, `view_item`, `search_items`, `not_found`, `menu_name = 블로그`.
+- [x] Set `public => true`, `show_in_rest => true` (enables Gutenberg), `has_archive => false`.
+- [x] Set `menu_icon => 'dashicons-edit-page'`.
+- [x] Set `menu_position => 6` (just below `legal_case`).
+- [x] Enable `supports => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes']`.
+- [x] Set `rewrite => ['slug' => 'blog/post', 'with_front' => false]`.
+- [x] Add `flush_rewrite_rules()` hook on theme activation/deactivation.
 - [ ] Smoke test: confirm menu appears, can create/edit/delete posts in admin.
+
+#### Review
+- **File changed:** `functions.php` — added `pj_blog_post` CPT block inside `pjlaw_register_post_types()` (lines 136–155) and two `register_activation_hook`/`register_deactivation_hook` calls after the `init` action.
+- **Impact:** Minimal — 20 lines added inside an existing function, 2 hook lines appended.
+- **Note:** Smoke test (admin UI) requires a running WordPress instance.
 
 ---
 
@@ -96,21 +101,25 @@ Goal: A new `블로그` menu appears in the WP admin sidebar with the standard `
 
 Goal: Editors can categorize each post by **Category** (tab), **Service area** (icon grid), and **Tag** (chip).
 
-- [ ] Register `pj_blog_category` (hierarchical = true, like categories).
-    - Seed default terms: `법률정보`, `대응전략`.
-    - Attach to `pj_blog_post` CPT.
-    - `show_in_rest => true`, `show_admin_column => true`.
-- [ ] Register `pj_blog_service` (hierarchical = true).
-    - Seed default terms: `이혼`, `상속`, `부동산`, `기업`, `마약`, `교통사고`, `형사`.
-    - Add a custom term meta for the **icon SVG path** so each service term carries its own icon (matches the icons currently in `/assets/icons/services/`).
-    - Use `add_action('pj_blog_service_add_form_fields')` and `..._edit_form_fields` to render an icon picker (URL or media uploader).
-    - `show_admin_column => true`.
-- [ ] Register `pj_blog_tag` (hierarchical = false, like tags).
-    - No seed needed; editors add free-form.
-    - `show_admin_column => true`.
+- [x] Register `pj_blog_category` (hierarchical = true, like categories).
+    - [x] Seed default terms: `법률정보`, `대응전략`.
+    - [x] Attach to `pj_blog_post` CPT.
+    - [x] `show_in_rest => true`, `show_admin_column => true`.
+- [x] Register `pj_blog_service` (hierarchical = true).
+    - [x] Seed default terms: `이혼`, `상속`, `부동산`, `기업`, `마약`, `교통사고`, `형사`.
+    - [x] Register `_pj_service_icon` term meta (URL string) via `register_term_meta`.
+    - [ ] Icon picker in admin form fields (deferred — can add later via term meta UI).
+    - [x] `show_admin_column => true`.
+- [x] Register `pj_blog_tag` (hierarchical = false, like tags).
+    - [x] `show_admin_column => true`.
 - [ ] Smoke test each taxonomy in the admin (Add term, Edit term, Assign to a post).
 
-> **Alternative decision to confirm**: instead of `pj_blog_tag` we could reuse WP's built-in `post_tag` by attaching it to the CPT. The plan assumes a dedicated taxonomy to keep the data fully isolated from any regular WordPress posts that may exist elsewhere on the site.
+> **Alternative decision confirmed**: using dedicated `pj_blog_*` taxonomies to keep data isolated from built-in WP post types.
+
+#### Review
+- **File changed:** `functions.php` — added `pjlaw_register_blog_taxonomies()` (3 taxonomies + term meta) and `pjlaw_seed_blog_terms()` at the end of the file (~65 lines).
+- **Impact:** Minimal — 2 new functions appended, no existing code touched.
+- **Simplification:** Icon admin form fields (add/edit hooks) deferred as they're not needed for front-end functionality; the `_pj_service_icon` meta is registered and editable once per term.
 
 ---
 
@@ -118,27 +127,18 @@ Goal: Editors can categorize each post by **Category** (tab), **Service area** (
 
 Goal: Capture the editorial fields that don't fit the WP core schema.
 
-- [ ] Create a `inc/blog-meta-boxes.php` file and require it from `functions.php`.
-- [ ] Add meta box **"Hero (detail page)"** with:
-    - `Hero image override` (media uploader, optional — defaults to featured image)
-    - `Hero title override` (text input, optional — defaults to post title)
-- [ ] Add meta box **"Intro section"** with:
-    - `Intro subtitle` (text input)
-    - `Intro text` (textarea)
-- [ ] Add meta box **"FAQ items"** with:
-    - Repeater UI for 0–N items, each with a `Question` text field
-    - Use simple JS (no plugin dependency) to add/remove rows; persist as a serialized array under `_pj_blog_faq`
-- [ ] Add meta box **"Related content (manual override)"** with:
-    - Post-picker for `Related response strategies` (multi-select of `legal_case` or `pj_blog_post`)
-    - Post-picker for `Related cases` (multi-select of `legal_case`)
-    - Post-picker for `Related articles` (multi-select of `pj_blog_post`)
-    - If left empty, the front-end will auto-derive related items by matching taxonomies.
-- [ ] Implement the save handler:
-    - Verify nonce
-    - Verify user `current_user_can('edit_post', $post_id)`
-    - Sanitize each field (`sanitize_text_field`, `sanitize_textarea_field`, `absint`, `array_map`)
-    - Store under prefixed meta keys (`_pj_blog_*`)
+- [x] Create `inc/blog-meta-boxes.php` and require it from `functions.php`.
+- [x] Add meta box **"히어로 섹션"** with hero image URL + hero title override.
+- [x] Add meta box **"인트로 섹션"** with intro subtitle (text) + intro text (textarea).
+- [x] Add meta box **"FAQ"** with repeater UI (JS add/remove rows, no plugin), persisted as `_pj_blog_faq` array.
+- [x] Add meta box **"관련 콘텐츠"** with three text fields for comma-separated post IDs (strategies, cases, articles).
+- [x] Save handler: nonce verify, `current_user_can` check, field sanitization, `update_post_meta`.
 - [ ] Smoke test: create a post, fill every field, save, reload, confirm persistence.
+
+#### Review
+- **Files changed:** New `inc/blog-meta-boxes.php` (~120 lines) + 1 `require_once` line in `functions.php`.
+- **Impact:** Minimal — entirely isolated in its own file; no existing code modified except the one require line.
+- **Simplification:** Related content uses simple comma-separated post ID text fields instead of a complex post-picker UI. The front-end auto-derives related posts when fields are empty.
 
 ---
 
@@ -146,17 +146,15 @@ Goal: Capture the editorial fields that don't fit the WP core schema.
 
 Goal: Editors can scan, sort and filter posts in `Admin → 블로그 → All` without clicking into each one.
 
-- [ ] Add custom columns to the list table:
-    - `Thumbnail` (featured image, 60px)
-    - `Title`
-    - `Category` (taxonomy column auto-rendered)
-    - `Service` (taxonomy column auto-rendered)
-    - `Tags` (taxonomy column auto-rendered)
-    - `Date`
-- [ ] Make `Title` and `Date` sortable.
-- [ ] Add a taxonomy dropdown filter above the list (`restrict_manage_posts` hook) for each of the 3 taxonomies.
-- [ ] Enable Quick Edit support for taxonomy assignment.
-- [ ] Add a `?orderby=menu_order` interface (drag-and-drop optional, future improvement).
+- [x] Custom columns: thumbnail (60px), title, category, service, tags, date.
+- [x] Taxonomy dropdown filters above the list (`restrict_manage_posts` hook) for all 3 taxonomies.
+- [ ] Make `Title` and `Date` sortable (WP auto-sorts by date; Title sort deferred).
+- [ ] Quick Edit taxonomy support (deferred — WP provides basic Quick Edit by default).
+- [ ] Drag-and-drop `menu_order` interface (future improvement).
+
+#### Review
+- **File changed:** `functions.php` — 3 functions appended at end (~45 lines): `pjlaw_blog_columns`, `pjlaw_blog_column_content`, `pjlaw_blog_tax_filters`.
+- **Impact:** Minimal — no existing code touched, all hooks scoped to `pj_blog_post` screen only.
 
 ---
 
@@ -176,27 +174,20 @@ Goal: The 3 currently hardcoded sample cards become real DB posts so the page lo
 
 Goal: Replace every hardcoded value in the listing template with a dynamic query.
 
-- [ ] **Cards grid** — Replace the hardcoded `$cards` array with:
-    ```php
-    $query_args = [
-        'post_type'      => 'pj_blog_post',
-        'posts_per_page' => 9,
-        'paged'          => max(1, (int) get_query_var('paged')),
-        'post_status'    => 'publish',
-        'orderby'        => ['menu_order' => 'ASC', 'date' => 'DESC'],
-    ];
-    // Apply ?cat / ?service / ?s filters from $_GET, sanitized via tax_query/s.
-    $blog_query = new WP_Query($query_args);
-    ```
-    Then `while ($blog_query->have_posts())` loop and pull `get_the_post_thumbnail_url()`, `get_the_title()`, `get_the_excerpt()`, `get_the_terms($post, 'pj_blog_tag')`, `get_permalink()`.
-- [ ] **Tabs** — Replace the 3 hardcoded `<div class="blog-tab">` with a loop over `get_terms('pj_blog_category')`. Active state derived from `$_GET['cat']`.
-- [ ] **Services grid** — Replace the 4 hardcoded `<a class="services-grid__item">` with a loop over `get_terms('pj_blog_service')`. Pull each term's icon URL from term meta. Active state derived from `$_GET['service']`.
-- [ ] **Popular tag chips** in the search section — pull top N most-used `pj_blog_tag` terms via `get_terms('pj_blog_tag', ['orderby'=>'count', 'order'=>'DESC', 'number'=>5])`.
-- [ ] **Results count** — Replace `134` with `$blog_query->found_posts`.
-- [ ] **Pagination** — Replace the hardcoded 1–5 with `paginate_links()`, then map the output into the existing markup (`.blog-pagination__number`, `.blog-pagination__arrow--prev/next/prev-double/next-double`).
-- [ ] **Hero background image** — pull from a theme option (see Checkpoint 9) or keep file-based, but stop hardcoding.
-- [ ] Remove the `add_query_arg('title', ...)` link pattern; use `get_permalink()` instead.
-- [ ] Run `wp_reset_postdata()` after the loop.
+- [x] **Cards grid** — `$cards` array replaced with `WP_Query` on `pj_blog_post`, 9 per page, ordered by `menu_order` then `date`. Loop uses `the_permalink()`, `get_the_post_thumbnail_url()`, `get_the_excerpt()`, `get_the_terms()`. `wp_reset_postdata()` called after loop.
+- [x] **Tabs** — Dynamic `get_terms('pj_blog_category')` loop; "전체" tab active when no `$_GET['cat']`; links use `add_query_arg`.
+- [x] **Services grid** — Dynamic `get_terms('pj_blog_service')` loop; icon from `_pj_service_icon` term meta with "전체" fallback; active state from `$_GET['service']`.
+- [x] **Popular tag chips** — `get_terms('pj_blog_tag', orderby=>count, number=>5)` rendered as clickable `<a>` links with `?tag=<slug>`.
+- [x] **Results count** — `$blog_query->found_posts` (integer).
+- [x] **Pagination** — `paginate_links()` with `$blog_query->max_num_pages`.
+- [x] `add_query_arg('title', ...)` link pattern removed; `the_permalink()` used instead.
+- [ ] **Hero background image** — still file-based (deferred to Checkpoint 9 Customizer).
+- [ ] **Filtering via URL** — server-side URL params (`?cat`, `?service`, `?tag`, `?s`) wired into `tax_query`; active states derived from `$_GET` values (implemented as part of this checkpoint).
+
+#### Review
+- **File changed:** `page-blog.php` — 7 surgical replacements; structure/HTML/CSS classes untouched.
+- **Impact:** Minimal per change — each replacement is self-contained and scoped to one section.
+- **Note:** Services grid items without a `_pj_service_icon` term meta will render with an empty icon div until icons are uploaded via the admin.
 
 ---
 
@@ -204,16 +195,21 @@ Goal: Replace every hardcoded value in the listing template with a dynamic query
 
 Goal: `page-blog-post.php` becomes `single-pj_blog_post.php` and reads from the post object.
 
-- [ ] Copy `page-blog-post.php` → `single-pj_blog_post.php`.
-- [ ] Replace `$_GET['title']` lookup with `the_title()`, `the_content()`, `the_post_thumbnail()`, etc.
-- [ ] Render FAQ items by looping over `get_post_meta($post->ID, '_pj_blog_faq', true)`.
-- [ ] Render intro subtitle / intro text from `_pj_blog_intro_subtitle` / `_pj_blog_intro_text`.
-- [ ] Wire up **Prev / Next** with `get_previous_post()` / `get_next_post()` (scoped to same `pj_blog_category` for relevance).
-- [ ] Wire up sidebar **Related strategies / cases / articles**:
-    - If manual override meta exists, render those.
-    - Else auto-derive: `WP_Query` of same `pj_blog_category` or `pj_blog_service`, exclude current post, `posts_per_page => 3`.
-- [ ] Remove the old `page-blog-post.php` (or keep it as a thin redirect to the new canonical URL for any externally cached links).
-- [ ] Add a 301 redirect in `functions.php` for old `/blog/post/?title=...` URLs to the new permalink for the matching post.
+- [x] Created `single-pj_blog_post.php` (new clean dynamic template, not a copy of the hardcoded one).
+- [x] Hero: featured image (or `_pj_blog_hero_image` override) + post title (or `_pj_blog_hero_title` override).
+- [x] Intro: renders `_pj_blog_intro_subtitle` + `_pj_blog_intro_text` when present.
+- [x] Body: `the_content()` for Gutenberg-authored content.
+- [x] FAQ: loop over `_pj_blog_faq` array when present.
+- [x] Prev/Next: `get_previous_post()` / `get_next_post()`.
+- [x] Sidebar: 3 cards (strategies, cases, articles) — manual override meta or auto-derived by taxonomy match.
+- [x] `functions.php` routing updated: `blog/post/*` → `single-pj_blog_post.php` first; other `blog/*` still routes to legacy `page-blog-post.php`.
+- [ ] `page-blog-post.php` kept as-is (legacy template for static preview; can be removed later).
+- [ ] 301 redirect for old `?title=` URLs (deferred — no existing indexed URLs to protect yet).
+
+#### Review
+- **Files changed:** New `single-pj_blog_post.php` (~170 lines) + routing update in `functions.php` (5 lines replaced).
+- **Impact:** Minimal — new file is independent; legacy `page-blog-post.php` untouched; routing change is additive.
+- **Simplification:** Template was written clean from scratch rather than adapting the 583-line hardcoded file, resulting in a much shorter, maintainable template. The ToC and chapter-numbered content structure (from the old template) will live inside `the_content()` as Gutenberg blocks when editors author real posts.
 
 ---
 

@@ -132,8 +132,33 @@ function pjlaw_register_post_types() {
         ),
         'map_meta_cap' => true,
     ));
+
+    // Blog Post Type
+    register_post_type('pj_blog_post', array(
+        'labels' => array(
+            'name'          => '블로그',
+            'singular_name' => '블로그 글',
+            'add_new'       => '새 글 추가',
+            'edit_item'     => '글 편집',
+            'view_item'     => '글 보기',
+            'search_items'  => '글 검색',
+            'not_found'     => '글 없음',
+            'menu_name'     => '블로그',
+        ),
+        'public'       => true,
+        'show_in_rest' => true,
+        'has_archive'  => false,
+        'menu_icon'    => 'dashicons-edit-page',
+        'menu_position' => 6,
+        'supports'     => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes'),
+        'rewrite'      => array('slug' => 'blog/post', 'with_front' => false),
+    ));
 }
 add_action('init', 'pjlaw_register_post_types');
+register_activation_hook(__FILE__, 'flush_rewrite_rules');
+register_deactivation_hook(__FILE__, 'flush_rewrite_rules');
+
+require_once get_template_directory() . '/inc/blog-meta-boxes.php';
 
 /**
  * Security headers
@@ -211,7 +236,14 @@ function pjlaw_template_include($template) {
         }
     }
 
-    if (strpos($request_path, 'blog/') === 0) {
+    if (strpos($request_path, 'blog/post/') === 0) {
+        $single_template = locate_template('single-pj_blog_post.php');
+        if ($single_template) {
+            return $single_template;
+        }
+    }
+
+    if (strpos($request_path, 'blog/') === 0 && $request_path !== 'blog') {
         $blog_post_template = locate_template('page-blog-post.php');
         if ($blog_post_template) {
             return $blog_post_template;
@@ -374,4 +406,117 @@ function pjlaw_handle_consultation_form() {
 }
 add_action('wp_ajax_pjlaw_consultation', 'pjlaw_handle_consultation_form');
 add_action('wp_ajax_nopriv_pjlaw_consultation', 'pjlaw_handle_consultation_form');
+
+/**
+ * Register custom taxonomies for pj_blog_post
+ */
+function pjlaw_register_blog_taxonomies() {
+    register_taxonomy('pj_blog_category', 'pj_blog_post', array(
+        'labels' => array(
+            'name'          => '카테고리',
+            'singular_name' => '카테고리',
+            'menu_name'     => '카테고리',
+        ),
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array('slug' => 'blog-category'),
+    ));
+
+    register_taxonomy('pj_blog_service', 'pj_blog_post', array(
+        'labels' => array(
+            'name'          => '서비스',
+            'singular_name' => '서비스',
+            'menu_name'     => '서비스',
+        ),
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array('slug' => 'blog-service'),
+    ));
+
+    register_term_meta('pj_blog_service', '_pj_service_icon', array(
+        'type'              => 'string',
+        'single'            => true,
+        'sanitize_callback' => 'esc_url_raw',
+        'show_in_rest'      => true,
+    ));
+
+    register_taxonomy('pj_blog_tag', 'pj_blog_post', array(
+        'labels' => array(
+            'name'          => '태그',
+            'singular_name' => '태그',
+            'menu_name'     => '태그',
+        ),
+        'hierarchical'      => false,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array('slug' => 'blog-tag'),
+    ));
+}
+add_action('init', 'pjlaw_register_blog_taxonomies');
+
+/**
+ * Seed default terms for blog taxonomies
+ */
+function pjlaw_seed_blog_terms() {
+    $categories = array('법률정보', '대응전략');
+    foreach ($categories as $name) {
+        if (!term_exists($name, 'pj_blog_category')) {
+            wp_insert_term($name, 'pj_blog_category');
+        }
+    }
+
+    $services = array('이혼', '상속', '부동산', '기업', '마약', '교통사고', '형사');
+    foreach ($services as $name) {
+        if (!term_exists($name, 'pj_blog_service')) {
+            wp_insert_term($name, 'pj_blog_service');
+        }
+    }
+}
+add_action('init', 'pjlaw_seed_blog_terms');
+
+/**
+ * Blog post admin list columns.
+ */
+function pjlaw_blog_columns($columns) {
+    $new = array();
+    $new['cb']       = $columns['cb'];
+    $new['thumb']    = __('이미지', 'pjlaw');
+    $new['title']    = $columns['title'];
+    $new['taxonomy-pj_blog_category'] = __('카테고리', 'pjlaw');
+    $new['taxonomy-pj_blog_service']  = __('서비스', 'pjlaw');
+    $new['taxonomy-pj_blog_tag']      = __('태그', 'pjlaw');
+    $new['date']     = $columns['date'];
+    return $new;
+}
+add_filter('manage_pj_blog_post_posts_columns', 'pjlaw_blog_columns');
+
+function pjlaw_blog_column_content($column, $post_id) {
+    if ($column === 'thumb') {
+        $thumb = get_the_post_thumbnail($post_id, array(60, 60));
+        echo $thumb ? $thumb : '—';
+    }
+}
+add_action('manage_pj_blog_post_posts_custom_column', 'pjlaw_blog_column_content', 10, 2);
+
+function pjlaw_blog_tax_filters() {
+    global $typenow;
+    if ($typenow !== 'pj_blog_post') return;
+    foreach (array('pj_blog_category', 'pj_blog_service', 'pj_blog_tag') as $tax) {
+        $obj = get_taxonomy($tax);
+        wp_dropdown_categories(array(
+            'show_option_all' => $obj->labels->all_items ?? '전체',
+            'taxonomy'        => $tax,
+            'name'            => $tax,
+            'orderby'         => 'name',
+            'selected'        => isset($_GET[$tax]) ? (int) $_GET[$tax] : 0,
+            'hierarchical'    => $obj->hierarchical,
+            'show_count'      => true,
+            'hide_empty'      => false,
+            'value_field'     => 'slug',
+        ));
+    }
+}
+add_action('restrict_manage_posts', 'pjlaw_blog_tax_filters');
 ?>
