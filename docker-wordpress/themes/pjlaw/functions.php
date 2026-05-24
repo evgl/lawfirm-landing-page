@@ -467,7 +467,7 @@ function pjlaw_seed_blog_terms() {
         }
     }
 
-    $services = array('이혼', '상속', '부동산', '기업', '마약', '교통사고', '형사');
+    $services = array('민사', '형사', '성범죄', '이혼', '상속', '부동산', '기업');
     foreach ($services as $name) {
         if (!term_exists($name, 'pj_blog_service')) {
             wp_insert_term($name, 'pj_blog_service');
