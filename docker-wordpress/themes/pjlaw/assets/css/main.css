@@ -2967,6 +2967,8 @@
     gap: 14px;
     text-decoration: none;
     transition: all 0.25s ease;
+    cursor: pointer;
+    padding: 0;
 }
 
 .services-grid__item.active {

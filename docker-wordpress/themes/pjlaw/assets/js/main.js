@@ -133,27 +133,41 @@
     }
 
     function initBlogFilter() {
-        var $tabs = $('.blog-tabs .blog-tab[data-cat]');
-        if (!$tabs.length) return;
+        var $tabs     = $('.blog-tabs .blog-tab[data-cat]');
+        var $services = $('.services-grid .services-grid__item[data-service]');
+        if (!$tabs.length && !$services.length) return;
 
-        $tabs.on('click', function() {
-            var cat = $(this).data('cat');
+        var activeCat     = 'all';
+        var activeService = 'all';
 
-            $tabs.removeClass('blog-tab--active');
-            $(this).addClass('blog-tab--active');
-
-            var $cards = $('.blog-card');
+        function applyFilter() {
+            var $cards  = $('.blog-card');
             var visible = 0;
-
             $cards.each(function() {
-                var cats = $(this).data('cats') ? String($(this).data('cats')).split(' ') : [];
-                var show = cat === 'all' || cats.indexOf(cat) !== -1;
+                var cats     = $(this).data('cats')     ? String($(this).data('cats')).split(' ')     : [];
+                var services = $(this).data('services') ? String($(this).data('services')).split(' ') : [];
+                var catMatch     = activeCat     === 'all' || cats.indexOf(activeCat)         !== -1;
+                var serviceMatch = activeService === 'all' || services.indexOf(activeService) !== -1;
+                var show = catMatch && serviceMatch;
                 $(this).toggle(show);
                 if (show) visible++;
             });
-
             var $count = $('.blog-results-count strong');
             if ($count.length) $count.text(visible + '건');
+        }
+
+        $tabs.on('click', function() {
+            activeCat = String($(this).data('cat'));
+            $tabs.removeClass('blog-tab--active');
+            $(this).addClass('blog-tab--active');
+            applyFilter();
+        });
+
+        $services.on('click', function() {
+            activeService = String($(this).data('service'));
+            $services.removeClass('active');
+            $(this).addClass('active');
+            applyFilter();
         });
     }
 

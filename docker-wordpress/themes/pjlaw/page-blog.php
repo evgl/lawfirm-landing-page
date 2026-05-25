@@ -32,6 +32,13 @@ if (count($tax_query) > 1) $query_args['tax_query'] = $tax_query;
 if ($current_search)  $query_args['s'] = $current_search;
 
 $blog_query = new WP_Query($query_args);
+
+// Build service name→slug map for the services grid
+$service_terms = get_terms(array('taxonomy' => 'pj_blog_service', 'hide_empty' => false));
+$service_slug = array();
+foreach ((array) $service_terms as $st) {
+    if (!is_wp_error($st)) $service_slug[$st->name] = $st->slug;
+}
 ?>
 
 <main id="main" class="site-main blog-page" role="main">
@@ -107,7 +114,7 @@ $blog_query = new WP_Query($query_args);
             </div>
 
             <div class="services-grid" style="margin-bottom: 60px;">
-                <a href="#all" class="services-grid__item active">
+                <button class="services-grid__item active" data-service="all">
                     <div class="services-grid__icon">
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <mask id="path-1-inside-1_4115_3763" fill="white">
@@ -117,8 +124,8 @@ $blog_query = new WP_Query($query_args);
                         </svg>
                     </div>
                     <span class="services-grid__label">전체</span>
-                </a>
-                <a href="#civil" class="services-grid__item">
+                </button>
+                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['민사'] ?? ''); ?>">
                     <div class="services-grid__icon">
                         <svg width="40" height="40" viewBox="0 0 37 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" overflow="visible" preserveAspectRatio="xMidYMid meet">
                             <path d="M18 4.31543C18.9306 4.31543 19.6846 5.0694 19.6846 6V26.4346H16.3154V6C16.3154 5.0694 17.0694 4.31543 18 4.31543Z" stroke="#181A1E" stroke-width="1.88"/>
@@ -134,38 +141,38 @@ $blog_query = new WP_Query($query_args);
                         </svg>
                     </div>
                     <span class="services-grid__label">민사</span>
-                </a>
-                <a href="#criminal" class="services-grid__item">
+                </button>
+                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['형사'] ?? ''); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-criminal.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">형사</span>
-                </a>
-                <a href="#sexual" class="services-grid__item">
+                </button>
+                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['성범죄'] ?? ''); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-sexual-crime.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">성범죄</span>
-                </a>
-                <a href="#divorce" class="services-grid__item">
+                </button>
+                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['이혼'] ?? ''); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-divorce.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">이혼</span>
-                </a>
-                <a href="#inheritance" class="services-grid__item">
+                </button>
+                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['상속'] ?? ''); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-inheritance.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">상속</span>
-                </a>
-                <a href="#realestate" class="services-grid__item">
+                </button>
+                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['부동산'] ?? ''); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-real-estate.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">부동산</span>
-                </a>
-                <a href="#corporate" class="services-grid__item">
+                </button>
+                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['기업'] ?? ''); ?>">
                     <div class="services-grid__icon corporate-icon">
                         <div class="corporate-icon-wrapper">
                             <div class="corporate-building-1"></div>
@@ -174,7 +181,7 @@ $blog_query = new WP_Query($query_args);
                         </div>
                     </div>
                     <span class="services-grid__label">기업</span>
-                </a>
+                </button>
             </div>
 
             <div class="blog-results-header">
@@ -184,10 +191,12 @@ $blog_query = new WP_Query($query_args);
             <div class="blog-grid">
                 <?php if ($blog_query->have_posts()) : ?>
                     <?php while ($blog_query->have_posts()) : $blog_query->the_post();
-                        $post_cats = get_the_terms(get_the_ID(), 'pj_blog_category');
-                        $cat_slugs = ($post_cats && !is_wp_error($post_cats)) ? implode(' ', wp_list_pluck($post_cats, 'slug')) : '';
+                        $post_cats     = get_the_terms(get_the_ID(), 'pj_blog_category');
+                        $cat_slugs     = ($post_cats && !is_wp_error($post_cats)) ? implode(' ', wp_list_pluck($post_cats, 'slug')) : '';
+                        $post_services = get_the_terms(get_the_ID(), 'pj_blog_service');
+                        $service_slugs = ($post_services && !is_wp_error($post_services)) ? implode(' ', wp_list_pluck($post_services, 'slug')) : '';
                     ?>
-                    <a href="<?php the_permalink(); ?>" class="blog-card" data-cats="<?php echo esc_attr($cat_slugs); ?>">
+                    <a href="<?php the_permalink(); ?>" class="blog-card" data-cats="<?php echo esc_attr($cat_slugs); ?>" data-services="<?php echo esc_attr($service_slugs); ?>">
                         <div class="blog-card__image-wrap">
                             <?php if (has_post_thumbnail()) : ?>
                                 <img src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'large')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="blog-card__image" loading="lazy" />
