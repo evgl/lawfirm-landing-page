@@ -11,6 +11,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Load blog infrastructure files
+require_once get_template_directory() . '/inc/blog-seed.php';
+require_once get_template_directory() . '/inc/blog-meta-boxes.php';
+
 /**
  * Theme Setup
  */
