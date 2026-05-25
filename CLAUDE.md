@@ -6,6 +6,64 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 WordPress landing page for PyeongJeong Law Firm (Korean), developed locally via Docker. All real work happens inside the custom `pjlaw` theme — there is no JS build pipeline, no package manager, and no test suite. Edits to PHP/CSS/JS files in the theme directory are reflected immediately because the host folder is bind-mounted into the WordPress container.
 
+# Standard Development Workflow
+
+## Required Process for All Coding Tasks
+
+### 1. Initial Analysis & Planning
+- **Think through the problem** thoroughly before starting
+- **Read the codebase** to understand relevant files and context
+- Break down complex tasks into simple, manageable steps
+
+### 2. Task List Requirements
+- Create a **numbered todo list** that can be checked off as items are completed
+- Each task should be **specific and actionable**
+- Tasks should have **minimal impact** on the codebase
+- Prioritize **simplicity** over complexity in every task
+
+### 3. Plan Verification
+- **Always check in with the user** before beginning work
+- Present the plan and wait for **user verification/approval**
+- Make adjustments to the plan if requested
+
+### 4. Implementation Process
+- Work through **todo items sequentially**
+- **Mark items as complete** as you finish them sequentially
+- Provide **high-level explanations** of changes made at each step
+- Focus on **incremental progress** rather than large changes
+
+### 5. Code Change Principles
+- Make every change **as simple as possible**
+- **Minimize code impact** - affect as few files/lines as possible
+- Avoid **massive or complex changes**
+- Prioritize **clarity and maintainability**
+
+### 6. Documentation & Review
+- Add a **review section** to the task file when complete
+- Include a **summary of all changes made**
+- Note any **relevant information** for future reference
+
+### 7. DO NOT BE LAZY. 
+- NEVER BE LAZY. IF THERE IS A BUG FIND THE ROOT CAUSE AND FIX IT. NO TEMPORARY FIXES. YOU ARE A SENIOR DEVELOPER. NEVER BE LAZY
+
+### 8. MAKE ALL FIXES AND CODE CHANGES SIMPLE 
+- MAKE ALL FIXES AND CODE CHANGES AS SIMPLE AS HUMANLY POSSIBLE. THEY SHOULD ONLY IMPACT NECESSARY CODE RELEVANT TO THE TASK AND NOTHING ELSE. IT SHOULD IMPACT AS LITTLE CODE AS POSSIBLE. YOUR GOAL IS TO NOT INTRODUCE ANY BUGS. IT'S ALL ABOUT SIMPLICITY
+
+### 9. Confidence for making changes
+- Do not make any changes, until you have 95% confidence that you know what to build ask me follow up questions until you have that confidence
+
+### 10. Frontend Design & Components
+- When building web components, pages, or applications, use the **@frontend-design skill**
+- Use for creating distinctive, production-grade frontend interfaces
+- Applies to design work, UI/UX development, and component creation
+
+
+## Key Principles
+- **Simplicity first** - every change should be as minimal as possible
+- **Plan before code** - never start coding without a clear plan
+- **Incremental progress** - small steps, constant verification
+- **Clear communication** - explain what you're doing at each step
+
 ## Local Development
 
 The Docker stack lives in `docker-wordpress/`. Run all `docker compose` commands from that directory.
