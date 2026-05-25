@@ -20,7 +20,8 @@ $current_search  = isset($_GET['s'])       ? sanitize_text_field($_GET['s'])    
 
 $query_args = array(
     'post_type'      => 'pj_blog_post',
-    'posts_per_page' => -1,
+    'posts_per_page' => 9,
+    'paged'          => max(1, get_query_var('paged')),
     'post_status'    => 'publish',
     'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
 );
@@ -217,10 +218,30 @@ foreach ((array) $service_terms as $st) {
                         </div>
                     </a>
                     <?php endwhile; wp_reset_postdata(); ?>
+                    <?php
+                    $empty_slots = 9 - min($blog_query->post_count, 9);
+                    for ($i = 0; $i < $empty_slots; $i++) :
+                    ?>
+                        <div class="blog-card blog-card--empty"></div>
+                    <?php endfor; ?>
                 <?php else : ?>
-                    <p class="blog-no-results">검색 결과가 없습니다.</p>
+                    <?php for ($i = 0; $i < 9; $i++) : ?>
+                        <div class="blog-card blog-card--empty"></div>
+                    <?php endfor; ?>
                 <?php endif; ?>
             </div>
+
+            <?php if ($blog_query->max_num_pages > 1) : ?>
+            <div class="blog-pagination">
+                <?php echo paginate_links(array(
+                    'total'     => $blog_query->max_num_pages,
+                    'current'   => max(1, get_query_var('paged')),
+                    'format'    => '?paged=%#%',
+                    'prev_text' => '&lsaquo;',
+                    'next_text' => '&rsaquo;',
+                )); ?>
+            </div>
+            <?php endif; ?>
 
         </div>
     </section>

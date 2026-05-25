@@ -3600,6 +3600,38 @@
     color: #FFFFFF;
 }
 
+.blog-card--empty {
+    background: transparent;
+    border: none;
+    pointer-events: none;
+    min-height: 380px;
+}
+
+.blog-pagination .page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #3D3D3D;
+    text-decoration: none;
+}
+
+.blog-pagination .page-numbers.current {
+    background: #1E1E1E;
+    color: #FFFFFF;
+}
+
+.blog-pagination .page-numbers.prev,
+.blog-pagination .page-numbers.next {
+    font-size: 18px;
+}
+
 .blog-footer__bottom {
     background-color: #050505;
 }
