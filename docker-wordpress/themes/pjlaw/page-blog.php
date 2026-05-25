@@ -231,15 +231,32 @@ foreach ((array) $service_terms as $st) {
                 <?php endif; ?>
             </div>
 
-            <?php if ($blog_query->max_num_pages > 1) : ?>
+            <?php
+            $paged     = max(1, get_query_var('paged'));
+            $max_pages = $blog_query->max_num_pages;
+            if ($max_pages > 1) :
+                $start = max(1, $paged - 2);
+                $end   = min($max_pages, $start + 4);
+                if ($end - $start < 4) $start = max(1, $end - 4);
+            ?>
             <div class="blog-pagination">
-                <?php echo paginate_links(array(
-                    'total'     => $blog_query->max_num_pages,
-                    'current'   => max(1, get_query_var('paged')),
-                    'format'    => '?paged=%#%',
-                    'prev_text' => '&lsaquo;',
-                    'next_text' => '&rsaquo;',
-                )); ?>
+                <?php if ($paged > 1) : ?>
+                    <a href="<?php echo esc_url(get_pagenum_link($paged - 1)); ?>" class="blog-pagination__arrow">&lsaquo;</a>
+                <?php endif; ?>
+
+                <div class="blog-pagination__numbers">
+                    <?php for ($p = $start; $p <= $end; $p++) : ?>
+                        <?php if ($p === $paged) : ?>
+                            <span class="blog-pagination__number blog-pagination__number--active"><?php echo $p; ?></span>
+                        <?php else : ?>
+                            <a href="<?php echo esc_url(get_pagenum_link($p)); ?>" class="blog-pagination__number"><?php echo $p; ?></a>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </div>
+
+                <?php if ($paged < $max_pages) : ?>
+                    <a href="<?php echo esc_url(get_pagenum_link($paged + 1)); ?>" class="blog-pagination__arrow">&rsaquo;</a>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
 
