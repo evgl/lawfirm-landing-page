@@ -3457,7 +3457,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 26px;
     max-width: 1300px;
-    margin: 0 auto;
+    margin: 0 auto 90px;
 }
 
 .blog-card {
