@@ -20,6 +20,9 @@
         
         // Scroll to top
         initScrollTop();
+
+        // Blog category filter (client-side)
+        initBlogFilter();
     });
 
     /**
@@ -126,6 +129,31 @@
             error: function() {
                 alert('An error occurred. Please try again.');
             }
+        });
+    }
+
+    function initBlogFilter() {
+        var $tabs = $('.blog-tabs .blog-tab[data-cat]');
+        if (!$tabs.length) return;
+
+        $tabs.on('click', function() {
+            var cat = $(this).data('cat');
+
+            $tabs.removeClass('blog-tab--active');
+            $(this).addClass('blog-tab--active');
+
+            var $cards = $('.blog-card');
+            var visible = 0;
+
+            $cards.each(function() {
+                var cats = $(this).data('cats') ? String($(this).data('cats')).split(' ') : [];
+                var show = cat === 'all' || cats.indexOf(cat) !== -1;
+                $(this).toggle(show);
+                if (show) visible++;
+            });
+
+            var $count = $('.blog-results-count strong');
+            if ($count.length) $count.text(visible + '건');
         });
     }
 

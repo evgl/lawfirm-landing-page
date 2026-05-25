@@ -13,25 +13,21 @@ get_header();
 
 $theme_uri = get_template_directory_uri();
 
-// Filters from URL
-$current_cat     = isset($_GET['cat'])     ? sanitize_text_field($_GET['cat'])     : '';
+// Filters from URL (category is now handled client-side)
 $current_service = isset($_GET['service']) ? sanitize_text_field($_GET['service']) : '';
 $current_tag     = isset($_GET['tag'])     ? sanitize_text_field($_GET['tag'])     : '';
 $current_search  = isset($_GET['s'])       ? sanitize_text_field($_GET['s'])       : '';
-$paged           = max(1, (int) get_query_var('paged'));
 
 $query_args = array(
     'post_type'      => 'pj_blog_post',
-    'posts_per_page' => 9,
-    'paged'          => $paged,
+    'posts_per_page' => -1,
     'post_status'    => 'publish',
     'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
 );
 
 $tax_query = array('relation' => 'AND');
-if ($current_cat)     $tax_query[] = array('taxonomy' => 'pj_blog_category', 'field' => 'slug', 'terms' => $current_cat);
-if ($current_service) $tax_query[] = array('taxonomy' => 'pj_blog_service',  'field' => 'slug', 'terms' => $current_service);
-if ($current_tag)     $tax_query[] = array('taxonomy' => 'pj_blog_tag',       'field' => 'slug', 'terms' => $current_tag);
+if ($current_service) $tax_query[] = array('taxonomy' => 'pj_blog_service', 'field' => 'slug', 'terms' => $current_service);
+if ($current_tag)     $tax_query[] = array('taxonomy' => 'pj_blog_tag',     'field' => 'slug', 'terms' => $current_tag);
 if (count($tax_query) > 1) $query_args['tax_query'] = $tax_query;
 if ($current_search)  $query_args['s'] = $current_search;
 
@@ -93,21 +89,20 @@ $blog_query = new WP_Query($query_args);
         </div>
     </section>
 
-    <section class="blog-content">
+    <section class="blog-content" id="blog-content">
         <div class="container">
             <div class="blog-tabs">
-                <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-tab<?php echo !$current_cat ? ' blog-tab--active' : ''; ?>">
+                <button class="blog-tab blog-tab--active" data-cat="all">
                     <span class="blog-tab__text">전체</span>
-                </a>
+                </button>
                 <?php
                 $cat_terms = get_terms(array('taxonomy' => 'pj_blog_category', 'hide_empty' => false));
                 foreach ((array) $cat_terms as $ct) :
                     if (is_wp_error($ct)) continue;
-                    $cat_url = add_query_arg('cat', $ct->slug, home_url('/blog/'));
                 ?>
-                <a href="<?php echo esc_url($cat_url); ?>" class="blog-tab<?php echo ($current_cat === $ct->slug) ? ' blog-tab--active' : ''; ?>">
+                <button class="blog-tab" data-cat="<?php echo esc_attr($ct->slug); ?>">
                     <span class="blog-tab__text"><?php echo esc_html($ct->name); ?></span>
-                </a>
+                </button>
                 <?php endforeach; ?>
             </div>
 
@@ -188,8 +183,11 @@ $blog_query = new WP_Query($query_args);
 
             <div class="blog-grid">
                 <?php if ($blog_query->have_posts()) : ?>
-                    <?php while ($blog_query->have_posts()) : $blog_query->the_post(); ?>
-                    <a href="<?php the_permalink(); ?>" class="blog-card">
+                    <?php while ($blog_query->have_posts()) : $blog_query->the_post();
+                        $post_cats = get_the_terms(get_the_ID(), 'pj_blog_category');
+                        $cat_slugs = ($post_cats && !is_wp_error($post_cats)) ? implode(' ', wp_list_pluck($post_cats, 'slug')) : '';
+                    ?>
+                    <a href="<?php the_permalink(); ?>" class="blog-card" data-cats="<?php echo esc_attr($cat_slugs); ?>">
                         <div class="blog-card__image-wrap">
                             <?php if (has_post_thumbnail()) : ?>
                                 <img src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'large')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="blog-card__image" loading="lazy" />
@@ -215,22 +213,6 @@ $blog_query = new WP_Query($query_args);
                 <?php endif; ?>
             </div>
 
-            <div class="blog-pagination">
-                <?php
-                $pagination = paginate_links(array(
-                    'total'     => $blog_query->max_num_pages,
-                    'current'   => $paged,
-                    'type'      => 'array',
-                    'prev_text' => '&lsaquo;',
-                    'next_text' => '&rsaquo;',
-                ));
-                if ($pagination) :
-                    foreach ($pagination as $page_link) :
-                        echo '<span class="blog-pagination__number">' . $page_link . '</span>';
-                    endforeach;
-                endif;
-                ?>
-            </div>
         </div>
     </section>
 

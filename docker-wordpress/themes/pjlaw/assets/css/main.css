@@ -3392,6 +3392,10 @@
     gap: 12px;
     cursor: pointer;
     position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: none;
 }
 
 .blog-tab__text {
