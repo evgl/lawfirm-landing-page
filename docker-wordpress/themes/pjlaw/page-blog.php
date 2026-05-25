@@ -23,7 +23,7 @@ $query_args = array(
     'posts_per_page' => 9,
     'paged'          => max(1, get_query_var('paged')),
     'post_status'    => 'publish',
-    'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
+    'orderby'        => array('menu_order' => 'ASC', 'ID' => 'DESC'),
 );
 
 $tax_query = array('relation' => 'AND');
