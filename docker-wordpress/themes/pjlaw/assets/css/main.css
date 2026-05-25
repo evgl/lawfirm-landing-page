@@ -3532,6 +3532,10 @@
     color: #181A1E;
     margin: 0;
     margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 .blog-card__excerpt {
@@ -3542,6 +3546,10 @@
     letter-spacing: -0.45px;
     color: #595B5F;
     margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 /* Blog Pagination */
