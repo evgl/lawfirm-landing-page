@@ -140,6 +140,29 @@
         var activeCat     = 'all';
         var activeService = 'all';
 
+        // Restore filter state saved before navigating from page 2+
+        var saved = sessionStorage.getItem('pjlaw_blog_filter');
+        if (saved) {
+            try {
+                var f = JSON.parse(saved);
+                activeCat     = f.cat     || 'all';
+                activeService = f.service || 'all';
+                if (activeCat !== 'all') {
+                    $tabs.removeClass('blog-tab--active');
+                    $tabs.filter('[data-cat="' + activeCat + '"]').addClass('blog-tab--active');
+                }
+                if (activeService !== 'all') {
+                    $services.removeClass('active');
+                    $services.filter('[data-service="' + activeService + '"]').addClass('active');
+                }
+            } catch (e) {}
+            sessionStorage.removeItem('pjlaw_blog_filter');
+        }
+
+        function isPaged() {
+            return window.location.search.indexOf('paged') !== -1;
+        }
+
         function applyFilter() {
             var $realCards  = $('.blog-card:not(.blog-card--empty)');
             var $emptyCards = $('.blog-card--empty');
@@ -169,6 +192,11 @@
 
         $tabs.on('click', function() {
             activeCat = String($(this).data('cat'));
+            if (isPaged()) {
+                sessionStorage.setItem('pjlaw_blog_filter', JSON.stringify({ cat: activeCat, service: activeService }));
+                window.location.href = window.location.origin + window.location.pathname;
+                return;
+            }
             $tabs.removeClass('blog-tab--active');
             $(this).addClass('blog-tab--active');
             applyFilter();
@@ -176,6 +204,11 @@
 
         $services.on('click', function() {
             activeService = String($(this).data('service'));
+            if (isPaged()) {
+                sessionStorage.setItem('pjlaw_blog_filter', JSON.stringify({ cat: activeCat, service: activeService }));
+                window.location.href = window.location.origin + window.location.pathname;
+                return;
+            }
             $services.removeClass('active');
             $(this).addClass('active');
             applyFilter();
