@@ -163,6 +163,8 @@
 
             var $count = $('.blog-results-count strong');
             if ($count.length) $count.text(visible + '건');
+
+            $('.blog-pagination').toggle(activeCat === 'all' && activeService === 'all');
         }
 
         $tabs.on('click', function() {
