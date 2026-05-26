@@ -18,6 +18,9 @@ $current_service = isset($_GET['service']) ? sanitize_text_field($_GET['service'
 $current_tag     = isset($_GET['tag'])     ? sanitize_text_field($_GET['tag'])     : '';
 $current_search  = isset($_GET['s'])       ? sanitize_text_field($_GET['s'])       : '';
 
+// Normalize current_service to slug format (PHP URL-decodes $_GET, but DB slugs are URL-encoded)
+$current_service_slug = $current_service ? sanitize_title($current_service) : '';
+
 $query_args = array(
     'post_type'      => 'pj_blog_post',
     'posts_per_page' => 9,
@@ -115,7 +118,7 @@ foreach ((array) $service_terms as $st) {
             </div>
 
             <div class="services-grid" style="margin-bottom: 60px;">
-                <button class="services-grid__item active" data-service="all">
+                <button class="services-grid__item <?php echo $current_service === '' ? 'active' : ''; ?>" data-service="all" data-href="<?php echo esc_url(home_url('/blog/')); ?>">
                     <div class="services-grid__icon">
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <mask id="path-1-inside-1_4115_3763" fill="white">
@@ -126,7 +129,7 @@ foreach ((array) $service_terms as $st) {
                     </div>
                     <span class="services-grid__label">전체</span>
                 </button>
-                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['민사'] ?? ''); ?>">
+                <button class="services-grid__item <?php echo $current_service_slug === ($service_slug['민사'] ?? '') ? 'active' : ''; ?>" data-service="<?php echo esc_attr($service_slug['민사'] ?? ''); ?>" data-href="<?php echo esc_url(add_query_arg('service', $service_slug['민사'] ?? '', home_url('/blog/'))); ?>">
                     <div class="services-grid__icon">
                         <svg width="40" height="40" viewBox="0 0 37 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" overflow="visible" preserveAspectRatio="xMidYMid meet">
                             <path d="M18 4.31543C18.9306 4.31543 19.6846 5.0694 19.6846 6V26.4346H16.3154V6C16.3154 5.0694 17.0694 4.31543 18 4.31543Z" stroke="#181A1E" stroke-width="1.88"/>
@@ -143,37 +146,37 @@ foreach ((array) $service_terms as $st) {
                     </div>
                     <span class="services-grid__label">민사</span>
                 </button>
-                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['형사'] ?? ''); ?>">
+                <button class="services-grid__item <?php echo $current_service_slug === ($service_slug['형사'] ?? '') ? 'active' : ''; ?>" data-service="<?php echo esc_attr($service_slug['형사'] ?? ''); ?>" data-href="<?php echo esc_url(add_query_arg('service', $service_slug['형사'] ?? '', home_url('/blog/'))); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-criminal.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">형사</span>
                 </button>
-                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['성범죄'] ?? ''); ?>">
+                <button class="services-grid__item <?php echo $current_service_slug === ($service_slug['성범죄'] ?? '') ? 'active' : ''; ?>" data-service="<?php echo esc_attr($service_slug['성범죄'] ?? ''); ?>" data-href="<?php echo esc_url(add_query_arg('service', $service_slug['성범죄'] ?? '', home_url('/blog/'))); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-sexual-crime.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">성범죄</span>
                 </button>
-                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['이혼'] ?? ''); ?>">
+                <button class="services-grid__item <?php echo $current_service_slug === ($service_slug['이혼'] ?? '') ? 'active' : ''; ?>" data-service="<?php echo esc_attr($service_slug['이혼'] ?? ''); ?>" data-href="<?php echo esc_url(add_query_arg('service', $service_slug['이혼'] ?? '', home_url('/blog/'))); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-divorce.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">이혼</span>
                 </button>
-                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['상속'] ?? ''); ?>">
+                <button class="services-grid__item <?php echo $current_service_slug === ($service_slug['상속'] ?? '') ? 'active' : ''; ?>" data-service="<?php echo esc_attr($service_slug['상속'] ?? ''); ?>" data-href="<?php echo esc_url(add_query_arg('service', $service_slug['상속'] ?? '', home_url('/blog/'))); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-inheritance.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">상속</span>
                 </button>
-                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['부동산'] ?? ''); ?>">
+                <button class="services-grid__item <?php echo $current_service_slug === ($service_slug['부동산'] ?? '') ? 'active' : ''; ?>" data-service="<?php echo esc_attr($service_slug['부동산'] ?? ''); ?>" data-href="<?php echo esc_url(add_query_arg('service', $service_slug['부동산'] ?? '', home_url('/blog/'))); ?>">
                     <div class="services-grid__icon">
                         <img src="<?php echo esc_url($theme_uri . '/assets/icons/services/icon-real-estate.svg'); ?>" alt="" />
                     </div>
                     <span class="services-grid__label">부동산</span>
                 </button>
-                <button class="services-grid__item" data-service="<?php echo esc_attr($service_slug['기업'] ?? ''); ?>">
+                <button class="services-grid__item <?php echo $current_service_slug === ($service_slug['기업'] ?? '') ? 'active' : ''; ?>" data-service="<?php echo esc_attr($service_slug['기업'] ?? ''); ?>" data-href="<?php echo esc_url(add_query_arg('service', $service_slug['기업'] ?? '', home_url('/blog/'))); ?>">
                     <div class="services-grid__icon corporate-icon">
                         <div class="corporate-icon-wrapper">
                             <div class="corporate-building-1"></div>
@@ -238,24 +241,33 @@ foreach ((array) $service_terms as $st) {
                 $start = max(1, $paged - 2);
                 $end   = min($max_pages, $start + 4);
                 if ($end - $start < 4) $start = max(1, $end - 4);
+                $pagination_args = array_filter(['service' => $current_service, 'tag' => $current_tag]);
             ?>
             <div class="blog-pagination">
-                <?php if ($paged > 1) : ?>
-                    <a href="<?php echo esc_url(get_pagenum_link($paged - 1)); ?>" class="blog-pagination__arrow">&lsaquo;</a>
+                <?php if ($paged > 1) :
+                    $prev_args = ($paged - 1) > 1 ? array_merge($pagination_args, ['paged' => $paged - 1]) : $pagination_args;
+                    $prev_url  = add_query_arg($prev_args, home_url('/blog/'));
+                ?>
+                    <a href="<?php echo esc_url($prev_url); ?>" class="blog-pagination__arrow">&lsaquo;</a>
                 <?php endif; ?>
 
                 <div class="blog-pagination__numbers">
                     <?php for ($p = $start; $p <= $end; $p++) : ?>
                         <?php if ($p === $paged) : ?>
                             <span class="blog-pagination__number blog-pagination__number--active"><?php echo $p; ?></span>
-                        <?php else : ?>
-                            <a href="<?php echo esc_url(get_pagenum_link($p)); ?>" class="blog-pagination__number"><?php echo $p; ?></a>
+                        <?php else :
+                            $page_args = $p > 1 ? array_merge($pagination_args, ['paged' => $p]) : $pagination_args;
+                            $page_url  = add_query_arg($page_args, home_url('/blog/'));
+                        ?>
+                            <a href="<?php echo esc_url($page_url); ?>" class="blog-pagination__number"><?php echo $p; ?></a>
                         <?php endif; ?>
                     <?php endfor; ?>
                 </div>
 
-                <?php if ($paged < $max_pages) : ?>
-                    <a href="<?php echo esc_url(get_pagenum_link($paged + 1)); ?>" class="blog-pagination__arrow">&rsaquo;</a>
+                <?php if ($paged < $max_pages) :
+                    $next_url  = add_query_arg(array_merge($pagination_args, ['paged' => $paged + 1]), home_url('/blog/'));
+                ?>
+                    <a href="<?php echo esc_url($next_url); ?>" class="blog-pagination__arrow">&rsaquo;</a>
                 <?php endif; ?>
             </div>
             <?php endif; ?>

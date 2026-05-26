@@ -164,10 +164,8 @@
         });
 
         $services.on('click', function() {
-            activeService = String($(this).data('service'));
-            $services.removeClass('active');
-            $(this).addClass('active');
-            applyFilter();
+            var href = $(this).data('href');
+            if (href) window.location.href = href;
         });
     }
 
