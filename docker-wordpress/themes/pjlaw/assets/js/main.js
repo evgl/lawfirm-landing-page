@@ -141,9 +141,11 @@
         var activeService = 'all';
 
         function applyFilter() {
-            var $cards  = $('.blog-card');
+            var $realCards  = $('.blog-card:not(.blog-card--empty)');
+            var $emptyCards = $('.blog-card--empty');
             var visible = 0;
-            $cards.each(function() {
+
+            $realCards.each(function() {
                 var cats     = $(this).data('cats')     ? String($(this).data('cats')).split(' ')     : [];
                 var services = $(this).data('services') ? String($(this).data('services')).split(' ') : [];
                 var catMatch     = activeCat     === 'all' || cats.indexOf(activeCat)         !== -1;
@@ -152,6 +154,13 @@
                 $(this).toggle(show);
                 if (show) visible++;
             });
+
+            // Show enough placeholders to keep the grid at 9 slots
+            var placeholdersNeeded = Math.max(0, 9 - visible);
+            $emptyCards.each(function(i) {
+                $(this).toggle(i < placeholdersNeeded);
+            });
+
             var $count = $('.blog-results-count strong');
             if ($count.length) $count.text(visible + '건');
         }
