@@ -173,8 +173,10 @@
         });
 
         $services.on('click', function() {
-            var href = $(this).data('href');
-            if (href) window.location.href = href;
+            activeService = String($(this).data('service'));
+            $services.removeClass('active');
+            $(this).addClass('active');
+            applyFilter();
         });
 
         applyFilter();
