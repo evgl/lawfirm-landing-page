@@ -221,15 +221,12 @@ foreach ((array) $service_terms as $st) {
                         </div>
                     </a>
                     <?php endwhile; wp_reset_postdata(); ?>
-                    <?php
-                    $empty_slots = 9 - min($blog_query->post_count, 9);
-                    for ($i = 0; $i < $empty_slots; $i++) :
-                    ?>
-                        <div class="blog-card blog-card--empty"></div>
+                    <?php for ($i = 0; $i < 9; $i++) : ?>
+                        <div class="blog-card blog-card--empty" style="display:none"></div>
                     <?php endfor; ?>
                 <?php else : ?>
                     <?php for ($i = 0; $i < 9; $i++) : ?>
-                        <div class="blog-card blog-card--empty"></div>
+                        <div class="blog-card blog-card--empty" style="display:none"></div>
                     <?php endfor; ?>
                 <?php endif; ?>
             </div>

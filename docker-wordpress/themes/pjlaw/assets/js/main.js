@@ -176,6 +176,8 @@
             var href = $(this).data('href');
             if (href) window.location.href = href;
         });
+
+        applyFilter();
     }
 
     // Intersection Observer for animations on scroll
