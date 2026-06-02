@@ -35,7 +35,7 @@ $total_found = (int) $careers_query->found_posts;
 <main id="main" class="site-main careers-all-page" role="main">
 
     <!-- Hero Section -->
-    <section class="careers-hero" style="background-image: url('<?php echo esc_url($theme_uri . '/assets/images/careers/hero-people.jpg'); ?>');">
+    <section class="careers-hero" style="background-image: url('<?php echo esc_url($theme_uri . '/assets/images/careers/career-all-hero.jpg'); ?>');">
         <div class="careers-hero__overlay"></div>
         <div class="careers-hero__content">
             <div class="careers-hero__text">
