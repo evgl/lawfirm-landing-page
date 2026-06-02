@@ -3,57 +3,25 @@ if (!defined('ABSPATH')) { exit; }
 get_header();
 $theme_uri = get_template_directory_uri();
 
-$job_cards = array(
-    array(
-        'badge'    => 'D-15',
-        'badge_mod' => 'navy',
-        'type'     => '경력',
-        'title'    => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'     => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'    => 'D-08',
-        'badge_mod' => 'navy',
-        'type'     => '신입/인턴',
-        'title'    => '법무법인(유한) 대륜 의료전문 상담실장 모집',
-        'date'     => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'    => 'D-15',
-        'badge_mod' => 'navy',
-        'type'     => '경력',
-        'title'    => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'     => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'    => 'D-DAY',
-        'badge_mod' => 'orange',
-        'type'     => '경력',
-        'title'    => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'     => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'    => 'D-15',
-        'badge_mod' => 'navy',
-        'type'     => '경력',
-        'title'    => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'     => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'    => 'D-15',
-        'badge_mod' => 'navy',
-        'type'     => '경력',
-        'title'    => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'     => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-);
+// Latest published career postings.
+$careers_query = new WP_Query(array(
+    'post_type'      => 'pj_career',
+    'posts_per_page' => 6,
+    'post_status'    => 'publish',
+    'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
+));
 
+// Filter tabs built from the 부문 taxonomy with live counts.
+$total_careers = (int) wp_count_posts('pj_career')->publish;
 $filter_tabs = array(
-    array('label' => '전체',   'count' => '20건', 'active' => true),
-    array('label' => '변호사', 'count' => '3건',  'active' => false),
-    array('label' => '사무원', 'count' => '3건',  'active' => false),
-    array('label' => '인턴십', 'count' => '3건',  'active' => false),
+    array('label' => '전체', 'count' => $total_careers . '건', 'active' => true),
 );
+$career_cat_terms = get_terms(array('taxonomy' => 'pj_career_category', 'hide_empty' => false));
+if (!is_wp_error($career_cat_terms)) {
+    foreach ($career_cat_terms as $term) {
+        $filter_tabs[] = array('label' => $term->name, 'count' => $term->count . '건', 'active' => false);
+    }
+}
 
 $talent_values = array(
     array(
@@ -130,30 +98,35 @@ $talent_values = array(
             </div>
 
             <div class="careers-grid">
-                <?php foreach ($job_cards as $card) : ?>
-                <a href="<?php echo esc_url(home_url('/careers-detail/')); ?>" class="careers-card-link">
+                <?php if ($careers_query->have_posts()) : while ($careers_query->have_posts()) : $careers_query->the_post();
+                    $card_end   = get_post_meta(get_the_ID(), '_pj_career_end_date', true);
+                    $card_start = get_post_meta(get_the_ID(), '_pj_career_start_date', true);
+                    $card_type  = get_post_meta(get_the_ID(), '_pj_career_employment_type', true);
+                    $card_badge = pjlaw_career_badge($card_end);
+                ?>
+                <a href="<?php the_permalink(); ?>" class="careers-card-link">
                     <article class="careers-card">
                         <div class="careers-card__header">
                             <div class="careers-card__meta">
-                                <span class="careers-card__badge careers-card__badge--<?php echo esc_attr($card['badge_mod']); ?>">
-                                    <?php echo esc_html($card['badge']); ?>
+                                <span class="careers-card__badge careers-card__badge--<?php echo esc_attr($card_badge['mod']); ?>">
+                                    <?php echo esc_html($card_badge['badge']); ?>
                                 </span>
-                                <span class="careers-card__type"><?php echo esc_html($card['type']); ?></span>
+                                <span class="careers-card__type"><?php echo esc_html($card_type); ?></span>
                             </div>
                             <button class="careers-card__share" aria-label="공유">
                                 <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/share-icon.svg'); ?>" alt="" width="44" height="44">
                             </button>
                         </div>
                         <div class="careers-card__body">
-                            <h3 class="careers-card__title"><?php echo esc_html($card['title']); ?></h3>
+                            <h3 class="careers-card__title"><?php the_title(); ?></h3>
                             <div class="careers-card__date">
                                 <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/calendar-icon.svg'); ?>" alt="" width="15" height="16">
-                                <span><?php echo esc_html($card['date']); ?></span>
+                                <span><?php echo esc_html(pjlaw_career_date_range($card_start, $card_end)); ?></span>
                             </div>
                         </div>
                     </article>
                 </a>
-                <?php endforeach; ?>
+                <?php endwhile; wp_reset_postdata(); endif; ?>
             </div>
 
             <div class="careers-viewall-wrap">

@@ -15,6 +15,10 @@ if (!defined('ABSPATH')) {
 require_once get_template_directory() . '/inc/blog-seed.php';
 require_once get_template_directory() . '/inc/blog-meta-boxes.php';
 
+// Load careers infrastructure files
+require_once get_template_directory() . '/inc/career-seed.php';
+require_once get_template_directory() . '/inc/career-meta-boxes.php';
+
 /**
  * Theme Setup
  */
@@ -157,6 +161,27 @@ function pjlaw_register_post_types() {
         'supports'     => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes'),
         'rewrite'      => array('slug' => 'blog/post', 'with_front' => false),
     ));
+
+    // Career Post Type
+    register_post_type('pj_career', array(
+        'labels' => array(
+            'name'          => '채용',
+            'singular_name' => '채용공고',
+            'add_new'       => '새 공고 추가',
+            'edit_item'     => '공고 편집',
+            'view_item'     => '공고 보기',
+            'search_items'  => '공고 검색',
+            'not_found'     => '공고 없음',
+            'menu_name'     => '채용',
+        ),
+        'public'        => true,
+        'show_in_rest'  => true,
+        'has_archive'   => false,
+        'menu_icon'     => 'dashicons-businessman',
+        'menu_position' => 7,
+        'supports'      => array('title', 'revisions', 'author', 'page-attributes'),
+        'rewrite'       => array('slug' => 'careers/post', 'with_front' => false),
+    ));
 }
 add_action('init', 'pjlaw_register_post_types');
 register_activation_hook(__FILE__, 'flush_rewrite_rules');
@@ -275,10 +300,10 @@ function pjlaw_template_include($template) {
         }
     }
 
-    if ('careers-detail' === $request_path) {
-        $detail_template = locate_template('page-careers-detail.php');
-        if ($detail_template) {
-            return $detail_template;
+    if (strpos($request_path, 'careers/post/') === 0) {
+        $single_career_template = locate_template('single-pj_career.php');
+        if ($single_career_template) {
+            return $single_career_template;
         }
     }
 
@@ -523,4 +548,114 @@ function pjlaw_blog_tax_filters() {
     }
 }
 add_action('restrict_manage_posts', 'pjlaw_blog_tax_filters');
+
+/**
+ * Register custom taxonomy for pj_career
+ */
+function pjlaw_register_career_taxonomies() {
+    register_taxonomy('pj_career_category', 'pj_career', array(
+        'labels' => array(
+            'name'          => '부문',
+            'singular_name' => '부문',
+            'menu_name'     => '부문',
+        ),
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array('slug' => 'career-category'),
+    ));
+}
+add_action('init', 'pjlaw_register_career_taxonomies');
+
+/**
+ * Seed default terms for career taxonomy
+ */
+function pjlaw_seed_career_terms() {
+    $categories = array('변호사', '사무원', '인턴십');
+    foreach ($categories as $name) {
+        if (!term_exists($name, 'pj_career_category')) {
+            wp_insert_term($name, 'pj_career_category');
+        }
+    }
+}
+add_action('init', 'pjlaw_seed_career_terms');
+
+/**
+ * Career post admin list columns.
+ */
+function pjlaw_career_columns($columns) {
+    $new = array();
+    $new['cb']    = $columns['cb'];
+    $new['title'] = $columns['title'];
+    $new['taxonomy-pj_career_category'] = __('부문', 'pjlaw');
+    $new['employment_type'] = __('고용형태', 'pjlaw');
+    $new['deadline']        = __('마감일', 'pjlaw');
+    $new['date']  = $columns['date'];
+    return $new;
+}
+add_filter('manage_pj_career_posts_columns', 'pjlaw_career_columns');
+
+function pjlaw_career_column_content($column, $post_id) {
+    if ($column === 'employment_type') {
+        $type = get_post_meta($post_id, '_pj_career_employment_type', true);
+        echo $type ? esc_html($type) : '—';
+    } elseif ($column === 'deadline') {
+        $end = get_post_meta($post_id, '_pj_career_end_date', true);
+        echo $end ? esc_html($end) : '—';
+    }
+}
+add_action('manage_pj_career_posts_custom_column', 'pjlaw_career_column_content', 10, 2);
+
+function pjlaw_career_tax_filters() {
+    global $typenow;
+    if ($typenow !== 'pj_career') return;
+    $tax = 'pj_career_category';
+    $obj = get_taxonomy($tax);
+    wp_dropdown_categories(array(
+        'show_option_all' => $obj->labels->all_items ?? '전체',
+        'taxonomy'        => $tax,
+        'name'            => $tax,
+        'orderby'         => 'name',
+        'selected'        => isset($_GET[$tax]) ? sanitize_text_field(wp_unslash($_GET[$tax])) : '',
+        'hierarchical'    => $obj->hierarchical,
+        'show_count'      => true,
+        'hide_empty'      => false,
+        'value_field'     => 'slug',
+    ));
+}
+add_action('restrict_manage_posts', 'pjlaw_career_tax_filters');
+
+/**
+ * Compute the deadline badge for a career posting from its end date.
+ * Returns array('badge' => 'D-NN'|'D-DAY', 'mod' => 'navy'|'orange').
+ */
+function pjlaw_career_badge($end_date) {
+    if (empty($end_date)) {
+        return array('badge' => '상시', 'mod' => 'navy');
+    }
+    $today = strtotime(current_time('Y-m-d'));
+    $end   = strtotime($end_date);
+    if ($end === false) {
+        return array('badge' => '상시', 'mod' => 'navy');
+    }
+    $days = (int) floor(($end - $today) / DAY_IN_SECONDS);
+    if ($days <= 0) {
+        return array('badge' => 'D-DAY', 'mod' => 'orange');
+    }
+    return array('badge' => 'D-' . str_pad($days, 2, '0', STR_PAD_LEFT), 'mod' => 'navy');
+}
+
+/**
+ * Format a career posting's application period as "Y. m. d ~ Y. m. d".
+ */
+function pjlaw_career_date_range($start_date, $end_date) {
+    $fmt = function ($d) {
+        $t = $d ? strtotime($d) : false;
+        return $t ? date_i18n('Y. m. d', $t) : '';
+    };
+    $start = $fmt($start_date);
+    $end   = $fmt($end_date);
+    if ($start && $end) return $start . ' ~ ' . $end;
+    return $start ?: $end;
+}
 ?>

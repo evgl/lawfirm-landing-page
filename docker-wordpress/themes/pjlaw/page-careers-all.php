@@ -3,71 +3,34 @@ if (!defined('ABSPATH')) { exit; }
 get_header();
 $theme_uri = get_template_directory_uri();
 
-$job_cards = array(
-    array(
-        'badge'     => 'D-15',
-        'badge_mod' => 'navy',
-        'type'      => '경력',
-        'title'     => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-08',
-        'badge_mod' => 'navy',
-        'type'      => '신입/인턴',
-        'title'     => '법무법인(유한) 대륜 의료전문 상담실장 모집',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-15',
-        'badge_mod' => 'navy',
-        'type'      => '경력',
-        'title'     => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-DAY',
-        'badge_mod' => 'orange',
-        'type'      => '경력',
-        'title'     => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-15',
-        'badge_mod' => 'navy',
-        'type'      => '경력',
-        'title'     => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-15',
-        'badge_mod' => 'navy',
-        'type'      => '경력',
-        'title'     => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-15',
-        'badge_mod' => 'navy',
-        'type'      => '경력',
-        'title'     => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-08',
-        'badge_mod' => 'navy',
-        'type'      => '신입/인턴',
-        'title'     => '법무법인(유한) 대륜 의료전문 상담실장 모집',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
-    array(
-        'badge'     => 'D-15',
-        'badge_mod' => 'navy',
-        'type'      => '경력',
-        'title'     => '(주) 스카이즈코리아 사내변호사 채용공고',
-        'date'      => '2026. 03. 05 ~ 2026. 03. 05',
-    ),
+// Active category filter (부문 slug) from the URL.
+$current_cat = isset($_GET['cat']) ? sanitize_text_field(wp_unslash($_GET['cat'])) : '';
+
+$query_args = array(
+    'post_type'      => 'pj_career',
+    'posts_per_page' => 9,
+    'paged'          => max(1, get_query_var('paged')),
+    'post_status'    => 'publish',
+    'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
 );
+if ($current_cat) {
+    $query_args['tax_query'] = array(
+        array('taxonomy' => 'pj_career_category', 'field' => 'slug', 'terms' => $current_cat),
+    );
+}
+$careers_query = new WP_Query($query_args);
+
+// Filter tabs: 전체 + each 부문 term, active state from the current filter.
+$filter_tabs = array(
+    array('label' => '전체', 'slug' => '', 'active' => ($current_cat === '')),
+);
+$career_cat_terms = get_terms(array('taxonomy' => 'pj_career_category', 'hide_empty' => false));
+if (!is_wp_error($career_cat_terms)) {
+    foreach ($career_cat_terms as $term) {
+        $filter_tabs[] = array('label' => $term->name, 'slug' => $term->slug, 'active' => ($current_cat === $term->slug));
+    }
+}
+$total_found = (int) $careers_query->found_posts;
 ?>
 <main id="main" class="site-main careers-all-page" role="main">
 
@@ -103,7 +66,7 @@ $job_cards = array(
 
             <!-- Top bar: count + search -->
             <div class="careers-all-topbar">
-                <p class="careers-all-count">총 <strong>134건</strong>의 포지션에서 당신의 혁신이 필요합니다.</p>
+                <p class="careers-all-count">총 <strong><?php echo esc_html($total_found); ?>건</strong>의 포지션에서 당신의 혁신이 필요합니다.</p>
                 <div class="careers-all-search">
                     <input type="text" placeholder="검색어를 입력해주세요." aria-label="직무 검색">
                     <button class="careers-all-search__btn" aria-label="검색">
@@ -125,70 +88,94 @@ $job_cards = array(
                     </label>
                 </div>
                 <div class="careers-all-filter">
-                    <span class="careers-all-filter__tab careers-all-filter__tab--active">전체</span>
-                    <div class="careers-all-filter__divider" aria-hidden="true"></div>
-                    <span class="careers-all-filter__tab">변호사</span>
-                    <div class="careers-all-filter__divider" aria-hidden="true"></div>
-                    <span class="careers-all-filter__tab">사무원</span>
-                    <div class="careers-all-filter__divider" aria-hidden="true"></div>
-                    <span class="careers-all-filter__tab">인턴십</span>
+                    <?php foreach ($filter_tabs as $i => $tab) :
+                        $tab_url = $tab['slug'] ? add_query_arg('cat', $tab['slug'], home_url('/careers-all/')) : home_url('/careers-all/');
+                    ?>
+                        <a href="<?php echo esc_url($tab_url); ?>" class="careers-all-filter__tab<?php echo $tab['active'] ? ' careers-all-filter__tab--active' : ''; ?>"><?php echo esc_html($tab['label']); ?></a>
+                        <?php if ($i < count($filter_tabs) - 1) : ?>
+                            <div class="careers-all-filter__divider" aria-hidden="true"></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
 
             <!-- Job cards grid -->
             <div class="careers-grid">
-                <?php foreach ($job_cards as $card) : ?>
-                <a href="<?php echo esc_url(home_url('/careers-detail/')); ?>" class="careers-card-link">
+                <?php if ($careers_query->have_posts()) : while ($careers_query->have_posts()) : $careers_query->the_post();
+                    $card_end   = get_post_meta(get_the_ID(), '_pj_career_end_date', true);
+                    $card_start = get_post_meta(get_the_ID(), '_pj_career_start_date', true);
+                    $card_type  = get_post_meta(get_the_ID(), '_pj_career_employment_type', true);
+                    $card_badge = pjlaw_career_badge($card_end);
+                ?>
+                <a href="<?php the_permalink(); ?>" class="careers-card-link">
                     <article class="careers-card">
                         <div class="careers-card__header">
                             <div class="careers-card__meta">
-                                <span class="careers-card__badge careers-card__badge--<?php echo esc_attr($card['badge_mod']); ?>">
-                                    <?php echo esc_html($card['badge']); ?>
+                                <span class="careers-card__badge careers-card__badge--<?php echo esc_attr($card_badge['mod']); ?>">
+                                    <?php echo esc_html($card_badge['badge']); ?>
                                 </span>
-                                <span class="careers-card__type"><?php echo esc_html($card['type']); ?></span>
+                                <span class="careers-card__type"><?php echo esc_html($card_type); ?></span>
                             </div>
                             <button class="careers-card__share" aria-label="공유">
                                 <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/share-icon.svg'); ?>" alt="" width="44" height="44">
                             </button>
                         </div>
                         <div class="careers-card__body">
-                            <h3 class="careers-card__title"><?php echo esc_html($card['title']); ?></h3>
+                            <h3 class="careers-card__title"><?php the_title(); ?></h3>
                             <div class="careers-card__date">
                                 <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/calendar-icon.svg'); ?>" alt="" width="15" height="16">
-                                <span><?php echo esc_html($card['date']); ?></span>
+                                <span><?php echo esc_html(pjlaw_career_date_range($card_start, $card_end)); ?></span>
                             </div>
                         </div>
                     </article>
                 </a>
-                <?php endforeach; ?>
+                <?php endwhile; wp_reset_postdata(); else : ?>
+                    <p class="careers-all-empty">등록된 공고가 없습니다.</p>
+                <?php endif; ?>
             </div>
 
             <!-- Pagination -->
+            <?php
+            $paged     = max(1, get_query_var('paged'));
+            $max_pages = (int) $careers_query->max_num_pages;
+            if ($max_pages > 1) :
+                $start = max(1, $paged - 2);
+                $end   = min($max_pages, $start + 4);
+                if ($end - $start < 4) $start = max(1, $end - 4);
+                $base_args = $current_cat ? array('cat' => $current_cat) : array();
+                $page_link = function ($p) use ($base_args) {
+                    $args = $p > 1 ? array_merge($base_args, array('paged' => $p)) : $base_args;
+                    return add_query_arg($args, home_url('/careers-all/'));
+                };
+            ?>
             <div class="careers-all-pagination">
                 <div class="pagination-edges">
-                    <button aria-label="처음 페이지">
+                    <a href="<?php echo esc_url($page_link(1)); ?>" aria-label="처음 페이지"<?php echo $paged <= 1 ? ' class="disabled"' : ''; ?>>
                         <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/page-first.svg'); ?>" alt="" width="14" height="13">
-                    </button>
-                    <button aria-label="이전 페이지">
+                    </a>
+                    <a href="<?php echo esc_url($page_link(max(1, $paged - 1))); ?>" aria-label="이전 페이지"<?php echo $paged <= 1 ? ' class="disabled"' : ''; ?>>
                         <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/page-prev-btn.svg'); ?>" alt="" width="40" height="40">
-                    </button>
+                    </a>
                 </div>
                 <div class="pagination-numbers">
-                    <button class="active" aria-current="page">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
+                    <?php for ($p = $start; $p <= $end; $p++) : ?>
+                        <?php if ($p === $paged) : ?>
+                            <button class="active" aria-current="page"><?php echo $p; ?></button>
+                        <?php else : ?>
+                            <a href="<?php echo esc_url($page_link($p)); ?>"><?php echo $p; ?></a>
+                        <?php endif; ?>
+                    <?php endfor; ?>
                 </div>
                 <div class="pagination-edges">
-                    <button aria-label="다음 페이지">
+                    <a href="<?php echo esc_url($page_link(min($max_pages, $paged + 1))); ?>" aria-label="다음 페이지"<?php echo $paged >= $max_pages ? ' class="disabled"' : ''; ?>>
                         <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/page-next-btn.svg'); ?>" alt="" width="40" height="40">
-                    </button>
-                    <button aria-label="마지막 페이지">
+                    </a>
+                    <a href="<?php echo esc_url($page_link($max_pages)); ?>" aria-label="마지막 페이지"<?php echo $paged >= $max_pages ? ' class="disabled"' : ''; ?>>
                         <img src="<?php echo esc_url($theme_uri . '/assets/images/careers/page-next.svg'); ?>" alt="" width="14" height="13">
-                    </button>
+                    </a>
                 </div>
             </div>
+            <?php endif; ?>
 
         </div>
     </section>
