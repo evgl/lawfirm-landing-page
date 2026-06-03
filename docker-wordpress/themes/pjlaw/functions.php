@@ -19,6 +19,10 @@ require_once get_template_directory() . '/inc/blog-meta-boxes.php';
 require_once get_template_directory() . '/inc/career-seed.php';
 require_once get_template_directory() . '/inc/career-meta-boxes.php';
 
+// Load cases infrastructure files
+require_once get_template_directory() . '/inc/case-seed.php';
+require_once get_template_directory() . '/inc/case-meta-boxes.php';
+
 /**
  * Theme Setup
  */
@@ -111,16 +115,24 @@ add_action('widgets_init', 'pjlaw_widgets_init');
  * Custom post types
  */
 function pjlaw_register_post_types() {
-    // Legal Case Post Type
+    // Legal Case Post Type (업무사례)
     register_post_type('legal_case', array(
         'labels' => array(
-            'name' => __('Legal Cases', 'pjlaw'),
-            'singular_name' => __('Legal Case', 'pjlaw'),
+            'name'          => '업무사례',
+            'singular_name' => '업무사례',
+            'add_new'       => '새 사례 추가',
+            'edit_item'     => '사례 편집',
+            'view_item'     => '사례 보기',
+            'search_items'  => '사례 검색',
+            'not_found'     => '사례 없음',
+            'menu_name'     => '업무사례',
         ),
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail'),
-        'menu_icon' => 'dashicons-gavel',
+        'public'        => true,
+        'show_in_rest'  => true,
+        'has_archive'   => false,
+        'menu_icon'     => 'dashicons-gavel',
+        'menu_position' => 8,
+        'supports'      => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes'),
     ));
 
     // Consultation Post Type
@@ -658,4 +670,89 @@ function pjlaw_career_date_range($start_date, $end_date) {
     if ($start && $end) return $start . ' ~ ' . $end;
     return $start ?: $end;
 }
+
+/**
+ * Register the practice-area taxonomy for legal_case (drives the cases tabs).
+ */
+function pjlaw_register_case_taxonomies() {
+    register_taxonomy('pj_case_category', 'legal_case', array(
+        'labels' => array(
+            'name'          => '분야',
+            'singular_name' => '분야',
+            'menu_name'     => '분야',
+        ),
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array('slug' => 'case-category'),
+    ));
+}
+add_action('init', 'pjlaw_register_case_taxonomies');
+
+/**
+ * Seed default practice-area terms with explicit English slugs.
+ * Slug = the data-type filter key used by the cases page tabs.
+ */
+function pjlaw_seed_case_terms() {
+    $terms = array(
+        '민사'   => 'civil',
+        '형사'   => 'criminal',
+        '성범죄' => 'sex-crime',
+        '이혼'   => 'divorce',
+        '상속'   => 'inheritance',
+        '부동산' => 'realestate',
+        '기업'   => 'corporate',
+    );
+    foreach ($terms as $name => $slug) {
+        if (!term_exists($name, 'pj_case_category') && !term_exists($slug, 'pj_case_category')) {
+            wp_insert_term($name, 'pj_case_category', array('slug' => $slug));
+        }
+    }
+}
+add_action('init', 'pjlaw_seed_case_terms');
+
+/**
+ * Legal case admin list columns.
+ */
+function pjlaw_case_columns($columns) {
+    $new = array();
+    $new['cb']    = $columns['cb'];
+    $new['thumb'] = __('이미지', 'pjlaw');
+    $new['title'] = $columns['title'];
+    $new['taxonomy-pj_case_category'] = __('분야', 'pjlaw');
+    $new['case_badge'] = __('결과', 'pjlaw');
+    $new['date']  = $columns['date'];
+    return $new;
+}
+add_filter('manage_legal_case_posts_columns', 'pjlaw_case_columns');
+
+function pjlaw_case_column_content($column, $post_id) {
+    if ($column === 'thumb') {
+        $thumb = get_the_post_thumbnail($post_id, array(60, 60));
+        echo $thumb ? $thumb : '—';
+    } elseif ($column === 'case_badge') {
+        $badge = get_post_meta($post_id, '_pj_case_badge', true);
+        echo $badge ? esc_html($badge) : '—';
+    }
+}
+add_action('manage_legal_case_posts_custom_column', 'pjlaw_case_column_content', 10, 2);
+
+function pjlaw_case_tax_filters() {
+    global $typenow;
+    if ($typenow !== 'legal_case') return;
+    $tax = 'pj_case_category';
+    $obj = get_taxonomy($tax);
+    wp_dropdown_categories(array(
+        'show_option_all' => $obj->labels->all_items ?? '전체',
+        'taxonomy'        => $tax,
+        'name'            => $tax,
+        'orderby'         => 'name',
+        'selected'        => isset($_GET[$tax]) ? sanitize_text_field(wp_unslash($_GET[$tax])) : '',
+        'hierarchical'    => $obj->hierarchical,
+        'show_count'      => true,
+        'hide_empty'      => false,
+        'value_field'     => 'slug',
+    ));
+}
+add_action('restrict_manage_posts', 'pjlaw_case_tax_filters');
 ?>
