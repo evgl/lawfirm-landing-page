@@ -23,6 +23,10 @@ require_once get_template_directory() . '/inc/career-meta-boxes.php';
 require_once get_template_directory() . '/inc/case-seed.php';
 require_once get_template_directory() . '/inc/case-meta-boxes.php';
 
+// Load services infrastructure files
+require_once get_template_directory() . '/inc/service-seed.php';
+require_once get_template_directory() . '/inc/service-meta-boxes.php';
+
 /**
  * Theme Setup
  */
@@ -193,6 +197,27 @@ function pjlaw_register_post_types() {
         'menu_position' => 7,
         'supports'      => array('title', 'revisions', 'author', 'page-attributes'),
         'rewrite'       => array('slug' => 'careers/post', 'with_front' => false),
+    ));
+
+    // Service Post Type (업무분야)
+    register_post_type('pj_service', array(
+        'labels' => array(
+            'name'          => '업무분야',
+            'singular_name' => '업무분야',
+            'add_new'       => '새 분야 추가',
+            'edit_item'     => '분야 편집',
+            'view_item'     => '분야 보기',
+            'search_items'  => '분야 검색',
+            'not_found'     => '분야 없음',
+            'menu_name'     => '업무분야',
+        ),
+        'public'        => true,
+        'show_in_rest'  => true,
+        'has_archive'   => false,
+        'menu_icon'     => 'dashicons-portfolio',
+        'menu_position' => 5,
+        'supports'      => array('title', 'revisions', 'author', 'page-attributes'),
+        'rewrite'       => array('slug' => 'services/post', 'with_front' => false),
     ));
 }
 add_action('init', 'pjlaw_register_post_types');
@@ -755,4 +780,96 @@ function pjlaw_case_tax_filters() {
     ));
 }
 add_action('restrict_manage_posts', 'pjlaw_case_tax_filters');
+
+/**
+ * Register custom taxonomies for pj_service
+ */
+function pjlaw_register_service_taxonomies() {
+    register_taxonomy('pj_service_category', 'pj_service', array(
+        'labels' => array(
+            'name'          => '카테고리',
+            'singular_name' => '카테고리',
+            'menu_name'     => '카테고리',
+        ),
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array('slug' => 'service-category'),
+    ));
+
+    register_taxonomy('pj_service_tag', 'pj_service', array(
+        'labels' => array(
+            'name'          => '태그',
+            'singular_name' => '태그',
+            'menu_name'     => '태그',
+        ),
+        'hierarchical'      => false,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array('slug' => 'service-tag'),
+    ));
+}
+add_action('init', 'pjlaw_register_service_taxonomies');
+
+/**
+ * Seed default terms for service taxonomies
+ */
+function pjlaw_seed_service_terms() {
+    $categories = array(
+        '민사'   => 'civil',
+        '형사'   => 'criminal',
+        '성범죄' => 'sexual',
+        '이혼'   => 'divorce',
+        '상속'   => 'inheritance',
+        '부동산' => 'realestate',
+        '기업'   => 'corporate',
+    );
+    foreach ($categories as $name => $slug) {
+        if (!term_exists($name, 'pj_service_category')) {
+            wp_insert_term($name, 'pj_service_category', array('slug' => $slug));
+        }
+    }
+
+    $tags = array('사이버범죄', '따돌림', '분리조치', '학폭위', '생기부');
+    foreach ($tags as $name) {
+        if (!term_exists($name, 'pj_service_tag')) {
+            wp_insert_term($name, 'pj_service_tag');
+        }
+    }
+}
+add_action('init', 'pjlaw_seed_service_terms', 15);
+
+/**
+ * Service post admin list columns.
+ */
+function pjlaw_service_columns($columns) {
+    $new = array();
+    $new['cb']    = $columns['cb'];
+    $new['title'] = $columns['title'];
+    $new['taxonomy-pj_service_category'] = __('카테고리', 'pjlaw');
+    $new['taxonomy-pj_service_tag']      = __('태그', 'pjlaw');
+    $new['date']  = $columns['date'];
+    return $new;
+}
+add_filter('manage_pj_service_posts_columns', 'pjlaw_service_columns');
+
+function pjlaw_service_tax_filters() {
+    global $typenow;
+    if ($typenow !== 'pj_service') return;
+    foreach (array('pj_service_category', 'pj_service_tag') as $tax) {
+        $obj = get_taxonomy($tax);
+        wp_dropdown_categories(array(
+            'show_option_all' => $obj->labels->all_items ?? '전체',
+            'taxonomy'        => $tax,
+            'name'            => $tax,
+            'orderby'         => 'name',
+            'selected'        => isset($_GET[$tax]) ? sanitize_text_field(wp_unslash($_GET[$tax])) : '',
+            'hierarchical'    => $obj->hierarchical,
+            'show_count'      => true,
+            'hide_empty'      => false,
+            'value_field'     => 'slug',
+        ));
+    }
+}
+add_action('restrict_manage_posts', 'pjlaw_service_tax_filters');
 ?>
