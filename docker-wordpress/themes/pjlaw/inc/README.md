@@ -1,6 +1,6 @@
 # `inc/` — Theme Module Files
 
-This folder contains the admin-managed content infrastructure for the PyeongJeong Law WordPress theme. It powers three features — **Blog** (`pj_blog_post`), **Careers** (`pj_career`), and **Cases** (`legal_case`) — and handles:
+This folder contains the admin-managed content infrastructure for the PyeongJeong Law WordPress theme. It powers four features — **Blog** (`pj_blog_post`), **Careers** (`pj_career`), **Cases** (`legal_case`), and **Team** (`pj_team`) — and handles:
 - Admin UI (meta boxes) for editing each content type
 - One-shot sample/migration data seeding
 - Content population for blog articles
@@ -127,6 +127,42 @@ The remaining card fields use native WordPress: **title** = post title, **desc**
 
 ---
 
+## Team files
+
+### `team-meta-boxes.php`
+
+**Purpose:** Defines the WordPress admin interface for editing `pj_team` (구성원) members.
+
+**What it provides:**
+- **구성원 정보** — 직위(role), 상세 페이지 타이틀(tagline), 전문분야(card overlay list), 태그(card list)
+- **업무분야** — a repeater of practice fields, each a 분야명 plus a tag list (one tag per line). Reuses the careers "상세 섹션" repeater pattern.
+- **구성원 상세** — 대표경력 / 학력 / 경력 / 주요실적, each a newline list (fixed headings; the detail design renders a specific icon per section)
+- **업무사례 선택** — checkbox list of published `legal_case` posts shown on the member's 업무사례 tab
+
+The member **photo** is the post's **Featured Image** (대표 이미지; falls back to `assets/images/team/member-1.png`). The member **name** is the post title.
+
+**How it runs:** Automatically loaded by WordPress via `functions.php`. Saves with nonce verification and sanitization on `save_post_pj_team`.
+
+**When to use:** No manual action required. Open WordPress admin → **구성원** → edit a member.
+
+---
+
+### `team-seed.php`
+
+**Purpose:** One-shot migration of the formerly hardcoded team members (이시완, 공선영) into the `pj_team` post type, with the full member detail (대표경력 / 업무분야 / 학력 / 경력 / 주요실적) and a sample 업무사례 selection.
+
+**What it provides:**
+- Two pre-populated members with all meta, plus a best-effort Featured Image sideloaded from the theme's `member-1.png` / `member-2.png` assets
+- Idempotent — runs only once via the `pjlaw_team_seeded` WordPress option
+
+**How it runs:** Automatically on `init` (priority 20) on first page load.
+
+**When to use:** No manual action required.
+
+> **Important (Team, like Careers):** per-member single pages live at `/team/member/<slug>/`. For these to resolve you must have **pretty permalinks enabled** and the **rewrite rules flushed** after the CPT is registered (see "First-time setup"). The `/team/` list itself renders via the theme's `template_include` routing and does not require a flush.
+
+---
+
 ## Execution Order
 
 Everything except the blog content seed runs **automatically** on page load — you normally do nothing. The order WordPress applies on a fresh database:
@@ -168,12 +204,14 @@ docker compose exec wordpress wp --allow-root eval-file wp-content/themes/pjlaw/
 - Blog: WP admin → **블로그** → edit a post (boxes from `blog-meta-boxes.php`)
 - Careers: WP admin → **채용** → edit a posting (boxes from `career-meta-boxes.php`)
 - Cases: WP admin → **업무사례** → edit a case (box from `case-meta-boxes.php` + Featured Image + 분야 taxonomy)
+- Team: WP admin → **구성원** → edit a member (boxes from `team-meta-boxes.php` + Featured Image)
 
 **To reset and re-run a seed** (deletes the guard option; data is recreated on next page load):
 ```bash
 docker compose exec wordpress wp --allow-root option delete pjlaw_blog_seeded
 docker compose exec wordpress wp --allow-root option delete pjlaw_careers_seeded
 docker compose exec wordpress wp --allow-root option delete pjlaw_cases_seeded
+docker compose exec wordpress wp --allow-root option delete pjlaw_team_seeded
 ```
 
 **To check seeded content exists:**
@@ -181,6 +219,7 @@ docker compose exec wordpress wp --allow-root option delete pjlaw_cases_seeded
 docker compose exec wordpress wp --allow-root post list --post_type=pj_blog_post
 docker compose exec wordpress wp --allow-root post list --post_type=pj_career
 docker compose exec wordpress wp --allow-root post list --post_type=legal_case
+docker compose exec wordpress wp --allow-root post list --post_type=pj_team
 ```
 
 **To repopulate blog article content:**

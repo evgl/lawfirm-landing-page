@@ -98,7 +98,7 @@ docker compose exec wordpress wp --allow-root <command>
 
 ### Routing model — important
 
-The site does **not** use real WordPress Pages for most routes. Instead, `functions.php` registers a `template_include` filter (`pjlaw_template_include`, around line 179) that inspects `$_SERVER['REQUEST_URI']` and forces a specific `page-*.php` template based on the URL path (`/about`, `/team`, `/team/<slug>`, `/services`, `/consultation`, `/directions`, `/why-pjlaw`, etc.).
+The site does **not** use real WordPress Pages for most routes. Instead, `functions.php` registers a `template_include` filter (`pjlaw_template_include`, around line 179) that inspects `$_SERVER['REQUEST_URI']` and forces a specific template based on the URL path (`/about`, `/team` → `page-team.php`, `/team/member/<slug>` → `single-pj_team.php`, `/services`, `/consultation`, `/directions`, `/why-pjlaw`, etc.).
 
 Implication: adding a new top-level page typically means **both** creating `page-<name>.php` **and** adding a new branch to `pjlaw_template_include`. Pretty permalinks must be enabled in WordPress settings for these paths to resolve.
 
@@ -110,6 +110,9 @@ Registered in `functions.php`:
 - `legal_case` — case studies (UI hidden, `public: true`)
 - `consultation` — submissions captured by the AJAX consultation form (not public)
 - `pj_blog_post` — the blog content type used by `page-blog.php` and `single-pj_blog_post.php`
+- `pj_career` — job postings; list at `/careers/`, single at `/careers/post/<slug>/` (`single-pj_career.php`)
+- `pj_service` — practice areas (업무분야)
+- `pj_team` — team members (구성원); list at `/team/` (`page-team.php`), single at `/team/member/<slug>/` (`single-pj_team.php`). Admin UI + seed in `inc/team-meta-boxes.php` / `inc/team-seed.php`; photo = Featured Image. Adding/removing members is done entirely in WP admin → **구성원** (no hardcoded data in the templates).
 
 Blog taxonomies (`pjlaw_register_blog_taxonomies`):
 - `pj_blog_category`, `pj_blog_service`, `pj_blog_tag`

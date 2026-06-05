@@ -27,6 +27,10 @@ require_once get_template_directory() . '/inc/case-meta-boxes.php';
 require_once get_template_directory() . '/inc/service-seed.php';
 require_once get_template_directory() . '/inc/service-meta-boxes.php';
 
+// Load team infrastructure files
+require_once get_template_directory() . '/inc/team-seed.php';
+require_once get_template_directory() . '/inc/team-meta-boxes.php';
+
 /**
  * Theme Setup
  */
@@ -219,6 +223,27 @@ function pjlaw_register_post_types() {
         'supports'      => array('title', 'revisions', 'author', 'page-attributes'),
         'rewrite'       => array('slug' => 'services/post', 'with_front' => false),
     ));
+
+    // Team Member Post Type (구성원)
+    register_post_type('pj_team', array(
+        'labels' => array(
+            'name'          => '구성원',
+            'singular_name' => '구성원',
+            'add_new'       => '새 구성원 추가',
+            'edit_item'     => '구성원 편집',
+            'view_item'     => '구성원 보기',
+            'search_items'  => '구성원 검색',
+            'not_found'     => '구성원 없음',
+            'menu_name'     => '구성원',
+        ),
+        'public'        => true,
+        'show_in_rest'  => true,
+        'has_archive'   => false,
+        'menu_icon'     => 'dashicons-groups',
+        'menu_position' => 9,
+        'supports'      => array('title', 'thumbnail', 'revisions', 'author', 'page-attributes'),
+        'rewrite'       => array('slug' => 'team/member', 'with_front' => false),
+    ));
 }
 add_action('init', 'pjlaw_register_post_types');
 register_activation_hook(__FILE__, 'flush_rewrite_rules');
@@ -274,10 +299,10 @@ function pjlaw_template_include($template) {
         }
     }
 
-    if (strpos($request_path, 'team/') === 0) {
-        $team_member_template = locate_template('page-team-member.php');
-        if ($team_member_template) {
-            return $team_member_template;
+    if (strpos($request_path, 'team/member/') === 0) {
+        $single_team_template = locate_template('single-pj_team.php');
+        if ($single_team_template) {
+            return $single_team_template;
         }
     }
 
@@ -661,6 +686,34 @@ function pjlaw_career_tax_filters() {
     ));
 }
 add_action('restrict_manage_posts', 'pjlaw_career_tax_filters');
+
+/**
+ * Team member admin list columns.
+ */
+function pjlaw_team_columns($columns) {
+    $new = array();
+    $new['cb']     = $columns['cb'];
+    $new['photo']  = __('대표이미지', 'pjlaw');
+    $new['title']  = $columns['title'];
+    $new['role']   = __('직위', 'pjlaw');
+    $new['date']   = $columns['date'];
+    return $new;
+}
+add_filter('manage_pj_team_posts_columns', 'pjlaw_team_columns');
+
+function pjlaw_team_column_content($column, $post_id) {
+    if ($column === 'role') {
+        $role = get_post_meta($post_id, '_pj_team_role', true);
+        echo $role ? esc_html($role) : '—';
+    } elseif ($column === 'photo') {
+        if (has_post_thumbnail($post_id)) {
+            echo get_the_post_thumbnail($post_id, array(48, 48), array('style' => 'width:48px;height:48px;object-fit:cover;border-radius:4px;'));
+        } else {
+            echo '—';
+        }
+    }
+}
+add_action('manage_pj_team_posts_custom_column', 'pjlaw_team_column_content', 10, 2);
 
 /**
  * Compute the deadline badge for a career posting from its end date.
