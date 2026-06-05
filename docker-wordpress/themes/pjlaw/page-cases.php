@@ -176,7 +176,7 @@ $case_fallback_image = $theme_uri . '/assets/images/cases/case-base.jpg';
                     if ($case_label === '') $case_label = 'seungso';
                     $case_image = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : $case_fallback_image;
                 ?>
-                <article class="case-card" data-type="<?php echo esc_attr($case_type); ?>" data-category="<?php echo esc_attr($case_cat); ?>">
+                <a href="<?php the_permalink(); ?>" class="case-card" data-type="<?php echo esc_attr($case_type); ?>" data-category="<?php echo esc_attr($case_cat); ?>">
                     <div class="case-card__info">
                         <div class="case-card__meta">
                             <span class="case-card__badge"><?php echo esc_html($case_badge); ?></span>
@@ -189,7 +189,7 @@ $case_fallback_image = $theme_uri . '/assets/images/cases/case-base.jpg';
                         <img class="case-card__image-base" src="<?php echo esc_url($case_image); ?>" alt="" loading="lazy" />
                         <img class="case-card__image-label" src="<?php echo esc_url($theme_uri . '/assets/images/cases/case-label-' . esc_attr($case_label) . '.png'); ?>" alt="" />
                     </div>
-                </article>
+                </a>
                 <?php endwhile; wp_reset_postdata(); endif; ?>
             </div>
 

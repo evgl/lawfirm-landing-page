@@ -123,7 +123,9 @@ The remaining card fields use native WordPress: **title** = post title, **desc**
 
 **How it runs:** Automatically on `init` (priority 20) on first page load.
 
-**When to use:** No manual action required. The cases page (`/cases/`) needs no rewrite flush (cards are not clickable; there is no single-case route).
+**When to use:** No manual action required.
+
+> **Important (Cases, like Careers):** case cards are clickable and per-case single pages live at `/cases/post/<slug>/` (`single-legal_case.php`, body = the WP editor content). For these to resolve you must have **pretty permalinks enabled** and the **rewrite rules flushed** after the CPT is registered (see "First-time setup"). The `/cases/` list itself renders via the theme's `template_include` routing and does not require a flush.
 
 ---
 
@@ -172,10 +174,10 @@ Everything except the blog content seed runs **automatically** on page load — 
 | 1 | Register CPTs + taxonomies + seed taxonomy terms (`functions.php`) | Automatic | Every `init` |
 | 2 | `blog-seed.php`, `career-seed.php`, `case-seed.php` | Automatic (once each) | First page load after activation |
 | 3 | `*-meta-boxes.php` (blog / career / case) | Automatic | Always available when editing in WP admin |
-| 4 | **Flush rewrite rules** (Careers single pages) | Manual, once | After CPTs exist, if `/careers/post/...` 404s |
+| 4 | **Flush rewrite rules** (Careers / Cases / Team single pages) | Manual, once | After CPTs exist, if `/careers/post/...`, `/cases/post/...`, or `/team/member/...` 404s |
 | 5 | `blog-content-seed-content.php` | Manual WP-CLI | After step 2 (blog only) |
 
-**Dependencies:** Step 5 depends on the blog seed (step 2). Step 4 is only needed for the Careers single-posting URLs (the Blog, Careers list, Cases, and Careers-all pages render via the theme's `template_include` routing and do not require it).
+**Dependencies:** Step 5 depends on the blog seed (step 2). Step 4 is needed for the single-posting URLs of Careers (`/careers/post/...`), Cases (`/cases/post/...`), and Team (`/team/member/...`); the list pages (Blog, Careers, Cases, Team, Careers-all) render via the theme's `template_include` routing and do not require it.
 
 ### First-time setup (fresh DB or after a DB reset)
 

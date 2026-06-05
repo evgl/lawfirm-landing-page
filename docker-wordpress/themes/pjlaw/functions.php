@@ -141,6 +141,7 @@ function pjlaw_register_post_types() {
         'menu_icon'     => 'dashicons-gavel',
         'menu_position' => 8,
         'supports'      => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes'),
+        'rewrite'       => array('slug' => 'cases/post', 'with_front' => false),
     ));
 
     // Consultation Post Type
@@ -345,6 +346,13 @@ function pjlaw_template_include($template) {
         $cases_template = locate_template('page-cases.php');
         if ($cases_template) {
             return $cases_template;
+        }
+    }
+
+    if (strpos($request_path, 'cases/post/') === 0) {
+        $single_case_template = locate_template('single-legal_case.php');
+        if ($single_case_template) {
+            return $single_case_template;
         }
     }
 

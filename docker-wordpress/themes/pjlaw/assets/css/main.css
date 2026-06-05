@@ -5297,6 +5297,8 @@
     overflow: hidden;
     border-radius: 18px;
     height: 100%;
+    text-decoration: none;
+    color: inherit;
 }
 
 .case-card__info {

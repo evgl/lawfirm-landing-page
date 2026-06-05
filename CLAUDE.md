@@ -107,7 +107,7 @@ Implication: adding a new top-level page typically means **both** creating `page
 ### Custom post types and taxonomies
 
 Registered in `functions.php`:
-- `legal_case` — case studies (UI hidden, `public: true`)
+- `legal_case` — case studies (업무사례); list at `/cases/` (`page-cases.php`), clickable cards → single at `/cases/post/<slug>/` (`single-legal_case.php`, body from the WP editor). Admin UI + seed in `inc/case-meta-boxes.php` / `inc/case-seed.php`.
 - `consultation` — submissions captured by the AJAX consultation form (not public)
 - `pj_blog_post` — the blog content type used by `page-blog.php` and `single-pj_blog_post.php`
 - `pj_career` — job postings; list at `/careers/`, single at `/careers/post/<slug>/` (`single-pj_career.php`)
