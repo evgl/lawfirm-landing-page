@@ -31,6 +31,10 @@ require_once get_template_directory() . '/inc/service-meta-boxes.php';
 require_once get_template_directory() . '/inc/team-seed.php';
 require_once get_template_directory() . '/inc/team-meta-boxes.php';
 
+// Load consultation infrastructure files
+require_once get_template_directory() . '/inc/consultation-meta-boxes.php';
+require_once get_template_directory() . '/inc/consultation-settings.php';
+
 /**
  * Theme Setup
  */
@@ -147,13 +151,19 @@ function pjlaw_register_post_types() {
     // Consultation Post Type
     register_post_type('consultation', array(
         'labels' => array(
-            'name' => __('Consultations', 'pjlaw'),
-            'singular_name' => __('Consultation', 'pjlaw'),
+            'name'          => '상담신청',
+            'singular_name' => '상담신청',
+            'edit_item'     => '상담신청 보기',
+            'view_item'     => '상담신청 보기',
+            'search_items'  => '상담신청 검색',
+            'not_found'     => '접수된 상담신청이 없습니다',
+            'menu_name'     => '상담신청',
         ),
         'public' => false,
         'show_ui' => true,
         'show_in_menu' => true,
         'menu_icon' => 'dashicons-email-alt',
+        'menu_position' => 6,
         'supports' => array('title', 'editor'),
         'capability_type' => 'post',
         'capabilities' => array(
@@ -441,19 +451,30 @@ function pjlaw_render_quick_actions_menu() {
  * AJAX Handler for Consultation Form
  */
 function pjlaw_handle_consultation_form() {
-    // Verify nonce
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pjlaw_nonce')) {
+    // Verify nonce (matches wp_create_nonce('pjlaw_consultation_nonce') in page-consultation-form.php)
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'pjlaw_consultation_nonce')) {
         wp_send_json_error(array('message' => __('보안 검증에 실패했습니다. 페이지를 새로고침한 후 다시 시도해 주세요.', 'pjlaw')));
         return;
     }
 
-    // Sanitize form data
-    $name = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
-    $phone = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
-    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
-    $subject = isset($_POST['subject']) ? sanitize_text_field($_POST['subject']) : '';
-    $message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
-    $privacy = isset($_POST['privacy']) ? intval($_POST['privacy']) : 0;
+    // Sanitize short text fields
+    $name        = isset($_POST['consultation_name']) ? sanitize_text_field(wp_unslash($_POST['consultation_name'])) : '';
+    $phone       = isset($_POST['consultation_phone']) ? sanitize_text_field(wp_unslash($_POST['consultation_phone'])) : '';
+    $category    = isset($_POST['consultation_category']) ? sanitize_text_field(wp_unslash($_POST['consultation_category'])) : '';
+    $subject     = isset($_POST['consultation_subject']) ? sanitize_text_field(wp_unslash($_POST['consultation_subject'])) : '';
+    $client      = isset($_POST['consultation_client']) ? sanitize_text_field(wp_unslash($_POST['consultation_client'])) : '';
+    $opponent    = isset($_POST['consultation_opponent']) ? sanitize_text_field(wp_unslash($_POST['consultation_opponent'])) : '';
+    $case_number = isset($_POST['consultation_case_number']) ? sanitize_text_field(wp_unslash($_POST['consultation_case_number'])) : '';
+    $pref_date   = isset($_POST['consultation_date']) ? sanitize_text_field(wp_unslash($_POST['consultation_date'])) : '';
+    $pref_time   = isset($_POST['consultation_time']) ? sanitize_text_field(wp_unslash($_POST['consultation_time'])) : '';
+    $method      = isset($_POST['consultation_method']) ? sanitize_text_field(wp_unslash($_POST['consultation_method'])) : '';
+    $q1          = isset($_POST['consultation_q1']) ? sanitize_text_field(wp_unslash($_POST['consultation_q1'])) : '';
+    $q2          = isset($_POST['consultation_q2']) ? sanitize_text_field(wp_unslash($_POST['consultation_q2'])) : '';
+
+    // Sanitize long text fields (preserve line breaks)
+    $case_desc = isset($_POST['consultation_case']) ? sanitize_textarea_field(wp_unslash($_POST['consultation_case'])) : '';
+    $goal      = isset($_POST['consultation_goal']) ? sanitize_textarea_field(wp_unslash($_POST['consultation_goal'])) : '';
+    $details   = isset($_POST['consultation_details']) ? sanitize_textarea_field(wp_unslash($_POST['consultation_details'])) : '';
 
     // Validate required fields
     if (empty($name) || empty($phone)) {
@@ -461,43 +482,63 @@ function pjlaw_handle_consultation_form() {
         return;
     }
 
-    // Validate privacy consent
-    if (1 !== $privacy) {
-        wp_send_json_error(array('message' => __('개인정보처리방침에 동의해 주세요.', 'pjlaw')));
-        return;
+    // Human-readable summary (kept on post_content for quick reading)
+    $rows = array(
+        '상담분야'     => $category,
+        '상담방식'     => $method,
+        '희망 상담일'  => trim($pref_date . ' ' . $pref_time),
+        '질문1 답변'   => $q1,
+        '질문2 답변'   => $q2,
+        '이름'         => $name,
+        '연락처'       => $phone,
+        '의뢰인 정보'  => $client,
+        '상대방 정보'  => $opponent,
+        '사건 개요'    => $case_desc,
+        '의뢰 목적'    => $goal,
+        '사건번호'     => $case_number,
+        '기타 상세'    => $details,
+    );
+    $formatted_content = '';
+    foreach ($rows as $label => $value) {
+        if ($value !== '') {
+            $formatted_content .= $label . ': ' . $value . "\n";
+        }
     }
-
-    // Format content
-    $formatted_content = "=== 연락처 정보 / Contact Information ===\n\n";
-    $formatted_content .= "이름 (Name): " . $name . "\n";
-    $formatted_content .= "전화번호 (Phone): " . $phone . "\n";
-    if (!empty($email)) {
-        $formatted_content .= "이메일 (Email): " . $email . "\n";
-    }
-    if (!empty($subject)) {
-        $formatted_content .= "상담분야 (Consultation Area): " . $subject . "\n";
-    }
-    $formatted_content .= "\n=== 상담내용 / Message ===\n\n";
-    $formatted_content .= $message;
 
     // Insert post
     $post_data = array(
-        'post_title' => sprintf(__('[상담신청] %s', 'pjlaw'), $name),
+        'post_title'   => sprintf(__('[상담신청] %s', 'pjlaw'), $name),
         'post_content' => $formatted_content,
-        'post_status' => 'publish',
-        'post_type' => 'consultation',
-        'meta_input' => array(
-            '_consultation_name' => $name,
-            '_consultation_phone' => $phone,
-            '_consultation_email' => $email,
-            '_consultation_subject' => $subject,
-            '_consultation_date' => current_time('mysql')
-        )
+        'post_status'  => 'publish',
+        'post_type'    => 'consultation',
+        'meta_input'   => array(
+            '_consultation_name'        => $name,
+            '_consultation_phone'       => $phone,
+            '_consultation_email'       => '',
+            '_consultation_category'    => $category,
+            '_consultation_subject'     => $subject,
+            '_consultation_client'      => $client,
+            '_consultation_opponent'    => $opponent,
+            '_consultation_case'        => $case_desc,
+            '_consultation_goal'        => $goal,
+            '_consultation_case_number' => $case_number,
+            '_consultation_details'     => $details,
+            '_consultation_pref_date'   => $pref_date,
+            '_consultation_pref_time'   => $pref_time,
+            '_consultation_method'      => $method,
+            '_consultation_q1'          => $q1,
+            '_consultation_q2'          => $q2,
+            '_consultation_date'        => current_time('mysql'),
+        ),
     );
 
     $consultation_id = wp_insert_post($post_data);
 
     if ($consultation_id && !is_wp_error($consultation_id)) {
+        // Notify staff via Resend. Email failures must not fail the booking.
+        if (function_exists('pjlaw_send_consultation_notification')) {
+            pjlaw_send_consultation_notification($consultation_id);
+        }
         wp_send_json_success(array('message' => __('상담 신청이 성공적으로 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.', 'pjlaw')));
     } else {
         wp_send_json_error(array('message' => __('상담 접수 중 오류가 발생했습니다. 다시 시도해 주세요.', 'pjlaw')));

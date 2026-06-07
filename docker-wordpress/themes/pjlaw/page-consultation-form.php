@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function () {
         d.setDate(today.getDate() + i);
 
         var dayOfWeek = d.getDay();
-        var isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+        var isWeekend = false; // firm operates every day — all dates selectable
         var isToday = i === 0;
 
         var cell = document.createElement('div');
@@ -548,6 +548,17 @@ document.addEventListener('DOMContentLoaded', function () {
         var nonce = document.getElementById('consult-nonce').value;
         var ajaxUrl = document.getElementById('consult-ajax-url').value;
 
+        // Selected wizard answers (Q1/Q2 pre-filled from URL, Q3 = 상담방식)
+        function selectedOptValue(q) {
+            var group = document.querySelector('.consult-form-qa-row__options[data-q="' + q + '"]');
+            if (!group) return '';
+            var sel = group.querySelector('.consult-form-option-btn--selected');
+            return sel ? sel.getAttribute('data-value') : '';
+        }
+        var q1Answer = selectedOptValue('1');
+        var q2Answer = selectedOptValue('2');
+        var method = selectedOptValue('3');
+
         var selectedTime = '';
         var timeBtn = document.querySelector('.consult-form-time-btn--selected');
         if (timeBtn) selectedTime = timeBtn.getAttribute('data-time');
@@ -579,6 +590,9 @@ document.addEventListener('DOMContentLoaded', function () {
         data.append('consultation_date', selectedDate || '');
         data.append('consultation_time', selectedTime);
         data.append('consultation_category', category);
+        data.append('consultation_method', method);
+        data.append('consultation_q1', q1Answer);
+        data.append('consultation_q2', q2Answer);
 
         fetch(ajaxUrl, { method: 'POST', body: data })
             .then(function(r) { return r.json(); })
