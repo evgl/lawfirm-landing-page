@@ -55,15 +55,17 @@ $talent_values = array(
                 <h1 class="careers-hero__title">법률사무소 평정은<br>당신의 가능성을 현실로 만듭니다</h1>
                 <p class="careers-hero__subtitle">더 나은 세상을 위한 끊임없는 도전,<br>그 시작을 평정 함께하세요.</p>
             </div>
-            <nav class="careers-hero__breadcrumb" aria-label="breadcrumb">
-                <span class="careers-hero__breadcrumb-home">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M1.5 9L9 1.5L16.5 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7.5V15.75C3 16.1642 3.33579 16.5 3.75 16.5H7.5V12H10.5V16.5H14.25C14.6642 16.5 15 16.1642 15 15.75V7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span class="careers-hero__breadcrumb-sep">
-                    <svg width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true"><path d="M1 1L7 6L1 11" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span class="careers-hero__breadcrumb-current">인재채용</span>
-            </nav>
+            <div class="careers-hero__footer">
+                <nav class="careers-hero__breadcrumb" aria-label="breadcrumb">
+                    <span class="careers-hero__breadcrumb-home">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M1.5 9L9 1.5L16.5 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7.5V15.75C3 16.1642 3.33579 16.5 3.75 16.5H7.5V12H10.5V16.5H14.25C14.6642 16.5 15 16.1642 15 15.75V7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span class="careers-hero__breadcrumb-sep">
+                        <svg width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true"><path d="M1 1L7 6L1 11" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span class="careers-hero__breadcrumb-current">인재채용</span>
+                </nav>
+            </div>
         </div>
     </section>
 

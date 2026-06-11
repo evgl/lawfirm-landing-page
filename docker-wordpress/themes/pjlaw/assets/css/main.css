@@ -2618,7 +2618,7 @@
 
 .services-hero__breadcrumb {
     margin-top: auto;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -3220,8 +3220,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 190px;
+    justify-content: space-between;
+    padding-bottom: 80px;
     box-sizing: border-box;
 }
 
@@ -3263,10 +3263,12 @@
     margin: 0;
 }
 
+.blog-hero__footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .blog-hero__breadcrumb-nav {
-    position: absolute;
-    bottom: 50px;
-    right: 0;
     display: flex;
     align-items: center;
     gap: 26px;
@@ -5038,7 +5040,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding-bottom: 48px;
+    padding-bottom: 80px;
 }
 
 .cases-hero__content {
@@ -5079,6 +5081,11 @@
 }
 
 /* Breadcrumb */
+.cases-hero__footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .cases-hero__breadcrumb-nav {
     display: flex;
     align-items: center;
@@ -5485,12 +5492,12 @@
     z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 40px;
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 60px 48px;
+    padding: 0 60px;
     height: 100%;
 }
 
@@ -5498,6 +5505,12 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+}
+
+.careers-hero__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 80px;
 }
 
 .careers-hero__breadcrumb {
