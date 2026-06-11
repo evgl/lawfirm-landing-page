@@ -207,13 +207,7 @@ $case_fallback_image = $theme_uri . '/assets/images/cases/case-base.jpg';
                         </svg>
                     </button>
                 </div>
-                <div class="cases-pagination__pages">
-                    <button class="cases-pagination__page cases-pagination__page--active">1</button>
-                    <button class="cases-pagination__page">2</button>
-                    <button class="cases-pagination__page">3</button>
-                    <button class="cases-pagination__page">4</button>
-                    <button class="cases-pagination__page">5</button>
-                </div>
+                <div class="cases-pagination__pages"></div>
                 <div class="cases-pagination__nav">
                     <button class="cases-pagination__arrow cases-pagination__arrow--last" aria-label="마지막">
                         <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -237,28 +231,78 @@ $case_fallback_image = $theme_uri . '/assets/images/cases/case-base.jpg';
 
 <script>
 (function () {
+    const PER_PAGE = 9;
     const tabs = document.querySelectorAll('#cases-tabs .services-grid__item');
-    const cards = document.querySelectorAll('.case-card');
+    const cards = Array.prototype.slice.call(document.querySelectorAll('.case-card'));
     const chips = document.querySelectorAll('.cases-chip');
     const searchInput = document.getElementById('cases-search-input');
+    const pagination = document.querySelector('.cases-pagination');
+    const pagesEl = document.querySelector('.cases-pagination__pages');
+    const prevArrow  = document.querySelector('.cases-pagination__arrow--prev');
+    const firstArrow = document.querySelector('.cases-pagination__arrow--first');
+    const nextArrow  = document.querySelector('.cases-pagination__arrow--next');
+    const lastArrow  = document.querySelector('.cases-pagination__arrow--last');
 
-    function filterCards(tab, searchTerm) {
-        cards.forEach(function (card) {
-            const typeMatch = (tab === 'all') || (card.dataset.type === tab);
-            const text = (card.querySelector('.case-card__title').textContent + ' ' + card.querySelector('.case-card__category').textContent).toLowerCase();
-            const searchMatch = !searchTerm || text.includes(searchTerm.toLowerCase());
-            card.style.display = (typeMatch && searchMatch) ? '' : 'none';
+    var activeTab = 'all';
+    var currentPage = 1;
+    var matching = cards;
+
+    function computeMatching(tab, searchTerm) {
+        var term = (searchTerm || '').toLowerCase();
+        return cards.filter(function (card) {
+            var typeMatch = (tab === 'all') || (card.dataset.type === tab);
+            var text = (card.querySelector('.case-card__title').textContent + ' ' + card.querySelector('.case-card__category').textContent).toLowerCase();
+            var searchMatch = !term || text.indexOf(term) !== -1;
+            return typeMatch && searchMatch;
         });
     }
 
-    var activeTab = 'all';
+    function renderPage() {
+        var start = (currentPage - 1) * PER_PAGE;
+        var end = start + PER_PAGE;
+        cards.forEach(function (card) { card.style.display = 'none'; });
+        matching.slice(start, end).forEach(function (card) { card.style.display = ''; });
+    }
+
+    function renderPagination() {
+        var totalPages = Math.ceil(matching.length / PER_PAGE);
+        pagesEl.innerHTML = '';
+        if (totalPages <= 1) {
+            pagination.style.display = 'none';
+            return;
+        }
+        pagination.style.display = '';
+        for (var p = 1; p <= totalPages; p++) {
+            var btn = document.createElement('button');
+            btn.className = 'cases-pagination__page' + (p === currentPage ? ' cases-pagination__page--active' : '');
+            btn.textContent = p;
+            (function (page) {
+                btn.addEventListener('click', function () { goToPage(page); });
+            }(p));
+            pagesEl.appendChild(btn);
+        }
+    }
+
+    function goToPage(page) {
+        var totalPages = Math.ceil(matching.length / PER_PAGE) || 1;
+        currentPage = Math.min(Math.max(1, page), totalPages);
+        renderPage();
+        renderPagination();
+    }
+
+    function applyFilter() {
+        matching = computeMatching(activeTab, searchInput ? searchInput.value : '');
+        currentPage = 1;
+        renderPage();
+        renderPagination();
+    }
 
     tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
             tabs.forEach(function (t) { t.classList.remove('active'); });
             tab.classList.add('active');
             activeTab = tab.dataset.tab;
-            filterCards(activeTab, searchInput ? searchInput.value : '');
+            applyFilter();
         });
     });
 
@@ -270,10 +314,15 @@ $case_fallback_image = $theme_uri . '/assets/images/cases/case-base.jpg';
     });
 
     if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            filterCards(activeTab, searchInput.value);
-        });
+        searchInput.addEventListener('input', applyFilter);
     }
+
+    if (prevArrow)  prevArrow.addEventListener('click', function () { goToPage(currentPage - 1); });
+    if (firstArrow) firstArrow.addEventListener('click', function () { goToPage(1); });
+    if (nextArrow)  nextArrow.addEventListener('click', function () { goToPage(currentPage + 1); });
+    if (lastArrow)  lastArrow.addEventListener('click', function () { goToPage(Math.ceil(matching.length / PER_PAGE)); });
+
+    applyFilter();
 }());
 </script>
 
