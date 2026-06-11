@@ -2254,6 +2254,7 @@
 .directions-hero__breadcrumb-home img {
     width: 20px;
     height: 18px;
+    filter: brightness(0) invert(1);
 }
 
 .directions-hero__breadcrumb-items {
