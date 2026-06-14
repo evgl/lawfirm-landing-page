@@ -5516,13 +5516,31 @@
 .careers-hero__breadcrumb {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 50px;
 }
 
-.careers-hero__breadcrumb-home svg,
-.careers-hero__breadcrumb-sep svg {
-    display: block;
+.careers-hero__breadcrumb-home {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
     opacity: 0.85;
+    transition: opacity 0.2s;
+}
+
+.careers-hero__breadcrumb-home:hover {
+    opacity: 1;
+}
+
+.careers-hero__breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.54px;
+    color: #fff;
 }
 
 .careers-hero__breadcrumb-current {
