@@ -329,12 +329,19 @@
 }
 
 .cases-slider {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    display: flex;
     gap: 30px;
+    overflow-x: auto;
+    padding: 20px 60px 40px;
+    scrollbar-width: none;
+}
+
+.cases-slider::-webkit-scrollbar {
+    display: none;
 }
 
 .case-item {
+    flex: 0 0 400px;
     background-color: var(--bg-card);
     border-radius: 30px;
     overflow: hidden;
