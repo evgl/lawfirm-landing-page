@@ -3271,7 +3271,7 @@
 .blog-hero__breadcrumb-nav {
     display: flex;
     align-items: center;
-    gap: 26px;
+    gap: 50px;
 }
 
 .blog-hero__breadcrumb-home {
@@ -5516,7 +5516,7 @@
 .careers-hero__breadcrumb {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .careers-hero__breadcrumb-home svg,
