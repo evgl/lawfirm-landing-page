@@ -88,7 +88,7 @@ $theme_uri = get_template_directory_uri();
                         <div class="directions-map-info__details">
                             <div class="directions-map-info__detail-row">
                                 <span class="directions-map-info__label">주소</span>
-                                <span class="directions-map-info__value">서울특별시 강남구 논현로63길 71, 6층</span>
+                                <span class="directions-map-info__value">서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층</span>
                             </div>
                             <div class="directions-map-info__detail-row">
                                 <span class="directions-map-info__label">대표전화</span>
@@ -99,7 +99,7 @@ $theme_uri = get_template_directory_uri();
 
                     <div class="directions-map-info__actions">
                         <a
-                            href="https://map.naver.com/v5/search/서울특별시 강남구 논현로63길 71"
+                            href="https://map.naver.com/v5/search/서울특별시 강남구 테헤란로 238"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="directions-map-info__btn"
@@ -140,7 +140,7 @@ $theme_uri = get_template_directory_uri();
                     <div class="legal-separator"></div>
                         <div class="legal-bottom">
                             <div class="legal-info">
-                            <p>서울특별시 강남구 논현로63길 71, 6층&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel : 02-554-5674</p>
+                            <p>서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel : 02-554-5674</p>
                             <p class="copyright">Copyright ⓒ Pyeongjeong. All Rights Reserved</p>
                         </div>
                         <div class="footer-logo-wrap">

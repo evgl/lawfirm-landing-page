@@ -155,7 +155,7 @@ $team_query = new WP_Query(array(
                     <div class="legal-separator"></div>
                     <div class="legal-bottom">
                         <div class="legal-info">
-                            <p>경기도 수원시 장안구 경수대로 976번길 19(송죽동)       Tel : 070-7800-2114</p>
+                            <p>서울특별시 강남구 테헤란로 238, 마크로젠빌딩 12층       Tel : 02-554-5674</p>
                             <p class="copyright">Copyright ⓒ Pyeongjeong. All Rights Reserved</p>
                         </div>
                         <div class="footer-logo-wrap">
