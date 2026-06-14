@@ -64,6 +64,30 @@ This populates the `post_content` field for the seeded posts so `single-pj_blog_
 
 ---
 
+### `blog-content-fill.php`
+
+**Purpose:** Bulk-creates or updates all 10 sample `pj_blog_post` entries with full structured content (HTML post body, metadata, and category assignments).
+
+**What it provides:**
+- Full `post_content` HTML for all 10 blog articles on Korean legal topics (졸피뎀 / 음주운전 / 무면허사고 / 특경법 / 강제추행 / 사기죄 / 명예훼손 고소 / 횡령/배임 / 폭행/상해 / and one more)
+- Intro section metadata (`_intro_subtitle`, `_intro_text`)
+- FAQ section metadata (`_faq`)
+- Category taxonomy assignments for each post
+- Idempotent — checks post title before inserting; re-running updates existing posts in place without duplication
+
+**How it runs:** **Manual WP-CLI command only** — this file is NOT auto-loaded.
+
+**When to use:** Run once after `blog-seed.php` has created the posts:
+
+```bash
+cd docker-wordpress
+docker compose exec wordpress wp --allow-root eval-file wp-content/themes/pjlaw/inc/blog-content-fill.php
+```
+
+This differs from `blog-content-seed-content.php` (which fills only a single sample post) — use this script to populate all 10 blog posts with their complete, distinct Korean legal content. Re-running is safe.
+
+---
+
 ## Careers files
 
 ### `career-meta-boxes.php`
@@ -129,6 +153,36 @@ The remaining card fields use native WordPress: **title** = post title, **desc**
 
 ---
 
+## Case Reviews files
+
+### `case-review-meta-boxes.php`
+
+**Purpose:** Defines the WordPress admin interface for editing `pj_case_review` (고객후기) post metadata.
+
+**What it provides:**
+- **후기 정보** — review tag label (e.g. "이혼소송후기"), lawyer name, and optional lawyer avatar URL
+
+**How it runs:** Automatically loaded by WordPress via `functions.php`.
+
+**When to use:** No manual action required. This file activates automatically whenever someone opens the WordPress admin editor for a case review post.
+
+---
+
+### `case-review-seed.php`
+
+**Purpose:** Creates sample case review posts on initial theme activation.
+
+**What it provides:**
+- Pre-populated `pj_case_review` entries (4 client testimonials) with client quotes as excerpts, review tags, lawyer names, and featured images from `assets/images/home/case-N.png`
+- Automatic setup so the homepage has review content to display from day one
+- Idempotent — runs only once via the `pjlaw_case_reviews_seeded` WordPress option
+
+**How it runs:** Automatically on first WordPress page load after theme activation (hooks into WordPress `init` at priority 20).
+
+**When to use:** No manual action required. The sample reviews are created automatically the first time you start the WordPress site. To reset and re-run, delete the `pjlaw_case_reviews_seeded` option (see Common Tasks).
+
+---
+
 ## Team files
 
 ### `team-meta-boxes.php`
@@ -165,6 +219,71 @@ The member **photo** is the post's **Featured Image** (대표 이미지; falls b
 
 ---
 
+## Services files
+
+### `service-meta-boxes.php`
+
+**Purpose:** Defines the WordPress admin interface for editing `pj_service` (업무분야) post metadata.
+
+**What it provides:**
+- **일반 정보** — optional page H1 title override (`_pj_service_main_title`)
+- **상세 카드** — repeater of content cards; each card has a heading, content, optional table title, table data (pipe-delimited rows), and laws data (blocks separated by `---`). Add/remove cards via inline JavaScript UI.
+- **맺음말 섹션** — closing section title and content
+- **관련 콘텐츠** — comma-separated related post IDs for manually pinned strategies, cases, and other content
+
+**How it runs:** Automatically loaded by WordPress via `functions.php`.
+
+**When to use:** No manual action required. Open WordPress admin → **업무분야** → edit a service to see the boxes.
+
+---
+
+### `service-seed.php`
+
+**Purpose:** One-shot migration that populates the `pj_service` custom post type with initial service posts and updates practice area category descriptions.
+
+**What it provides:**
+- Updates descriptions for 7 `pj_service_category` terms (civil, criminal, sexual, divorce, inheritance, realestate, corporate)
+- Creates 1 fully-detailed service post (명예훼손 / defamation) with all meta boxes populated
+- Creates ~35 skeleton service posts spread across all 7 categories, each ready to be edited in the admin
+- Idempotent — runs only once via the `pjlaw_services_seeded` WordPress option
+
+**How it runs:** Automatically on `init` (priority 20) on first page load.
+
+**When to use:** No manual action required.
+
+---
+
+## Consultation files
+
+### `consultation-meta-boxes.php`
+
+**Purpose:** Provides a read-only admin view and custom columns for `consultation` (상담) submissions captured by the frontend booking form.
+
+**What it provides:**
+- **상담 신청 내용** — read-only meta box displaying all 14 consultation fields (name, phone, email, etc.) in an HTML table
+- Custom admin list columns: 신청자 (name), 연락처 (phone), 분야 (category), 희망일시 (preferred date/time)
+
+**How it runs:** Automatically loaded by WordPress via `functions.php`. No save handler — these are display-only registrations.
+
+**When to use:** No manual action required. Open WordPress admin → **상담** to view all consultation submissions.
+
+---
+
+### `consultation-settings.php`
+
+**Purpose:** Provides staff-configurable email notification settings for new consultation bookings and sends HTML notifications via the Resend API.
+
+**What it provides:**
+- **알림 설정** — submenu page under the consultation post type where staff can toggle notifications on/off and set the recipient email
+- Settings API integration: `pjlaw_consultation_notify_enabled` (checkbox, default on) and `pjlaw_consultation_notify_to` (email, default admin email)
+- `pjlaw_send_consultation_notification($post_id)` — callable function (not self-hooked) that reads the Resend API key from `<theme>/.env/API-KEYS` (INI format), builds an HTML email from all consultation meta, and POSTs to Resend. Called externally by the AJAX handler that creates consultation posts.
+
+**How it runs:** Settings page and API registration auto-load via `admin_menu` and `admin_init` hooks. The mailer function must be called from wherever consultation posts are created (e.g., the AJAX handler).
+
+**When to use:** No manual action required for display. Staff configure notification settings in WordPress admin → **상담** → **알림 설정**.
+
+---
+
 ## Execution Order
 
 Everything except the blog content seed runs **automatically** on page load — you normally do nothing. The order WordPress applies on a fresh database:
@@ -172,12 +291,13 @@ Everything except the blog content seed runs **automatically** on page load — 
 | Step | File / Action | Type | When |
 |------|---------------|------|------|
 | 1 | Register CPTs + taxonomies + seed taxonomy terms (`functions.php`) | Automatic | Every `init` |
-| 2 | `blog-seed.php`, `career-seed.php`, `case-seed.php` | Automatic (once each) | First page load after activation |
-| 3 | `*-meta-boxes.php` (blog / career / case) | Automatic | Always available when editing in WP admin |
+| 2 | `blog-seed.php`, `career-seed.php`, `case-seed.php`, `case-review-seed.php`, `service-seed.php` | Automatic (once each) | First page load after activation |
+| 3 | `*-meta-boxes.php` (blog / career / case / case-review / service / consultation) | Automatic | Always available when editing in WP admin |
 | 4 | **Flush rewrite rules** (Careers / Cases / Team single pages) | Manual, once | After CPTs exist, if `/careers/post/...`, `/cases/post/...`, or `/team/member/...` 404s |
-| 5 | `blog-content-seed-content.php` | Manual WP-CLI | After step 2 (blog only) |
+| 5a | `blog-content-seed-content.php` | Manual WP-CLI | After step 2 (fills one sample post; deprecated) |
+| 5b | `blog-content-fill.php` | Manual WP-CLI | After step 2 (fills all 10 blog posts with distinct content) |
 
-**Dependencies:** Step 5 depends on the blog seed (step 2). Step 4 is needed for the single-posting URLs of Careers (`/careers/post/...`), Cases (`/cases/post/...`), and Team (`/team/member/...`); the list pages (Blog, Careers, Cases, Team, Careers-all) render via the theme's `template_include` routing and do not require it.
+**Dependencies:** Steps 5a and 5b depend on the blog seed (step 2). Step 4 is needed for the single-posting URLs of Careers (`/careers/post/...`), Cases (`/cases/post/...`), and Team (`/team/member/...`); the list pages (Blog, Careers, Cases, Team, Careers-all) render via the theme's `template_include` routing and do not require it. Step 5b (`blog-content-fill.php`) is the primary method for populating all 10 blog posts with complete content; step 5a is a legacy alternative for single-post fills.
 
 ### First-time setup (fresh DB or after a DB reset)
 
@@ -214,6 +334,8 @@ docker compose exec wordpress wp --allow-root option delete pjlaw_blog_seeded
 docker compose exec wordpress wp --allow-root option delete pjlaw_careers_seeded
 docker compose exec wordpress wp --allow-root option delete pjlaw_cases_seeded
 docker compose exec wordpress wp --allow-root option delete pjlaw_team_seeded
+docker compose exec wordpress wp --allow-root option delete pjlaw_case_reviews_seeded
+docker compose exec wordpress wp --allow-root option delete pjlaw_services_seeded
 ```
 
 **To check seeded content exists:**
@@ -222,9 +344,19 @@ docker compose exec wordpress wp --allow-root post list --post_type=pj_blog_post
 docker compose exec wordpress wp --allow-root post list --post_type=pj_career
 docker compose exec wordpress wp --allow-root post list --post_type=legal_case
 docker compose exec wordpress wp --allow-root post list --post_type=pj_team
+docker compose exec wordpress wp --allow-root post list --post_type=pj_case_review
+docker compose exec wordpress wp --allow-root post list --post_type=pj_service
 ```
 
-**To repopulate blog article content:**
+**To repopulate blog article content (all 10 posts):**
+```bash
+cd docker-wordpress
+docker compose exec wordpress wp --allow-root eval-file wp-content/themes/pjlaw/inc/blog-content-fill.php
+```
+
+This is the primary method for populating all 10 blog posts with complete content. Re-running is safe — existing posts are updated in place.
+
+**To repopulate a single blog post content (legacy method):**
 ```bash
 cd docker-wordpress
 docker compose exec wordpress wp --allow-root eval-file wp-content/themes/pjlaw/inc/blog-content-seed-content.php

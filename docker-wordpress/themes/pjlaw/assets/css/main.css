@@ -4933,6 +4933,10 @@
     background: #1a2e69;
 }
 
+.sidebar-card--blue {
+    background: #1a2e69;
+}
+
 .sidebar-card--light {
     background: #fff;
     border: 1px solid #e3e5e9;
@@ -4952,6 +4956,11 @@
     border-bottom: 1px solid #384e91;
 }
 
+.sidebar-card__header--blue {
+    background: #273d7e;
+    border-bottom: 1px solid #384e91;
+}
+
 .sidebar-card__title {
     font-family: 'Pretendard', sans-serif;
     font-weight: 700;
@@ -4960,6 +4969,10 @@
 }
 
 .sidebar-card--dark .sidebar-card__title {
+    color: #fff;
+}
+
+.sidebar-card--blue .sidebar-card__title {
     color: #fff;
 }
 
