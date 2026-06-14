@@ -23,6 +23,10 @@ require_once get_template_directory() . '/inc/career-meta-boxes.php';
 require_once get_template_directory() . '/inc/case-seed.php';
 require_once get_template_directory() . '/inc/case-meta-boxes.php';
 
+// Case Review (사례 후기) modules
+require_once get_template_directory() . '/inc/case-review-seed.php';
+require_once get_template_directory() . '/inc/case-review-meta-boxes.php';
+
 // Load services infrastructure files
 require_once get_template_directory() . '/inc/service-seed.php';
 require_once get_template_directory() . '/inc/service-meta-boxes.php';
@@ -146,6 +150,27 @@ function pjlaw_register_post_types() {
         'menu_position' => 8,
         'supports'      => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes'),
         'rewrite'       => array('slug' => 'cases/post', 'with_front' => false),
+    ));
+
+    // Case Review Post Type (사례 후기) — homepage LEGAL CASE testimonials
+    register_post_type('pj_case_review', array(
+        'labels' => array(
+            'name'          => '사례 후기',
+            'singular_name' => '사례 후기',
+            'add_new'       => '새 후기 추가',
+            'edit_item'     => '후기 편집',
+            'view_item'     => '후기 보기',
+            'search_items'  => '후기 검색',
+            'not_found'     => '후기 없음',
+            'menu_name'     => '사례 후기',
+        ),
+        'public'        => true,
+        'show_in_rest'  => true,
+        'has_archive'   => false,
+        'menu_icon'     => 'dashicons-format-quote',
+        'menu_position' => 9,
+        'supports'      => array('title', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes'),
+        'rewrite'       => false,
     ));
 
     // Consultation Post Type
@@ -411,15 +436,15 @@ add_filter('template_include', 'pjlaw_template_include');
 function pjlaw_render_quick_actions_menu() {
     ?>
     <aside class="about-quick-menu" aria-label="<?php esc_attr_e('Quick actions', 'pjlaw'); ?>">
-        <a class="about-quick-menu__item about-quick-menu__item--call" href="tel:15886999">
+        <a class="about-quick-menu__item about-quick-menu__item--call" href="tel:0255455674">
             <span class="about-quick-menu__icon-wrap">
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/about/icon-phone.svg'); ?>" alt="" aria-hidden="true" />
             </span>
             <span class="about-quick-menu__label">전화상담</span>
             <span class="about-quick-menu__phone">
-                <span>1588</span>
+                <span>02-554</span>
                 <span class="about-quick-menu__dot" aria-hidden="true"></span>
-                <span>6999</span>
+                <span>5674</span>
             </span>
         </a>
 
@@ -882,6 +907,35 @@ function pjlaw_case_tax_filters() {
     ));
 }
 add_action('restrict_manage_posts', 'pjlaw_case_tax_filters');
+
+/**
+ * Admin list columns for 사례 후기 (pj_case_review)
+ */
+function pjlaw_case_review_columns($columns) {
+    $new = array();
+    $new['cb']     = $columns['cb'];
+    $new['thumb']  = __('이미지', 'pjlaw');
+    $new['title']  = $columns['title'];
+    $new['review_tag']    = __('태그', 'pjlaw');
+    $new['review_lawyer'] = __('변호사', 'pjlaw');
+    $new['date']   = $columns['date'];
+    return $new;
+}
+add_filter('manage_pj_case_review_posts_columns', 'pjlaw_case_review_columns');
+
+function pjlaw_case_review_column_content($column, $post_id) {
+    if ($column === 'thumb') {
+        $thumb = get_the_post_thumbnail($post_id, array(60, 60));
+        echo $thumb ? $thumb : '—';
+    } elseif ($column === 'review_tag') {
+        $tag = get_post_meta($post_id, '_pj_review_tag', true);
+        echo $tag ? esc_html($tag) : '—';
+    } elseif ($column === 'review_lawyer') {
+        $lawyer = get_post_meta($post_id, '_pj_review_lawyer', true);
+        echo $lawyer ? esc_html($lawyer) : '—';
+    }
+}
+add_action('manage_pj_case_review_posts_custom_column', 'pjlaw_case_review_column_content', 10, 2);
 
 /**
  * Register custom taxonomies for pj_service

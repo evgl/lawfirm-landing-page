@@ -163,62 +163,36 @@ get_header();
             </div>
             
             <div class="cases-slider">
+                <?php
+                $reviews = new WP_Query(array(
+                    'post_type'      => 'pj_case_review',
+                    'posts_per_page' => -1,
+                    'post_status'    => 'publish',
+                    'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
+                ));
+                $default_avatar = get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png';
+                while ($reviews->have_posts()) : $reviews->the_post();
+                    $review_tag    = get_post_meta(get_the_ID(), '_pj_review_tag', true);
+                    $review_lawyer = get_post_meta(get_the_ID(), '_pj_review_lawyer', true);
+                    $review_avatar = get_post_meta(get_the_ID(), '_pj_review_avatar', true);
+                    if (empty($review_avatar)) $review_avatar = $default_avatar;
+                    $review_image  = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                ?>
                 <div class="case-item">
                     <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-1.png'); ?>" alt="" />
+                        <img src="<?php echo esc_url($review_image); ?>" alt="" />
                     </div>
                     <div class="case-info">
-                        <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
-                        <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
-                        <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
+                        <?php if ($review_tag) : ?><span class="case-tag"><?php echo esc_html($review_tag); ?></span><?php endif; ?>
+                        <h3 class="case-item-title"><?php the_title(); ?></h3>
+                        <p class="case-excerpt"><?php echo esc_html(get_the_excerpt()); ?></p>
                         <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
+                            <img src="<?php echo esc_url($review_avatar); ?>" alt="" />
+                            <span><?php echo esc_html($review_lawyer); ?></span>
                         </div>
                     </div>
                 </div>
-                <div class="case-item">
-                    <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-2.png'); ?>" alt="" />
-                    </div>
-                    <div class="case-info">
-                        <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
-                        <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
-                        <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
-                        <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="case-item">
-                    <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-3.png'); ?>" alt="" />
-                    </div>
-                    <div class="case-info">
-                        <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
-                        <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
-                        <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
-                        <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="case-item">
-                    <div class="case-img-box">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/case-4.png'); ?>" alt="" />
-                    </div>
-                    <div class="case-info">
-                        <span class="case-tag"><?php esc_html_e('이혼소송후기', 'pjlaw'); ?></span>
-                        <h3 class="case-item-title"><?php esc_html_e('이혼 양육권 소송 의뢰인', 'pjlaw'); ?></h3>
-                        <p class="case-excerpt"><?php esc_html_e('덕분에 이혼도 양육권도 형사사건 결과도 모두 원하던 방향 이상으로 최상의 결과를 얻었네요. 진심으로 감사드립니다.', 'pjlaw'); ?></p>
-                        <div class="case-author">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/lawyer-avatar.png'); ?>" alt="" />
-                            <span><?php esc_html_e('이시완 변호사', 'pjlaw'); ?></span>
-                        </div>
-                    </div>
-                </div>
+                <?php endwhile; wp_reset_postdata(); ?>
             </div>
         </div>
     </section>
