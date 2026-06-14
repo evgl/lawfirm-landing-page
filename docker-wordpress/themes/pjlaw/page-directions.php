@@ -114,6 +114,7 @@ $theme_uri = get_template_directory_uri();
                             rel="noopener noreferrer"
                             class="directions-map-info__btn"
                             id="btn-street-view"
+                            style="display:none;"
                         >
                             <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-street.svg'); ?>" alt="" aria-hidden="true" class="directions-map-info__btn-icon directions-map-info__btn-icon--street" />
                             <span>거리뷰로 보기</span>
