@@ -586,7 +586,7 @@ $theme_uri = get_template_directory_uri();
                 
                 <div class="services-hero__breadcrumb">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="services-hero__breadcrumb-icon">
-                        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="20" height="18" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 6.5L7 1.5L13 6.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M2 5.5V13.5H12V5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
