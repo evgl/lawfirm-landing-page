@@ -6,9 +6,6 @@
     'use strict';
 
     $(document).ready(function() {
-        // Mobile menu toggle
-        initMobileMenu();
-        
         // Header scroll behavior
         initHeaderScroll();
         
@@ -50,25 +47,6 @@
         });
     }
 
-
-    /**
-     * Initialize mobile menu
-     */
-    function initMobileMenu() {
-        var $toggle = $('#navbar-toggle');
-        var $menu = $('.navbar-menu');
-
-        $toggle.on('click', function() {
-            $menu.toggleClass('active');
-            $toggle.toggleClass('active');
-        });
-
-        // Close menu when a link is clicked
-        $menu.find('a').on('click', function() {
-            $menu.removeClass('active');
-            $toggle.removeClass('active');
-        });
-    }
 
     /**
      * Initialize smooth scroll for anchor links

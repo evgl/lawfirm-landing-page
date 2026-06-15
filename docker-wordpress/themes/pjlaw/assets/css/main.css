@@ -653,14 +653,6 @@
     color: var(--primary-dark);
 }
 
-.navbar-toggle {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
 /* ===========================
    FOOTER
    =========================== */

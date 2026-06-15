@@ -40,9 +40,6 @@ if (!defined('ABSPATH')) {
                 
                 <div class="navbar-actions">
                     <a href="<?php echo esc_url(home_url('/consultation/')); ?>" class="btn-reserve"><?php esc_html_e('상담예약', 'pjlaw'); ?></a>
-                    <button class="navbar-toggle" id="navbar-toggle" aria-label="<?php esc_attr_e('Toggle Menu', 'pjlaw'); ?>">
-                        <i class="fas fa-bars"></i>
-                    </button>
                 </div>
             </nav>
         </div>
