@@ -1028,4 +1028,12 @@ function pjlaw_service_tax_filters() {
     }
 }
 add_action('restrict_manage_posts', 'pjlaw_service_tax_filters');
+
+/**
+ * Remove the built-in Posts menu from WordPress admin
+ */
+function pjlaw_remove_posts_menu() {
+    remove_menu_page('edit.php');
+}
+add_action('admin_menu', 'pjlaw_remove_posts_menu');
 ?>
