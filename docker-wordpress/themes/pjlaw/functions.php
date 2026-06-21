@@ -146,7 +146,7 @@ function pjlaw_register_post_types() {
         'public'        => true,
         'show_in_rest'  => true,
         'has_archive'   => false,
-        'menu_icon'     => 'dashicons-gavel',
+        'menu_icon'     => 'dashicons-edit-page',
         'menu_position' => 8,
         'supports'      => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'page-attributes'),
         'rewrite'       => array('slug' => 'cases/post', 'with_front' => false),
