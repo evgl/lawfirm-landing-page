@@ -7145,6 +7145,16 @@
 
 .wizard-options-area {
     padding: 60px 0 100px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    touch-action: pan-x;
+}
+
+.wizard-options-area::-webkit-scrollbar {
+    display: none;
 }
 
 .wizard-options-container {
@@ -7154,12 +7164,16 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
+    width: max-content;
+    min-width: 100%;
+    gap: 32px;
 }
 
 .wizard-options {
     display: flex;
     gap: 16px;
     align-items: center;
+    flex: 0 0 auto;
 }
 
 .wizard-option-btn {
@@ -7192,6 +7206,7 @@
 .wizard-actions {
     display: flex;
     align-items: center;
+    flex: 0 0 auto;
 }
 
 .wizard-next-btn {
@@ -7241,17 +7256,16 @@
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
     .wizard-question { font-size: 42px; }
-    .wizard-options-container { flex-direction: column; align-items: flex-start; gap: 40px; }
-    .wizard-options { flex-wrap: wrap; }
+    .wizard-options-container { align-items: flex-start; gap: 24px; }
 }
 
 @media screen and (max-width: 768px) {
     .wizard-top-section { padding: 180px 0 100px; }
     .wizard-question { font-size: 32px; }
     .wizard-step { font-size: 24px; margin-bottom: 15px; }
-    .wizard-option-btn { font-size: 18px; padding: 18px 30px; width: 100%; text-align: center; }
-    .wizard-options { width: 100%; flex-direction: column; }
-    .wizard-actions { width: 100%; justify-content: flex-end; }
+    .wizard-option-btn { font-size: 18px; padding: 18px 30px; text-align: center; }
+    .wizard-options { gap: 12px; }
+    .wizard-actions { justify-content: flex-end; }
 }
 
 #wizard-completed-steps {

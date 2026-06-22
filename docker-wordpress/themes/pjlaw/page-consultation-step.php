@@ -34,7 +34,7 @@ get_header();
             <div class="wizard-progress-active" id="wizard-progress" style="width: 15%;"></div>
         </div>
         
-        <div class="wizard-options-area">
+        <div class="wizard-options-area" id="wizard-options-area">
             <div class="container">
                 <div class="wizard-options-container">
                     <div class="wizard-options" id="wizard-options">
@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const category = '<?php echo esc_js($category); ?>';
     const activeStepContainer = document.getElementById('wizard-active-step');
     const completedStepsContainer = document.getElementById('wizard-completed-steps');
+    const optionsArea = document.getElementById('wizard-options-area');
     const optionsContainer = document.getElementById('wizard-options');
     const nextBtn = document.getElementById('wizard-next');
     const progressBar = document.getElementById('wizard-progress');
@@ -189,6 +190,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial Render
     renderStep();
+
+    if (optionsArea) {
+        optionsArea.addEventListener('wheel', function(event) {
+            const canScrollHorizontally = optionsArea.scrollWidth > optionsArea.clientWidth;
+            if (!canScrollHorizontally) {
+                return;
+            }
+
+            const horizontalDelta = Math.abs(event.deltaX);
+            const verticalDelta = Math.abs(event.deltaY);
+
+            if (horizontalDelta > verticalDelta || verticalDelta === 0) {
+                return;
+            }
+
+            event.preventDefault();
+            optionsArea.scrollLeft += event.deltaY;
+        }, { passive: false });
+    }
 });
 
 // Handle bfcache restore: if page is restored from back-forward cache, redirect to consultation home
