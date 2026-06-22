@@ -248,7 +248,6 @@ $theme_uri = get_template_directory_uri();
                     <div class="blog-post-nav__separator"></div>
                     <div class="blog-post-nav__current">
                         <span class="blog-post-nav__title"><?php echo esc_html($service_name); ?></span>
-                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/blog/icon-chevron-down-small.svg'); ?>" alt="" />
                     </div>
                     <div class="blog-post-nav__separator"></div>
                 </div>
@@ -592,11 +591,6 @@ $theme_uri = get_template_directory_uri();
                         </svg>
                     </a>
                     <span class="services-hero__breadcrumb-current">업무분야</span>
-                    <span class="services-hero__breadcrumb-dropdown">
-                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
                 </div>
             </div>
         </section>

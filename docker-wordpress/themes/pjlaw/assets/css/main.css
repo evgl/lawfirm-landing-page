@@ -2630,11 +2630,6 @@
     margin-right: 42px;
 }
 
-.services-hero__breadcrumb-arrow {
-    display: flex;
-    align-items: center;
-}
-
 .services-hero__breadcrumb-current {
     font-family: 'Pretendard', sans-serif;
     font-weight: 700;
@@ -2643,11 +2638,6 @@
     text-align: center;
     letter-spacing: -0.54px;
     color: #fff;
-}
-
-.services-hero__breadcrumb-dropdown {
-    display: flex;
-    align-items: center;
 }
 
 /* --- Services Footer --- */
@@ -4268,12 +4258,6 @@
     font-weight: 600;
     font-size: 18px;
     color: #181a1e;
-}
-
-.blog-post-nav__current img {
-    max-width: 12px;
-    height: auto;
-    flex-shrink: 0;
 }
 
 .blog-post-nav__title {
@@ -7365,7 +7349,7 @@
 
 .consult-form-nav__divider {
     width: 1px;
-    height: 80px;
+    height: calc(100% - 2px);
     background: #e3e5e9;
 }
 
@@ -7383,11 +7367,6 @@
     color: #181a1e;
     letter-spacing: -0.54px;
     white-space: nowrap;
-}
-
-.consult-form-nav__chevron {
-    width: 10px;
-    height: 6px;
 }
 
 .consult-form-nav__close {
@@ -8031,4 +8010,3 @@
 .consult-form-submit:hover {
     background: #0730a8;
 }
-

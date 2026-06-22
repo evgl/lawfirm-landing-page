@@ -55,7 +55,6 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
             <div class="consult-form-nav__divider"></div>
             <div class="consult-form-nav__breadcrumb">
                 <span class="consult-form-nav__breadcrumb-text"><?php echo esc_html($category_label); ?> 상담 신청</span>
-                <img src="<?php echo esc_url($icons_url . 'icon-arrow-down.svg'); ?>" alt="" class="consult-form-nav__chevron" aria-hidden="true">
             </div>
             <div class="consult-form-nav__divider"></div>
         </div>
