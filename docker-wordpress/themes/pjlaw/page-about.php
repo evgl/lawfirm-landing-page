@@ -25,14 +25,14 @@ $about_sections = array(
         'modifier' => 'about-value--dispute',
         'eyebrow'  => '혼란과 분쟁을',
         'title'    => '평정(平定)',
-        'description' => '치밀한 논리와 뛰어난 실력으로 복잡한 사건의 실타래를\n끊어내고, 분쟁을 근본적으로 해소해드립니다.',
+        'description' => '치밀한 논리와 뛰어난 실력으로 복잡한 사건의 실타래를 끊어내고, 분쟁을 근본적으로 해소해드립니다.',
         'image'    => $theme_uri . '/assets/images/about/value-02-courtroom.jpg',
     ),
     array(
         'modifier' => 'about-value--peace',
         'eyebrow'  => '일상과 마음속',
         'title'    => '평정(平靜)',
-        'description' => '법적 분쟁이라는 거친 폭풍 속에서 의뢰인님이 일상을 되찾으실 수 있도록\n든든한 방패가 되어드립니다.',
+        'description' => '법적 분쟁이라는 거친 폭풍 속에서 의뢰인님이 일상을 되찾으실 수 있도록 든든한 방패가 되어드립니다.',
         'image'    => $theme_uri . '/assets/images/about/value-03-family.png',
     ),
 );

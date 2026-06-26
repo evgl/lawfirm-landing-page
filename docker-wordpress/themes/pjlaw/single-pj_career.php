@@ -121,9 +121,7 @@ $next_post = get_next_post();
                     </div>
 
                     <!-- Apply Button -->
-                    <div class="careers-detail-apply-wrap">
-                        <button class="careers-detail-apply-btn">지원하기</button>
-                    </div>
+                
 
                     <!-- Prev / Next Navigation -->
                     <div class="careers-detail-prevnext">

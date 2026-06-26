@@ -55,8 +55,8 @@ foreach ((array) $service_terms as $st) {
                     <span class="blog-hero__eyebrow-line"></span>
                 </div>
                 <h1 class="blog-hero__title">
-                    어려운 법률을 쉽게 풀이하고 꼭 알아야 할<br />
-                    최신 법령과 판례 정보를 전달합니다
+                    어려운 법률을 쉽게 풀이하고<br />
+                    판례 정보를 전달합니다.
                 </h1>
             </div>
 
