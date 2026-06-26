@@ -18,7 +18,7 @@ $about_sections = array(
         'modifier' => 'about-value--justice',
         'eyebrow'  => '권익과 가치의',
         'title'    => '평정(評定)',
-        'description' => '사건의 본질을 정확히 꿰뚫어 보고 의뢰인님의 억울함이\n조금도 남지 않도록 끝까지 함께합니다.',
+        'description' => '사건의 본질을 정확히 꿰뚫어 보고 의뢰인님의 억울함이 조금도 남지 않도록 끝까지 함께합니다.',
         'image'    => $theme_uri . '/assets/images/about/value-01-hands.png',
     ),
     array(
