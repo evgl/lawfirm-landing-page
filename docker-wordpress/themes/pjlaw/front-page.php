@@ -122,7 +122,7 @@ get_header();
                     <div class="stat-icon-wrapper">
                         <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/stat-icon-1.svg'); ?>" alt="" />
                     </div>
-                    <div class="stat-value">30+</div>
+                    <div class="stat-value">NaN+</div>
                     <div class="stat-label-group">
                         <div class="stat-main-label"><?php esc_html_e('법률사무소평정 구성원', 'pjlaw'); ?></div>
                         <div class="stat-sub-label"><?php esc_html_e('변호사 · 고문 · 위원', 'pjlaw'); ?></div>
@@ -133,7 +133,7 @@ get_header();
                     <div class="stat-icon-wrapper">
                         <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/stat-icon-2.svg'); ?>" alt="" />
                     </div>
-                    <div class="stat-value">2,850+</div>
+                    <div class="stat-value">NaN+</div>
                     <div class="stat-label-group">
                         <div class="stat-main-label"><?php esc_html_e('누적 업무사례', 'pjlaw'); ?></div>
                         <div class="stat-sub-label"><?php esc_html_e('2024년 기준', 'pjlaw'); ?></div>
@@ -144,7 +144,7 @@ get_header();
                     <div class="stat-icon-wrapper">
                         <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/stat-icon-3.svg'); ?>" alt="" />
                     </div>
-                    <div class="stat-value">14,060+</div>
+                    <div class="stat-value">NaN+</div>
                     <div class="stat-label-group">
                         <div class="stat-main-label"><?php esc_html_e('누적 상담건수', 'pjlaw'); ?></div>
                         <div class="stat-sub-label"><?php esc_html_e('2024년 기준', 'pjlaw'); ?></div>

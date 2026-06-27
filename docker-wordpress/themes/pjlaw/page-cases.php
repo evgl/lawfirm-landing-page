@@ -34,8 +34,8 @@ $case_fallback_image = $theme_uri . '/assets/images/cases/case-base.jpg';
                     <span class="cases-hero__eyebrow-line"></span>
                 </div>
                 <h1 class="cases-hero__title">
-                    개인정보보호차 판결문은 일부만 업로드 되며,<br />
-                    일부 내용이 각색될 수 있습니다
+                    법률사무소 평정과 함께한다면<br />
+                    마음 편히 일상으로 돌아가실 수 있습니다.
                 </h1>
             </div>
 
