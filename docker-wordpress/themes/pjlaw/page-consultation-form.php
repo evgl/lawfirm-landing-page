@@ -235,7 +235,7 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
                         <?php
                         $am_slots = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30'];
                         foreach ($am_slots as $t) {
-                            echo '<button class="consult-form-time-btn" data-time="' . esc_attr($t) . '">' . esc_html($t) . '</button>';
+                            echo '<button class="consult-form-time-btn" data-time="' . esc_attr($t) . ' AM">' . esc_html($t) . '</button>';
                         }
                         ?>
                     </div>
@@ -246,7 +246,7 @@ $nonce     = wp_create_nonce('pjlaw_consultation_nonce');
                         <?php
                         $pm_slots = ['12:00','12:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30'];
                         foreach ($pm_slots as $t) {
-                            echo '<button class="consult-form-time-btn" data-time="' . esc_attr($t) . '">' . esc_html($t) . '</button>';
+                            echo '<button class="consult-form-time-btn" data-time="' . esc_attr($t) . ' PM">' . esc_html($t) . '</button>';
                         }
                         ?>
                     </div>
@@ -440,7 +440,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         el.classList.remove('consult-form-date-cell__num--selected');
                     });
                     numEl.classList.add('consult-form-date-cell__num--selected');
-                    selectedDate = date.toISOString().split('T')[0];
+                    var year = date.getFullYear();
+                    var month = String(date.getMonth() + 1).padStart(2, '0');
+                    var day = String(date.getDate()).padStart(2, '0');
+                    selectedDate = year + '-' + month + '-' + day;
                 });
             })(d, cell, numDiv);
         }
