@@ -72,9 +72,8 @@ $theme_uri = get_template_directory_uri();
                     </h2>
                     <div class="why-feature__line"></div>
                     <p class="why-feature__desc">
-                        평정은 상담부터 사건의 종결까지 변호사가<br />
-                        직접 담당하며, 사무장이나 사무 직원을 통해<br />
-                        법률 업무를 처리하지 않습니다.
+                        평정은 상담부터 사건의 종결까지 변호사가 직접 담당하며,<br />
+                        사무장이나 사무 직원을 통해 법률 업무를 처리하지 않습니다.
                     </p>
                 </div>
                 <div class="why-feature__image">

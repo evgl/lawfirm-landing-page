@@ -17,7 +17,7 @@ get_header();
             <div class="container hero-container">
                 <div class="hero-content">
                     <h1 class="hero-title">JOURNEY OF<br />TRUST PYEONGJEONG</h1>
-                    <p class="hero-subtitle"><?php esc_html_e('당신을 위해 싸워줄 신뢰할 수 있는 변호사', 'pjlaw'); ?><br /><?php esc_html_e('언제나 평정이 함께 합니다', 'pjlaw'); ?></p>
+                    <p class="hero-subtitle"><?php esc_html_e('당신을 위해 싸워줄 신뢰할 수 있는 변호사', 'pjlaw'); ?><br /><?php esc_html_e('언제나 평정이 함께 합니다.', 'pjlaw'); ?></p>
                 </div>
             </div>
         </div>
@@ -200,7 +200,7 @@ get_header();
     <!-- Bottom CTA Section -->
     <section class="bottom-cta section">
         <div class="container">
-            <h2 class="cta-main-title"><?php esc_html_e('결과로 답하는 평정의 전문성', 'pjlaw'); ?><br /><?php esc_html_e('이제 당신의 사건에서 증명하겠습니다', 'pjlaw'); ?></h2>
+            <h2 class="cta-main-title"><?php esc_html_e('결과로 답하는 평정의 전문성', 'pjlaw'); ?><br /><?php esc_html_e('이제 당신의 사건에서 증명하겠습니다.', 'pjlaw'); ?></h2>
             
             <div class="cta-banner" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/cta-bg.png'); ?>');">
                 <div class="cta-overlay"></div>
@@ -218,7 +218,7 @@ get_header();
 
                     <div class="cta-banner-box">
                         <h3><?php esc_html_e('평정 오시는길', 'pjlaw'); ?></h3>
-                        <p><?php esc_html_e('법무법인평정 찾아오시는길을 안내해 드립니다.', 'pjlaw'); ?></p>
+                        <p><?php esc_html_e('법률사무소평정 찾아오시는길을 안내해 드립니다.', 'pjlaw'); ?></p>
                         <a href="<?php echo esc_url(home_url('/directions/')); ?>" class="btn-banner">
                             <span><?php esc_html_e('자세히보기', 'pjlaw'); ?></span>
                             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/btn-arrow.svg'); ?>" alt="" />

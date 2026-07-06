@@ -18,21 +18,21 @@ $about_sections = array(
         'modifier' => 'about-value--justice',
         'eyebrow'  => '권익과 가치의',
         'title'    => '평정(評定)',
-        'description' => '사건의 본질을 정확히 꿰뚫어 보고 의뢰인님의 억울함이 조금도 남지 않도록 끝까지 함께합니다.',
+        'description' => "사건의 본질을 정확히 꿰뚫어 보고의뢰인님의 억울함이\n조금도 남지 않도록 끝까지 함께합니다.",
         'image'    => $theme_uri . '/assets/images/about/value-01-hands.png',
     ),
     array(
         'modifier' => 'about-value--dispute',
         'eyebrow'  => '혼란과 분쟁을',
         'title'    => '평정(平定)',
-        'description' => '치밀한 논리와 뛰어난 실력으로 복잡한 사건의 실타래를 끊어내고, 분쟁을 근본적으로 해소해드립니다.',
+        'description' => "치밀한 논리와 뛰어난 실력으로 복잡한 사건의 실타래를 끊어내고,\n분쟁을 근본적으로 해소해드립니다.",
         'image'    => $theme_uri . '/assets/images/about/value-02-courtroom.jpg',
     ),
     array(
         'modifier' => 'about-value--peace',
         'eyebrow'  => '일상과 마음속',
         'title'    => '평정(平靜)',
-        'description' => '법적 분쟁이라는 거친 폭풍 속에서 의뢰인님이 일상을 되찾으실 수 있도록 든든한 방패가 되어드립니다.',
+        'description' => "법적 분쟁이라는 거친 폭풍 속에서 의뢰인님이\n일상을 되찾으실 수 있도록 든든한 방패가 되어드립니다.",
         'image'    => $theme_uri . '/assets/images/about/value-03-family.png',
     ),
 );
@@ -49,7 +49,7 @@ $about_sections = array(
                 </div>
                 <h1 class="about-hero__title">
                     평정은 의뢰인과<br />
-                    처음부터 끝까지 함께합니다
+                    처음부터 끝까지 함께합니다.
                 </h1>
             </div>
 
