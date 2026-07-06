@@ -90,7 +90,9 @@ $theme_uri = get_template_directory_uri();
                     </h2>
                     <div class="why-feature__line"></div>
                     <p class="why-feature__desc">
-                        모든 사건은 의뢰인님의 인생과 맞닿아 있습니다. 평정은 과다한 사건의 수임을 지양하고 의뢰인님 한 사람, 한 사람의 사건을 끝까지 책임지는 길을 고수합니다.
+                        모든 사건은 의뢰인님의 인생과 맞닿아 있습니다.<br /> 
+                        평정은 과다한 사건의 수임을 지양하고<br />
+                        의뢰인님 한 사람, 한 사람의 사건을 끝까지 책임지는 길을 고수합니다.
                     </p>
                 </div>
                 <div class="why-feature__image">
@@ -107,9 +109,8 @@ $theme_uri = get_template_directory_uri();
                     </h2>
                     <div class="why-feature__line"></div>
                     <p class="why-feature__desc">
-                        평정은 소송에 착수한 이후 집중적으로 사건<br />
-                        해결에 매진하여 모든 사건을 신속하고<br />
-                        정확하게 마무리합니다.
+                        평정은 소송에 착수한 이후 집중적으로 사건 해결에 매진하여<br />
+                        모든 사건을 신속하고 정확하게 마무리합니다.
                     </p>
                 </div>
                 <div class="why-feature__image">
@@ -126,11 +127,10 @@ $theme_uri = get_template_directory_uri();
                     </h2>
                     <div class="why-feature__line"></div>
                     <p class="why-feature__desc">
-                        의뢰인님과 원활한 의사소통은 변호사의 기본<br />
-                        소임입니다. 평정은 의뢰인님의 불안함을 해소하기<br />
-                        위해 변호사가 포함된 개별 카카오톡 채팅방을<br />
-                        마련하여 소송 진행에 대한 정보를 전달하고,<br />
-                        질문에 답해드리고 있습니다.
+                        의뢰인님과 원활한 의사소통은 변호사의 기본 소임입니다.<br />
+                        평정은 의뢰인님의 불안함을 해소하기 위해 변호사가 포함된 개별 카카오톡 채팅방을 마련하여<br />
+                        소송 진행에 대한 정보를 전달하고, 질문에 답해드리고 있습니다.
+                        
                     </p>
                 </div>
                 <div class="why-feature__image">

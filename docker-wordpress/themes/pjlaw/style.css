@@ -311,7 +311,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex: 0 0 396px;
+    flex: 0 0 580px;
     gap: 32px;
 }
 
@@ -345,7 +345,7 @@ a:hover {
     position: relative;
     border-radius: 20px;
     overflow: hidden;
-    width: min(792px, calc(100% - 442px));
+    width: min(792px, calc(100% - 626px));
     height: 500px;
     mask-image: url('assets/images/why-pjlaw/feature-mask.svg');
     mask-size: contain;
