@@ -79,7 +79,7 @@ $team_query = new WP_Query(array(
                     $member_tags  = get_post_meta($member_id, '_pj_team_tags', true);
                     if (!is_array($member_specs)) $member_specs = array();
                     if (!is_array($member_tags)) $member_tags = array();
-                    $member_photo = get_the_post_thumbnail_url($member_id, 'medium');
+                    $member_photo = get_the_post_thumbnail_url($member_id, 'full');
                     if (!$member_photo) {
                         $member_photo = $theme_uri . '/assets/images/team/member-1.png';
                     }
