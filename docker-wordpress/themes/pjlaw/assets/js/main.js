@@ -9,6 +9,9 @@
         // Header scroll behavior
         initHeaderScroll();
         
+        // Mobile navigation toggle
+        initMobileNav();
+
         // Smooth scroll for anchor links
         initSmoothScroll();
         
@@ -21,6 +24,39 @@
         // Blog category filter (client-side)
         initBlogFilter();
     });
+
+    /**
+     * Initialize mobile navigation toggle
+     */
+    function initMobileNav() {
+        var $toggler = $('.navbar-toggler');
+        var $menu    = $('.navbar-menu');
+
+        if (!$toggler.length) return;
+
+        $toggler.on('click', function() {
+            var isOpen = $menu.hasClass('active');
+            $menu.toggleClass('active');
+            $toggler.toggleClass('active');
+            $toggler.attr('aria-expanded', isOpen ? 'false' : 'true');
+        });
+
+        // Close menu when a nav link is clicked
+        $menu.on('click', 'a', function() {
+            $menu.removeClass('active');
+            $toggler.removeClass('active');
+            $toggler.attr('aria-expanded', 'false');
+        });
+
+        // Close on outside click
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.navbar').length) {
+                $menu.removeClass('active');
+                $toggler.removeClass('active');
+                $toggler.attr('aria-expanded', 'false');
+            }
+        });
+    }
 
     /**
      * Initialize header scroll behavior

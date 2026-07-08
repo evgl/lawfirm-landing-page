@@ -26,6 +26,12 @@ if (!defined('ABSPATH')) {
                     </a>
                 </div>
                 
+                <button class="navbar-toggler" aria-label="<?php esc_attr_e('메뉴 열기', 'pjlaw'); ?>" aria-expanded="false">
+                    <span class="toggler-bar"></span>
+                    <span class="toggler-bar"></span>
+                    <span class="toggler-bar"></span>
+                </button>
+
                 <div class="navbar-menu">
                     <?php
                     wp_nav_menu(array(
