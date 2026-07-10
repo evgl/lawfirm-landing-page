@@ -155,9 +155,6 @@ if ($is_detail && $service_post) {
 
         $closing_title = get_post_meta($service_post_id, '_pj_service_closing_title', true) ?: '법률사무소 평정이 함께합니다';
         $closing_desc = get_post_meta($service_post_id, '_pj_service_closing_content', true);
-        if (empty($closing_desc)) {
-            $closing_desc = "명예훼손은 누구나 피해자가 될 수 있는 동시에, 한순간의 실수로 의도치 않게 가해자로 지목될 수도 있는 사건입니다.\n특히 온라인상의 발언은 찰나의 순간에 전파되어 누군가에게는 회복하기 어려운 인격적 상처를 남기고, 다른 누군가에게는 과도한 형사 처벌과 경제적 손실이라는 위기를 불러오기도 합니다. 사건의 본질이 정당한 비판이었는지 아니면 악의적인 비방이었는지를 가려내는 일은 단순히 사실관계를 확인하는 수준을 넘어, 고도의 법리적 해석과 치밀한 논리 싸움이 동반되어야 하는 과정입니다.\n법률사무소 평정은 소중한 명예를 침해당한 피해자에게는 실효성 있는 증거 수집과 단호한 대응으로 실추된 평판을 되찾아드리고, 억울하게 고소를 당한 가해 피의자에게는 발언의 공익성과 비방 목적의 부재를 입증하여 부당한 처벌로부터 방어해 드립니다.";
-        }
 
         // Sidebar content overrides
         $rel_law_ids   = get_post_meta($service_post_id, '_pj_service_related_law_info', true);
