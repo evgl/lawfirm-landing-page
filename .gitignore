@@ -27,3 +27,4 @@ sitemap.xml.gz
 .playwright-mcp/*
 *.DS_Store
 docker-wordpress/.DS_Store
+docker-wordpress/plugins/*
