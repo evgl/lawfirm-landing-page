@@ -1,9 +1,10 @@
 <?php
 /**
- * Consultation (상담신청) notification settings + Resend mailer.
+ * Consultation (상담신청) notification settings + wp_mail() mailer.
  *
  * Adds an "알림 설정" submenu under the 상담신청 menu where staff configure the
- * recipient/from address, and sends an email via Resend on every new booking.
+ * recipient address, and sends an email via wp_mail() (routed through
+ * WP Mail SMTP / Gmail Workspace) on every new booking.
  *
  * @package pjlaw
  */
@@ -37,8 +38,6 @@ function pjlaw_consultation_settings_init() {
     ));
 }
 
-/** Fixed sender address (must be on the Resend-verified domain). */
-define('PJLAW_CONSULTATION_FROM', 'consultations-booking@pjlaw.co.kr');
 add_action('admin_init', 'pjlaw_consultation_settings_init');
 
 function pjlaw_consultation_settings_render() {
@@ -48,7 +47,7 @@ function pjlaw_consultation_settings_render() {
     ?>
     <div class="wrap">
         <h1>상담신청 알림 설정</h1>
-        <p class="description">새 상담신청이 접수되면 아래 주소로 Resend를 통해 이메일이 발송됩니다.</p>
+        <p class="description">새 상담신청이 접수되면 아래 주소로 이메일이 발송됩니다. (WP Mail SMTP 플러그인을 통해 Gmail Workspace로 발송)</p>
         <form method="post" action="options.php">
             <?php settings_fields('pjlaw_consultation_settings'); ?>
             <table class="form-table" role="presentation">
@@ -75,27 +74,11 @@ function pjlaw_consultation_settings_render() {
     <?php
 }
 
-/* ---------- Resend mailer ---------- */
+/* ---------- wp_mail() mailer (routed via WP Mail SMTP / Gmail Workspace) ---------- */
 
 /**
- * Read the Resend API key from the (git-ignored) theme .env/API-KEYS file.
- *
- * @return string Trimmed key, or '' if unavailable.
- */
-function pjlaw_get_resend_api_key() {
-    $path = get_template_directory() . '/.env/API-KEYS';
-    if (!is_readable($path)) {
-        return '';
-    }
-    $parsed = parse_ini_file($path);
-    if (!is_array($parsed) || empty($parsed['resend_api_key'])) {
-        return '';
-    }
-    return trim($parsed['resend_api_key']);
-}
-
-/**
- * Send a staff notification email for a consultation booking via Resend.
+ * Send a staff notification email for a consultation booking via wp_mail().
+ * WP Mail SMTP plugin routes this through Gmail Workspace SMTP automatically.
  * Failures are logged but never thrown, so a mail problem cannot fail the booking.
  *
  * @param int $post_id Consultation post ID.
@@ -105,14 +88,7 @@ function pjlaw_send_consultation_notification($post_id) {
         return;
     }
 
-    $api_key = pjlaw_get_resend_api_key();
-    if ($api_key === '') {
-        error_log('[pjlaw] Consultation email skipped: Resend API key not found in .env/API-KEYS');
-        return;
-    }
-
-    $to   = get_option('pjlaw_consultation_notify_to', get_option('admin_email'));
-    $from = PJLAW_CONSULTATION_FROM;
+    $to = get_option('pjlaw_consultation_notify_to', get_option('admin_email'));
     if (!is_email($to)) {
         error_log('[pjlaw] Consultation email skipped: invalid recipient address');
         return;
@@ -149,26 +125,11 @@ function pjlaw_send_consultation_notification($post_id) {
         . '<p style="margin-top:16px"><a href="' . esc_url($edit_link) . '">관리자에서 상담신청 보기 →</a></p>'
         . '</div>';
 
-    $response = wp_remote_post('https://api.resend.com/emails', array(
-        'timeout' => 15,
-        'headers' => array(
-            'Authorization' => 'Bearer ' . $api_key,
-            'Content-Type'  => 'application/json',
-        ),
-        'body' => wp_json_encode(array(
-            'from'    => $from,
-            'to'      => array($to),
-            'subject' => '[상담신청] ' . ($name !== '' ? $name : '신규 접수'),
-            'html'    => $html,
-        )),
-    ));
+    $subject = '[상담신청] ' . ($name !== '' ? $name : '신규 접수');
+    $headers = array('Content-Type: text/html; charset=UTF-8');
 
-    if (is_wp_error($response)) {
-        error_log('[pjlaw] Resend request failed: ' . $response->get_error_message());
-        return;
-    }
-    $code = wp_remote_retrieve_response_code($response);
-    if ($code < 200 || $code >= 300) {
-        error_log('[pjlaw] Resend returned HTTP ' . $code . ': ' . wp_remote_retrieve_body($response));
+    $result = wp_mail($to, $subject, $html, $headers);
+    if (!$result) {
+        error_log('[pjlaw] wp_mail failed to send consultation notification to ' . $to);
     }
 }
