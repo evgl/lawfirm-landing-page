@@ -300,6 +300,28 @@ function pjlaw_security_headers() {
 add_action('send_headers', 'pjlaw_security_headers');
 
 /**
+ * Helper to prepare custom routes by clearing 404 status, setting 200 OK, and custom title.
+ */
+function pjlaw_prepare_custom_route($template_file, $title = '') {
+    $located = locate_template($template_file);
+    if ($located) {
+        global $wp_query;
+        if (isset($wp_query)) {
+            $wp_query->is_404 = false;
+        }
+        status_header(200);
+        if (!empty($title)) {
+            add_filter('document_title_parts', function($parts) use ($title) {
+                $parts['title'] = $title;
+                return $parts;
+            }, 99);
+        }
+        return $located;
+    }
+    return null;
+}
+
+/**
  * Force the about page template for /about/ so the design renders even if the
  * WordPress page object or permalink rules are not configured yet.
  */
@@ -308,121 +330,121 @@ function pjlaw_template_include($template) {
     $request_path = trim((string) $request_path, '/');
 
     if ('consultation' === $request_path) {
-        $consultation_template = locate_template('page-consultation.php');
-        if ($consultation_template) {
-            return $consultation_template;
+        $res = pjlaw_prepare_custom_route('page-consultation.php', __('상담예약', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if ('about' === $request_path) {
-        $about_template = locate_template('page-about.php');
-        if ($about_template) {
-            return $about_template;
+        $res = pjlaw_prepare_custom_route('page-about.php', __('평정소개', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if ('why-pjlaw' === $request_path) {
-        $why_pjlaw_template = locate_template('page-why-pjlaw.php');
-        if ($why_pjlaw_template) {
-            return $why_pjlaw_template;
+        $res = pjlaw_prepare_custom_route('page-why-pjlaw.php', __('왜 평정인가', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if ('team' === $request_path) {
-        $team_template = locate_template('page-team.php');
-        if ($team_template) {
-            return $team_template;
+        $res = pjlaw_prepare_custom_route('page-team.php', __('구성원소개', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if (strpos($request_path, 'team/member/') === 0) {
-        $single_team_template = locate_template('single-pj_team.php');
-        if ($single_team_template) {
-            return $single_team_template;
+        $res = pjlaw_prepare_custom_route('single-pj_team.php');
+        if ($res) {
+            return $res;
         }
     }
 
     if ('directions' === $request_path) {
-        $directions_template = locate_template('page-directions.php');
-        if ($directions_template) {
-            return $directions_template;
+        $res = pjlaw_prepare_custom_route('page-directions.php', __('오시는길', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if ('services' === $request_path) {
-        $services_template = locate_template('page-services.php');
-        if ($services_template) {
-            return $services_template;
+        $res = pjlaw_prepare_custom_route('page-services.php', __('업무분야', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if ('blog' === $request_path) {
-        $blog_template = locate_template('page-blog.php');
-        if ($blog_template) {
-            return $blog_template;
+        $res = pjlaw_prepare_custom_route('page-blog.php', __('블로그', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if (strpos($request_path, 'blog/post/') === 0) {
-        $single_template = locate_template('single-pj_blog_post.php');
-        if ($single_template) {
-            return $single_template;
+        $res = pjlaw_prepare_custom_route('single-pj_blog_post.php');
+        if ($res) {
+            return $res;
         }
     }
 
     if (strpos($request_path, 'blog/') === 0 && $request_path !== 'blog') {
-        $blog_post_template = locate_template('page-blog-post.php');
-        if ($blog_post_template) {
-            return $blog_post_template;
+        $res = pjlaw_prepare_custom_route('page-blog-post.php');
+        if ($res) {
+            return $res;
         }
     }
 
     if ('cases' === $request_path) {
-        $cases_template = locate_template('page-cases.php');
-        if ($cases_template) {
-            return $cases_template;
+        $res = pjlaw_prepare_custom_route('page-cases.php', __('업무사례', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if (strpos($request_path, 'cases/post/') === 0) {
-        $single_case_template = locate_template('single-legal_case.php');
-        if ($single_case_template) {
-            return $single_case_template;
+        $res = pjlaw_prepare_custom_route('single-legal_case.php');
+        if ($res) {
+            return $res;
         }
     }
 
     if ('careers' === $request_path) {
-        $careers_template = locate_template('page-careers.php');
-        if ($careers_template) {
-            return $careers_template;
+        $res = pjlaw_prepare_custom_route('page-careers.php', __('인재채용', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if ('careers-all' === $request_path) {
-        $careers_all_template = locate_template('page-careers-all.php');
-        if ($careers_all_template) {
-            return $careers_all_template;
+        $res = pjlaw_prepare_custom_route('page-careers-all.php', __('인재채용', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if (strpos($request_path, 'careers/post/') === 0) {
-        $single_career_template = locate_template('single-pj_career.php');
-        if ($single_career_template) {
-            return $single_career_template;
+        $res = pjlaw_prepare_custom_route('single-pj_career.php');
+        if ($res) {
+            return $res;
         }
     }
 
     if ('consultation-step' === $request_path) {
-        $consultation_step_template = locate_template('page-consultation-step.php');
-        if ($consultation_step_template) {
-            return $consultation_step_template;
+        $res = pjlaw_prepare_custom_route('page-consultation-step.php', __('상담예약', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
     if ('consultation-form' === $request_path) {
-        $consultation_form_template = locate_template('page-consultation-form.php');
-        if ($consultation_form_template) {
-            return $consultation_form_template;
+        $res = pjlaw_prepare_custom_route('page-consultation-form.php', __('상담예약', 'pjlaw'));
+        if ($res) {
+            return $res;
         }
     }
 
