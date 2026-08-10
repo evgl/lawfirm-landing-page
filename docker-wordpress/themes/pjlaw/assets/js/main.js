@@ -8,6 +8,9 @@
     $(document).ready(function() {
         // Header scroll behavior
         initHeaderScroll();
+
+        // Transparent Mega Menu Hover
+        initMegaMenuHover();
         
         // Mobile navigation toggle
         initMobileNav();
@@ -24,6 +27,28 @@
         // Blog category filter (client-side)
         initBlogFilter();
     });
+
+    /**
+     * Initialize transparent mega menu hover pointer behavior
+     */
+    function initMegaMenuHover() {
+        var $header = $('.header');
+        var $nav    = $('.navbar-nav');
+        var hoverTimer;
+
+        if (!$nav.length) return;
+
+        $nav.on('mouseenter', 'li, a', function() {
+            clearTimeout(hoverTimer);
+            $header.addClass('mega-menu-open');
+        });
+
+        $('.navbar-menu, .header').on('mouseleave', function() {
+            hoverTimer = setTimeout(function() {
+                $header.removeClass('mega-menu-open');
+            }, 180);
+        });
+    }
 
     /**
      * Initialize mobile navigation toggle
