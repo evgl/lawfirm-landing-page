@@ -448,6 +448,13 @@ function pjlaw_template_include($template) {
         }
     }
 
+    if ('search' === $request_path) {
+        $res = pjlaw_prepare_custom_route('page-search.php', __('통합검색', 'pjlaw'));
+        if ($res) {
+            return $res;
+        }
+    }
+
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
