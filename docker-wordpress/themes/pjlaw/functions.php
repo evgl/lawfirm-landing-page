@@ -329,6 +329,13 @@ function pjlaw_template_include($template) {
     $request_path = isset($_SERVER['REQUEST_URI']) ? wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH) : '';
     $request_path = trim((string) $request_path, '/');
 
+    if ('all_menu' === $request_path || 'all-menu' === $request_path) {
+        $res = pjlaw_prepare_custom_route('page-all-menu.php', __('전체메뉴', 'pjlaw'));
+        if ($res) {
+            return $res;
+        }
+    }
+
     if ('consultation' === $request_path) {
         $res = pjlaw_prepare_custom_route('page-consultation.php', __('상담예약', 'pjlaw'));
         if ($res) {
@@ -458,6 +465,19 @@ function pjlaw_template_include($template) {
     return $template;
 }
 add_filter('template_include', 'pjlaw_template_include');
+
+/**
+ * Add page-all-menu body class for /all_menu/ route.
+ */
+function pjlaw_all_menu_body_class($classes) {
+    $request_path = isset($_SERVER['REQUEST_URI']) ? wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH) : '';
+    $request_path = trim((string) $request_path, '/');
+    if ('all_menu' === $request_path || 'all-menu' === $request_path) {
+        $classes[] = 'page-all-menu';
+    }
+    return $classes;
+}
+add_filter('body_class', 'pjlaw_all_menu_body_class');
 
 /**
  * Render the persistent quick actions menu.

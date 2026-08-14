@@ -9642,3 +9642,278 @@ mark.search-hl { background: transparent; color: #093bcd; font-weight: 700; }
 /* EMPTY STATE */
 .search-empty-state { background: #fff; padding: 80px 0 120px; }
 .search-empty-state__text { font-family: "Pretendard", sans-serif; font-size: 18px; color: #888; text-align: center; }
+
+/* ==========================================================================
+   ALL MENU PAGE (Figma 4146:5958)
+   ========================================================================== */
+body.page-all-menu .header,
+body.page-all-menu .footer,
+body.page-all-menu .about-quick-menu,
+body.page-template-page-all-menu .header,
+body.page-template-page-all-menu .footer,
+body.page-template-page-all-menu .about-quick-menu {
+    display: none !important;
+}
+
+.all-menu-page {
+    background-color: #1a2e69;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 184px 20px 80px;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+.all-menu-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.all-menu__close-btn {
+    position: fixed;
+    top: 31px;
+    right: 48px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    z-index: 9999;
+}
+
+.all-menu__close-btn:hover {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
+
+.all-menu__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.all-menu__columns {
+    display: flex;
+    gap: 36px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 1030px;
+    margin-bottom: 220px;
+}
+
+.all-menu__col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 177px;
+    flex-shrink: 0;
+}
+
+.all-menu__col-header {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.all-menu__col-title {
+    margin: 0;
+    width: 100%;
+}
+
+.all-menu__col-title a {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 30px;
+    letter-spacing: -0.78px;
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    word-break: break-word;
+    transition: color 0.2s ease;
+}
+
+.all-menu__col-title a:hover {
+    color: #fae11f;
+}
+
+.all-menu__col-divider {
+    height: 1px;
+    background-color: #ffffff;
+    opacity: 0.3;
+    width: 100%;
+}
+
+.all-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.all-menu__list li a {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.48px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    word-break: break-word;
+}
+
+.all-menu__list li a:hover {
+    opacity: 0.8;
+    color: #fae11f;
+}
+
+.all-menu__actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.all-menu__cards-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.all-menu__card {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.all-menu__card:hover {
+    transform: translateY(-3px);
+}
+
+.all-menu__card--outline {
+    border: 1px solid #394c86;
+    background: transparent;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.all-menu__card--kakao {
+    background: #fae11f;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.all-menu__card--location {
+    background: #3cb111;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.all-menu__card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.all-menu__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+}
+
+.all-menu__card-label {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    white-space: nowrap;
+}
+
+.all-menu__card--outline .all-menu__card-label,
+.all-menu__card--location .all-menu__card-label {
+    color: #ffffff;
+}
+
+.all-menu__card--kakao .all-menu__card-label {
+    color: #2d2e32;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .all-menu-page {
+        padding-top: 100px;
+    }
+    .all-menu__close-btn {
+        top: 20px;
+        right: 24px;
+    }
+    .all-menu__columns {
+        flex-wrap: wrap;
+        gap: 32px 24px;
+        justify-content: flex-start;
+        max-width: 600px;
+        margin-bottom: 64px;
+    }
+    .all-menu__col {
+        width: calc(33.333% - 16px);
+    }
+}
+
+@media (max-width: 640px) {
+    .all-menu-page {
+        padding: 80px 16px 60px;
+    }
+    .all-menu__close-btn {
+        top: 16px;
+        right: 16px;
+    }
+    .all-menu__columns {
+        gap: 28px 16px;
+        margin-bottom: 48px;
+    }
+    .all-menu__col {
+        width: calc(50% - 8px);
+    }
+    .all-menu__col-title a {
+        font-size: 22px;
+        line-height: 26px;
+    }
+    .all-menu__cards-group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+
