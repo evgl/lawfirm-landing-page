@@ -6,6 +6,9 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+
+$request_path = isset($_SERVER['REQUEST_URI']) ? wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) : '';
+$is_directions_page = is_page('directions') || is_page_template('page-directions.php') || trim((string) $request_path, '/') === 'directions';
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -17,12 +20,12 @@ if (!defined('ABSPATH')) {
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
     
-    <header class="header" role="banner">
+    <header class="header<?php echo $is_directions_page ? ' header--directions' : ''; ?>" role="banner">
         <div class="container-full">
             <nav class="navbar" role="navigation" aria-label="<?php esc_attr_e('Main Navigation', 'pjlaw'); ?>">
                 <div class="navbar-brand">
                     <a href="<?php echo esc_url(home_url('/')); ?>">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/logo-white.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-white" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . ($is_directions_page ? '/assets/images/home/logo-dark.png' : '/assets/images/home/logo-white.png')); ?>" alt="<?php bloginfo('name'); ?>" class="<?php echo $is_directions_page ? 'logo-dark' : 'logo-white'; ?>" />
                     </a>
                 </div>
                 

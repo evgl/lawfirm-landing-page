@@ -544,9 +544,18 @@
     justify-content: space-between;
 }
 
+.navbar-brand {
+}
+
 .logo-white {
     height: 40px;
     width: auto;
+}
+
+.logo-dark {
+    width: 209px;
+    height: 49px;
+    object-fit: contain;
 }
 
 .navbar-nav {
@@ -840,6 +849,55 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+}
+
+/* Directions page header — Figma light variant */
+.header--directions,
+.header--directions.scrolled {
+    background-color: #fff;
+    backdrop-filter: none;
+    box-shadow: 0 4px 20px rgba(24, 26, 30, 0.08);
+}
+
+.header--directions .navbar-brand {
+    width: 222px;
+    flex-shrink: 0;
+}
+
+.header--directions .logo-dark {
+    filter: brightness(0) saturate(100%) invert(10%) sepia(8%) saturate(1095%) hue-rotate(182deg) brightness(94%) contrast(94%);
+}
+
+.header--directions .navbar-nav a {
+    color: #181a1e;
+}
+
+.header--directions .navbar-actions {
+    justify-content: flex-end;
+    width: 210px;
+    flex-shrink: 0;
+}
+
+.header--directions .btn-reserve {
+    width: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-color: #181a1e;
+    color: #181a1e;
+    white-space: nowrap;
+}
+
+.header--directions .btn-reserve:hover {
+    background-color: #181a1e;
+    color: #fff;
+}
+
+.header--directions .btn-hamburger {
+    color: #181a1e;
+}
+
+.header--directions .toggler-bar {
+    background-color: #181a1e;
 }
 
 .scroll-top:hover {
@@ -9958,5 +10016,3 @@ body.page-template-page-all-menu .about-quick-menu {
         justify-content: center;
     }
 }
-
-
