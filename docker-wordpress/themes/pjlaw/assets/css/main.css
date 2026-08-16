@@ -664,23 +664,56 @@
 .navbar-actions {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 32px;
 }
 
 .btn-reserve {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid #fff;
     border-radius: 100px;
-    padding: 8px 24px;
+    padding: 5px 24px;
+    height: 38px;
+    box-sizing: border-box;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 15px;
+    letter-spacing: -0.45px;
     transition: all 0.3s ease;
 }
 
 .btn-reserve:hover {
     background-color: #fff;
     color: var(--primary-dark);
+}
+
+.btn-hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #fff;
+    width: 30px;
+    height: 23px;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-hamburger:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.btn-hamburger svg {
+    display: block;
+    width: 30px;
+    height: 23px;
 }
 
 /* ===========================
