@@ -874,6 +874,29 @@
     color: #181a1e;
 }
 
+.header--directions .navbar-nav::before {
+    content: '';
+    position: fixed;
+    top: 95px;
+    left: 0;
+    width: 100vw;
+    height: 180px;
+    background-color: #fff;
+    border-top: 1px solid #eef0f3;
+    border-bottom: 1px solid #eef0f3;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1000;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.header--directions .navbar-nav:hover::before,
+.header--directions.mega-menu-open .navbar-nav::before {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 .header--directions .navbar-actions {
     justify-content: flex-end;
     width: 210px;
