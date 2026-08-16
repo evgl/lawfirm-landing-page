@@ -864,8 +864,10 @@
     flex-shrink: 0;
 }
 
-.header--directions .logo-dark {
-    filter: brightness(0) saturate(100%) invert(10%) sepia(8%) saturate(1095%) hue-rotate(182deg) brightness(94%) contrast(94%);
+.header--directions .logo-directions {
+    width: 209px;
+    height: 49px;
+    object-fit: contain;
 }
 
 .header--directions .navbar-nav a {

@@ -25,7 +25,7 @@ $is_directions_page = is_page('directions') || is_page_template('page-directions
             <nav class="navbar" role="navigation" aria-label="<?php esc_attr_e('Main Navigation', 'pjlaw'); ?>">
                 <div class="navbar-brand">
                     <a href="<?php echo esc_url(home_url('/')); ?>">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . ($is_directions_page ? '/assets/images/home/logo-dark.png' : '/assets/images/home/logo-white.png')); ?>" alt="<?php bloginfo('name'); ?>" class="<?php echo $is_directions_page ? 'logo-dark' : 'logo-white'; ?>" />
+                        <img src="<?php echo esc_url(get_template_directory_uri() . ($is_directions_page ? '/assets/images/home/logo-directions.png' : '/assets/images/home/logo-white.png')); ?>" alt="<?php bloginfo('name'); ?>" class="<?php echo $is_directions_page ? 'logo-directions' : 'logo-white'; ?>" />
                     </a>
                 </div>
                 
