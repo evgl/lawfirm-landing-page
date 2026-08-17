@@ -654,6 +654,10 @@
     color: #1a2e69;
 }
 
+.header.mega-menu-open .navbar-nav .sub-menu a {
+    color: #1a2e69;
+}
+
 .navbar-nav .sub-menu a:hover {
     color: #1a2e69;
     font-weight: 600;
@@ -874,6 +878,10 @@
     color: #181a1e;
 }
 
+.header--directions .navbar-nav .sub-menu a {
+    color: #4a4c51;
+}
+
 .header--directions .navbar-nav::before {
     content: '';
     position: fixed;
@@ -895,6 +903,10 @@
 .header--directions.mega-menu-open .navbar-nav::before {
     opacity: 1 !important;
     visibility: visible !important;
+}
+
+.header--directions.mega-menu-open .navbar-nav .sub-menu a {
+    color: #1a2e69;
 }
 
 .header--directions .navbar-actions {
