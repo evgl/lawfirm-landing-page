@@ -26,6 +26,9 @@
 
         // Blog category filter (client-side)
         initBlogFilter();
+
+        // Breadcrumb dropdown menu
+        initBreadcrumbDropdown();
     });
 
     /**
@@ -254,6 +257,47 @@
         });
 
         applyFilter();
+    }
+
+    /**
+     * Initialize breadcrumb dropdown menu
+     */
+    function initBreadcrumbDropdown() {
+        var $dropdowns = $('.directions-hero__breadcrumb-dropdown');
+        if (!$dropdowns.length) return;
+
+        $dropdowns.each(function() {
+            var $dropdown = $(this);
+            var $toggle = $dropdown.find('.directions-hero__breadcrumb-dropdown-toggle');
+
+            $toggle.on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var isOpen = $dropdown.hasClass('is-open');
+
+                // Close any other open breadcrumb dropdowns
+                $('.directions-hero__breadcrumb-dropdown').not($dropdown).removeClass('is-open').find('.directions-hero__breadcrumb-dropdown-toggle').attr('aria-expanded', 'false');
+
+                $dropdown.toggleClass('is-open', !isOpen);
+                $toggle.attr('aria-expanded', (!isOpen).toString());
+            });
+        });
+
+        // Close on outside click
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.directions-hero__breadcrumb-dropdown').length) {
+                $dropdowns.removeClass('is-open');
+                $dropdowns.find('.directions-hero__breadcrumb-dropdown-toggle').attr('aria-expanded', 'false');
+            }
+        });
+
+        // Close on Escape key
+        $(document).on('keydown', function(e) {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                $dropdowns.removeClass('is-open');
+                $dropdowns.find('.directions-hero__breadcrumb-dropdown-toggle').attr('aria-expanded', 'false');
+            }
+        });
     }
 
     // Intersection Observer for animations on scroll

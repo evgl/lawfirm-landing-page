@@ -196,11 +196,11 @@ $suggestions = ["일반형사","성범죄","경제지능","마약","음주, 교�
                         <?php if ($area_tags && !is_wp_error($area_tags)) : ?>
                         <div class="search-case-card__tags"><?php foreach (array_slice($area_tags, 0, 1) as $tag) : ?><span class="search-case-tag"><?php echo esc_html($tag->name); ?></span><?php endforeach; ?></div>
                         <?php endif; ?>
-                        <div class="search-case-card__img-wrap"><?php if ($thumb) : ?><img class="search-case-card__img" src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" /><?php else : ?><div class="search-case-card__img-placeholder"></div><?php endif; ?></div>
                         <div class="search-case-card__body">
                             <h3 class="search-case-card__title"><?php echo pjlaw_search_highlight(get_the_title(), $keyword); ?></h3>
                             <p class="search-case-card__excerpt"><?php echo pjlaw_search_highlight($excerpt, $keyword); ?></p>
                         </div>
+                        <div class="search-case-card__img-wrap"><?php if ($thumb) : ?><img class="search-case-card__img" src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" /><?php else : ?><div class="search-case-card__img-placeholder"></div><?php endif; ?></div>
                     </a>
                 </article>
                 <?php endwhile; wp_reset_postdata(); ?>
