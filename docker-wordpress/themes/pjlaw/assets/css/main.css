@@ -899,6 +899,10 @@
     transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
+.header--directions.scrolled .navbar-nav::before {
+    top: 79px;
+}
+
 .header--directions .navbar-nav:hover::before,
 .header--directions.mega-menu-open .navbar-nav::before {
     opacity: 1 !important;
