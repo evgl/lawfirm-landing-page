@@ -1013,8 +1013,9 @@
         left: 0;
         right: 0;
         padding: 24px 30px 30px;
-        background: rgba(5, 5, 5, 0.98);
-        backdrop-filter: blur(10px);
+        background: #fff;
+        border-top: 1px solid #eef0f3;
+        box-shadow: 0 4px 20px rgba(24, 26, 30, 0.08);
     }
 
     .navbar-menu.active .navbar-nav .sub-menu {
@@ -1032,7 +1033,7 @@
     }
 
     .navbar-menu.active .navbar-nav .sub-menu a {
-        color: rgba(255, 255, 255, 0.85);
+        color: #4a4c51;
     }
 
     .navbar-menu.active .navbar-nav .menu-item-has-children > a::after {
