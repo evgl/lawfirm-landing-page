@@ -53,10 +53,18 @@ $team_query = new WP_Query(array(
                             <span>평정소개</span>
                             <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
                         </a>
-                        <a class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active" href="<?php echo esc_url(home_url('/team/')); ?>">
-                            <span>구성원소개</span>
-                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
-                        </a>
+                        <div class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active directions-hero__breadcrumb-dropdown">
+                            <button type="button" class="directions-hero__breadcrumb-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                                <span>구성원소개</span>
+                                <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                            </button>
+                            <div class="directions-hero__breadcrumb-menu">
+                                <a href="<?php echo esc_url(home_url('/about/')); ?>" class="directions-hero__breadcrumb-menu-item"><?php esc_html_e('가치관', 'pjlaw'); ?></a>
+                                <a href="<?php echo esc_url(home_url('/why-pjlaw/')); ?>" class="directions-hero__breadcrumb-menu-item"><?php esc_html_e('왜 평정인가?', 'pjlaw'); ?></a>
+                                <a href="<?php echo esc_url(home_url('/team/')); ?>" class="directions-hero__breadcrumb-menu-item directions-hero__breadcrumb-menu-item--active"><?php esc_html_e('구성원 소개', 'pjlaw'); ?></a>
+                                <a href="<?php echo esc_url(home_url('/directions/')); ?>" class="directions-hero__breadcrumb-menu-item"><?php esc_html_e('오시는길', 'pjlaw'); ?></a>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>
