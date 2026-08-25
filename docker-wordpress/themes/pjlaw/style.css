@@ -149,10 +149,10 @@ a:hover {
 
 .why-hero {
     position: relative;
+    z-index: 10;
     width: 100%;
     min-height: 760px;
     background-color: #fff;
-    overflow: hidden;
 }
 
 .why-hero__bg {
@@ -161,6 +161,7 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .why-hero__bg-mask {

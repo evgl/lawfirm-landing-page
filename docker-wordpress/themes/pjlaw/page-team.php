@@ -28,7 +28,7 @@ $team_query = new WP_Query(array(
 ?>
 
 <main id="main" class="site-main team-page" role="main">
-    <section class="team-hero" style="-webkit-mask-image: url('<?php echo esc_url($theme_uri . '/assets/images/team/hero-mask.svg'); ?>'); mask-image: url('<?php echo esc_url($theme_uri . '/assets/images/team/hero-mask.svg'); ?>');">
+    <section class="team-hero">
         <div class="team-hero__bg" style="background-image: url('<?php echo esc_url($theme_uri . '/assets/images/team/hero-bg.jpg'); ?>');"></div>
         <div class="team-hero__shade"></div>
         <div class="container team-hero__inner">
