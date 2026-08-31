@@ -66,7 +66,7 @@
 /* Logo Section */
 .logo-section {
     background-color: var(--primary-dark);
-    padding: clamp(80px, 12vw, 200px) 0;
+    padding: clamp(100px, 12vw, 220px) 0 clamp(80px, 10vw, 160px);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -76,13 +76,14 @@
 
 .logo-bg-text {
     position: absolute;
-    top: 50%;
+    bottom: -0.1em;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 100%;
     text-align: center;
     font-family: var(--font-heading);
     font-size: clamp(1.4rem, 9.6vw, 15rem);
+    line-height: 1;
     font-weight: 700;
     color: transparent;
     -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
@@ -99,15 +100,15 @@
     align-items: center;
     text-align: center;
     width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
-.pj-logo-large {
-    width: clamp(160px, 22vw, 320px);
+.pj-logo-emblem {
+    width: clamp(140px, 16vw, 310px);
     height: auto;
     display: block;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
 }
 
@@ -1100,11 +1101,11 @@
 
     /* Logo section */
     .logo-section {
-        padding: 80px 0;
+        padding: 80px 0 60px;
     }
 
-    .pj-logo-large {
-        width: 180px;
+    .pj-logo-emblem {
+        width: 140px;
     }
 
     /* Overview */

@@ -28,7 +28,7 @@ get_header();
         <div class="logo-bg-text">PYEONG JEONG</div>
         <div class="container">
             <div class="logo-content">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/logo-white.png'); ?>" alt="PyeongJeong Logo" class="pj-logo-large" />
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home/emblem-white.svg'); ?>" alt="PyeongJeong Emblem" class="pj-logo-emblem" />
             </div>
         </div>
     </section>
