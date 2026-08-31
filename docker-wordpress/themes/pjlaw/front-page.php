@@ -36,7 +36,7 @@ get_header();
     <!-- Overview / Intro Text -->
     <section class="overview section">
         <div class="container">
-            <h2 class="section-title"><?php esc_html_e('당신의 일상이 \'평정\'을 찾을 수 있도록,', 'pjlaw'); ?><br /><?php esc_html_e('처음부터 끝까지 평정이 함께합니다.', 'pjlaw'); ?></h2>
+            <h2 class="section-title"><?php esc_html_e('당신의 일상이 \'평정\'을 찾을 수 있도록,', 'pjlaw'); ?><br /><span class="overview-title-sub"><?php esc_html_e('처음부터 끝까지 평정이 함께합니다.', 'pjlaw'); ?></span></h2>
             <div class="overview-cta">
                 <h3 class="overview-cat-title"><?php esc_html_e('업무분야', 'pjlaw'); ?></h3>
                 <a href="<?php echo esc_url(home_url('/services/')); ?>" class="btn-text">
