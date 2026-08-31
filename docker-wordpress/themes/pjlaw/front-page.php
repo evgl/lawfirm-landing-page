@@ -38,9 +38,15 @@ get_header();
         <div class="container">
             <h2 class="section-title"><?php esc_html_e('당신의 일상이 \'평정\'을 찾을 수 있도록,', 'pjlaw'); ?><br /><?php esc_html_e('처음부터 끝까지 평정이 함께합니다.', 'pjlaw'); ?></h2>
             <div class="overview-cta">
+                <h3 class="overview-cat-title"><?php esc_html_e('업무분야', 'pjlaw'); ?></h3>
                 <a href="<?php echo esc_url(home_url('/services/')); ?>" class="btn-text">
-                    <?php esc_html_e('업무분야 바로가기', 'pjlaw'); ?>
-                    <i class="fas fa-arrow-right"></i>
+                    <span><?php esc_html_e('업무분야 바로가기', 'pjlaw'); ?></span>
+                    <span class="btn-circle-arrow" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="16" fill="#181A1E"/>
+                            <path d="M17.2295 10.9687C17.5224 10.676 17.9972 10.6759 18.29 10.9687L22.7822 15.4609C22.93 15.6087 23.0023 15.8033 23.001 15.997C23.0031 16.1917 22.9307 16.3866 22.7822 16.5351L18.2861 21.0312C17.9932 21.3241 17.5185 21.3241 17.2256 21.0312C16.933 20.7383 16.9328 20.2634 17.2256 19.9707L20.4521 16.7441H9.749C9.33479 16.7441 8.999 16.4083 8.999 15.9941C8.99926 15.5801 9.33495 15.2441 9.749 15.2441H20.4433L17.2295 12.0293C16.9366 11.7364 16.9366 11.2616 17.2295 10.9687Z" fill="white"/>
+                        </svg>
+                    </span>
                 </a>
             </div>
         </div>
