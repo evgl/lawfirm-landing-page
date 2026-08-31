@@ -66,7 +66,7 @@
 /* Logo Section */
 .logo-section {
     background-color: var(--primary-dark);
-    padding: clamp(100px, 12vw, 220px) 0 clamp(80px, 10vw, 160px);
+    padding: clamp(100px, 12vw, 220px) 0 clamp(80px, 10vw, 180px);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -102,6 +102,7 @@
     width: 100%;
     position: relative;
     z-index: 2;
+    margin-bottom: clamp(50px, 8vw, 150px);
 }
 
 .pj-logo-emblem {
