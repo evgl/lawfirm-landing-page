@@ -61,19 +61,21 @@ foreach ((array) $service_terms as $st) {
             </div>
 
             <div class="blog-hero__footer">
-                <nav class="blog-hero__breadcrumb-nav" aria-label="<?php esc_attr_e('페이지 경로', 'pjlaw'); ?>">
-                    <a class="blog-hero__breadcrumb-home" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('홈', 'pjlaw'); ?>">
-                        <svg width="20" height="18" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 6.5L7 1.5L13 6.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2 5.5V13.5H12V5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <nav class="directions-hero__breadcrumb-nav" aria-label="<?php esc_attr_e('페이지 경로', 'pjlaw'); ?>">
+                    <a class="directions-hero__breadcrumb-home" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('홈', 'pjlaw'); ?>">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-home.svg'); ?>" alt="" aria-hidden="true" width="20" height="18" />
                     </a>
-                    <div class="blog-hero__breadcrumb-items">
-                        <div class="blog-hero__breadcrumb-item blog-hero__breadcrumb-item--active">
-                            <span>블로그</span>
-                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    <div class="directions-hero__breadcrumb-items">
+                        <div class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active directions-hero__breadcrumb-dropdown">
+                            <button type="button" class="directions-hero__breadcrumb-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                                <span class="blog-hero__breadcrumb-active-label"><?php esc_html_e('블로그', 'pjlaw'); ?></span>
+                                <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                            </button>
+                            <div class="directions-hero__breadcrumb-menu">
+                                <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="directions-hero__breadcrumb-menu-item directions-hero__breadcrumb-menu-item--active" data-label="전체"><?php esc_html_e('전체', 'pjlaw'); ?></a>
+                                <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="directions-hero__breadcrumb-menu-item" data-label="법률정보"><?php esc_html_e('법률정보', 'pjlaw'); ?></a>
+                                <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="directions-hero__breadcrumb-menu-item" data-label="대응전략"><?php esc_html_e('대응전략', 'pjlaw'); ?></a>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -304,6 +306,43 @@ foreach ((array) $service_terms as $st) {
     <?php pjlaw_render_quick_actions_menu(); ?>
 </main>
 
+<script>
+(function($) {
+    $(document).ready(function() {
+        var $menuItems = $('.blog-hero .directions-hero__breadcrumb-menu-item[data-label]');
+        var $activeLabel = $('.blog-hero .blog-hero__breadcrumb-active-label');
+        var $dropdown = $('.blog-hero .directions-hero__breadcrumb-dropdown');
+
+        $menuItems.on('click', function(e) {
+            e.preventDefault();
+
+            var label = $(this).data('label');
+
+            // Update active state on menu items
+            $menuItems.removeClass('directions-hero__breadcrumb-menu-item--active');
+            $(this).addClass('directions-hero__breadcrumb-menu-item--active');
+
+            // Update the toggle button label
+            $activeLabel.text(label);
+
+            // Close dropdown
+            $dropdown.removeClass('is-open');
+            $dropdown.find('.directions-hero__breadcrumb-dropdown-toggle').attr('aria-expanded', 'false');
+
+            // Trigger the corresponding blog tab (match by visible text)
+            var $tabs = $('.blog-tabs .blog-tab');
+            var $matched = $tabs.filter(function() {
+                return $.trim($(this).find('.blog-tab__text').text()) === label;
+            });
+            if ($matched.length) {
+                $matched.trigger('click');
+            } else if (label === '전체') {
+                $tabs.filter('[data-cat="all"]').trigger('click');
+            }
+        });
+    });
+})(jQuery);
+</script>
 <?php wp_footer(); ?>
 </body>
 </html>

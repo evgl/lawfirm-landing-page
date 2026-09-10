@@ -595,14 +595,28 @@ if ($is_detail && $service_post) {
                     </h1>
                 </div>
                 
-                <div class="services-hero__breadcrumb">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="services-hero__breadcrumb-icon">
-                        <svg width="20" height="18" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 6.5L7 1.5L13 6.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2 5.5V13.5H12V5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <span class="services-hero__breadcrumb-current">업무분야</span>
+                <div class="services-hero__footer">
+                    <nav class="directions-hero__breadcrumb-nav" aria-label="<?php esc_attr_e('페이지 경로', 'pjlaw'); ?>">
+                        <a class="directions-hero__breadcrumb-home" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('홈', 'pjlaw'); ?>">
+                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-home.svg'); ?>" alt="" aria-hidden="true" width="20" height="18" />
+                        </a>
+                        <div class="directions-hero__breadcrumb-items">
+                            <a class="directions-hero__breadcrumb-item" href="<?php echo esc_url(home_url('/services/')); ?>">
+                                <span>업무분야</span>
+                                <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                            </a>
+                            <div class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active directions-hero__breadcrumb-dropdown">
+                                <button type="button" class="directions-hero__breadcrumb-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                                    <span class="services-hero__breadcrumb-active-label">분야별</span>
+                                    <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                                </button>
+                                <div class="directions-hero__breadcrumb-menu">
+                                    <a href="#tab-category" data-tab-target="tab-category" class="directions-hero__breadcrumb-menu-item directions-hero__breadcrumb-menu-item--active"><?php esc_html_e('분야별', 'pjlaw'); ?></a>
+                                    <a href="#tab-all" data-tab-target="tab-all" class="directions-hero__breadcrumb-menu-item"><?php esc_html_e('전체', 'pjlaw'); ?></a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
         </section>
@@ -758,23 +772,73 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1. Tab toggling (Category vs All)
     const tabs = document.querySelectorAll('.services-content .services-tab');
     const contents = document.querySelectorAll('.services-content .services-tab-content');
+    const breadcrumbMenuItems = document.querySelectorAll('.services-hero .directions-hero__breadcrumb-menu-item');
+    const breadcrumbActiveLabel = document.querySelector('.services-hero .services-hero__breadcrumb-active-label');
+    const breadcrumbDropdown = document.querySelector('.services-hero .directions-hero__breadcrumb-dropdown');
+    const breadcrumbToggle = document.querySelector('.services-hero .directions-hero__breadcrumb-dropdown-toggle');
+
+    function switchServicesTab(targetId) {
+        tabs.forEach(t => {
+            if (t.getAttribute('data-target') === targetId) {
+                t.classList.add('active');
+            } else {
+                t.classList.remove('active');
+            }
+        });
+
+        contents.forEach(c => {
+            if (c.id === targetId) {
+                c.classList.add('active');
+            } else {
+                c.classList.remove('active');
+            }
+        });
+
+        breadcrumbMenuItems.forEach(item => {
+            const itemTarget = item.getAttribute('data-tab-target');
+            if (itemTarget === targetId) {
+                item.classList.add('directions-hero__breadcrumb-menu-item--active');
+                if (breadcrumbActiveLabel) {
+                    breadcrumbActiveLabel.textContent = item.textContent.trim();
+                }
+            } else {
+                item.classList.remove('directions-hero__breadcrumb-menu-item--active');
+            }
+        });
+
+        if (breadcrumbDropdown) {
+            breadcrumbDropdown.classList.remove('is-open');
+        }
+        if (breadcrumbToggle) {
+            breadcrumbToggle.setAttribute('aria-expanded', 'false');
+        }
+    }
 
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
-
-            this.classList.add('active');
-
             const targetId = this.getAttribute('data-target');
             if (targetId) {
-                const targetContent = document.getElementById(targetId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
+                switchServicesTab(targetId);
             }
         });
     });
+
+    breadcrumbMenuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-tab-target');
+            if (targetId) {
+                switchServicesTab(targetId);
+            }
+        });
+    });
+
+    // Check hash on page load
+    if (window.location.hash === '#tab-all') {
+        switchServicesTab('tab-all');
+    } else if (window.location.hash === '#tab-category') {
+        switchServicesTab('tab-category');
+    }
 
     // 2. Category grid clicking inside tab-category (Civil, Criminal, etc.)
     const gridItems = document.querySelectorAll('#tab-category .services-grid__item');

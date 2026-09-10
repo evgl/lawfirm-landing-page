@@ -56,18 +56,25 @@ $talent_values = array(
                 <p class="careers-hero__subtitle">더 나은 세상을 위한 끊임없는 도전,<br>그 시작을 평정 함께하세요.</p>
             </div>
             <div class="careers-hero__footer">
-                <nav class="careers-hero__breadcrumb" aria-label="breadcrumb">
-                    <a class="careers-hero__breadcrumb-home" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('홈', 'pjlaw'); ?>">
-                        <svg width="20" height="18" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 6.5L7 1.5L13 6.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2 5.5V13.5H12V5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <nav class="directions-hero__breadcrumb-nav" aria-label="<?php esc_attr_e('페이지 경로', 'pjlaw'); ?>">
+                    <a class="directions-hero__breadcrumb-home" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('홈', 'pjlaw'); ?>">
+                        <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-home.svg'); ?>" alt="" aria-hidden="true" width="20" height="18" />
                     </a>
-                    <div class="careers-hero__breadcrumb-item">
-                        <span class="careers-hero__breadcrumb-current">인재채용</span>
-                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="directions-hero__breadcrumb-items">
+                        <a class="directions-hero__breadcrumb-item" href="<?php echo esc_url(home_url('/careers/')); ?>">
+                            <span><?php esc_html_e('인재채용', 'pjlaw'); ?></span>
+                            <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                        </a>
+                        <div class="directions-hero__breadcrumb-item directions-hero__breadcrumb-item--active directions-hero__breadcrumb-dropdown">
+                            <button type="button" class="directions-hero__breadcrumb-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                                <span><?php esc_html_e('전체', 'pjlaw'); ?></span>
+                                <img src="<?php echo esc_url($theme_uri . '/assets/icons/directions/icon-arrow.svg'); ?>" alt="" aria-hidden="true" class="directions-hero__breadcrumb-arrow" />
+                            </button>
+                            <div class="directions-hero__breadcrumb-menu">
+                                <a href="<?php echo esc_url(home_url('/careers/')); ?>" class="directions-hero__breadcrumb-menu-item directions-hero__breadcrumb-menu-item--active"><?php esc_html_e('전체', 'pjlaw'); ?></a>
+                                <a href="<?php echo esc_url(home_url('/careers-all/')); ?>" class="directions-hero__breadcrumb-menu-item"><?php esc_html_e('채용공고', 'pjlaw'); ?></a>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>

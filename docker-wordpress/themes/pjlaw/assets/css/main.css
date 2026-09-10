@@ -3286,28 +3286,10 @@
     margin: 0;
 }
 
-.services-hero__breadcrumb {
+.services-hero__footer {
     display: flex;
-    align-items: center;
     justify-content: flex-end;
-    gap: 8px;
-}
-
-.services-hero__breadcrumb-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 42px;
-}
-
-.services-hero__breadcrumb-current {
-    font-family: 'Pretendard', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    letter-spacing: -0.54px;
-    color: #fff;
+    margin-top: auto;
 }
 
 /* --- Services Footer --- */
@@ -3841,8 +3823,8 @@
         font-size: 16px;
         line-height: 28px;
     }
-    .services-hero__breadcrumb {
-        display: none;
+    .services-hero__footer {
+        justify-content: flex-start;
     }
 }
 
@@ -4301,7 +4283,7 @@
         font-size: 32px;
         line-height: 42px;
     }
-    .blog-hero__breadcrumb-nav {
+    .blog-hero__footer .directions-hero__breadcrumb-nav {
         display: none;
     }
     .blog-search {
@@ -7189,7 +7171,7 @@
         font-size: 16px;
         line-height: 24px;
     }
-    .careers-hero__breadcrumb {
+    .careers-hero__footer .directions-hero__breadcrumb-nav {
         display: none;
     }
     .careers-listings {
